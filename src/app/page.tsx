@@ -1,14 +1,17 @@
-import Docs from 'public/icon/docs.svg';
 import Anchor from '@/components/Anchor';
-import Button from '@/components/Anchor';
+import AuthChecker from '@/components/AuthChecker';
+import SearchLink from '@/components/SearchLink';
+import IconDocs from 'public/icon/docs.svg';
 
 export default function Home() {
   return (
-    <main className="flex-center min-h-screen">
-      <Anchor href="https://naver.com" target="_blank" className="text-20 font-medium text-white active:bg-black-100">
-        <Docs />
-        <span>첫걸음 안내서</span>
-      </Anchor>
-    </main>
+    <div className="min-h-screen px-40 py-16">
+      <header className="flex h-40 w-full items-center justify-end ">
+        <AuthChecker />
+      </header>
+      <main className="flex-center">
+        <SearchLink />
+      </main>
+    </div>
   );
 }

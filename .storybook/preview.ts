@@ -1,5 +1,6 @@
-import type { Preview } from "@storybook/react";
-import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
+import type { Preview } from '@storybook/react';
+import 'src/app/globals.css';
 
 const preview: Preview = {
   parameters: {

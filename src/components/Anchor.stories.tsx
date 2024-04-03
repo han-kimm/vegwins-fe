@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Anchor from '@/components/Anchor';
 import Docs from 'public/icon/docs.svg';
-import '@/app/globals.css';
 
 const meta = {
   title: 'Example/Button',
