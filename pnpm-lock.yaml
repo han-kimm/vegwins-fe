@@ -31,6 +31,9 @@ devDependencies:
   '@storybook/addon-onboarding':
     specifier: ^8.0.5
     version: 8.0.5
+  '@storybook/addon-viewport':
+    specifier: ^8.0.5
+    version: 8.0.5
   '@storybook/blocks':
     specifier: ^8.0.5
     version: 8.0.5(@types/react@18.2.73)(react-dom@18.2.0)(react@18.2.0)

@@ -18,9 +18,10 @@ const config: Config = {
       spacing: PX_ENTRIES,
       borderRadius: {
         none: "0rem",
-        sm: "2rem",
-        md: "3.2rem",
-        lg: "4rem",
+        sm: "1.2rem",
+        md: "2rem",
+        lg: "3.2rem",
+        xl: "4rem",
         full: "100rem",
       },
       boxShadow: {
@@ -47,11 +48,6 @@ const config: Config = {
         18: "1.8rem",
         20: "2.0rem",
         24: "2.4rem",
-      },
-      fontWeight: {
-        r: "400",
-        m: "500",
-        b: "600",
       },
     },
   },
