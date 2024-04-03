@@ -1,28 +1,28 @@
-import Button from "./Button";
 import type { Meta, StoryObj } from "@storybook/react";
 import "@/app/globals.css";
-import Image from "next/image";
 import Docs from "@/../public/icon/docs.svg";
+import Anchor from "@/components/Anchor";
 
 const meta = {
   title: "Example/Button",
-  component: Button,
+  component: Anchor,
   parameters: {
     layout: "centered",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof Button>;
+} satisfies Meta<typeof Anchor>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    className: "focus:bg-white",
+    href: "/",
+    className: "text-white text-20 font-medium active:text-black-100 active:bg-orange",
     children: (
       <>
-        <Image src={Docs} alt="안내서 이미지" className="align-baseline" />
-        <span className="text-white text-20 font-medium">첫걸음 안내서</span>
+        <Docs />
+        <span>첫걸음 안내서</span>
       </>
     ),
   },

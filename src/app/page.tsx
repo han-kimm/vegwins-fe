@@ -1,13 +1,14 @@
-import Button from "@/components/Button";
-import Image from "next/image";
+import Anchor from "@/components/Anchor";
+import Button from "@/components/Anchor";
+import Docs from "public/icon/docs.svg";
 
 export default function Home() {
   return (
     <main className="flex-center min-h-screen">
-      <Button className=" focus:bg-white">
-        <Image src="/icon/docs.svg" width={20} height={20} alt="안내서 이미지" />
-        <span className="text-white text-20 font-medium">첫걸음 안내서</span>
-      </Button>
+      <Anchor href="https://naver.com" target="_blank" className="text-white text-20 font-medium active:bg-black-100">
+        <Docs />
+        <span>첫걸음 안내서</span>
+      </Anchor>
     </main>
   );
 }
