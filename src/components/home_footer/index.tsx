@@ -11,10 +11,10 @@ const Footer = () => {
       </p>
       <div className="flex gap-20">
         <span>han-kimm@2024</span>
-        <Link href="https://www.instagram.com/hank1mm/">
+        <Link href="https://www.instagram.com/hank1mm/" target="_blank">
           <IconInstagram />
         </Link>
-        <Link href="https://www.instagram.com/hank1mm/">
+        <Link href="https://github.com/han-kimm" target="_blank">
           <IconGithub />
         </Link>
       </div>

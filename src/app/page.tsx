@@ -7,7 +7,7 @@ import SearchLink from '@/components/home_link/SearchLink';
 
 export default function Home() {
   return (
-    <div className="flex h-dvh flex-col gap-16">
+    <div className="flex h-dvh flex-col">
       <header className="my-16 flex h-40 w-full items-center justify-end px-40">
         <AuthChecker />
       </header>
@@ -17,7 +17,7 @@ export default function Home() {
         <CategoryLink />
         <FeedLink />
       </main>
-      <footer className="mt-auto bg-black-80 px-40 py-12 text-14 text-white">
+      <footer className="mt-[auto] bg-black-80 px-40 py-12 text-14 text-white">
         <Footer />
       </footer>
     </div>
