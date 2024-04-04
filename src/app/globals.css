@@ -33,6 +33,10 @@
   .absolute-center {
     @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2;
   }
+
+  .mt-m-auto {
+    margin-top: min(6rem, auto);
+  }
 }
 
 *::-webkit-scrollbar {

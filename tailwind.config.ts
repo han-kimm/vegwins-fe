@@ -25,7 +25,7 @@ const config: Config = {
         full: '100rem',
       },
       boxShadow: {
-        sm: '0px 16px 10px -10px rgba(0, 0, 0, 0.10)',
+        sm: '0px 12px 10px -8px rgba(0, 0, 0, 0.10)',
         md: '0px 20px 10px -8px rgba(0, 0, 0, 0.10)',
         lg: '0px 12px 30px 0px rgba(0, 0, 0, 0.20)',
       },
