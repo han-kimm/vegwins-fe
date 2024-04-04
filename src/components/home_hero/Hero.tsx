@@ -14,14 +14,14 @@ const Hero = () => {
     () =>
       Array(LENGTH)
         .fill('')
-        .map((_, i, arr) => (i + 1) / LENGTH),
+        .map((_, i) => (i + 1) / LENGTH),
     [],
   );
 
   return (
     <section className="relative mb-20 w-full px-40" aria-label="슬라이드: 이용 방법과 추천 제품">
       <div id="viewport" ref={emblaRef} className="overflow-hidden rounded-md bg-white shadow-sm">
-        <div id="container" className="flex h-200" role="group">
+        <div id="slides" className="flex h-200" role="group">
           {mock.map((v, i, arr) => (
             <article
               key={i}
@@ -34,7 +34,7 @@ const Hero = () => {
           ))}
         </div>
       </div>
-      <div id="dots" className="flex-center absolute -bottom-16 left-1/2 mt-4 w-4/5 -translate-x-1/2 -translate-y-1/2 gap-20 px-40">
+      <div id="indicators" className="flex-center absolute -bottom-16 left-1/2 mt-4 w-4/5 -translate-x-1/2 -translate-y-1/2 gap-20 px-40">
         {mock.map((_, index) => (
           <button
             key={index}

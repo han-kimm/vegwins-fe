@@ -17,9 +17,9 @@ const CATEGORY_KEY = Object.keys(CATEGORY) as Array<keyof typeof CATEGORY>;
 
 const CategoryLink = () => {
   return (
-    <section className="flex h-104 w-full scroll-mx-60 gap-20 overflow-scroll scroll-smooth" aria-label="카테고리에 따른 검색 페이지 이동">
+    <section className="flex h-104 w-full scroll-mx-60 items-center gap-20 overflow-scroll scroll-smooth" role="group" aria-label="카테고리에 따른 검색 페이지 이동">
       {CATEGORY_KEY.map((key) => (
-        <Link href="/" key={key} className={`relative flex h-100 w-80 shrink-0 flex-col items-center gap-8 rounded-sm bg-white py-8 shadow first:ml-40 last:mr-40`}>
+        <Link href="/" key={key} className={`relative flex h-100 w-100 shrink-0 flex-col items-center gap-8 rounded-sm bg-white py-8 shadow first:ml-40 last:mr-40`}>
           <div className="relative h-48 w-48">
             <Image src={CATEGORY[key]} fill alt={`${key} 이미지`} />
           </div>
