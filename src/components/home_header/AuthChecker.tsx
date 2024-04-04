@@ -1,8 +1,8 @@
 import { cookies } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
-import LoginButton from '@/components/LoginButton';
-import Notice from '@/components/Notice';
+import LoginButton from '@/components/home_header/LoginButton';
+import Notice from '@/components/home_header/Notice';
 import IconProfile from 'public/icon/profile.svg';
 
 const AuthChecker = () => {
