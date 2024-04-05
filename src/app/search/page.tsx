@@ -1,4 +1,4 @@
-import Category from '@/components/search_category';
+import CategorySelector from '@/components/search_category';
 import HomeButton from '@/components/search_header/HomeButton';
 import SearchBar from '@/components/search_header/SearchBar';
 
@@ -10,7 +10,7 @@ const Search = () => {
         <SearchBar />
       </header>
       <main>
-        <Category />
+        <CategorySelector />
       </main>
     </div>
   );
