@@ -20,8 +20,8 @@ const MOCK: Array<{
   id: string;
   imgSrc?: string;
   title: string;
-  hashtag: string[];
-  rating: number;
+  hashtag?: string[];
+  rating?: number | null;
 }> = [
   {
     id: '1',
@@ -32,7 +32,7 @@ const MOCK: Array<{
   },
   {
     id: '2',
-    title: 'CU 삼각김밥',
+    title: 'CU 삼각김밥 뿡가뽕뽀로뽕뽕',
     imgSrc: '/image/sample2.jpg',
     hashtag: ['#CU', '#삼각김밥'],
     rating: 77,
@@ -42,5 +42,33 @@ const MOCK: Array<{
     title: '에에올',
     hashtag: ['#영화', '#재밌다'],
     rating: 100,
+  },
+  {
+    id: '4',
+    title: '에에올',
+    rating: 33,
+  },
+  {
+    id: '5',
+    title: '에에올',
+    hashtag: ['#영화', '#재밌다'],
+  },
+  {
+    id: '6',
+    title: '에에올',
+    hashtag: ['#영화', '#재밌다'],
+    rating: null,
+  },
+  {
+    id: '7',
+    title: '에에올',
+    hashtag: ['#영화', '#재밌다'],
+    rating: 33,
+  },
+  {
+    id: '8',
+    title: '에에올',
+    hashtag: ['#영화', '#재밌다'],
+    rating: null,
   },
 ];

@@ -1,3 +1,4 @@
+import LiftingButton from '@/components/LiftingButton';
 import CategorySelector from '@/components/search_category';
 import HomeButton from '@/components/search_header/HomeButton';
 import SearchBar from '@/components/search_header/SearchBar';
@@ -14,6 +15,7 @@ const Search = () => {
         <CategorySelector />
         <SearchResult />
       </main>
+      <LiftingButton />
     </div>
   );
 };
