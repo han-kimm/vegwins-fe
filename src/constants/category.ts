@@ -9,7 +9,7 @@ import IconInst from 'public/icon/place-inst.svg';
 import IconMart from 'public/icon/place-mart.svg';
 import IconMovi from 'public/icon/place-movi.svg';
 import IconView from 'public/icon/place-view.svg';
-import IconRate from 'public/icon/rate-good.svg';
+import IconRate from 'public/icon/rate-1.svg';
 
 export const CATEGORY = {
   '주간 조회수': IconView,
