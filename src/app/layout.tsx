@@ -11,7 +11,7 @@ const NotoSansKR = localFont({
 });
 
 export const metadata: Metadata = {
-  title: '함께 시작해요, 비긴즈',
+  title: '비긴즈',
   description: '편의점, 마트에 있는 비건 제품을 찾아봅시다.',
 };
 

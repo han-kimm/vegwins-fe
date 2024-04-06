@@ -1,6 +1,6 @@
 import Footer from '@/components/home_footer';
 import AuthChecker from '@/components/home_header';
-import Hero from '@/components/home_hero';
+import Carousel from '@/components/home_hero';
 import CategoryLink from '@/components/home_link/CategoryLink';
 import FeedLink from '@/components/home_link/FeedLink';
 import SearchLink from '@/components/home_link/SearchLink';
@@ -12,7 +12,7 @@ export default function Home() {
         <AuthChecker />
       </header>
       <main className="flex-center mb-100 flex-col gap-28">
-        <Hero />
+        <Carousel />
         <SearchLink />
         <CategoryLink />
         <FeedLink />
