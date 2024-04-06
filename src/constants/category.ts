@@ -11,7 +11,7 @@ import IconMovi from 'public/icon/place-movi.svg';
 import IconView from 'public/icon/place-view.svg';
 import IconRate from 'public/icon/rate-2.svg';
 
-export const CATEGORY = {
+export const CATEGORY: { [key: string]: any } = {
   '주간 조회수': IconView,
   '좋은 평가': IconRate,
   편의점: IconConv,
@@ -26,4 +26,4 @@ export const CATEGORY = {
   운동: IconExer,
 };
 
-export const CATEGORY_KEY = Object.keys(CATEGORY) as Array<keyof typeof CATEGORY>;
+export const CATEGORY_KEY = Object.keys(CATEGORY);

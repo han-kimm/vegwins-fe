@@ -1,20 +1,17 @@
-import Image from 'next/image';
+import { ReactNode } from 'react';
 
 interface Props {
-  obj: { [key: string]: string };
-  objKey: string;
+  render: () => ReactNode;
+  name: string;
   fontSize?: number;
 }
 
-const Icon = ({ obj, objKey, fontSize = 16 }: Props) => {
-  const Svg = obj[objKey];
+const Icon = ({ render, name, fontSize = 16 }: Props) => {
   return (
     <>
-      <div className="flex-center h-40 w-40">
-        <Svg />
-      </div>
+      <div className="flex-center h-40 w-40">{render()}</div>
       <span className={`text-${fontSize} font-bold`} aria-hidden={true}>
-        {objKey}
+        {name}
       </span>
     </>
   );

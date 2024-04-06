@@ -1,18 +1,18 @@
-import { cookies } from 'next/headers';
+import { getCookie } from '@/utils/cookie';
 import Link from 'next/link';
 import LoginButton from '@/components/home_header/LoginButton';
 import Notice from '@/components/home_header/Notice';
 import IconProfile from 'public/icon/profile.svg';
 
-const AuthChecker = () => {
-  const session = JSON.parse(cookies().get('session')?.value ?? '{}');
-  return session.isLogin ? (
-    <div className="flex gap-60">
+const AuthChecker = async () => {
+  const session = await getCookie('session');
+  return session ? (
+    <>
       <Notice />
-      <Link href="/profile">
+      <Link href="/profile" className="ml-60">
         <IconProfile />
       </Link>
-    </div>
+    </>
   ) : (
     <LoginButton />
   );
