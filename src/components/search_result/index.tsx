@@ -2,11 +2,11 @@ import SearchItem from '@/components/search_result/SearchItem';
 
 const SearchResult = () => {
   const searchParam = '삼각김밥';
-  const searchCount = 5;
+  const searchCount = MOCK.length;
   return (
-    <section className="flex flex-grow flex-col gap-8">
-      <h1 className="ml-20 text-18 font-bold">{`"${searchParam}" 검색 결과(${searchCount}) 입니다.`}</h1>
-      <div className="flex w-full flex-grow flex-col overflow-scroll rounded-t-md bg-white px-16 shadow-lg" role="group">
+    <section>
+      <h1 className="mb-4 ml-20 text-18 font-bold">{`"${searchParam}" 검색 결과(${searchCount}) 입니다.`}</h1>
+      <div className="flex w-full flex-col rounded-md bg-white px-16 shadow-lg" role="group">
         {MOCK.map((data) => (
           <SearchItem key={data.id} {...data} />
         ))}

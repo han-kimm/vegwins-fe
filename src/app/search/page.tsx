@@ -7,7 +7,7 @@ import SearchResult from '@/components/search_result';
 const Search = ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {
   const { category } = searchParams;
   return (
-    <div className="flex h-dvh flex-col px-16 pt-16">
+    <div className="flex min-h-dvh flex-col px-16 pb-28 pt-16">
       <header className="mb-12 flex gap-8">
         <HomeButton />
         <SearchBar />
