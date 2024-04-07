@@ -2,8 +2,6 @@ import { CATEGORY } from '@/constants/category';
 import Image from 'next/image';
 import Link from 'next/link';
 import BaseIcon from '@/components/common/BaseIcon';
-import IconPencil from 'public/icon/pencil.svg';
-import IconShare from 'public/icon/share.svg';
 
 const InformationContent = ({ label, value }: { label: string; value: string | number | Array<string> }) => {
   let SwitchedComponent;
@@ -54,18 +52,6 @@ const InformationContent = ({ label, value }: { label: string; value: string | n
       break;
     case '설명':
       SwitchedComponent = <p className="whitespace-pre-wrap text-14 font-medium">{value}</p>;
-      break;
-    case '공유하기':
-      SwitchedComponent = (
-        <div className="flex gap-32">
-          <button className="shrink-0">
-            <BaseIcon render={IconShare} name="SNS 공유" fontSize={14} />
-          </button>
-          <button className="shrink-0">
-            <BaseIcon render={IconPencil} name="태그 글쓰기" fontSize={14} />
-          </button>
-        </div>
-      );
       break;
     default:
       if (typeof value === 'string') {

@@ -2,6 +2,7 @@ import HomeButton from '@/components/common/HomeButton';
 import ReturnButton from '@/components/doc_header/ReturnButton';
 import Information from '@/components/doc_main/Information';
 import MyRating from '@/components/doc_main/MyRating';
+import Share from '@/components/doc_main/Share';
 
 const Doc = ({ params }: { params: { [key: string]: string } }) => {
   const { docId } = params;
@@ -13,7 +14,10 @@ const Doc = ({ params }: { params: { [key: string]: string } }) => {
       </header>
       <main className="flex flex-grow flex-col gap-24">
         <Information docId={docId} />
-        <MyRating docId={docId} />
+        <div className="flex gap-20">
+          <MyRating docId={docId} />
+          <Share />
+        </div>
       </main>
     </div>
   );

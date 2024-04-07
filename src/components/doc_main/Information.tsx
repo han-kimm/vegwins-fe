@@ -27,7 +27,6 @@ const LABEL: { [key: string]: string } = {
   category: '카테고리',
   hashtag: '해시태그',
   description: '설명',
-  share: '공유하기',
 };
 
 const MOCK_DOC: { [key: string]: any } = {
