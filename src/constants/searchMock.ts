@@ -1,6 +1,6 @@
 export const MOCK: Array<{
   id: string;
-  imgSrc?: string;
+  imageUrl?: string;
   title: string;
   hashtag?: string[];
   rating?: number | null;
@@ -8,14 +8,14 @@ export const MOCK: Array<{
   {
     id: '1',
     title: '풀무원',
-    imgSrc: '/image/sample.png',
+    imageUrl: '/image/sample.png',
     hashtag: ['#웃어', '#좋아'],
     rating: 44,
   },
   {
     id: '2',
     title: 'CU 삼각김밥 뿡가뽕뽀로뽕뽕',
-    imgSrc: '/image/sample2.jpg',
+    imageUrl: '/image/sample2.jpg',
     hashtag: ['#CU', '#삼각김밥'],
     rating: 77,
   },
