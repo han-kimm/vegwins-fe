@@ -12,7 +12,10 @@ interface Props {
 
 const SearchItem = ({ id, imgSrc, title, hashtag, rating }: Props) => {
   return (
-    <Link href={`/document/${id}`} className="flex-center h-max w-full gap-28 border-b border-solid border-black-100 p-12 last:border-0">
+    <Link
+      href={`/document/${id}`}
+      className="flex-center h-max w-full animate-fadeIn gap-28 border-b border-solid border-black-100 p-12 last:border-0"
+    >
       <div id="imageContainer" className="relative h-100 w-100 shrink-0">
         <Image fill priority sizes="100px" src={imgSrc ?? '/image/default.webp'} alt="" className="rounded-sm" aria-hidden={true} />
       </div>

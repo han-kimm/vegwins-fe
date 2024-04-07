@@ -7,7 +7,7 @@ import SearchLink from '@/components/home_link/SearchLink';
 
 export default function Home() {
   return (
-    <div>
+    <div className="h-dvh">
       <header className="flex h-60 w-full items-center justify-end px-40 py-20">
         <AuthChecker />
       </header>

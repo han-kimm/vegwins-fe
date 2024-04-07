@@ -20,7 +20,7 @@
   }
 
   body > div {
-    @apply mx-auto flex h-dvh max-w-[50rem] flex-col shadow-lg;
+    @apply mx-auto flex max-w-[50rem] flex-col shadow-lg;
   }
 }
 

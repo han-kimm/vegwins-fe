@@ -8,7 +8,7 @@ interface Props extends AnchorHTMLAttributes<HTMLAnchorElement> {
 
 const Anchor = ({ children, href, className, ...params }: Props) => {
   return (
-    <Link href={href} className={`flex-center gap-12 rounded-sm bg-black-80 px-16 py-8 ${className}`} {...params}>
+    <Link href={href} className={`flex-center rounded-xs gap-8 bg-black-80 px-12 py-4 ${className}`} {...params}>
       {children}
     </Link>
   );

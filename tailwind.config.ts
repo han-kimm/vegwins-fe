@@ -18,6 +18,7 @@ const config: Config = {
       spacing: PX_ENTRIES,
       borderRadius: {
         none: '0rem',
+        xs: '0.8rem',
         sm: '1.2rem',
         md: '2rem',
         lg: '3.2rem',
@@ -56,7 +57,7 @@ const config: Config = {
         },
       },
       animation: {
-        fadeIn: 'fadeIn 0.3s ease-in-out',
+        fadeIn: 'fadeIn 0.5s ease-in-out',
       },
     },
   },
