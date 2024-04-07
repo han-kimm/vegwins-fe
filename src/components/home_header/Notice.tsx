@@ -1,6 +1,7 @@
 import IconBell from 'public/icon/bell.svg';
 
 const Notice = () => {
+  // notice Fetching...
   return (
     <button className="relative">
       <IconBell />
