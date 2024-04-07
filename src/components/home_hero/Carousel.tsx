@@ -4,7 +4,7 @@ import { MOCK } from '@/constants/carouselMock';
 import useEmblaCarousel from 'embla-carousel-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useDotButton } from './HeroDotButton';
+import { useDotButton } from '../../hooks/useDotButton';
 
 const Carousel = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
@@ -13,10 +13,10 @@ const Carousel = () => {
   return (
     <section className="relative mb-20 w-full px-40" aria-label="슬라이드: 이용 방법과 추천 제품">
       <div ref={emblaRef} className="overflow-hidden rounded-md bg-white shadow-lg">
-        <SlideList data={MOCK} {...indicate} />
+        <CarouselSlide data={MOCK} {...indicate} />
       </div>
       <div className="flex-center absolute -bottom-16 left-1/2 mt-4 w-4/5 -translate-x-1/2 -translate-y-1/2 gap-20 px-40">
-        <Indicator data={MOCK} {...indicate} />
+        <CarouselIndicator data={MOCK} {...indicate} />
       </div>
     </section>
   );
@@ -28,7 +28,7 @@ interface SlideProps {
   selectedIndex: number;
 }
 
-const SlideList = ({ data, selectedIndex }: SlideProps) => {
+const CarouselSlide = ({ data, selectedIndex }: SlideProps) => {
   return (
     <div className="flex h-200" role="group">
       {data.map((data, i, arr) => (
@@ -53,7 +53,7 @@ interface IndicatorProps extends SlideProps {
   onDotButtonClick: (index: number) => void;
 }
 
-const Indicator = ({ data, selectedIndex, onDotButtonClick }: IndicatorProps) => {
+const CarouselIndicator = ({ data, selectedIndex, onDotButtonClick }: IndicatorProps) => {
   return data.map((_, index) => (
     <button
       key={index}

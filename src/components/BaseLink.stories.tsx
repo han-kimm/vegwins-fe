@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Anchor from '@/components/Anchor';
+import BaseLink from '@/components/BaseLink';
 import Docs from 'public/icon/docs.svg';
 
 const meta = {
   title: 'Example/Button',
-  component: Anchor,
+  component: BaseLink,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
-} satisfies Meta<typeof Anchor>;
+} satisfies Meta<typeof BaseLink>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

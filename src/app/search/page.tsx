@@ -1,8 +1,8 @@
 import HomeButton from '@/components/HomeButton';
 import LiftingButton from '@/components/LiftingButton';
-import CategorySelector from '@/components/search_category';
+import CategorySelector from '@/components/search_category/CategorySelector';
 import SearchBar from '@/components/search_header/SearchBar';
-import ResultContainer from '@/components/search_result';
+import SearchResult from '@/components/search_result/SearchResult';
 
 const Search = ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {
   const { category, q } = searchParams;
@@ -14,7 +14,7 @@ const Search = ({ searchParams }: { searchParams: { [key: string]: string | unde
       </header>
       <main className="flex flex-grow flex-col gap-24">
         <CategorySelector selected={category} />
-        <ResultContainer q={q} />
+        <SearchResult q={q} />
       </main>
       <LiftingButton />
     </div>

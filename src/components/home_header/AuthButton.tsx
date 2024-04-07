@@ -3,7 +3,7 @@
 import { setCookie } from '@/utils/cookie';
 import Image from 'next/image';
 
-const LoginButton = () => {
+const AuthButton = () => {
   return (
     <button onClick={() => setCookie({ key: 'session', value: { isLogin: true } })} className="flex-center gap-8 text-16 font-medium">
       <Image src="icon/join.svg" alt="로그인 이미지" width={24} height={24} />
@@ -12,4 +12,4 @@ const LoginButton = () => {
   );
 };
 
-export default LoginButton;
+export default AuthButton;

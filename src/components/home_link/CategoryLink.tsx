@@ -1,6 +1,6 @@
 import { CATEGORY, CATEGORY_KEY } from '@/constants/category';
 import Link from 'next/link';
-import Icon from '@/components/Icon';
+import BaseIcon from '@/components/BaseIcon';
 
 const CategoryLink = () => {
   return (
@@ -16,7 +16,7 @@ const CategoryLink = () => {
           className={`flex-center h-100 w-100 shrink-0 flex-col gap-8 rounded-sm bg-white py-8 shadow-sm first:ml-40 last:mr-40`}
           aria-label={`${key} 카테고리 검색 페이지로 이동`}
         >
-          <Icon render={CATEGORY[key]} name={key} />
+          <BaseIcon render={CATEGORY[key]} name={key} />
         </Link>
       ))}
     </section>

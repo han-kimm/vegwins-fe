@@ -10,7 +10,7 @@ interface Props {
   rating?: number | null;
 }
 
-const SearchItem = ({ id, imgSrc, title, hashtag, rating }: Props) => {
+const SearchResultItem = ({ id, imgSrc, title, hashtag, rating }: Props) => {
   return (
     <Link href={`/doc/${id}`} className="flex-center h-max w-full animate-fadeIn gap-28 border-b border-solid border-black-100 p-12 last:border-0">
       <div id="imageContainer" className="relative h-100 w-100 shrink-0">
@@ -23,7 +23,7 @@ const SearchItem = ({ id, imgSrc, title, hashtag, rating }: Props) => {
     </Link>
   );
 };
-export default SearchItem;
+export default SearchResultItem;
 
 const ItemTitle = ({ title, hashtag }: Pick<Props, 'title' | 'hashtag'>) => {
   return (

@@ -1,6 +1,6 @@
 import { getCookie } from '@/utils/cookie';
 import Link from 'next/link';
-import LoginButton from '@/components/home_header/LoginButton';
+import AuthButton from '@/components/home_header/AuthButton';
 import Notice from '@/components/home_header/Notice';
 import IconProfile from 'public/icon/profile.svg';
 
@@ -14,7 +14,7 @@ const AuthChecker = async () => {
       </Link>
     </>
   ) : (
-    <LoginButton />
+    <AuthButton />
   );
 };
 export default AuthChecker;

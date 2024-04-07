@@ -6,7 +6,7 @@ interface Props {
   fontSize?: number;
 }
 
-const Icon = ({ render, name, fontSize = 16 }: Props) => {
+const BaseIcon = ({ render, name, fontSize = 16 }: Props) => {
   return (
     <>
       <div className="flex-center h-40 w-40">{render()}</div>
@@ -16,4 +16,4 @@ const Icon = ({ render, name, fontSize = 16 }: Props) => {
     </>
   );
 };
-export default Icon;
+export default BaseIcon;

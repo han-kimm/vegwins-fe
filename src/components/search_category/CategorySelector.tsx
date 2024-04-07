@@ -1,5 +1,5 @@
 import { CATEGORY_KEY } from '@/constants/category';
-import CategoryItem from '@/components/search_category/CategoryItem';
+import CategorySelectorItem from '@/components/search_category/CategorySelectorItem';
 
 interface Props {
   selected?: string;
@@ -12,10 +12,10 @@ const CategorySelector = ({ selected }: Props) => {
       role="group"
       aria-label="검색 결과를 필터링하는 카테고리 선택"
     >
-      <div>{selected ? <CategoryItem key={selected} name={selected} isSelected /> : <NoSelected />}</div>
+      <div>{selected ? <CategorySelectorItem key={selected} name={selected} isSelected /> : <NoSelected />}</div>
       <div className="flex overflow-scroll scroll-smooth">
         {CATEGORY_KEY.filter((key) => key !== selected).map((key) => (
-          <CategoryItem key={key} name={key} />
+          <CategorySelectorItem key={key} name={key} />
         ))}
       </div>
     </section>
