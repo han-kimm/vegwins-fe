@@ -1,3 +1,4 @@
+import { ALTMSG } from '@/constants/ratingAlt';
 import Image from 'next/image';
 
 interface Props {
@@ -14,9 +15,3 @@ const ItemRating = ({ rating }: Props) => {
   );
 };
 export default ItemRating;
-
-const ALTMSG: { [key: number]: string } = {
-  [0]: '안 좋음',
-  [1]: '보통',
-  [2]: '좋음',
-};

@@ -1,6 +1,7 @@
 import HomeButton from '@/components/common/HomeButton';
 import ReturnButton from '@/components/doc_header/ReturnButton';
 import Information from '@/components/doc_main/Information';
+import MyRating from '@/components/doc_main/MyRating';
 
 const Doc = ({ params }: { params: { [key: string]: string } }) => {
   const { docId } = params;
@@ -12,6 +13,9 @@ const Doc = ({ params }: { params: { [key: string]: string } }) => {
       </header>
       <main className="flex flex-grow flex-col gap-24">
         <Information docId={docId} />
+        <div>
+          <MyRating docId={docId} />
+        </div>
       </main>
     </div>
   );
