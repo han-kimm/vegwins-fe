@@ -8,7 +8,7 @@ const Search = ({ searchParams }: { searchParams: { [key: string]: string | unde
   const { category } = searchParams;
   const { q } = searchParams;
   return (
-    <div className="flex min-h-dvh flex-col px-16 pb-28 pt-16">
+    <div className="h-max px-16 pb-28 pt-16">
       <header className="mb-12 flex gap-8">
         <HomeButton />
         <SearchBar />

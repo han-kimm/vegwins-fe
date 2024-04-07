@@ -16,8 +16,11 @@
   }
 
   body {
-    @apply text-black-100;
-    @apply bg-black-0;
+    @apply bg-black-0 text-black-100;
+  }
+
+  body > div {
+    @apply mx-auto flex h-dvh max-w-[50rem] flex-col shadow-lg;
   }
 }
 

@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={NotoSansKR.className}>{children}</body>
+      <body className={`${NotoSansKR.className}`}>{children}</body>
     </html>
   );
 }

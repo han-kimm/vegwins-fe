@@ -39,7 +39,7 @@ const SlideList = ({ data, selectedIndex }: SlideProps) => {
           aria-label={`${arr.length}번째 중 ${i + 1}번째 슬라이드`}
           aria-hidden={i === selectedIndex ? false : true}
         >
-          <Image fill priority sizes="300px" src={data.imageUrl} alt="" className="object-cover" aria-hidden={true} />
+          <Image fill priority sizes="(min-width: 500px) 500px, 300px" src={data.imageUrl} alt="" className="object-cover" aria-hidden={true} />
           <h1 className="z-10 text-24 font-bold">
             <p>{data.title}</p>
           </h1>

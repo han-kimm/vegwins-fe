@@ -5,7 +5,7 @@ import Icon from '@/components/Icon';
 const CategoryLink = () => {
   return (
     <section
-      className="flex h-120 w-full scroll-mx-60 items-start gap-20 overflow-scroll scroll-smooth"
+      className="flex h-120 w-full scroll-mx-60 gap-20 overflow-scroll scroll-smooth pt-4"
       role="group"
       aria-label="카테고리에 따른 검색 페이지 이동"
     >
