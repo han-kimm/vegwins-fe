@@ -13,9 +13,7 @@ const Doc = ({ params }: { params: { [key: string]: string } }) => {
       </header>
       <main className="flex flex-grow flex-col gap-24">
         <Information docId={docId} />
-        <div>
-          <MyRating docId={docId} />
-        </div>
+        <MyRating docId={docId} />
       </main>
     </div>
   );

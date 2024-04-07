@@ -9,10 +9,10 @@ interface Props {
 const BaseIcon = ({ render, name, fontSize = 16 }: Props) => {
   return (
     <div className="flex-center flex-col">
-      <div className="flex-center h-40 w-40">{render()}</div>
-      <span className={`text-${fontSize} font-bold`} aria-hidden={true}>
-        {name}
-      </span>
+      <div className="flex-center h-40 w-40" aria-hidden={true}>
+        {render()}
+      </div>
+      <span className={`text-${fontSize} font-bold`}>{name}</span>
     </div>
   );
 };
