@@ -1,9 +1,9 @@
 import Footer from '@/components/home_footer/Footer';
 import AuthChecker from '@/components/home_header/AuthChecker';
-import Carousel from '@/components/home_hero/Carousel';
-import CategoryLink from '@/components/home_link/CategoryLink';
-import FeedLink from '@/components/home_link/FeedLink';
-import SearchLink from '@/components/home_link/SearchLink';
+import Carousel from '@/components/home_main/Carousel';
+import LinkCategory from '@/components/home_main/LinkCategory';
+import LinkFeed from '@/components/home_main/LinkFeed';
+import LinkSearch from '@/components/home_main/LinkSearch';
 
 export default function Home() {
   return (
@@ -13,9 +13,9 @@ export default function Home() {
       </header>
       <main className="flex-center mb-100 flex-col gap-28">
         <Carousel />
-        <SearchLink />
-        <CategoryLink />
-        <FeedLink />
+        <LinkSearch />
+        <LinkCategory />
+        <LinkFeed />
       </main>
       <footer className="mt-auto bg-black-80 px-40 py-12 text-14 text-white">
         <Footer />

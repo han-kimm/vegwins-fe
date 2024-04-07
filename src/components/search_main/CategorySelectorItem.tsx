@@ -3,7 +3,7 @@
 import { CATEGORY } from '@/constants/category';
 import useSetSearch from '@/hooks/useSetSearch';
 import { setCookie } from '@/utils/cookie';
-import BaseIcon from '@/components/BaseIcon';
+import BaseIcon from '@/components/common/BaseIcon';
 
 interface Props {
   name: string;

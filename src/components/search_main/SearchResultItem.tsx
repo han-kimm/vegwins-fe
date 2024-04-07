@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import ItemRating from '@/components/ItemRating';
+import ItemRating from '@/components/common/ItemRating';
 
 interface Props {
   id: string;

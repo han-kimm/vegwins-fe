@@ -1,8 +1,8 @@
-import HomeButton from '@/components/HomeButton';
-import LiftingButton from '@/components/LiftingButton';
-import CategorySelector from '@/components/search_category/CategorySelector';
+import HomeButton from '@/components/common/HomeButton';
+import LiftingButton from '@/components/common/LiftingButton';
 import SearchBar from '@/components/search_header/SearchBar';
-import SearchResult from '@/components/search_result/SearchResult';
+import CategorySelector from '@/components/search_main/CategorySelector';
+import SearchResult from '@/components/search_main/SearchResult';
 
 const Search = ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {
   const { category, q } = searchParams;

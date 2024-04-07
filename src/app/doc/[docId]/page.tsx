@@ -1,4 +1,4 @@
-import HomeButton from '@/components/HomeButton';
+import HomeButton from '@/components/common/HomeButton';
 import ReturnButton from '@/components/doc_header/ReturnButton';
 
 const Doc = () => {

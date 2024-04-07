@@ -1,8 +1,8 @@
 import { CATEGORY, CATEGORY_KEY } from '@/constants/category';
 import Link from 'next/link';
-import BaseIcon from '@/components/BaseIcon';
+import BaseIcon from '@/components/common/BaseIcon';
 
-const CategoryLink = () => {
+const LinkCategory = () => {
   return (
     <section
       className="flex h-120 w-full scroll-mx-60 gap-20 overflow-scroll scroll-smooth pt-4"
@@ -22,4 +22,4 @@ const CategoryLink = () => {
     </section>
   );
 };
-export default CategoryLink;
+export default LinkCategory;

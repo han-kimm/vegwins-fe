@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-const FeedLink = () => {
+const LinkFeed = () => {
   return (
     <section className="flex w-full px-40" aria-label="게시판으로 이동">
       <Link href="/community" className="relative flex-grow rounded-sm bg-white px-28 py-28 shadow-md">
@@ -14,4 +14,4 @@ const FeedLink = () => {
     </section>
   );
 };
-export default FeedLink;
+export default LinkFeed;

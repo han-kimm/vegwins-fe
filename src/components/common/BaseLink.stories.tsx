@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import BaseLink from '@/components/BaseLink';
+import BaseLink from '@/components/common/BaseLink';
 import Docs from 'public/icon/docs.svg';
 
 const meta = {

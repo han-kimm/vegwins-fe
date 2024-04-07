@@ -1,8 +1,8 @@
 import { MOCK } from '@/constants/searchMock';
 import Image from 'next/image';
 import { Suspense } from 'react';
-import BaseLink from '@/components/BaseLink';
-import SearchResultItem from '@/components/search_result/SearchResultItem';
+import BaseLink from '@/components/common/BaseLink';
+import SearchResultItem from '@/components/search_main/SearchResultItem';
 
 interface Props {
   q?: string;
