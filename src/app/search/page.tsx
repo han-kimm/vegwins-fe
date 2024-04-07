@@ -2,10 +2,11 @@ import LiftingButton from '@/components/LiftingButton';
 import CategorySelector from '@/components/search_category';
 import HomeButton from '@/components/search_header/HomeButton';
 import SearchBar from '@/components/search_header/SearchBar';
-import SearchResult from '@/components/search_result';
+import ResultContainer from '@/components/search_result';
 
 const Search = ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {
   const { category } = searchParams;
+  const { q } = searchParams;
   return (
     <div className="flex min-h-dvh flex-col px-16 pb-28 pt-16">
       <header className="mb-12 flex gap-8">
@@ -14,7 +15,7 @@ const Search = ({ searchParams }: { searchParams: { [key: string]: string | unde
       </header>
       <main className="flex flex-grow flex-col gap-24">
         <CategorySelector selected={category} />
-        <SearchResult />
+        <ResultContainer q={q} />
       </main>
       <LiftingButton />
     </div>

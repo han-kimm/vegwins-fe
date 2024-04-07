@@ -1,11 +1,29 @@
+import { Suspense } from 'react';
 import SearchItem from '@/components/search_result/SearchItem';
 
-const SearchResult = () => {
-  const searchParam = '삼각김밥';
-  const searchCount = MOCK.length;
+interface Props {
+  q?: string;
+}
+
+const ResultContainer = ({ q }: Props) => {
+  // Data Fetching
+  return (
+    <Suspense fallback={<h1 className="mb-4 ml-20 text-18 font-bold">{`"${q}" 검색 중...`}</h1>}>
+      <ResultView data={MOCK} q={q} />
+    </Suspense>
+  );
+};
+export default ResultContainer;
+
+interface ResultViewProps {
+  data: typeof MOCK;
+  q?: string;
+}
+
+const ResultView = ({ data, q }: ResultViewProps) => {
   return (
     <section>
-      <h1 className="mb-4 ml-20 text-18 font-bold">{`"${searchParam}" 검색 결과(${searchCount}) 입니다.`}</h1>
+      <h1 className="mb-4 ml-20 text-18 font-bold">{q ? `"${q}" 검색 결과(${data.length}) 입니다.` : '최근 작성된 문서'}</h1>
       <div className="flex w-full flex-col rounded-md bg-white px-16 shadow-lg" role="group">
         {MOCK.map((data) => (
           <SearchItem key={data.id} {...data} />
@@ -14,7 +32,6 @@ const SearchResult = () => {
     </section>
   );
 };
-export default SearchResult;
 
 const MOCK: Array<{
   id: string;
