@@ -1,12 +1,6 @@
-import _ from 'lodash';
-import Image from 'next/image';
-import Link from 'next/link';
-import BaseIcon from '@/components/common/BaseIcon';
-import ItemRating from '@/components/common/ItemRating';
-import InformationContent from '@/components/doc_main/InfomationContent';
+import InformationContent from '@/components/doc_main/InformationContent';
 import InformationTable from '@/components/doc_main/InformationTable';
 import InformationRow from '@/components/doc_main/informationRow';
-import { CATEGORY } from './../../constants/category';
 
 interface Props {
   docId: string;
