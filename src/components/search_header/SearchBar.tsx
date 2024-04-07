@@ -1,6 +1,7 @@
 'use client';
 
 import useSetSearch from '@/hooks/useSetSearch';
+import { setCookie } from '@/utils/cookie';
 import Image from 'next/image';
 import { FormEvent } from 'react';
 
@@ -14,14 +15,16 @@ interface CustomEvent extends FormEvent<HTMLFormElement> {
 const SearchBar = () => {
   const { router, pathname, createQueryString } = useSetSearch();
 
-  const handleSubmit = (e: CustomEvent) => {
+  const changeSearchParams = (e: CustomEvent) => {
     e.preventDefault();
     const q = e.target[INPUTNAME].value;
     const newParams = createQueryString('q', q);
-    router.push(pathname + '?' + newParams);
+    const newPath = pathname + '?' + newParams;
+    setCookie({ key: 'sp', value: newPath });
+    router.push(newPath);
   };
   return (
-    <form onSubmit={handleSubmit} className="relative w-full">
+    <form onSubmit={changeSearchParams} className="relative w-full">
       <input
         name={INPUTNAME}
         placeholder="'검색어' 또는 '#특징'으로 검색"
