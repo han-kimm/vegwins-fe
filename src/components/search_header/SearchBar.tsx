@@ -26,7 +26,7 @@ const SearchBar = ({ k }: Props) => {
 
   const changeSearchParams = (e: FormEvent) => {
     e.preventDefault();
-    setCookieRouting(SP_KEYWORD, value ?? '');
+    setCookieRouting(SP_KEYWORD, value);
   };
 
   const resetKeyword = () => {

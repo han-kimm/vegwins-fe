@@ -8,9 +8,9 @@ const useSetSearch = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const createNewPath = useCallback(
-    (name: string, value: string) => {
+    (name: string, value: string | null) => {
       const params = new URLSearchParams(searchParams.toString());
-      params.set(name, value);
+      value ? params.set(name, value) : params.delete(name);
 
       const newParams = params.toString();
       const newPath = pathname + '?' + newParams;
