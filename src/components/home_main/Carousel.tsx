@@ -1,6 +1,6 @@
 'use client';
 
-import { MOCK } from '@/constants/carouselMock';
+import { MOCK } from '@/constants/mockCarousel';
 import useEmblaCarousel from 'embla-carousel-react';
 import Image from 'next/image';
 import Link from 'next/link';

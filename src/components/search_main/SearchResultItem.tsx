@@ -1,3 +1,4 @@
+import { DEFAULT_IMAGE } from '@/constants/default';
 import Image from 'next/image';
 import Link from 'next/link';
 import ItemRating from '@/components/common/ItemRating';
@@ -14,7 +15,7 @@ const SearchResultItem = ({ id, imageUrl, title, hashtag, rating }: Props) => {
   return (
     <Link href={`/doc/${id}`} className="flex-center h-max w-full animate-fadeIn gap-28 border-b border-solid border-black-100 p-12 last:border-0">
       <div id="imageContainer" className="relative h-100 w-100 shrink-0">
-        <Image fill priority sizes="100px" src={imageUrl ?? '/image/default.webp'} alt="" className="rounded-sm" aria-hidden={true} />
+        <Image fill priority sizes="100px" src={imageUrl ?? DEFAULT_IMAGE} alt="" className="rounded-sm" aria-hidden={true} />
       </div>
       <div id="itemInfo" className="flex h-100 flex-grow justify-between gap-12 py-12">
         <ItemTitle title={title.length > 12 ? title.slice(0, 12) + '...' : title} hashtag={hashtag} />

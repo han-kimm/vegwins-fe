@@ -1,4 +1,4 @@
-import { MOCK } from '@/constants/searchMock';
+import { MOCK } from '@/constants/mockSearch';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Suspense } from 'react';

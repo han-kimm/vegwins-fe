@@ -1,4 +1,6 @@
 import { CATEGORY } from '@/constants/category';
+import { DEFAULT_IMAGE } from '@/constants/default';
+import { SP_CATEGORY, SP_KEYWORD } from '@/constants/searchCookie';
 import Image from 'next/image';
 import Link from 'next/link';
 import BaseIcon from '@/components/common/BaseIcon';
@@ -25,7 +27,7 @@ const InformationContent = ({ label, value }: { label: string; value: string | n
         SwitchedComponent = (
           <div className="flex flex-wrap gap-16 text-black-80">
             {value.map((v) => (
-              <Link href={`/search?category=${v}`} key={v}>
+              <Link href={`/search?${SP_CATEGORY}=${v}`} key={v}>
                 <BaseIcon key={v} name={v} render={CATEGORY[v]} fontSize={12} />
               </Link>
             ))}
@@ -39,7 +41,7 @@ const InformationContent = ({ label, value }: { label: string; value: string | n
           <div className="flex flex-wrap gap-16 text-14 font-bold">
             {value.map((tag) => (
               <Link
-                href={`/search?q=${encodeURIComponent(tag)}`}
+                href={`/search?${SP_KEYWORD}=${encodeURIComponent(tag)}`}
                 key={tag}
                 className="shrink-0 rounded-full border border-black-40 px-8 active:bg-black-80"
               >
@@ -61,7 +63,7 @@ const InformationContent = ({ label, value }: { label: string; value: string | n
             height={300}
             priority
             sizes="300px"
-            src={value ?? '/image/default.webp'}
+            src={value ?? DEFAULT_IMAGE}
             alt=""
             className="mx-auto object-cover"
             aria-hidden={true}
