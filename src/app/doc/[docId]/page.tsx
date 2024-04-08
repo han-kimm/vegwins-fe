@@ -22,7 +22,7 @@ const Doc = ({ params }: { params: { [key: string]: string } }) => {
           <MyRating data={MOCK_DOC} docId={docId} />
           <Share />
         </div>
-        <Comment data={MOCK_DOC} />
+        <Comment data={MOCK_DOC} docId={docId} />
       </main>
       <LiftingButton />
     </div>

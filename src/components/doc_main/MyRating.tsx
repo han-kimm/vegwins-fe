@@ -3,7 +3,7 @@
 import { MockDoc } from '@/constants/mockDoc';
 import { ALTMSG } from '@/constants/ratingAlt';
 import { getSessionStorage } from '@/utils/sessionStorage';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import MyRatingSelector from '@/components/doc_main/MyRatingSelector';
 
 interface Props {
@@ -12,8 +12,13 @@ interface Props {
 }
 
 const MyRating = ({ data, docId }: Props) => {
-  const [rating, setRating] = useState(() => getSessionStorage(`r${docId}`) ?? -1);
+  const [rating, setRating] = useState(-1);
   // Data Fetching...
+
+  useEffect(() => {
+    setRating(getSessionStorage(`r${docId}`) ?? -1);
+  }, []);
+
   return (
     <section className="flex-center relative grow flex-col rounded-md bg-white p-20 shadow-lg" aria-label="문서 평가">
       <div className="mb-28 flex w-full gap-12">
