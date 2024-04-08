@@ -1,25 +1,25 @@
-'use client';
-
 import { ALTMSG } from '@/constants/ratingAlt';
-import { setCookie } from '@/utils/cookie';
+import { setSessionStorage } from '@/utils/sessionStorage';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
 
 interface Props {
   rating: number;
+  setRating: (rating: number) => void;
 }
-const MyRatingSelector = ({ rating }: Props) => {
+const MyRatingSelector = ({ rating, setRating }: Props) => {
   const { docId } = useParams();
 
-  const setRatingCookie = (status: number) => {
-    setCookie({ key: `r${docId}`, value: rating === status ? null : status });
+  const setRatingSessionStorage = (status: number) => {
+    setRating(rating === status ? -1 : status);
+    setSessionStorage({ key: `r${docId}`, value: rating === status ? -1 : status });
   };
   return (
     <div className="flex w-full justify-evenly" role="group" aria-label="평가 고르기">
       {[2, 1, 0].map((status) => (
         <button
           type="button"
-          onClick={() => setRatingCookie(status)}
+          onClick={() => setRatingSessionStorage(status)}
           key={status}
           className={`flex-center relative h-40 w-40 rounded-full ${rating === status ? 'bg-orange' : 'bg-black-20'}`}
         >
