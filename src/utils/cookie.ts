@@ -4,7 +4,7 @@ import { cookies } from 'next/headers';
 
 interface Args {
   key: string;
-  value: {};
+  value: any;
 }
 
 export const setCookie = ({ key, value }: Args) => {

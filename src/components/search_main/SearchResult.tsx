@@ -27,8 +27,8 @@ interface SearchResultViewProps extends Props {
 const SearchResultView = ({ data, k }: SearchResultViewProps) => {
   return (
     <section className="flex flex-grow flex-col">
-      <div className="mb-4">
-        <h1 className="ml-20 inline text-18 font-bold">{k ? `"${k}" 검색 결과(${data.length}) 입니다.` : '최근 작성된 문서'}</h1>
+      <div className="mb-4 ml-20">
+        <h1 className="inline text-18 font-bold">{k ? `"${k}" 검색 결과(${data.length}) 입니다.` : '최근 작성된 문서'}</h1>
         {!!k && <SearchResultReset />}
       </div>
       {data.length ? (

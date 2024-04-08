@@ -1,4 +1,5 @@
 import HomeButton from '@/components/common/HomeButton';
+import LiftingButton from '@/components/common/LiftingButton';
 import ReturnButton from '@/components/doc_header/ReturnButton';
 import Information from '@/components/doc_main/Information';
 import MyRating from '@/components/doc_main/MyRating';
@@ -19,6 +20,7 @@ const Doc = ({ params }: { params: { [key: string]: string } }) => {
           <Share />
         </div>
       </main>
+      <LiftingButton />
     </div>
   );
 };

@@ -11,7 +11,7 @@ interface Props {
 }
 
 const SearchBar = ({ k }: Props) => {
-  const [value, setValue] = useState<string>();
+  const [value, setValue] = useState('');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
@@ -19,7 +19,7 @@ const SearchBar = ({ k }: Props) => {
   };
 
   useEffect(() => {
-    setValue(k);
+    setValue(k ?? '');
   }, [k]);
 
   const { setCookieRouting } = useSetSearch();
@@ -40,7 +40,7 @@ const SearchBar = ({ k }: Props) => {
         name={SP_KEYWORD}
         value={value}
         onChange={handleChange}
-        placeholder="'검색어' 또는 '#특징'으로 검색"
+        placeholder="'검색어' 또는 '#특징'"
         className="h-48 w-full rounded-full bg-white pl-48 text-16 font-bold shadow-sm"
       />
       <Image
@@ -51,15 +51,17 @@ const SearchBar = ({ k }: Props) => {
         className="absolute left-16 top-1/2 -translate-y-1/2"
         aria-hidden={true}
       />
-      <button
-        type="button"
-        onClick={resetKeyword}
-        disabled={!value}
-        className={`absolute right-16 top-1/2 -translate-y-1/2 ${value ? 'text-black-80' : 'text-black-40'}`}
-        aria-label="검색어 초기화 버튼"
-      >
-        <IconReset />
-      </button>
+      {!!value && (
+        <button
+          type="button"
+          onClick={resetKeyword}
+          disabled={!value}
+          className={`absolute right-16 top-1/2 -translate-y-1/2 ${value ? 'text-black-80' : 'text-black-40'}`}
+          aria-label="검색어 초기화 버튼"
+        >
+          <IconReset />
+        </button>
+      )}
     </form>
   );
 };

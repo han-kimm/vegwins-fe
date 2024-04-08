@@ -12,7 +12,7 @@ const MyRatingSelector = ({ rating }: Props) => {
   const { docId } = useParams();
 
   const setRatingCookie = (status: number) => {
-    setCookie({ key: `r${docId}`, value: status });
+    setCookie({ key: `r${docId}`, value: rating === status ? null : status });
   };
   return (
     <div className="flex w-full justify-evenly" role="group" aria-label="평가 고르기">
