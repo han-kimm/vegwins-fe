@@ -1,5 +1,5 @@
 import { CATEGORY_KEY } from '@/constants/category';
-import CategorySelectorItem from '@/components/search_main/CategorySelectorItem';
+import CategorySelectorItem from '@/components/search_header/CategorySelectorItem';
 
 interface Props {
   selected?: string;
