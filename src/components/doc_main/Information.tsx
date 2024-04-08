@@ -1,3 +1,4 @@
+import { MOCK_DOC } from '@/constants/mockDoc';
 import InformationContent from '@/components/doc_main/InformationContent';
 import InformationTable from '@/components/doc_main/InformationTable';
 import InformationRow from '@/components/doc_main/informationRow';
@@ -27,16 +28,4 @@ const LABEL: { [key: string]: string } = {
   category: '카테고리',
   hashtag: '해시태그',
   description: '설명',
-};
-
-const MOCK_DOC: { [key: string]: any } = {
-  id: '1',
-  title: '풀무원',
-  imageUrl: '/image/sample.png',
-  hashtag: ['#웃어', '#좋아'],
-  rating: 33,
-  caution: ['밀', '대두'],
-  category: ['편의점', '마트', '주간 조회수', '영화관', '서점'],
-  description:
-    '맛있어요.맛있어요.맛있어요.맛있어요.맛있어요.맛있어요.맛있어요.맛있어요.맛있어요.맛있어요.맛있어요.맛있어요.맛있어요.맛있어요.맛있어요.맛있어요.맛있어요.맛있어요.맛있어요.맛있어요.맛있어요.맛있어요.맛있어요.맛있어요.맛있어요.맛있어요.',
 };

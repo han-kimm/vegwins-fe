@@ -1,5 +1,6 @@
 'use client';
 
+import { INPUT_PLACEHODER } from '@/constants/default';
 import { SP_KEYWORD } from '@/constants/searchCookie';
 import useSetSearch from '@/hooks/useSetSearch';
 import Image from 'next/image';
@@ -40,7 +41,7 @@ const SearchBar = ({ k }: Props) => {
         name={SP_KEYWORD}
         value={value}
         onChange={handleChange}
-        placeholder="'검색어' 또는 '#특징'"
+        placeholder={INPUT_PLACEHODER}
         className="h-48 w-full rounded-full bg-white pl-48 text-16 font-bold shadow-sm"
       />
       <Image

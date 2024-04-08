@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import BaseIcon from '@/components/common/BaseIcon';
 
-const InformationContent = ({ label, value }: { label: string; value: string | number | Array<string> }) => {
+const InformationContent = ({ label, value }: { label: string; value: string | Array<string> }) => {
   let SwitchedComponent;
   switch (label) {
     case '제품명':
@@ -58,16 +58,7 @@ const InformationContent = ({ label, value }: { label: string; value: string | n
     default:
       if (typeof value === 'string') {
         SwitchedComponent = (
-          <Image
-            width={300}
-            height={300}
-            priority
-            sizes="300px"
-            src={value ?? DEFAULT_IMAGE}
-            alt=""
-            className="mx-auto object-cover"
-            aria-hidden={true}
-          />
+          <Image width={300} height={300} priority sizes="300px" src={value} alt="" className="mx-auto rounded-md object-cover" aria-hidden={true} />
         );
       }
   }
