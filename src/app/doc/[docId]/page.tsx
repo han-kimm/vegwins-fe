@@ -12,7 +12,7 @@ const Doc = ({ params }: { params: { [key: string]: string } }) => {
         <ReturnButton />
         <HomeButton isDoc />
       </header>
-      <main className="flex flex-grow flex-col gap-24">
+      <main className="flex flex-grow animate-fadeIn flex-col gap-24">
         <Information docId={docId} />
         <div className="flex gap-20">
           <MyRating docId={docId} />

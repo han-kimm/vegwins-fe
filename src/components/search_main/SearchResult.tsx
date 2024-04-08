@@ -1,18 +1,20 @@
 import { MOCK } from '@/constants/searchMock';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Suspense } from 'react';
 import BaseLink from '@/components/common/BaseLink';
 import SearchResultItem from '@/components/search_main/SearchResultItem';
+import SearchResultReset from '@/components/search_main/SearchResultReset';
 
 interface Props {
-  q?: string;
+  k?: string;
 }
 
-const SearchResult = ({ q }: Props) => {
+const SearchResult = ({ k }: Props) => {
   // Data Fetching
   return (
-    <Suspense fallback={<h1 className="mb-4 ml-20 text-18 font-bold">{`"${q}" 검색 중...`}</h1>}>
-      <SearchResultView data={q ? MOCK.slice(2, 2) : MOCK} q={q} />
+    <Suspense fallback={<h1 className="mb-4 ml-20 text-18 font-bold">{`"${k}" 검색 중...`}</h1>}>
+      <SearchResultView data={k ? MOCK.slice(2, 2) : MOCK} k={k} />
     </Suspense>
   );
 };
@@ -22,10 +24,13 @@ interface SearchResultViewProps extends Props {
   data: typeof MOCK;
 }
 
-const SearchResultView = ({ data, q }: SearchResultViewProps) => {
+const SearchResultView = ({ data, k }: SearchResultViewProps) => {
   return (
     <section className="flex flex-grow flex-col">
-      <h1 className="mb-4 ml-20 text-18 font-bold">{q ? `"${q}" 검색 결과(${data.length}) 입니다.` : '최근 작성된 문서'}</h1>
+      <div className="mb-4">
+        <h1 className="ml-20 inline text-18 font-bold">{k ? `"${k}" 검색 결과(${data.length}) 입니다.` : '최근 작성된 문서'}</h1>
+        {!!k && <SearchResultReset />}
+      </div>
       {data.length ? (
         <div className={`flex w-full flex-col rounded-md bg-white px-16 shadow-lg`} role="group">
           {data.map((data) => (

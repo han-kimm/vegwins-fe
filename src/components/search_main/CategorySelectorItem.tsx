@@ -1,8 +1,8 @@
 'use client';
 
 import { CATEGORY } from '@/constants/category';
+import { SP_CATEGORY } from '@/constants/searchCookie';
 import useSetSearch from '@/hooks/useSetSearch';
-import { setCookie } from '@/utils/cookie';
 import BaseIcon from '@/components/common/BaseIcon';
 
 interface Props {
@@ -11,13 +11,10 @@ interface Props {
 }
 
 const CategorySelectorItem = ({ name, isSelected }: Props) => {
-  const { router, pathname, createQueryString } = useSetSearch();
+  const { setCookieRouting } = useSetSearch();
 
   const changeSearchParams = () => {
-    const newParams = createQueryString('category', isSelected ? '' : name);
-    const newPath = pathname + '?' + newParams;
-    setCookie({ key: 'sp', value: newPath });
-    router.push(newPath);
+    setCookieRouting(SP_CATEGORY, isSelected ? '' : name);
   };
   return (
     <button onClick={changeSearchParams} className={`flex-center w-60 shrink-0 flex-col ${isSelected ? 'text-black-100' : 'text-black-40'}`}>
