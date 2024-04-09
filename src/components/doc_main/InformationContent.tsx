@@ -16,7 +16,7 @@ const InformationContent = ({ label, value }: { label: string; value: string | A
         SwitchedComponent = (
           <div className="flex gap-16 text-20 font-medium">
             {value.map((v) => (
-              <span key={v}>{v}</span>
+              <p key={v}>{v}</p>
             ))}
           </div>
         );

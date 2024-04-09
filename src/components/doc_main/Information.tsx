@@ -4,7 +4,7 @@ import InformationTable from '@/components/doc_main/InformationTable';
 import InformationRow from '@/components/doc_main/informationRow';
 
 interface Props {
-  data: MockDoc;
+  data: { [key: string]: string | Array<string> };
 }
 const Information = ({ data }: Props) => {
   return (

@@ -10,6 +10,12 @@ export const MOCK_COMMENT = [
         comment: '웃음이 나오는 곳, 홈플러스입니다.',
         createdAt: '2024-04-01T18:47:00+09:00',
       },
+      {
+        id: '1b',
+        nickname: '이마트',
+        comment: '웃음, 그 이상의 환희 이마트입니다.',
+        createdAt: '2024-04-09T14:11:00+09:00',
+      },
     ],
     createdAt: '2024-04-01T18:30:00+09:00',
   },
