@@ -9,11 +9,15 @@ interface Props {
   title: string;
   hashtag?: string[];
   rating?: number | null;
+  end?: boolean;
 }
 
-const SearchResultItem = ({ id, imageUrl, title, hashtag, rating }: Props) => {
+const SearchResultItem = ({ id, imageUrl, title, hashtag, rating, end }: Props) => {
   return (
-    <Link href={`/doc/${id}`} className="flex-center h-max w-full animate-fadeIn gap-28 border-b border-solid border-black-100 p-12 last:border-0">
+    <Link
+      href={`/doc/${id}`}
+      className={`${end && 'relative bg-black-0 [&>div]:opacity-30'} flex-center h-max w-full animate-fadeIn gap-28 border-b border-solid border-black-100 p-12 last:border-0`}
+    >
       <div id="imageContainer" className="relative h-100 w-100 shrink-0">
         <Image fill sizes="100px" src={imageUrl ?? DEFAULT_IMAGE} alt="" className="rounded-sm" aria-hidden={true} />
       </div>
@@ -21,6 +25,7 @@ const SearchResultItem = ({ id, imageUrl, title, hashtag, rating }: Props) => {
         <ItemTitle title={title.length > 12 ? title.slice(0, 12) + '...' : title} hashtag={hashtag} />
         <RatingChecker rating={rating} />
       </div>
+      {end && <p className="absolute left-32 text-18 font-bold">판매종료</p>}
     </Link>
   );
 };

@@ -4,6 +4,7 @@ export const MOCK: Array<{
   title: string;
   hashtag?: string[];
   rating?: number | null;
+  end?: boolean;
 }> = [
   {
     id: '1',
@@ -18,6 +19,7 @@ export const MOCK: Array<{
     imageUrl: '/image/sample2.jpg',
     hashtag: ['#CU', '#삼각김밥'],
     rating: 77,
+    end: true,
   },
   {
     id: '3',
@@ -29,6 +31,7 @@ export const MOCK: Array<{
     id: '4',
     title: '에에올',
     rating: 33,
+    end: true,
   },
   {
     id: '5',

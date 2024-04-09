@@ -23,7 +23,7 @@ export default Information;
 const LABEL: { [key: string]: string } = {
   imageUrl: '',
   title: '제품명',
-  caution: '알레르기 유발성분',
+  caution: '주의점',
   category: '카테고리',
   hashtag: '해시태그',
   description: '설명',

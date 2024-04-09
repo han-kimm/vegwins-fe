@@ -11,14 +11,14 @@ const InformationContent = ({ label, value }: { label: string; value: string | A
     case '제품명':
       SwitchedComponent = <p className="text-24 font-bold">{value}</p>;
       break;
-    case '알레르기 유발성분':
+    case '주의점':
       if (typeof value === 'object') {
         SwitchedComponent = (
-          <div className="flex gap-16 text-20 font-medium">
+          <p className="flex flex-wrap gap-16 text-20 font-medium">
             {value.map((v) => (
-              <p key={v}>{v}</p>
+              <span key={v}>{v}</span>
             ))}
-          </div>
+          </p>
         );
       }
       break;
