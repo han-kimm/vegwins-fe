@@ -4,14 +4,14 @@ import InformationTable from '@/components/doc_main/InformationTable';
 import InformationRow from '@/components/doc_main/informationRow';
 
 interface Props {
-  data: { [key: string]: string | Array<string> };
+  data: MockDoc;
 }
 const Information = ({ data }: Props) => {
   return (
     <InformationTable>
       {Object.keys(LABEL).map((label) => (
         <InformationRow key={label} label={LABEL[label]}>
-          <InformationContent label={LABEL[label]} value={data[label]} />
+          <InformationContent label={LABEL[label]} value={data[label as keyof MockDoc] as any} />
         </InformationRow>
       ))}
     </InformationTable>
