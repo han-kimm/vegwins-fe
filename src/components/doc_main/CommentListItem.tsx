@@ -1,36 +1,38 @@
 import { MockComment } from '@/constants/mockComment';
-import CommentInput from '@/components/doc_main/CommentInput';
+import dayjs from 'dayjs';
+import { Dispatch, SetStateAction } from 'react';
 
 interface Props {
-  comment: MockComment[0];
-  recommentId: string;
+  comment: MockComment[number];
   session: {
     id: string;
     name: string;
   } | null;
-  setRecommentId?: (id: string) => void;
+  recommentId?: string;
+  setRecomment?: Dispatch<SetStateAction<MockComment[number] | null>>;
+  r?: boolean;
 }
 
-const CommentListItem = ({ comment, session, recommentId, setRecommentId }: Props) => {
-  const isSelected = recommentId === comment.id;
-  const isMine = session?.id === comment.id;
+const CommentListItem = ({ comment, session, recommentId, setRecomment, r }: Props) => {
+  const isSelected = comment.id === recommentId;
+  const date = dayjs(Date.now());
+  const dayDiff = date.diff(comment.createdAt, 'd');
+
+  const handleClick = () => setRecomment?.((prev) => (prev?.id === comment.id ? null : comment));
 
   return (
-    <div key={comment.id} className="flex flex-col transition-all">
-      <button
-        onClick={() => setRecommentId?.(isSelected ? '' : comment.id)}
-        className="relative z-0 mb-4 w-max px-12 text-center text-14 font-medium"
-      >
-        {comment.nickname}
-        <line className={`${isSelected ? 'bg-black-60' : isMine ? 'bg-orange' : 'bg-black-20'} absolute bottom-0 left-0 -z-10 h-[0.6rem] w-full`} />
-      </button>
-      <p className="mb-8 ml-12 text-14">{comment.comment}</p>
-      {comment.recomment?.map((re) => (
-        <div key={re.id} className="ml-20 border-l pl-12">
-          <CommentListItem comment={re} session={session} recommentId={recommentId} />
-        </div>
-      ))}
-      {isSelected && <CommentInput sessionName={session?.name} />}
+    <div key={comment.id} className={`${r ? 'my-8 ml-12 border-l pl-12' : 'border-b pb-12'} flex flex-col`}>
+      <div className="flex items-baseline gap-8">
+        <h3 className="mb-4 text-center text-14 font-medium">{comment.nickname}</h3>
+        <span className="text-black-60">{dayDiff + '일 전'}</span>
+        {r || (
+          <button onClick={handleClick} disabled={!session} className={`${isSelected && 'font-medium text-sky'}`}>
+            {isSelected ? '답글 취소' : '답글 달기'}
+          </button>
+        )}
+      </div>
+      <p className="text-14">{comment.comment}</p>
+      {comment.recomment?.map((r) => <CommentListItem key={r.id} comment={r} session={session} r />)}
     </div>
   );
 };

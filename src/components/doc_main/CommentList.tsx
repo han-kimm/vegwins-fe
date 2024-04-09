@@ -14,22 +14,14 @@ interface Props {
 }
 
 const CommentList = ({ data, session }: Props) => {
-  const [recommentId, setRecommentId] = useState('');
+  const [recomment, setRecomment] = useState<MockComment[number] | null>(null);
   return (
-    <article className="flex w-full flex-col gap-16 pb-12" role="group" aria-label="댓글 목록">
-      <div className="flex items-baseline gap-8">
-        <h1 className="text-18 font-bold">댓글</h1>
-        <span>닉네임을 눌러 대댓글을 달 수 있습니다.</span>
-        <button onClick={() => setRecommentId('')} className="font-bold text-sky">
-          초기화
-        </button>
-      </div>
-      <div className="border-b">
-        {data.map((comment) => (
-          <CommentListItem key={comment.id} comment={comment} session={session} recommentId={recommentId} setRecommentId={setRecommentId} />
-        ))}
-      </div>
-      {!recommentId && <CommentInput sessionName={session?.name} />}{' '}
+    <article className="flex w-full flex-col gap-12 pb-12" role="group" aria-label="댓글 목록">
+      <h1 className="text-18 font-bold">댓글</h1>
+      {data.map((comment) => (
+        <CommentListItem key={comment.id} comment={comment} session={session} recommentId={recomment?.id} setRecomment={setRecomment} />
+      ))}
+      <CommentInput sessionName={session?.name} recomment={data.find((v) => v.id === recomment?.id) ?? null} />
     </article>
   );
 };
