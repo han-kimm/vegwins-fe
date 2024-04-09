@@ -5,12 +5,12 @@ interface Props {
   isDoc?: boolean;
 }
 
-const HomeButton = ({ isDoc }: Props) => {
+const HomeLink = ({ isDoc }: Props) => {
   return (
-    <Link href="/" className={isDoc ? 'flex gap-12 text-16 font-medium' : 'rounded-full bg-white p-12 shadow-sm'}>
+    <Link href="/" className={isDoc ? 'flex items-center gap-12 text-16 font-medium' : 'rounded-full bg-white p-12 shadow-sm'}>
       {isDoc && '홈페이지'}
       <IconHome />
     </Link>
   );
 };
-export default HomeButton;
+export default HomeLink;

@@ -1,7 +1,7 @@
 import { MOCK_DOC } from '@/constants/mockDoc';
-import HomeButton from '@/components/common/HomeButton';
+import HomeLink from '@/components/common/HomeLink';
 import LiftingButton from '@/components/common/LiftingButton';
-import ReturnButton from '@/components/doc_header/ReturnButton';
+import ReturnLink from '@/components/common/ReturnLink';
 import Information from '@/components/doc_main/Information';
 import MyRating from '@/components/doc_main/MyRating';
 import Share from '@/components/doc_main/Share';
@@ -13,8 +13,8 @@ const Doc = ({ params }: { params: { [key: string]: string } }) => {
   return (
     <div className="max-h-max min-h-dvh px-16 pb-28 pt-16">
       <header className="mb-12 flex justify-between">
-        <ReturnButton />
-        <HomeButton isDoc />
+        <ReturnLink href="/search" text="검색 결과로 돌아가기" icon="arrow-left" />
+        <HomeLink isDoc />
       </header>
       <main className="flex flex-grow animate-fadeIn flex-col gap-24">
         <Information data={MOCK_DOC} />

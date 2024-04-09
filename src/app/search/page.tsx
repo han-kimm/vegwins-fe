@@ -1,5 +1,5 @@
 import { SearchParamsType } from '@/constants/searchCookie';
-import HomeButton from '@/components/common/HomeButton';
+import HomeLink from '@/components/common/HomeLink';
 import LiftingButton from '@/components/common/LiftingButton';
 import CategorySelector from '@/components/search_header/CategorySelector';
 import SearchBar from '@/components/search_header/SearchBar';
@@ -16,7 +16,7 @@ const Search = ({ searchParams }: Props) => {
       <header className="mb-20 flex flex-col gap-8">
         <div className="flex gap-8">
           <SearchBar k={k} />
-          <HomeButton />
+          <HomeLink />
         </div>
         <CategorySelector selected={c} />
       </header>
