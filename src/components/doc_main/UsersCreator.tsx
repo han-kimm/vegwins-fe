@@ -1,4 +1,3 @@
-import { MockDoc } from '@/constants/mockDoc';
 import dayjs from 'dayjs';
 import BaseLink from '@/components/common/BaseLink';
 
@@ -9,7 +8,7 @@ interface Props {
   isCommiter: boolean;
 }
 
-const CommentCommiter = ({ name, createdAt, docId, isCommiter }: Props) => {
+const UsersCreator = ({ name, createdAt, docId, isCommiter }: Props) => {
   const date = dayjs(createdAt).format('YY년 MM월 DD일');
   return (
     <article className="w-full border-b border-black-20 pb-12">
@@ -28,4 +27,4 @@ const CommentCommiter = ({ name, createdAt, docId, isCommiter }: Props) => {
     </article>
   );
 };
-export default CommentCommiter;
+export default UsersCreator;

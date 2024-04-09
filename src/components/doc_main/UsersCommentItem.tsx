@@ -13,7 +13,7 @@ interface Props {
   r?: boolean;
 }
 
-const CommentListItem = ({ comment, session, recommentId, setRecomment, r }: Props) => {
+const UsersCommentItem = ({ comment, session, recommentId, setRecomment, r }: Props) => {
   const isSelected = comment.id === recommentId;
   const date = dayjs(Date.now());
   const dayDiff = date.diff(comment.createdAt, 'd');
@@ -32,8 +32,8 @@ const CommentListItem = ({ comment, session, recommentId, setRecomment, r }: Pro
         )}
       </div>
       <p className="text-14">{comment.comment}</p>
-      {comment.recomment?.map((r) => <CommentListItem key={r.id} comment={r} session={session} r />)}
+      {comment.recomment?.map((r) => <UsersCommentItem key={r.id} comment={r} session={session} r />)}
     </div>
   );
 };
-export default CommentListItem;
+export default UsersCommentItem;

@@ -8,7 +8,7 @@ interface Props {
   sessionName?: string;
   recomment: MockComment[number] | null;
 }
-const CommentInput = ({ sessionName, recomment }: Props) => {
+const UsersCommentInput = ({ sessionName, recomment }: Props) => {
   const [value, setValue] = useState('');
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -39,4 +39,4 @@ const CommentInput = ({ sessionName, recomment }: Props) => {
     </div>
   );
 };
-export default CommentInput;
+export default UsersCommentInput;

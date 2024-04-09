@@ -2,10 +2,10 @@ import { MOCK_DOC } from '@/constants/mockDoc';
 import HomeButton from '@/components/common/HomeButton';
 import LiftingButton from '@/components/common/LiftingButton';
 import ReturnButton from '@/components/doc_header/ReturnButton';
-import Comment from '@/components/doc_main/Comment';
 import Information from '@/components/doc_main/Information';
 import MyRating from '@/components/doc_main/MyRating';
 import Share from '@/components/doc_main/Share';
+import Users from '@/components/doc_main/Users';
 
 const Doc = ({ params }: { params: { [key: string]: string } }) => {
   const { docId } = params;
@@ -22,7 +22,7 @@ const Doc = ({ params }: { params: { [key: string]: string } }) => {
           <MyRating data={MOCK_DOC} docId={docId} />
           <Share />
         </div>
-        <Comment data={MOCK_DOC} docId={docId} />
+        <Users data={MOCK_DOC} docId={docId} />
       </main>
       <LiftingButton />
     </div>
