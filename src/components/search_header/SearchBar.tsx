@@ -1,17 +1,14 @@
 'use client';
 
 import { INPUT_PLACEHODER } from '@/constants/default';
-import { SP_KEYWORD } from '@/constants/searchCookie';
-import useSetSearch from '@/hooks/useSetSearch';
+import { QUERY, SP_KEYWORD } from '@/constants/sessionStorage';
+import useSetSearch from '@/hooks/useSavePath';
+import { getSessionStorage, setSessionStorage } from '@/utils/sessionStorage';
 import Image from 'next/image';
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import IconReset from 'public/icon/reset.svg';
 
-interface Props {
-  k: string | undefined;
-}
-
-const SearchBar = ({ k }: Props) => {
+const SearchBar = () => {
   const [value, setValue] = useState('');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -20,19 +17,28 @@ const SearchBar = ({ k }: Props) => {
   };
 
   useEffect(() => {
-    setValue(k ?? '');
-  }, [k]);
+    const initial = getSessionStorage(QUERY);
+    if (initial?.k) {
+      setValue(initial.k);
+    }
+  }, []);
 
-  const { setCookieRouting } = useSetSearch();
+  const { savePath } = useSetSearch();
 
   const changeSearchParams = (e: FormEvent) => {
     e.preventDefault();
-    setCookieRouting(SP_KEYWORD, value);
+    savePath(SP_KEYWORD, value);
+
+    const previousQuery = getSessionStorage(QUERY);
+    setSessionStorage({ key: QUERY, value: { ...previousQuery, k: value } });
   };
 
   const resetKeyword = () => {
     setValue('');
-    setCookieRouting(SP_KEYWORD, '');
+    savePath(SP_KEYWORD, '');
+
+    const previousQuery = getSessionStorage(QUERY);
+    setSessionStorage({ key: QUERY, value: { ...previousQuery, k: '' } });
   };
 
   return (

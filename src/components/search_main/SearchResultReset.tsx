@@ -1,7 +1,7 @@
 'use client';
 
-import { SP_KEYWORD } from '@/constants/searchCookie';
-import useSetSearch from '@/hooks/useSetSearch';
+import { SP_KEYWORD } from '@/constants/sessionStorage';
+import useSetSearch from '@/hooks/useSavePath';
 
 const SearchResultReset = () => {
   const { setCookieRouting } = useSetSearch();

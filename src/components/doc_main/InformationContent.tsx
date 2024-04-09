@@ -1,6 +1,6 @@
 import { CATEGORY } from '@/constants/category';
 import { DEFAULT_IMAGE } from '@/constants/default';
-import { SP_CATEGORY, SP_KEYWORD } from '@/constants/searchCookie';
+import { SP_CATEGORY, SP_KEYWORD } from '@/constants/sessionStorage';
 import Image from 'next/image';
 import Link from 'next/link';
 import BaseIcon from '@/components/common/BaseIcon';

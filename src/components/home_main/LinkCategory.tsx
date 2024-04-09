@@ -1,5 +1,8 @@
+'use client';
+
 import { CATEGORY, CATEGORY_KEY } from '@/constants/category';
-import { SP_CATEGORY } from '@/constants/searchCookie';
+import { QUERY, SP_CATEGORY } from '@/constants/sessionStorage';
+import { setSessionStorage } from '@/utils/sessionStorage';
 import Link from 'next/link';
 import BaseIcon from '@/components/common/BaseIcon';
 
@@ -12,8 +15,9 @@ const LinkCategory = () => {
     >
       {CATEGORY_KEY.map((key) => (
         <Link
-          href={`/search?${SP_CATEGORY}=${key}`}
           key={key}
+          href="/search"
+          onClick={() => setSessionStorage({ key: QUERY, value: { c: key } })}
           className={`flex-center h-100 w-100 shrink-0 flex-col gap-8 rounded-sm bg-white py-8 shadow-sm first:ml-40 last:mr-40`}
           aria-label={`${key} 카테고리 검색 페이지로 이동`}
         >

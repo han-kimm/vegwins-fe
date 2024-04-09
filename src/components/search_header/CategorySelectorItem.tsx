@@ -1,23 +1,30 @@
 'use client';
 
 import { CATEGORY } from '@/constants/category';
-import { SP_CATEGORY } from '@/constants/searchCookie';
-import useSetSearch from '@/hooks/useSetSearch';
+import { QUERY, SP_CATEGORY } from '@/constants/sessionStorage';
+import useSetSearch from '@/hooks/useSavePath';
+import { getSessionStorage, setSessionStorage } from '@/utils/sessionStorage';
 import BaseIcon from '@/components/common/BaseIcon';
 
 interface Props {
   name: string;
   isSelected?: boolean;
+  setSelected: (name: string) => void;
 }
 
-const CategorySelectorItem = ({ name, isSelected }: Props) => {
-  const { setCookieRouting } = useSetSearch();
+const CategorySelectorItem = ({ name, isSelected, setSelected }: Props) => {
+  const { savePath } = useSetSearch();
 
-  const changeSearchParams = () => {
-    setCookieRouting(SP_CATEGORY, isSelected ? '' : name);
+  const handleClick = () => {
+    const updatedValue = isSelected ? '' : name;
+    savePath(SP_CATEGORY, updatedValue);
+
+    const previousQuery = getSessionStorage(QUERY);
+    setSessionStorage({ key: QUERY, value: { ...previousQuery, c: updatedValue } });
+    setSelected(updatedValue);
   };
   return (
-    <button onClick={changeSearchParams} className={`flex-center w-60 shrink-0 flex-col ${isSelected ? 'text-black-100' : 'text-black-40'}`}>
+    <button onClick={handleClick} className={`flex-center w-60 shrink-0 flex-col ${isSelected ? 'text-black-100' : 'text-black-40'}`}>
       <BaseIcon render={CATEGORY[name]} name={name} fontSize={12} />
       {isSelected && <span className="font-bold text-sky">초기화 하기</span>}
     </button>

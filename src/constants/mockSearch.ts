@@ -57,3 +57,5 @@ export const MOCK: Array<{
     rating: null,
   },
 ];
+
+export type MockSearch = typeof MOCK;
