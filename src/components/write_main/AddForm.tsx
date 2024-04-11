@@ -8,6 +8,7 @@ import AddDescription from '@/components/write_main/AddDescription';
 import AddHashtag from '@/components/write_main/AddHashtag';
 import AddImage from '@/components/write_main/AddImage';
 import AddSave from '@/components/write_main/AddSave';
+import AddSubmit from '@/components/write_main/AddSubmit';
 import AddTitle from '@/components/write_main/AddTitle';
 
 const AddForm = () => {
@@ -35,6 +36,7 @@ const AddForm = () => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    console.log(11);
   };
 
   return (
@@ -45,6 +47,7 @@ const AddForm = () => {
       <AddHashtag hashtag={hashtag} setHashtag={setHashTag} />
       <AddDescription description={description} setDescription={setDescription} />
       <AddSave handleSave={handleSave} handleRecall={handleRecall} />
+      <AddSubmit required={!!title && !!category.length && !!description} />
     </form>
   );
 };

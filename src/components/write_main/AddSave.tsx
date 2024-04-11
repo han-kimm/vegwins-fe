@@ -26,11 +26,11 @@ const AddSave = memo(function AddSave({ handleSave, handleRecall }: Props) {
       >
         <IconSave />
         임시 저장
-      </button>{' '}
+      </button>
       <button
         onClick={handleRecall}
         disabled={!isSave}
-        className={`${isSave ? 'transform-active border-black-80' : 'border-black-60 text-black-60'} flex-center grow gap-12 rounded-sm border py-12 font-bold`}
+        className={`${isSave ? 'transform-active border-black-80' : 'border-black-40 text-black-40'} flex-center grow gap-12 rounded-sm border py-12 font-bold`}
       >
         <IconRecall />
         불러오기
