@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, memo, useState } from 'react';
 
-const AddImage = () => {
+const AddImage = memo(function AddImage() {
   const [thumbnail, setThumbnail] = useState('');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -10,7 +10,6 @@ const AddImage = () => {
       return;
     }
 
-    console.log(1);
     const newThumbnail = URL.createObjectURL(newFile);
     setThumbnail((prev) => (prev && URL.revokeObjectURL(prev), newThumbnail));
     e.target.value = '';
@@ -24,7 +23,11 @@ const AddImage = () => {
     <div className="mb-12 flex w-full flex-col gap-8">
       <div className="flex items-baseline gap-8">
         <h2 className="text-18 font-medium">이미지</h2>
-        <span>추가하지 않으면, 기본 이미지로 설정됩니다.</span>
+        {thumbnail && (
+          <button onClick={resetThumbnail} className=" p-4 font-bold text-sky">
+            기본 이미지로 설정하기
+          </button>
+        )}
       </div>
       <label
         htmlFor="image"
@@ -42,14 +45,7 @@ const AddImage = () => {
         }
       </label>
       <input onChange={handleChange} id="image" type="file" accept="image/*" hidden />
-      <div className="mx-auto h-24 w-300">
-        {thumbnail && (
-          <button onClick={resetThumbnail} className="w-full rounded-full border border-black-40 p-4 font-bold text-black-60">
-            기본 이미지로 설정하기
-          </button>
-        )}
-      </div>
     </div>
   );
-};
+});
 export default AddImage;
