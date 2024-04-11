@@ -11,12 +11,13 @@ import AddSave from '@/components/write_main/AddSave';
 import AddTitle from '@/components/write_main/AddTitle';
 
 const AddForm = () => {
+  const [image, setImage] = useState('');
   const [title, setTitle] = useState('');
   const [hashtag, setHashTag] = useState<Set<string>>(new Set());
   const [category, setCategory] = useState<string[]>([]);
   const [description, setDescription] = useState('');
 
-  const submitData = { title, hashtag: [...hashtag], category, description };
+  const submitData = { image, title, hashtag: [...hashtag], category, description };
 
   const handleSave = () => {
     setSessionStorage({ key: WRITE_SAVE, value: submitData });
@@ -24,15 +25,13 @@ const AddForm = () => {
   const handleRecall = () => {
     const previousValue: typeof submitData | null = getSessionStorage(WRITE_SAVE);
     if (previousValue) {
+      setImage(previousValue.image);
       setTitle(previousValue.title);
       setHashTag(new Set(previousValue.hashtag));
       setCategory(previousValue.category);
       setDescription(previousValue.description);
     }
   };
-  useEffect(() => {
-    handleRecall();
-  }, []);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -40,7 +39,7 @@ const AddForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="flex w-full flex-col [&>div:not(:first-child)]:mt-40">
-      <AddImage />
+      <AddImage image={image} setImage={setImage} />
       <AddTitle title={title} setTitle={setTitle} />
       <AddCategory category={category} setCategory={setCategory} />
       <AddHashtag hashtag={hashtag} setHashtag={setHashTag} />

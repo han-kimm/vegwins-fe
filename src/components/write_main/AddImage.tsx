@@ -1,29 +1,39 @@
 import Image from 'next/image';
-import { ChangeEvent, memo, useState } from 'react';
+import { ChangeEvent, memo, useEffect, useState } from 'react';
 
-const AddImage = memo(function AddImage() {
-  const [thumbnail, setThumbnail] = useState('');
+interface Props {
+  image: string;
+  setImage: (image: string) => void;
+}
 
+const AddImage = memo(function AddImage({ image, setImage }: Props) {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newFile = e.target.files?.[0];
     if (!newFile) {
       return;
     }
 
-    const newThumbnail = URL.createObjectURL(newFile);
-    setThumbnail((prev) => (prev && URL.revokeObjectURL(prev), newThumbnail));
+    const reader = new FileReader();
+    reader.readAsDataURL(newFile);
+    reader.onload = () => {
+      const result = reader.result;
+      if (typeof result === 'string') {
+        setImage(result);
+      }
+    };
+
     e.target.value = '';
   };
 
   const resetThumbnail = () => {
-    setThumbnail('');
+    setImage('');
   };
 
   return (
     <div className="mb-12 flex w-full flex-col gap-8">
       <div className="flex items-baseline gap-8">
         <h2 className="text-18 font-medium">이미지</h2>
-        {thumbnail && (
+        {image && (
           <button onClick={resetThumbnail} className=" p-4 font-bold text-sky">
             기본 이미지로 설정하기
           </button>
@@ -39,8 +49,8 @@ const AddImage = memo(function AddImage() {
             fill
             priority
             sizes="300px"
-            src={thumbnail || '/image/default.webp'}
-            alt={thumbnail ? '추가한 이미지 썸네일' : '기본 이미지'}
+            src={image || '/image/default.webp'}
+            alt={image ? '추가한 이미지 썸네일' : '기본 이미지'}
             className="rounded-md object-cover"
           />
         }
