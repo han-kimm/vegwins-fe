@@ -7,7 +7,7 @@ const Commit = () => {
       <header className="flex justify-end">
         <ReturnLink href="/" text="취소하기" icon="cancel" reverse />
       </header>
-      <main className="w-full">
+      <main className="h-full w-full">
         <AddForm />
       </main>
     </div>

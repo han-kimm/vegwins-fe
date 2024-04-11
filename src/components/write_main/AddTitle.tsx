@@ -7,7 +7,7 @@ interface Props {
 }
 
 const AddTitle = memo(function AddTitle({ title, setTitle }: Props) {
-  const changeTitle = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
     setTitle(newValue);
   };
@@ -16,7 +16,7 @@ const AddTitle = memo(function AddTitle({ title, setTitle }: Props) {
     <AddFormRow label="문서명" required={!title}>
       <input
         value={title}
-        onChange={changeTitle}
+        onChange={handleChange}
         placeholder="입력해 주세요."
         className="h-max w-full border-b border-black-60 bg-transparent font-bold focus:outline-none"
       />
