@@ -1,5 +1,5 @@
 import { CATEGORY } from '@/constants/category';
-import { DEFAULT_IMAGE } from '@/constants/default';
+import { LABEL } from '@/constants/default';
 import { SP_CATEGORY, SP_KEYWORD } from '@/constants/sessionStorage';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -8,10 +8,10 @@ import BaseIcon from '@/components/common/BaseIcon';
 const InformationContent = ({ label, value }: { label: string; value: string | Array<string> }) => {
   let SwitchedComponent;
   switch (label) {
-    case '제품명':
+    case LABEL.title:
       SwitchedComponent = <p className="text-24 font-bold">{value}</p>;
       break;
-    case '주의점':
+    case LABEL.caution:
       if (typeof value === 'object') {
         SwitchedComponent = (
           <p className="flex flex-wrap gap-16 text-20 font-medium">
@@ -22,7 +22,7 @@ const InformationContent = ({ label, value }: { label: string; value: string | A
         );
       }
       break;
-    case '카테고리':
+    case LABEL.category:
       if (typeof value === 'object') {
         SwitchedComponent = (
           <div className="flex flex-wrap gap-16 text-black-80">
@@ -35,7 +35,7 @@ const InformationContent = ({ label, value }: { label: string; value: string | A
         );
       }
       break;
-    case '해시태그':
+    case LABEL.hashtag:
       if (typeof value === 'object') {
         SwitchedComponent = (
           <div className="flex flex-wrap gap-16 text-14 font-bold">
@@ -52,7 +52,7 @@ const InformationContent = ({ label, value }: { label: string; value: string | A
         );
       }
       break;
-    case '설명':
+    case LABEL.description:
       SwitchedComponent = <p className="whitespace-pre-wrap text-14 font-medium">{value}</p>;
       break;
     default:

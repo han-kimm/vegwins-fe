@@ -1,3 +1,4 @@
+import { LABEL } from '@/constants/default';
 import { MockDoc } from '@/constants/mockDoc';
 import InformationContent from '@/components/doc_main/InformationContent';
 import InformationTable from '@/components/doc_main/InformationTable';
@@ -19,12 +20,3 @@ const Information = ({ data }: Props) => {
 };
 
 export default Information;
-
-const LABEL: { [key: string]: string } = {
-  imageUrl: '',
-  title: '제품명',
-  caution: '주의점',
-  category: '카테고리',
-  hashtag: '해시태그',
-  description: '설명',
-};

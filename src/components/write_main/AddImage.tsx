@@ -1,13 +1,7 @@
 import Image from 'next/image';
-import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
-import IconPicture from 'public/icon/picture.svg';
+import { ChangeEvent, useState } from 'react';
 
-interface Props {
-  image: File | null;
-  setImage: Dispatch<SetStateAction<File | null>>;
-}
-
-const AddImage = ({ image, setImage }: Props) => {
+const AddImage = () => {
   const [thumbnail, setThumbnail] = useState('');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -16,13 +10,13 @@ const AddImage = ({ image, setImage }: Props) => {
       return;
     }
 
-    setImage(newFile);
+    console.log(1);
     const newThumbnail = URL.createObjectURL(newFile);
     setThumbnail((prev) => (prev && URL.revokeObjectURL(prev), newThumbnail));
+    e.target.value = '';
   };
 
   const resetThumbnail = () => {
-    setImage(null);
     setThumbnail('');
   };
 
