@@ -64,9 +64,6 @@ const config: Config = {
         fadeIn: 'fadeIn 0.5s ease-in-out',
         slideIn: 'slideIn 0.3s ease-in-out',
       },
-      transform: {
-        active: 'transition-transform active:scale-95',
-      },
     },
   },
   plugins: [],

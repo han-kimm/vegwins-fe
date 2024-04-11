@@ -21,7 +21,9 @@ const CategorySelector = () => {
       role="group"
       aria-label="검색 결과를 필터링하는 카테고리 선택"
     >
-      <div>{selected ? <CategorySelectorItem name={selected} setSelected={setSelected} isSelected /> : <NoSelected />}</div>
+      <div className="transform-active">
+        {selected ? <CategorySelectorItem name={selected} setSelected={setSelected} isSelected /> : <NoSelected />}
+      </div>
       <div className="flex overflow-scroll scroll-smooth">
         {CATEGORY_KEY.filter((key) => key !== selected).map((key) => (
           <CategorySelectorItem key={key} name={key} setSelected={setSelected} />

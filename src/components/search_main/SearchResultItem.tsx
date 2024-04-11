@@ -16,7 +16,7 @@ const SearchResultItem = ({ id, imageUrl, title, hashtag, rating, end }: Props) 
   return (
     <Link
       href={`/doc/${id}`}
-      className={`${end && 'relative bg-black-0 [&>div]:opacity-30'} flex-center h-max w-full animate-fadeIn gap-28 border-b border-solid border-black-100 p-12 last:border-0`}
+      className={`${end && 'relative bg-black-0 [&>div]:opacity-30'} flex-center transform-active h-max w-full animate-fadeIn gap-28 border-b border-solid border-black-100 p-12 last:border-0`}
     >
       <div id="imageContainer" className="relative h-100 w-100 shrink-0">
         <Image fill sizes="100px" src={imageUrl ?? DEFAULT_IMAGE} alt="" className="rounded-sm" aria-hidden={true} />

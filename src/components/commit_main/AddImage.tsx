@@ -34,7 +34,7 @@ const AddImage = ({ image, setImage }: Props) => {
       </div>
       <label
         htmlFor="image"
-        className={`flex-center relative block h-300 w-300 rounded-md border border-black-40 text-black-60 transition active:scale-95 active:opacity-70`}
+        className="flex-center transform-active relative block h-300 w-300 rounded-md border border-black-40 text-black-60 active:opacity-70"
         tabIndex={0}
       >
         {

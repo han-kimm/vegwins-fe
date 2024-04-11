@@ -21,7 +21,7 @@ const MyRatingSelector = ({ rating, setRating }: Props) => {
           type="button"
           onClick={() => setRatingSessionStorage(status)}
           key={status}
-          className={`flex-center relative h-40 w-40 rounded-full ${rating === status ? 'bg-orange' : 'bg-black-20'}`}
+          className={`flex-center transform-active relative h-40 w-40 rounded-full ${rating === status ? 'bg-orange' : 'bg-black-20'}`}
         >
           {rating === status && <div className="absolute -top-12 left-1/2 mb-4 h-8 w-8 -translate-x-1/2 rounded-full bg-black-80" />}
           <Image width={24} height={24} src={`/icon/rate-${status}.svg`} alt={ALTMSG[status]} />

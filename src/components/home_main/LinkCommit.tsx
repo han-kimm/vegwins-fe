@@ -8,7 +8,7 @@ const LinkCommit = () => {
   const { savePath } = useSetSearch();
   return (
     <section className="flex w-full gap-12 px-40" aria-label="게시판 또는 문서작성으로 이동">
-      <Link href="/commit" onClick={() => savePath} className="grow rounded-sm bg-white px-20 py-28 shadow-md">
+      <Link href="/commit" onClick={() => savePath} className="transform-active grow rounded-sm bg-white px-20 py-28 shadow-md">
         <p className="mb-28 text-start text-18 font-bold">문서 작성</p>
         <Image width={32} height={32} src="/icon/pencil.svg" alt="작성 이미지" aria-hidden={true} />
       </Link>

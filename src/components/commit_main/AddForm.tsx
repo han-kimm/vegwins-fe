@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import AddImage from '@/components/post_main/AddImage';
+import AddImage from '@/components/commit_main/AddImage';
 
 const AddForm = () => {
   const [image, setImage] = useState<File | null>(null);

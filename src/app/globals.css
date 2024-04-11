@@ -40,6 +40,10 @@
   .mt-m-auto {
     margin-top: min(6rem, auto);
   }
+
+  .transform-active {
+    @apply transition-transform active:scale-95;
+  }
 }
 
 *::-webkit-scrollbar {
