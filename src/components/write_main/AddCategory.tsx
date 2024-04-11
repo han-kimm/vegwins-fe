@@ -25,7 +25,7 @@ const AddCategory = memo(function AddCategory({ category, setCategory }: Props) 
               type="button"
               onClick={() => handleClick(isSelected, key)}
               key={i}
-              className={`flex-center w-60 shrink-0 flex-col transition duration-300 ${isSelected ? 'text-black-100' : 'text-black-40'}`}
+              className={`flex-center transform-active w-60 shrink-0 flex-col transition duration-300 ${isSelected ? 'text-black-100' : 'text-black-40'}`}
             >
               <BaseIcon render={CATEGORY[key]} name={key} fontSize={12} />
             </button>
