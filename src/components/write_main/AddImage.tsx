@@ -21,14 +21,14 @@ const AddImage = () => {
   };
 
   return (
-    <div className="flex w-full flex-col gap-8">
+    <div className="mb-12 flex w-full flex-col gap-8">
       <div className="flex items-baseline gap-8">
         <h2 className="text-18 font-medium">이미지</h2>
         <span>추가하지 않으면, 기본 이미지로 설정됩니다.</span>
       </div>
       <label
         htmlFor="image"
-        className="flex-center transform-active relative block h-300 w-300 rounded-md border border-black-40 text-black-60 active:opacity-70"
+        className="flex-center transform-active relative mx-auto block h-300 w-300 rounded-md border border-black-40 text-black-60 active:opacity-70"
         tabIndex={0}
       >
         {
@@ -42,7 +42,7 @@ const AddImage = () => {
         }
       </label>
       <input onChange={handleChange} id="image" type="file" accept="image/*" hidden />
-      <div className="h-24">
+      <div className="mx-auto h-24 w-300">
         {thumbnail && (
           <button onClick={resetThumbnail} className="w-full rounded-full border border-black-40 p-4 font-bold text-black-60">
             기본 이미지로 설정하기
