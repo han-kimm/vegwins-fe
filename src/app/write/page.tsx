@@ -1,5 +1,5 @@
-import AddForm from '@/components/commit_main/AddForm';
 import ReturnLink from '@/components/common/ReturnLink';
+import AddForm from '@/components/write_main/AddForm';
 
 const Commit = () => {
   return (

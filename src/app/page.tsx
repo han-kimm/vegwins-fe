@@ -2,8 +2,8 @@ import Footer from '@/components/home_footer/Footer';
 import AuthChecker from '@/components/home_header/AuthChecker';
 import Carousel from '@/components/home_main/Carousel';
 import LinkCategory from '@/components/home_main/LinkCategory';
-import LinkCommit from '@/components/home_main/LinkCommit';
 import LinkSearch from '@/components/home_main/LinkSearch';
+import LinkWrite from '@/components/home_main/LinkWrite';
 
 export default function Home() {
   return (
@@ -15,7 +15,7 @@ export default function Home() {
         <Carousel />
         <LinkSearch />
         <LinkCategory />
-        <LinkCommit />
+        <LinkWrite />
       </main>
       <footer className="mt-auto bg-black-80 px-40 py-12 text-14 text-white">
         <Footer />

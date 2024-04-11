@@ -5,15 +5,15 @@ interface Props {
   name: string;
   createdAt: string;
   docId: string;
-  isCommiter: boolean;
+  isWriter: boolean;
 }
 
-const UsersCreator = ({ name, createdAt, docId, isCommiter }: Props) => {
+const UsersWriter = ({ name, createdAt, docId, isWriter }: Props) => {
   return (
     <article className="w-full border-b border-black-20 pb-12">
       <div className="mb-8 flex justify-between">
         <h2 className="text-18 font-bold">작성자</h2>
-        {isCommiter && (
+        {isWriter && (
           <BaseLink href={`/doc/${docId}/edit`} className="text-14 text-white">
             편집하기
           </BaseLink>
@@ -26,4 +26,4 @@ const UsersCreator = ({ name, createdAt, docId, isCommiter }: Props) => {
     </article>
   );
 };
-export default UsersCreator;
+export default UsersWriter;
