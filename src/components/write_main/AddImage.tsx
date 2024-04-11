@@ -38,6 +38,7 @@ const AddImage = memo(function AddImage() {
           <Image
             fill
             priority
+            sizes="300px"
             src={thumbnail || '/image/default.webp'}
             alt={thumbnail ? '추가한 이미지 썸네일' : '기본 이미지'}
             className="rounded-md object-cover"

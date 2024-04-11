@@ -13,7 +13,7 @@ const AddHashtag = memo(function AddHashtag({ hashtag, setHashtag }: Props) {
     const input = e.target as HTMLInputElement;
     const newValue = input.value;
 
-    if (e.code !== 'Enter' || !newValue) {
+    if (e.key !== 'Enter' || !newValue) {
       return;
     }
 
@@ -43,13 +43,15 @@ const AddHashtag = memo(function AddHashtag({ hashtag, setHashtag }: Props) {
       </div>
       <div className="flex grow flex-col gap-8">
         <input
+          type="search"
           onKeyUp={addHashtag}
           placeholder="'#특징' 추가해 주세요."
-          className="border-b border-black-60 bg-transparent font-bold focus:outline-none"
+          className="webkit w-full border-b border-black-60 bg-transparent font-bold focus:outline-none"
         />
         <div className="flex flex-wrap gap-8">
           {[...hashtag].map((tag) => (
             <button
+              type="button"
               onClick={deleteHashtag(tag)}
               className="flex-center animate-fadeIn gap-8 rounded-full border border-black-40 px-8 active:bg-black-80"
               key={tag}

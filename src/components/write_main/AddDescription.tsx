@@ -16,11 +16,12 @@ const AddDescription = memo(function AddDescription({ description, setDescriptio
     <AddFormRow label="설명" required={!description}>
       <div className="relative grow">
         <textarea
+          value={description}
           onChange={handleChange}
           className="h-200 w-full rounded-sm border border-black-60 bg-transparent p-8 text-14 font-bold focus:outline-none"
         />
         {!description && (
-          <p className="pointer-events-none absolute top-0 flex p-8 text-14 text-black-60">
+          <p className="pointer-events-none absolute top-0 flex p-8 text-14 font-bold text-black-40" aria-label="설명 예시">
             비건, 비거니즘에 해당하는 이유, 근거를 작성해 주세요.
             <br />
             <br />

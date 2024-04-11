@@ -49,3 +49,7 @@
 *::-webkit-scrollbar {
   display: none;
 }
+
+input::-webkit-search-cancel-button {
+  display: none;
+}
