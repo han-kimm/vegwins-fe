@@ -25,7 +25,7 @@ const SearchBar = () => {
 
   const { savePath } = useSetSearch();
 
-  const changeSearchParams = (e: FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     savePath(SP_KEYWORD, value);
 
@@ -42,7 +42,7 @@ const SearchBar = () => {
   };
 
   return (
-    <form onSubmit={changeSearchParams} className="relative w-full">
+    <form onSubmit={handleSubmit} className="relative w-full">
       <input
         name={SP_KEYWORD}
         value={value}
