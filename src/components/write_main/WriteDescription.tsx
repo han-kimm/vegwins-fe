@@ -1,19 +1,19 @@
 import { ChangeEvent, memo } from 'react';
-import AddFormRow from '@/components/write_main/AddFormRow';
+import WriteFormRow from '@/components/write_main/WriteFormRow';
 
 interface Props {
   description: string;
   setDescription: (description: string) => void;
 }
 
-const AddDescription = memo(function AddDescription({ description, setDescription }: Props) {
+const WriteDescription = memo(function WriteDescription({ description, setDescription }: Props) {
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const newValue = e.target.value;
     setDescription(newValue);
   };
 
   return (
-    <AddFormRow label="설명" required={!description}>
+    <WriteFormRow label="설명" required={!description}>
       <div className="relative grow">
         <textarea
           value={description}
@@ -26,11 +26,10 @@ const AddDescription = memo(function AddDescription({ description, setDescriptio
             <br />
             <br />
             예시 1. 밀으로 만들어진 비건 과자입니다. **팜유 주의** <br />
-            예시 2. 비거니즘에 대해서 이야기하는 책입니다. 저자는 피터 싱어입니다.
           </p>
         )}
       </div>
-    </AddFormRow>
+    </WriteFormRow>
   );
 });
-export default AddDescription;
+export default WriteDescription;

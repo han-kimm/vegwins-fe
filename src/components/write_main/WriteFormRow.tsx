@@ -6,7 +6,7 @@ interface Props {
   required?: boolean;
 }
 
-const AddFormRow = ({ children, label, required }: Props) => {
+const WriteFormRow = ({ children, label, required }: Props) => {
   return (
     <div className="flex min-h-56 gap-40 text-18 font-medium">
       <div className="w-68 shrink-0 ">
@@ -17,4 +17,4 @@ const AddFormRow = ({ children, label, required }: Props) => {
     </div>
   );
 };
-export default AddFormRow;
+export default WriteFormRow;

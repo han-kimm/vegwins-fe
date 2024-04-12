@@ -8,8 +8,8 @@ interface Props {
   setHashtag: Dispatch<SetStateAction<Set<string>>>;
 }
 
-const AddHashtag = memo(function AddHashtag({ hashtag, setHashtag }: Props) {
-  const addHashtag = (e: KeyboardEvent) => {
+const WriteHashtag = memo(function WriteHashtag({ hashtag, setHashtag }: Props) {
+  const WriteHashtag = (e: KeyboardEvent) => {
     const input = e.target as HTMLInputElement;
     const newValue = input.value;
 
@@ -44,7 +44,7 @@ const AddHashtag = memo(function AddHashtag({ hashtag, setHashtag }: Props) {
       <div className="flex grow flex-col gap-8">
         <input
           type="search"
-          onKeyUp={addHashtag}
+          onKeyUp={WriteHashtag}
           placeholder="'#특징' 추가해 주세요."
           className="webkit w-full border-b border-black-60 bg-transparent font-bold focus:outline-none"
         />
@@ -53,7 +53,7 @@ const AddHashtag = memo(function AddHashtag({ hashtag, setHashtag }: Props) {
             <button
               type="button"
               onClick={deleteHashtag(tag)}
-              className="flex-center animate-fadeIn gap-8 rounded-full border border-black-40 px-8 active:bg-black-80"
+              className="flex-center animate-fadeIn gap-8 rounded-full border border-black-80 px-8 active:bg-black-80"
               key={tag}
             >
               {tag}
@@ -65,4 +65,4 @@ const AddHashtag = memo(function AddHashtag({ hashtag, setHashtag }: Props) {
     </div>
   );
 });
-export default AddHashtag;
+export default WriteHashtag;

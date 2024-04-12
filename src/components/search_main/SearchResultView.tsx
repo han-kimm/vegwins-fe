@@ -3,7 +3,7 @@
 import { MockSearch } from '@/constants/mockSearch';
 import { QUERY } from '@/constants/sessionStorage';
 import { getSessionStorage } from '@/utils/sessionStorage';
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import SearchResultEmpty from '@/components/search_main/SEarchResultEmpty';
 import SearchResultItem from '@/components/search_main/SearchResultItem';
 import SearchResultReset from '@/components/search_main/SearchResultReset';
@@ -28,9 +28,12 @@ const SearchResultView = ({ data }: Props) => {
         {!!keyword && <SearchResultReset />}
       </div>
       {data.length ? (
-        <div className={`flex w-full flex-col rounded-md bg-white px-16 shadow-lg`} role="group">
-          {data.map((data) => (
-            <SearchResultItem key={data.id} {...data} />
+        <div className="flex w-full flex-col rounded-md bg-white px-16 shadow-lg" role="group">
+          {data.map((data, i) => (
+            <Fragment key={data.id}>
+              {!i || <hr className="border-black-60" />}
+              <SearchResultItem {...data} />
+            </Fragment>
           ))}
         </div>
       ) : (

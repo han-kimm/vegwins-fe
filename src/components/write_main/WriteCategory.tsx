@@ -1,13 +1,13 @@
 import { CATEGORY, CATEGORY_KEY } from '@/constants/category';
 import { Dispatch, SetStateAction, memo } from 'react';
 import BaseIcon from '@/components/common/BaseIcon';
-import AddFormRow from '@/components/write_main/AddFormRow';
+import WriteFormRow from '@/components/write_main/WriteFormRow';
 
 interface Props {
   category: string[];
   setCategory: Dispatch<SetStateAction<string[]>>;
 }
-const AddCategory = memo(function AddCategory({ category, setCategory }: Props) {
+const WriteCategory = memo(function WriteCategory({ category, setCategory }: Props) {
   const handleClick = (isSelected: boolean, key: string) => {
     if (isSelected) {
       setCategory((prev) => prev.filter((v) => v !== key));
@@ -16,7 +16,7 @@ const AddCategory = memo(function AddCategory({ category, setCategory }: Props) 
     setCategory((prev) => [...prev, key]);
   };
   return (
-    <AddFormRow label="카테고리" required={!category.length}>
+    <WriteFormRow label="카테고리" required={!category.length}>
       <div className="flex flex-wrap gap-8">
         {CATEGORY_KEY.map((key, i) => {
           const isSelected = category?.includes(key);
@@ -32,7 +32,7 @@ const AddCategory = memo(function AddCategory({ category, setCategory }: Props) 
           );
         })}
       </div>
-    </AddFormRow>
+    </WriteFormRow>
   );
 });
-export default AddCategory;
+export default WriteCategory;

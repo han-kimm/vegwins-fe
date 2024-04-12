@@ -44,6 +44,7 @@ const SearchBar = () => {
   return (
     <form onSubmit={handleSubmit} className="relative w-full">
       <input
+        type="search"
         name={SP_KEYWORD}
         value={value}
         onChange={handleChange}

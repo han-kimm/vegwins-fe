@@ -1,16 +1,16 @@
 import ReturnLink from '@/components/common/ReturnLink';
-import AddForm from '@/components/write_main/AddForm';
+import WriteForm from '@/components/write_main/WriteForm';
 
-const Commit = () => {
+const Write = () => {
   return (
-    <div className="max-h-max min-h-dvh px-20 pb-28 pt-16">
-      <header className="flex justify-end">
+    <div className="max-h-max min-h-dvh px-28 pb-28 pt-16">
+      <header className="mb-12 flex justify-end">
         <ReturnLink href="/" text="취소하기" icon="cancel" reverse />
       </header>
       <main className="h-full w-full">
-        <AddForm />
+        <WriteForm />
       </main>
     </div>
   );
 };
-export default Commit;
+export default Write;

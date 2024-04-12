@@ -3,16 +3,16 @@
 import { WRITE_SAVE } from '@/constants/sessionStorage';
 import { getSessionStorage, setSessionStorage } from '@/utils/sessionStorage';
 import { useRouter } from 'next/navigation';
-import { FormEvent, useEffect, useState } from 'react';
-import AddCategory from '@/components/write_main/AddCategory';
-import AddDescription from '@/components/write_main/AddDescription';
-import AddHashtag from '@/components/write_main/AddHashtag';
-import AddImage from '@/components/write_main/AddImage';
-import AddSave from '@/components/write_main/AddSave';
-import AddSubmit from '@/components/write_main/AddSubmit';
-import AddTitle from '@/components/write_main/AddTitle';
+import { FormEvent, useState } from 'react';
+import WriteCategory from '@/components/write_main/WriteCategory';
+import WriteDescription from '@/components/write_main/WriteDescription';
+import WriteHashtag from '@/components/write_main/WriteHashtag';
+import WriteImage from '@/components/write_main/WriteImage';
+import WriteSave from '@/components/write_main/WriteSave';
+import WriteSubmit from '@/components/write_main/WriteSubmit';
+import WriteTitle from '@/components/write_main/WriteTitle';
 
-const AddForm = () => {
+const WriteForm = () => {
   const [image, setImage] = useState('');
   const [title, setTitle] = useState('');
   const [hashtag, setHashTag] = useState<Set<string>>(new Set());
@@ -37,21 +37,26 @@ const AddForm = () => {
 
   const router = useRouter();
 
+  const required = !!title && !!category.length && !!description;
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    if (!required) {
+      return;
+    }
     router.push('/');
   };
 
   return (
     <form onSubmit={handleSubmit} className="flex w-full flex-col [&>div:not(:first-child)]:mt-40">
-      <AddImage image={image} setImage={setImage} />
-      <AddTitle title={title} setTitle={setTitle} />
-      <AddCategory category={category} setCategory={setCategory} />
-      <AddHashtag hashtag={hashtag} setHashtag={setHashTag} />
-      <AddDescription description={description} setDescription={setDescription} />
-      <AddSave handleSave={handleSave} handleRecall={handleRecall} />
-      <AddSubmit required={!!title && !!category.length && !!description} />
+      <WriteImage image={image} setImage={setImage} />
+      <WriteTitle title={title} setTitle={setTitle} />
+      <WriteCategory category={category} setCategory={setCategory} />
+      <WriteHashtag hashtag={hashtag} setHashtag={setHashTag} />
+      <WriteDescription description={description} setDescription={setDescription} />
+      <WriteSave handleSave={handleSave} handleRecall={handleRecall} />
+      <WriteSubmit required={required} />
     </form>
   );
 };
-export default AddForm;
+export default WriteForm;

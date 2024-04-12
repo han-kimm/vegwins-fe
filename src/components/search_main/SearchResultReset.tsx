@@ -4,10 +4,10 @@ import { SP_KEYWORD } from '@/constants/sessionStorage';
 import useSetSearch from '@/hooks/useSavePath';
 
 const SearchResultReset = () => {
-  const { setCookieRouting } = useSetSearch();
+  const { savePath } = useSetSearch();
 
   const changeSearchParams = () => {
-    setCookieRouting(SP_KEYWORD, '');
+    savePath(SP_KEYWORD, '');
   };
 
   return (

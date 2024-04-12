@@ -7,7 +7,7 @@ interface Props {
   buttonRef: RefObject<HTMLButtonElement>;
 }
 
-const AddSubmitModal = ({ closeModal, buttonRef }: Props) => {
+const WriteSubmitModal = ({ closeModal, buttonRef }: Props) => {
   const [signed, setSigned] = useState(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => setSigned(e.target.checked);
@@ -39,4 +39,4 @@ const AddSubmitModal = ({ closeModal, buttonRef }: Props) => {
     </ModalFrame>
   );
 };
-export default AddSubmitModal;
+export default WriteSubmitModal;

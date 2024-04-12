@@ -10,7 +10,7 @@ interface Props {
   handleRecall: () => void;
 }
 
-const AddSave = memo(function AddSave({ handleSave, handleRecall }: Props) {
+const WriteSave = memo(function WriteSave({ handleSave, handleRecall }: Props) {
   const [isSave, setIsSave] = useState(false);
 
   useEffect(() => {
@@ -40,4 +40,4 @@ const AddSave = memo(function AddSave({ handleSave, handleRecall }: Props) {
     </div>
   );
 });
-export default AddSave;
+export default WriteSave;

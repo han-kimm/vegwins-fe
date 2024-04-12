@@ -1,12 +1,12 @@
 import { memo, useRef, useState } from 'react';
-import AddSubmitModal from '@/components/write_main/AddSubmitModal';
+import WriteSubmitModal from '@/components/write_main/WriteSubmitModal';
 import IconUpload from 'public/icon/upload.svg';
 
 interface Props {
   required: boolean;
 }
 
-const AddSubmit = memo(function AddSubmit({ required }: Props) {
+const WriteSubmit = memo(function WriteSubmit({ required }: Props) {
   const [modalOpen, setModalOpen] = useState(false);
   const buttenRef = useRef<HTMLButtonElement>(null);
 
@@ -22,8 +22,8 @@ const AddSubmit = memo(function AddSubmit({ required }: Props) {
         작성 완료
       </button>
       <button ref={buttenRef} hidden />
-      {modalOpen && <AddSubmitModal closeModal={() => setModalOpen(false)} buttonRef={buttenRef} />}
+      {modalOpen && <WriteSubmitModal closeModal={() => setModalOpen(false)} buttonRef={buttenRef} />}
     </>
   );
 });
-export default AddSubmit;
+export default WriteSubmit;

@@ -6,7 +6,7 @@ interface Props {
   setImage: (image: string) => void;
 }
 
-const AddImage = memo(function AddImage({ image, setImage }: Props) {
+const WriteImage = memo(function WriteImage({ image, setImage }: Props) {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newFile = e.target.files?.[0];
     if (!newFile) {
@@ -41,7 +41,7 @@ const AddImage = memo(function AddImage({ image, setImage }: Props) {
       </div>
       <label
         htmlFor="image"
-        className="flex-center transform-active relative mx-auto block h-300 w-300 rounded-md border border-black-40 text-black-60 active:opacity-70"
+        className="flex-center transform-active relative mx-auto block w-full max-w-300 rounded-md border border-black-40 pt-[min(100%,_30rem)] text-black-60 active:opacity-70"
         tabIndex={0}
       >
         {
@@ -59,4 +59,4 @@ const AddImage = memo(function AddImage({ image, setImage }: Props) {
     </div>
   );
 });
-export default AddImage;
+export default WriteImage;

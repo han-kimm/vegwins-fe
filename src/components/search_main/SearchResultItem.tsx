@@ -16,12 +16,12 @@ const SearchResultItem = ({ id, imageUrl, title, hashtag, rating, end }: Props) 
   return (
     <Link
       href={`/doc/${id}`}
-      className={`${end && 'relative bg-black-0 [&>div]:opacity-30'} flex-center transform-active h-max w-full animate-fadeIn gap-28 border-b border-solid border-black-100 p-12 last:border-0`}
+      className={`${end && 'relative bg-black-0 [&>div]:opacity-30'} flex-center transform-active h-max w-full animate-fadeIn gap-28 p-12`}
     >
-      <div id="imageContainer" className="relative h-100 w-100 shrink-0">
+      <div className="relative h-100 w-100 shrink-0">
         <Image fill sizes="100px" src={imageUrl ?? DEFAULT_IMAGE} alt="" className="rounded-sm" aria-hidden={true} />
       </div>
-      <div id="itemInfo" className="flex h-100 flex-grow justify-between gap-12 py-12">
+      <div className="flex h-100 flex-grow justify-between gap-12 py-12">
         <ItemTitle title={title.length > 12 ? title.slice(0, 12) + '...' : title} hashtag={hashtag} />
         <RatingChecker rating={rating} />
       </div>
