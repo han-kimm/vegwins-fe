@@ -1,5 +1,5 @@
-import { WRITE_SAVE } from '@/constants/sessionStorage';
-import { getSessionStorage } from '@/utils/sessionStorage';
+import { WRITE_SAVE } from '@/constants/localStorage';
+import { getLocalStorage } from '@/utils/localStorage';
 import Image from 'next/image';
 import { memo, useEffect, useState } from 'react';
 import IconRecall from 'public/icon/recall.svg';
@@ -15,7 +15,7 @@ const WriteSave = memo(function WriteSave({ required, handleSave, handleRecall }
   const [isSave, setIsSave] = useState(false);
 
   useEffect(() => {
-    const initial = !!getSessionStorage(WRITE_SAVE);
+    const initial = !!getLocalStorage(WRITE_SAVE);
     setIsSave(initial);
   }, []);
 

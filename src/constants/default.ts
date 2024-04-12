@@ -9,3 +9,7 @@ export const LABEL: { [key: string]: string } = {
 };
 
 export const LABEL_WRITE = ['title', 'caution', 'category', 'hashtag', 'description'];
+
+export const SP_KEYWORD = 'k';
+export const SP_CATEGORY = 'c';
+export const SP_COOKIE_NAME = 'sp';

@@ -1,7 +1,7 @@
 'use client';
 
 import { CATEGORY_KEY } from '@/constants/category';
-import { SP_CATEGORY } from '@/constants/sessionStorage';
+import { SP_CATEGORY } from '@/constants/default';
 import useChangeQuery from '@/hooks/useSavePath';
 import { Suspense, useState } from 'react';
 import CategorySelectorItem from '@/components/search_header/CategorySelectorItem';

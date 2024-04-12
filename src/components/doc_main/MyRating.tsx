@@ -2,7 +2,7 @@
 
 import { MockDoc } from '@/constants/mockDoc';
 import { ALTMSG } from '@/constants/ratingAlt';
-import { getSessionStorage } from '@/utils/sessionStorage';
+import { getLocalStorage } from '@/utils/localStorage';
 import { useEffect, useState } from 'react';
 import MyRatingSelector from '@/components/doc_main/MyRatingSelector';
 
@@ -16,7 +16,7 @@ const MyRating = ({ data, docId }: Props) => {
   // Data Fetching...
 
   useEffect(() => {
-    setRating(getSessionStorage(`r${docId}`) ?? -1);
+    setRating(getLocalStorage(`r${docId}`) ?? -1);
   }, []);
 
   return (

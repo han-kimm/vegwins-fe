@@ -1,6 +1,5 @@
 import { CATEGORY } from '@/constants/category';
-import { LABEL } from '@/constants/default';
-import { SP_CATEGORY, SP_KEYWORD } from '@/constants/sessionStorage';
+import { LABEL, SP_CATEGORY, SP_KEYWORD } from '@/constants/default';
 import Image from 'next/image';
 import Link from 'next/link';
 import BaseIcon from '@/components/common/BaseIcon';

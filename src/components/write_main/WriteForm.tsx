@@ -1,7 +1,7 @@
 'use client';
 
-import { WRITE_SAVE } from '@/constants/sessionStorage';
-import { getSessionStorage, setSessionStorage } from '@/utils/sessionStorage';
+import { WRITE_SAVE } from '@/constants/localStorage';
+import { getLocalStorage, setLocalStorage } from '@/utils/localStorage';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useMemo, useState } from 'react';
 import WriteCategory from '@/components/write_main/WriteCategory';
@@ -22,10 +22,10 @@ const WriteForm = () => {
   const submitData = { image, title, hashtag: [...hashtag], category, description };
 
   const handleSave = () => {
-    setSessionStorage({ key: WRITE_SAVE, value: submitData });
+    setLocalStorage({ key: WRITE_SAVE, value: submitData });
   };
   const handleRecall = () => {
-    const previousValue: typeof submitData | null = getSessionStorage(WRITE_SAVE);
+    const previousValue: typeof submitData | null = getLocalStorage(WRITE_SAVE);
     if (previousValue) {
       setImage(previousValue.image);
       setTitle(previousValue.title);

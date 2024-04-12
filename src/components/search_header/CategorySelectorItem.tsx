@@ -1,11 +1,8 @@
 'use client';
 
 import { CATEGORY } from '@/constants/category';
-import { QUERY, SP_CATEGORY } from '@/constants/sessionStorage';
-import useSetSearch from '@/hooks/useSavePath';
+import { SP_CATEGORY } from '@/constants/default';
 import useChangeQuery from '@/hooks/useSavePath';
-import { getSessionStorage, setSessionStorage } from '@/utils/sessionStorage';
-import { Suspense } from 'react';
 import BaseIcon from '@/components/common/BaseIcon';
 
 interface Props {

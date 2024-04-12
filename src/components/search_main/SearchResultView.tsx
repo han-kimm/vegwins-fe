@@ -1,9 +1,9 @@
 'use client';
 
+import { SP_KEYWORD } from '@/constants/default';
 import { MockSearch } from '@/constants/mockSearch';
-import { QUERY } from '@/constants/sessionStorage';
-import { getSessionStorage } from '@/utils/sessionStorage';
-import { Fragment, useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { Fragment } from 'react';
 import SearchResultEmpty from '@/components/search_main/SEarchResultEmpty';
 import SearchResultItem from '@/components/search_main/SearchResultItem';
 import SearchResultReset from '@/components/search_main/SearchResultReset';
@@ -13,14 +13,9 @@ interface Props {
 }
 
 const SearchResultView = ({ data }: Props) => {
-  const [keyword, setKeyword] = useState('');
+  const searchParams = useSearchParams();
+  const keyword = searchParams.get(SP_KEYWORD);
 
-  useEffect(() => {
-    const initial = getSessionStorage(QUERY);
-    if (initial?.k) {
-      setKeyword(initial.k);
-    }
-  }, []);
   return (
     <section className="flex flex-grow flex-col">
       <div className="mb-4 ml-20">

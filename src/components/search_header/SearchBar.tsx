@@ -1,10 +1,9 @@
 'use client';
 
-import { INPUT_PLACEHODER } from '@/constants/default';
-import { SP_KEYWORD } from '@/constants/sessionStorage';
+import { INPUT_PLACEHODER, SP_KEYWORD } from '@/constants/default';
 import useChangeQuery from '@/hooks/useSavePath';
 import Image from 'next/image';
-import { ChangeEvent, FormEvent, Suspense, useState } from 'react';
+import { ChangeEvent, FormEvent, Suspense, useCallback, useEffect, useMemo, useState } from 'react';
 import IconReset from 'public/icon/reset.svg';
 
 const SearchBar = () => {
@@ -20,19 +19,24 @@ const SearchInput = () => {
   const { changeQuery, searchParams } = useChangeQuery();
   const [value, setValue] = useState(() => searchParams.get(SP_KEYWORD) ?? '');
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  useEffect(() => {
+    const initial = searchParams.get(SP_KEYWORD);
+    setValue(initial ?? '');
+  }, [searchParams]);
+
+  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
     setValue(newValue);
-  };
+  }, []);
+
+  const resetKeyword = useCallback(() => {
+    setValue('');
+    changeQuery(SP_KEYWORD);
+  }, []);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     changeQuery(SP_KEYWORD, value);
-  };
-
-  const resetKeyword = () => {
-    setValue('');
-    changeQuery(SP_KEYWORD);
   };
 
   return (
