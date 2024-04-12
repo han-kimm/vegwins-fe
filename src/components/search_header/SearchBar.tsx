@@ -1,39 +1,38 @@
 'use client';
 
 import { INPUT_PLACEHODER } from '@/constants/default';
-import { QUERY, SP_KEYWORD } from '@/constants/sessionStorage';
-import { getSessionStorage, setSessionStorage } from '@/utils/sessionStorage';
+import { SP_KEYWORD } from '@/constants/sessionStorage';
+import useChangeQuery from '@/hooks/useSavePath';
 import Image from 'next/image';
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, Suspense, useState } from 'react';
 import IconReset from 'public/icon/reset.svg';
 
 const SearchBar = () => {
-  const [value, setValue] = useState('');
+  return (
+    <Suspense>
+      <SearchInput />
+    </Suspense>
+  );
+};
+export default SearchBar;
+
+const SearchInput = () => {
+  const { changeQuery, searchParams } = useChangeQuery();
+  const [value, setValue] = useState(() => searchParams.get(SP_KEYWORD) ?? '');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
     setValue(newValue);
   };
 
-  useEffect(() => {
-    const initial = getSessionStorage(QUERY);
-    if (initial?.k) {
-      setValue(initial.k);
-    }
-  }, []);
-
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-
-    const previousQuery = getSessionStorage(QUERY);
-    setSessionStorage({ key: QUERY, value: { ...previousQuery, k: value } });
+    changeQuery(SP_KEYWORD, value);
   };
 
   const resetKeyword = () => {
     setValue('');
-
-    const previousQuery = getSessionStorage(QUERY);
-    setSessionStorage({ key: QUERY, value: { ...previousQuery, k: '' } });
+    changeQuery(SP_KEYWORD);
   };
 
   return (
@@ -68,4 +67,3 @@ const SearchBar = () => {
     </form>
   );
 };
-export default SearchBar;

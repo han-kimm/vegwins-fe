@@ -2,7 +2,9 @@
 
 import { CATEGORY } from '@/constants/category';
 import { QUERY } from '@/constants/sessionStorage';
+import useSetSearch from '@/hooks/useSavePath';
 import { getSessionStorage, setSessionStorage } from '@/utils/sessionStorage';
+import { Suspense } from 'react';
 import BaseIcon from '@/components/common/BaseIcon';
 
 interface Props {
@@ -11,7 +13,16 @@ interface Props {
   setSelected: (name: string) => void;
 }
 
-const CategorySelectorItem = ({ name, isSelected, setSelected }: Props) => {
+const CategorySelectorItem = (prop: Props) => {
+  return (
+    <Suspense>
+      <CategorySelectorOption {...prop} />
+    </Suspense>
+  );
+};
+export default CategorySelectorItem;
+
+const CategorySelectorOption = ({ name, isSelected, setSelected }: Props) => {
   const handleClick = () => {
     const updatedValue = isSelected ? '' : name;
 
@@ -26,4 +37,3 @@ const CategorySelectorItem = ({ name, isSelected, setSelected }: Props) => {
     </button>
   );
 };
-export default CategorySelectorItem;
