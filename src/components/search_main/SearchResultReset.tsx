@@ -1,17 +1,6 @@
-'use client';
-
-import { SP_KEYWORD } from '@/constants/sessionStorage';
-import useSetSearch from '@/hooks/useSavePath';
-
 const SearchResultReset = () => {
-  const { savePath } = useSetSearch();
-
-  const changeSearchParams = () => {
-    savePath(SP_KEYWORD, '');
-  };
-
   return (
-    <button type="reset" onClick={changeSearchParams} className="ml-8 font-bold text-sky">
+    <button type="reset" className="ml-8 font-bold text-sky">
       검색어 초기화
     </button>
   );

@@ -37,13 +37,10 @@ const CarouselSlide = ({ data, selectedIndex }: SlideProps) => {
           href={data.href}
           key={i}
           className={`relative flex w-full flex-shrink-0 p-28 ${data.className}`}
-          aria-label={`${arr.length}번째 중 ${i + 1}번째 슬라이드`}
-          aria-hidden={i === selectedIndex ? false : true}
+          aria-label={`${arr.length}번째 중 ${i + 1}번째 슬라이드: ${data.title}로 이동`}
         >
-          <Image fill priority sizes="(min-width: 500px) 500px, 300px" src={data.imageUrl} alt="" className="object-cover" aria-hidden={true} />
-          <h1 className="z-10 text-24 font-bold">
-            <p>{data.title}</p>
-          </h1>
+          <Image fill priority sizes="(min-width: 500px) 500px, 250px" src={data.imageUrl} alt="" className="object-cover" aria-hidden />
+          <h2 className="z-10 text-24 font-bold">{data.title}</h2>
         </Link>
       ))}
     </div>
@@ -61,6 +58,7 @@ const CarouselIndicator = ({ data, selectedIndex, onDotButtonClick }: IndicatorP
       onClick={() => onDotButtonClick(index)}
       className={`h-[0.6rem] rounded-full transition-all ${index === selectedIndex ? 'basis-100 bg-black-80' : 'basis-32 bg-black-40'}`}
       aria-current={index === selectedIndex}
+      aria-label={`${index}번째 슬라이드 바로가기`}
     />
   ));
 };

@@ -1,8 +1,7 @@
 'use client';
 
 import { CATEGORY } from '@/constants/category';
-import { QUERY, SP_CATEGORY } from '@/constants/sessionStorage';
-import useSetSearch from '@/hooks/useSavePath';
+import { QUERY } from '@/constants/sessionStorage';
 import { getSessionStorage, setSessionStorage } from '@/utils/sessionStorage';
 import BaseIcon from '@/components/common/BaseIcon';
 
@@ -13,11 +12,8 @@ interface Props {
 }
 
 const CategorySelectorItem = ({ name, isSelected, setSelected }: Props) => {
-  const { savePath } = useSetSearch();
-
   const handleClick = () => {
     const updatedValue = isSelected ? '' : name;
-    savePath(SP_CATEGORY, updatedValue);
 
     const previousQuery = getSessionStorage(QUERY);
     setSessionStorage({ key: QUERY, value: { ...previousQuery, c: updatedValue } });

@@ -2,7 +2,6 @@
 
 import { INPUT_PLACEHODER } from '@/constants/default';
 import { QUERY, SP_KEYWORD } from '@/constants/sessionStorage';
-import useSetSearch from '@/hooks/useSavePath';
 import { getSessionStorage, setSessionStorage } from '@/utils/sessionStorage';
 import Image from 'next/image';
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
@@ -23,11 +22,8 @@ const SearchBar = () => {
     }
   }, []);
 
-  const { savePath } = useSetSearch();
-
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    savePath(SP_KEYWORD, value);
 
     const previousQuery = getSessionStorage(QUERY);
     setSessionStorage({ key: QUERY, value: { ...previousQuery, k: value } });
@@ -35,7 +31,6 @@ const SearchBar = () => {
 
   const resetKeyword = () => {
     setValue('');
-    savePath(SP_KEYWORD, '');
 
     const previousQuery = getSessionStorage(QUERY);
     setSessionStorage({ key: QUERY, value: { ...previousQuery, k: '' } });
