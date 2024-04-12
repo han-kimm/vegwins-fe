@@ -1,9 +1,10 @@
+import { SetSubmitData } from '@/constants/default';
 import Image from 'next/image';
-import { ChangeEvent, memo, useEffect, useState } from 'react';
+import { ChangeEvent, memo } from 'react';
 
 interface Props {
   image: string;
-  setImage: (image: string) => void;
+  setImage: SetSubmitData;
 }
 
 const WriteImage = memo(function WriteImage({ image, setImage }: Props) {
@@ -18,7 +19,7 @@ const WriteImage = memo(function WriteImage({ image, setImage }: Props) {
     reader.onload = () => {
       const result = reader.result;
       if (typeof result === 'string') {
-        setImage(result);
+        setImage((prev) => ({ ...prev, image: result }));
       }
     };
 
@@ -26,7 +27,7 @@ const WriteImage = memo(function WriteImage({ image, setImage }: Props) {
   };
 
   const resetThumbnail = () => {
-    setImage('');
+    setImage((prev) => ({ ...prev, image: '' }));
   };
 
   return (

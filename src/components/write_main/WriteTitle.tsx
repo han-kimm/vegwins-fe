@@ -1,15 +1,15 @@
+import { SetSubmitData } from '@/constants/default';
 import { ChangeEvent, memo } from 'react';
 import WriteFormRow from '@/components/write_main/WriteFormRow';
 
 interface Props {
   title: string;
-  setTitle: (title: string) => void;
+  setTitle: SetSubmitData;
 }
-
 const WriteTitle = memo(function WriteTitle({ title, setTitle }: Props) {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
-    setTitle(newValue);
+    const newTitle = e.target.value;
+    setTitle((prev) => ({ ...prev, title: newTitle }));
   };
 
   return (

@@ -1,19 +1,21 @@
 import { CATEGORY, CATEGORY_KEY } from '@/constants/category';
-import { Dispatch, SetStateAction, memo } from 'react';
+import { SetSubmitData } from '@/constants/default';
+import { memo } from 'react';
 import BaseIcon from '@/components/common/BaseIcon';
 import WriteFormRow from '@/components/write_main/WriteFormRow';
 
 interface Props {
   category: string[];
-  setCategory: Dispatch<SetStateAction<string[]>>;
+  setCategory: SetSubmitData;
 }
+
 const WriteCategory = memo(function WriteCategory({ category, setCategory }: Props) {
   const handleClick = (isSelected: boolean, key: string) => {
     if (isSelected) {
-      setCategory((prev) => prev.filter((v) => v !== key));
+      setCategory((prev) => ({ ...prev, category: prev.category.filter((v) => v !== key) }));
       return;
     }
-    setCategory((prev) => [...prev, key]);
+    setCategory((prev) => ({ ...prev, category: [...prev.category, key] }));
   };
   return (
     <WriteFormRow label="카테고리" required={!category.length}>

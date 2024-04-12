@@ -1,6 +1,5 @@
 import { WRITE_SAVE } from '@/constants/localStorage';
 import { getLocalStorage } from '@/utils/localStorage';
-import Image from 'next/image';
 import { memo, useEffect, useState } from 'react';
 import IconRecall from 'public/icon/recall.svg';
 import IconSave from 'public/icon/save.svg';

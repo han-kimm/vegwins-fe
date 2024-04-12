@@ -1,11 +1,12 @@
+import { SetSubmitData } from '@/constants/default';
 import Image from 'next/image';
-import { Dispatch, KeyboardEvent, SetStateAction, memo } from 'react';
+import { KeyboardEvent, memo } from 'react';
 
 const REG = /#[a-z0-9_가-힣]+/;
 
 interface Props {
   hashtag: Set<string>;
-  setHashtag: Dispatch<SetStateAction<Set<string>>>;
+  setHashtag: SetSubmitData;
 }
 
 const WriteHashtag = memo(function WriteHashtag({ hashtag, setHashtag }: Props) {
@@ -29,11 +30,11 @@ const WriteHashtag = memo(function WriteHashtag({ hashtag, setHashtag }: Props) 
       return;
     }
     input.value = '';
-    setHashtag((prev) => (prev.add(newValue), new Set(prev)));
+    setHashtag((prev) => ({ ...prev, hashtag: (prev.hashtag.add(newValue), prev.hashtag) }));
   };
 
   const deleteHashtag = (tag: string) => () => {
-    setHashtag((prev) => (prev.delete(tag), new Set(prev)));
+    setHashtag((prev) => ({ ...prev, hashtag: (prev.hashtag.delete(tag), prev.hashtag) }));
   };
 
   return (

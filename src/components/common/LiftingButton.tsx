@@ -12,7 +12,6 @@ const LiftingButton = () => {
     if (throttle.current) {
       return;
     }
-    console.log(3);
     const { scrollY } = window;
     scrollY > 200 ? setIsScroll(true) : setIsScroll(false);
     throttle.current = true;
@@ -25,7 +24,7 @@ const LiftingButton = () => {
       const { scrollY } = window;
       scrollY > 200 ? setIsScroll(true) : setIsScroll(false);
     }, 500);
-  }, [throttle]);
+  }, [throttle, debounce]);
 
   useEffect(() => {
     handleScroll();
