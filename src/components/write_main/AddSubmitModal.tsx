@@ -15,7 +15,14 @@ const AddSubmitModal = ({ closeModal, buttonRef }: Props) => {
     <ModalFrame closeModal={closeModal}>
       <h2 className="text-18 font-bold">완료 전 확인하기</h2>
       <button onClick={() => setSigned(!signed)} className="mt-20 flex gap-8">
-        <input checked={signed} onChange={handleChange} type="checkbox" className="mt-[0.5rem] h-16 w-16 shrink-0 rounded-lg accent-black-80" />
+        <input
+          checked={signed}
+          onChange={handleChange}
+          type="checkbox"
+          className="mt-[0.5rem] h-16 w-16 shrink-0 rounded-lg accent-black-80"
+          tabIndex={-1}
+          aria-hidden
+        />
         <p className="text-start text-16 font-medium">
           부적절한 내용
           <strong>(논비건, 욕설, 혐오발언)</strong>은 경고 없이 삭제됩니다.
