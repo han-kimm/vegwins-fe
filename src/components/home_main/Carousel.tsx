@@ -1,13 +1,14 @@
 'use client';
 
 import { MOCK } from '@/constants/mockCarousel';
+import Autoplay from 'embla-carousel-autoplay';
 import useEmblaCarousel from 'embla-carousel-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useDotButton } from '../../hooks/useDotButton';
 
 const Carousel = () => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 5000 })]);
   const indicate = useDotButton(emblaApi);
 
   return (
@@ -30,7 +31,7 @@ interface SlideProps {
 
 const CarouselSlide = ({ data, selectedIndex }: SlideProps) => {
   return (
-    <div className="flex h-200" role="group">
+    <div className="flex h-200" role="marquee">
       {data.map((data, i, arr) => (
         <Link
           href={data.href}
