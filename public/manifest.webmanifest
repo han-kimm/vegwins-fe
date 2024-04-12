@@ -3,10 +3,10 @@
   "background_color": "#f5f5f5",
   "display": "standalone",
   "orientation": "portrait",
-  "scope": "/",
-  "start_url": "/",
-  "name": "\ud568\uaed8 \ub098\uc544\uac00\ub294 \ube44\uae34\uc988, vegins",
-  "short_name": "\ube44\uae34\uc988",
+  "scope": "http://localhost:3000",
+  "start_url": "http://localhost:3000",
+  "name": "함께 나아가는 비긴즈, vegins",
+  "short_name": "비긴즈",
   "description": "",
   "icons": [
     {
@@ -28,6 +28,22 @@
       "src": "/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "홈화면"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "홈화면"
     }
   ]
 }

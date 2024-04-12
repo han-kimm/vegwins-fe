@@ -28,7 +28,10 @@ const nextConfig = {
 };
 
 const withPWA = withPWAInit({
-  dest: "public"
+  dest: "public",
+  cacheStartUrl: true,
+  cacheOnFrontEndNav: true,
+  aggressiveFrontEndNavCaching: true,
 })
 
 export default withPWA(nextConfig);
