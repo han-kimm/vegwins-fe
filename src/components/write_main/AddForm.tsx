@@ -2,6 +2,7 @@
 
 import { WRITE_SAVE } from '@/constants/sessionStorage';
 import { getSessionStorage, setSessionStorage } from '@/utils/sessionStorage';
+import { useRouter } from 'next/navigation';
 import { FormEvent, useEffect, useState } from 'react';
 import AddCategory from '@/components/write_main/AddCategory';
 import AddDescription from '@/components/write_main/AddDescription';
@@ -34,9 +35,11 @@ const AddForm = () => {
     }
   };
 
+  const router = useRouter();
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log(11);
+    router.push('/');
   };
 
   return (

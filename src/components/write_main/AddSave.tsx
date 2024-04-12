@@ -21,6 +21,7 @@ const AddSave = memo(function AddSave({ handleSave, handleRecall }: Props) {
   return (
     <div className="flex gap-20 text-18">
       <button
+        type="button"
         onClick={() => (setIsSave(true), handleSave())}
         className="flex-center transform-active grow gap-12 rounded-sm border border-black-80 py-12 font-bold"
       >
@@ -28,6 +29,7 @@ const AddSave = memo(function AddSave({ handleSave, handleRecall }: Props) {
         임시 저장
       </button>
       <button
+        type="button"
         onClick={handleRecall}
         disabled={!isSave}
         className={`${isSave ? 'transform-active border-black-80' : 'border-black-40 text-black-40'} flex-center grow gap-12 rounded-sm border py-12 font-bold`}
