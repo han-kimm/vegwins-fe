@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import { ReactNode } from 'react';
 import ModalPortal from '@/components/common/ModalPortal';
-import IconCancel from 'public/icon/cancel.svg';
 
 interface ModalFrameProps {
   children: ReactNode;
@@ -13,7 +12,7 @@ const ModalFrame = ({ children, closeModal }: ModalFrameProps) => {
     <ModalPortal>
       <div onClick={closeModal} className="fixed left-0 top-0 flex h-screen w-full items-center justify-center bg-gray-900 bg-opacity-70 text-center">
         <div
-          className="relative mx-32 flex min-h-240 min-w-300 flex-col gap-20 rounded-md bg-white p-20"
+          className="relative mx-32 flex min-h-200 min-w-300 flex-col gap-20 rounded-md bg-white p-20"
           onClick={(event) => event.stopPropagation()}
           role="alert"
           aria-label="팝업창"

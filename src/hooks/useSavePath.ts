@@ -1,6 +1,6 @@
 import { PREVIOUS_PATH } from '@/constants/sessionStorage';
 import { setSessionStorage } from '@/utils/sessionStorage';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { useCallback } from 'react';
 
 const useSavePath = () => {
