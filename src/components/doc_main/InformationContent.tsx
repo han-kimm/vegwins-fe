@@ -9,25 +9,14 @@ const InformationContent = ({ label, value }: { label: string; value: string | A
   let SwitchedComponent;
   switch (label) {
     case LABEL.title:
-      SwitchedComponent = <p className="text-24 font-bold">{value}</p>;
-      break;
-    case LABEL.caution:
-      if (typeof value === 'object') {
-        SwitchedComponent = (
-          <p className="flex flex-wrap gap-16 text-20 font-medium">
-            {value.map((v) => (
-              <span key={v}>{v}</span>
-            ))}
-          </p>
-        );
-      }
+      SwitchedComponent = <p className="text-20 font-bold">{value}</p>;
       break;
     case LABEL.category:
       if (typeof value === 'object') {
         SwitchedComponent = (
           <div className="flex flex-wrap gap-16 text-black-80">
             {value.map((v) => (
-              <Link href={`/search?${SP_CATEGORY}=${v}`} key={v}>
+              <Link href={`/search?${SP_CATEGORY}=${v}`} key={v} className="transform-active">
                 <BaseIcon key={v} name={v} render={CATEGORY[v]} fontSize={12} />
               </Link>
             ))}
@@ -39,11 +28,11 @@ const InformationContent = ({ label, value }: { label: string; value: string | A
       if (typeof value === 'object') {
         SwitchedComponent = (
           <div className="flex flex-wrap gap-16 text-14 font-bold">
-            {value.map((tag) => (
+            {value.slice(0, 2).map((tag) => (
               <Link
                 href={`/search?${SP_KEYWORD}=${encodeURIComponent(tag)}`}
                 key={tag}
-                className="shrink-0 rounded-full border border-black-40 px-8 active:bg-black-80"
+                className="transform-active shrink-0 rounded-full border border-black-40 px-8 active:bg-black-20"
               >
                 {tag}
               </Link>
