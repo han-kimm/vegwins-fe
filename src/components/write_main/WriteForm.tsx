@@ -3,7 +3,7 @@
 import { WRITE_SAVE } from '@/constants/sessionStorage';
 import { getSessionStorage, setSessionStorage } from '@/utils/sessionStorage';
 import { useRouter } from 'next/navigation';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useMemo, useState } from 'react';
 import WriteCategory from '@/components/write_main/WriteCategory';
 import WriteDescription from '@/components/write_main/WriteDescription';
 import WriteHashtag from '@/components/write_main/WriteHashtag';
@@ -37,7 +37,8 @@ const WriteForm = () => {
 
   const router = useRouter();
 
-  const required = !!title && !!category.length && !!description;
+  const required = useMemo(() => !!title && !!category.length && !!description, [title, category, description]);
+  const canSave = !!image || !!title || !!category.length || !!hashtag.size || !!description;
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -54,7 +55,7 @@ const WriteForm = () => {
       <WriteCategory category={category} setCategory={setCategory} />
       <WriteHashtag hashtag={hashtag} setHashtag={setHashTag} />
       <WriteDescription description={description} setDescription={setDescription} />
-      <WriteSave handleSave={handleSave} handleRecall={handleRecall} />
+      <WriteSave required={canSave} handleSave={handleSave} handleRecall={handleRecall} />
       <WriteSubmit required={required} />
     </form>
   );

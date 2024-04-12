@@ -6,11 +6,12 @@ import IconRecall from 'public/icon/recall.svg';
 import IconSave from 'public/icon/save.svg';
 
 interface Props {
+  required: boolean;
   handleSave: () => void;
   handleRecall: () => void;
 }
 
-const WriteSave = memo(function WriteSave({ handleSave, handleRecall }: Props) {
+const WriteSave = memo(function WriteSave({ required, handleSave, handleRecall }: Props) {
   const [isSave, setIsSave] = useState(false);
 
   useEffect(() => {
@@ -23,7 +24,8 @@ const WriteSave = memo(function WriteSave({ handleSave, handleRecall }: Props) {
       <button
         type="button"
         onClick={() => (setIsSave(true), handleSave())}
-        className="flex-center transform-active grow gap-12 rounded-sm border border-black-80 py-12 font-bold"
+        disabled={!required}
+        className={`${required ? 'transform-active border-black-80' : 'border-black-40 text-black-40'} flex-center grow gap-12 rounded-sm border py-12 font-bold`}
       >
         <IconSave />
         임시 저장
