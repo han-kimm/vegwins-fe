@@ -1,8 +1,9 @@
 'use client';
 
 import { CATEGORY } from '@/constants/category';
-import { QUERY } from '@/constants/sessionStorage';
+import { QUERY, SP_CATEGORY } from '@/constants/sessionStorage';
 import useSetSearch from '@/hooks/useSavePath';
+import useChangeQuery from '@/hooks/useSavePath';
 import { getSessionStorage, setSessionStorage } from '@/utils/sessionStorage';
 import { Suspense } from 'react';
 import BaseIcon from '@/components/common/BaseIcon';
@@ -13,22 +14,12 @@ interface Props {
   setSelected: (name: string) => void;
 }
 
-const CategorySelectorItem = (prop: Props) => {
-  return (
-    <Suspense>
-      <CategorySelectorOption {...prop} />
-    </Suspense>
-  );
-};
-export default CategorySelectorItem;
-
-const CategorySelectorOption = ({ name, isSelected, setSelected }: Props) => {
+const CategorySelectorItem = ({ name, isSelected, setSelected }: Props) => {
+  const { changeQuery } = useChangeQuery();
   const handleClick = () => {
     const updatedValue = isSelected ? '' : name;
-
-    const previousQuery = getSessionStorage(QUERY);
-    setSessionStorage({ key: QUERY, value: { ...previousQuery, c: updatedValue } });
     setSelected(updatedValue);
+    changeQuery(SP_CATEGORY, updatedValue);
   };
   return (
     <button onClick={handleClick} className={`flex-center w-60 shrink-0 flex-col ${isSelected ? 'text-black-100' : 'text-black-40'}`}>
@@ -37,3 +28,4 @@ const CategorySelectorOption = ({ name, isSelected, setSelected }: Props) => {
     </button>
   );
 };
+export default CategorySelectorItem;

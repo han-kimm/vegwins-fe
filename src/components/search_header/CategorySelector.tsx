@@ -1,20 +1,24 @@
 'use client';
 
 import { CATEGORY_KEY } from '@/constants/category';
-import { QUERY } from '@/constants/sessionStorage';
-import { getSessionStorage } from '@/utils/sessionStorage';
-import { useEffect, useState } from 'react';
+import { SP_CATEGORY } from '@/constants/sessionStorage';
+import useChangeQuery from '@/hooks/useSavePath';
+import { Suspense, useState } from 'react';
 import CategorySelectorItem from '@/components/search_header/CategorySelectorItem';
 
 const CategorySelector = () => {
-  const [selected, setSelected] = useState('');
+  return (
+    <Suspense>
+      <CategorySelect />
+    </Suspense>
+  );
+};
+export default CategorySelector;
 
-  useEffect(() => {
-    const initial = getSessionStorage(QUERY);
-    if (initial?.c) {
-      setSelected(initial.c);
-    }
-  }, []);
+const CategorySelect = () => {
+  const { searchParams } = useChangeQuery();
+  const [selected, setSelected] = useState(() => searchParams.get(SP_CATEGORY) ?? '');
+
   return (
     <section
       className="relative flex h-96 gap-12 [&>div]:rounded-md [&>div]:bg-white [&>div]:p-12 [&>div]:shadow-md"
@@ -32,7 +36,6 @@ const CategorySelector = () => {
     </section>
   );
 };
-export default CategorySelector;
 
 const NoSelected = () => {
   return (
