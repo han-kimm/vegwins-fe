@@ -1,7 +1,7 @@
 'use client';
 
 import { INPUT_PLACEHODER, SP_KEYWORD } from '@/constants/default';
-import useChangeQuery from '@/hooks/useSavePath';
+import useChangeQuery from '@/hooks/useChangeQuery';
 import Image from 'next/image';
 import { ChangeEvent, FormEvent, Suspense, useCallback, useEffect, useMemo, useState } from 'react';
 import IconReset from 'public/icon/reset.svg';
@@ -31,12 +31,12 @@ const SearchInput = () => {
 
   const resetKeyword = useCallback(() => {
     setValue('');
-    changeQuery(SP_KEYWORD);
+    changeQuery({ name: SP_KEYWORD });
   }, []);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    changeQuery(SP_KEYWORD, value);
+    changeQuery({ name: SP_KEYWORD, value });
   };
 
   return (

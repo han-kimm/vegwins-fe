@@ -1,10 +1,11 @@
 'use client';
 
 import { SP_KEYWORD } from '@/constants/default';
+import { PREVIOUS_PATH } from '@/constants/localStorage';
 import { MockSearch } from '@/constants/mockSearch';
-import { useSearchParams } from 'next/navigation';
+import useChangeQuery from '@/hooks/useChangeQuery';
 import { Fragment } from 'react';
-import SearchResultEmpty from '@/components/search_main/SEarchResultEmpty';
+import SearchResultEmpty from '@/components/search_main/SearchResultEmpty';
 import SearchResultItem from '@/components/search_main/SearchResultItem';
 import SearchResultReset from '@/components/search_main/SearchResultReset';
 
@@ -13,7 +14,7 @@ interface Props {
 }
 
 const SearchResultView = ({ data }: Props) => {
-  const searchParams = useSearchParams();
+  const { searchParams, changeQuery } = useChangeQuery();
   const keyword = searchParams.get(SP_KEYWORD);
 
   return (
@@ -23,7 +24,11 @@ const SearchResultView = ({ data }: Props) => {
         {!!keyword && <SearchResultReset />}
       </div>
       {data.length ? (
-        <div className="flex w-full flex-col rounded-md bg-white px-16 shadow-lg" role="group">
+        <div
+          onClick={() => changeQuery({ save: true, routing: false })}
+          className="flex w-full flex-col rounded-md bg-white px-16 shadow-lg"
+          role="group"
+        >
           {data.map((data, i) => (
             <Fragment key={data.id}>
               {!i || <hr className="border-black-60" />}

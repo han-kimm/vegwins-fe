@@ -2,7 +2,7 @@
 
 import { CATEGORY } from '@/constants/category';
 import { SP_CATEGORY } from '@/constants/default';
-import useChangeQuery from '@/hooks/useSavePath';
+import useChangeQuery from '@/hooks/useChangeQuery';
 import BaseIcon from '@/components/common/BaseIcon';
 
 interface Props {
@@ -16,7 +16,7 @@ const CategorySelectorItem = ({ name, isSelected, setSelected }: Props) => {
   const handleClick = () => {
     const updatedValue = isSelected ? '' : name;
     setSelected(updatedValue);
-    changeQuery(SP_CATEGORY, updatedValue);
+    changeQuery({ name: SP_CATEGORY, value: updatedValue });
   };
   return (
     <button onClick={handleClick} className={`flex-center w-60 shrink-0 flex-col ${isSelected ? 'text-black-100' : 'text-black-40'}`}>

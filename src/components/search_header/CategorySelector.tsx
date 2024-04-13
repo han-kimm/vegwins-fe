@@ -2,7 +2,7 @@
 
 import { CATEGORY_KEY } from '@/constants/category';
 import { SP_CATEGORY } from '@/constants/default';
-import useChangeQuery from '@/hooks/useSavePath';
+import useChangeQuery from '@/hooks/useChangeQuery';
 import { Suspense, useState } from 'react';
 import CategorySelectorItem from '@/components/search_header/CategorySelectorItem';
 

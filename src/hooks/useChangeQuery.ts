@@ -10,25 +10,23 @@ const useChangeQuery = () => {
   const createNewPath = useCallback(
     (name?: string, value?: string) => {
       let newPath: string;
+      let newParams = searchParams.toString();
       if (name) {
-        const params = new URLSearchParams(searchParams.toString());
+        const params = new URLSearchParams(newParams);
         value ? params.set(name, value) : params.delete(name);
 
-        const newParams = params.toString();
-        newPath = pathname + '?' + newParams;
-        return newPath;
+        newParams = params.toString();
       }
-      newPath = pathname;
+      newPath = pathname + '?' + newParams;
       return newPath;
     },
     [searchParams],
   );
   const changeQuery = useCallback(
-    (...params: Parameters<typeof createNewPath>) => {
-      const [name, value] = params;
+    ({ name, value, save = false, routing = true }: { name?: string; value?: string; save?: boolean; routing?: boolean }) => {
       const newPath = createNewPath(name, value);
-      setLocalStorage({ key: PREVIOUS_PATH, value: newPath });
-      router.push(newPath);
+      save && setLocalStorage({ key: PREVIOUS_PATH, value: newPath });
+      routing && router.push(newPath);
     },
     [createNewPath],
   );
