@@ -1,20 +1,22 @@
 import { SetSubmitData } from '@/constants/default';
 import useDebounce from '@/hooks/useDebounce';
-import { memo, useRef } from 'react';
+import useUncontrolInput from '@/hooks/useUncontrolInput';
+import { memo } from 'react';
 import WriteFormRow from '@/components/write_main/WriteFormRow';
 
 interface Props {
+  description: string;
   setDescription: SetSubmitData;
 }
 
-const WriteDescription = memo(function WriteDescription({ setDescription }: Props) {
-  const ref = useRef<HTMLTextAreaElement>(null);
+const WriteDescription = memo(function WriteDescription({ description, setDescription }: Props) {
+  const ref = useUncontrolInput<HTMLTextAreaElement>({ syncState: description });
   const handleChange = useDebounce(() => {
     setDescription((prev) => ({ ...prev, description: ref.current?.value! }));
   }, 500);
 
   return (
-    <WriteFormRow label="설명" required={!ref.current?.value}>
+    <WriteFormRow label="설명" required={!description}>
       <textarea
         ref={ref}
         onChange={handleChange}

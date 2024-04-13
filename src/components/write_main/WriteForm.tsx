@@ -3,7 +3,7 @@
 import { DEFAULT_SUBMIT } from '@/constants/default';
 import { WRITE_SAVE } from '@/constants/localStorage';
 import { getLocalStorage } from '@/utils/localStorage';
-import { canSave, diffLocalStorage, required, saveSubmitData } from '@/utils/writeUtils';
+import { canRecall, canSave, required, saveSubmitData } from '@/utils/writeUtils';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
 import WriteCategory from '@/components/write_main/WriteCategory';
@@ -16,11 +16,11 @@ import WriteTitle from '@/components/write_main/WriteTitle';
 
 const WriteForm = () => {
   const [submitData, setSubmitData] = useState(DEFAULT_SUBMIT);
-  const [isSave, setIsSave] = useState(false);
+  const [reload, setReload] = useState(0);
 
   const handleSave = () => {
     saveSubmitData(submitData);
-    setIsSave(true);
+    setReload(reload + 1);
   };
   const handleRecall = () => {
     const prev = getLocalStorage(WRITE_SAVE);
@@ -42,11 +42,11 @@ const WriteForm = () => {
   return (
     <form onSubmit={handleSubmit} className="flex w-full flex-col [&>div:not(:first-child)]:mt-40">
       <WriteImage image={submitData.image} setImage={setSubmitData} />
-      <WriteTitle setTitle={setSubmitData} />
+      <WriteTitle title={submitData.title} setTitle={setSubmitData} />
       <WriteCategory category={submitData.category} setCategory={setSubmitData} />
       <WriteHashtag hashtag={submitData.hashtag} setHashtag={setSubmitData} />
-      <WriteDescription setDescription={setSubmitData} />
-      <WriteSave canSave={canSave(submitData)} canRecall={diffLocalStorage(submitData)} handleSave={handleSave} handleRecall={handleRecall} />
+      <WriteDescription description={submitData.description} setDescription={setSubmitData} />
+      <WriteSave canSave={canSave(submitData)} canRecall={canRecall(submitData)} handleSave={handleSave} handleRecall={handleRecall} />
       <WriteSubmit required={required(submitData)} />
     </form>
   );

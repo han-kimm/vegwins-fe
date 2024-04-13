@@ -1,19 +1,21 @@
 import { SetSubmitData } from '@/constants/default';
 import useDebounce from '@/hooks/useDebounce';
-import { FocusEvent, memo, useRef } from 'react';
+import useUncontrolInput from '@/hooks/useUncontrolInput';
+import { memo, useEffect, useRef } from 'react';
 import WriteFormRow from '@/components/write_main/WriteFormRow';
 
 interface Props {
+  title: string;
   setTitle: SetSubmitData;
 }
-const WriteTitle = memo(function WriteTitle({ setTitle }: Props) {
-  const ref = useRef<HTMLInputElement>(null);
+const WriteTitle = memo(function WriteTitle({ title, setTitle }: Props) {
+  const ref = useUncontrolInput<HTMLInputElement>({ syncState: title });
   const handleChange = useDebounce(() => {
     setTitle((prev) => ({ ...prev, title: ref.current?.value! }));
   }, 500);
 
   return (
-    <WriteFormRow label="문서명" required={!ref.current?.value}>
+    <WriteFormRow label="문서명" required={!title}>
       <input
         ref={ref}
         onChange={handleChange}
