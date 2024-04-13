@@ -1,30 +1,22 @@
-import { WRITE_SAVE } from '@/constants/localStorage';
-import { getLocalStorage } from '@/utils/localStorage';
-import { memo, useEffect, useState } from 'react';
+import { memo } from 'react';
 import IconRecall from 'public/icon/recall.svg';
 import IconSave from 'public/icon/save.svg';
 
 interface Props {
-  required: boolean;
+  canSave: boolean;
+  canRecall: boolean;
   handleSave: () => void;
   handleRecall: () => void;
 }
 
-const WriteSave = memo(function WriteSave({ required, handleSave, handleRecall }: Props) {
-  const [isSave, setIsSave] = useState(false);
-
-  useEffect(() => {
-    const initial = !!getLocalStorage(WRITE_SAVE);
-    setIsSave(initial);
-  }, []);
-
+const WriteSave = memo(function WriteSave({ canSave, canRecall, handleSave, handleRecall }: Props) {
   return (
     <div className="flex gap-20 text-18">
       <button
         type="button"
-        onClick={() => (setIsSave(true), handleSave())}
-        disabled={!required}
-        className={`${required ? 'transform-active border-black-80' : 'border-black-40 text-black-40'} flex-center grow gap-12 rounded-sm border py-12 font-bold`}
+        onClick={() => handleSave()}
+        disabled={!canSave}
+        className={`${canSave ? 'transform-active border-black-80' : 'border-black-40 text-black-40'} flex-center grow gap-12 rounded-sm border py-12 font-bold`}
       >
         <IconSave />
         임시 저장
@@ -32,8 +24,8 @@ const WriteSave = memo(function WriteSave({ required, handleSave, handleRecall }
       <button
         type="button"
         onClick={handleRecall}
-        disabled={!isSave}
-        className={`${isSave ? 'transform-active border-black-80' : 'border-black-40 text-black-40'} flex-center grow gap-12 rounded-sm border py-12 font-bold`}
+        disabled={!canRecall}
+        className={`${canRecall ? 'transform-active border-black-80' : 'border-black-40 text-black-40'} flex-center grow gap-12 rounded-sm border py-12 font-bold`}
       >
         <IconRecall />
         불러오기

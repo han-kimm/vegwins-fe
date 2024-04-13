@@ -2,7 +2,8 @@
 
 import { DEFAULT_SUBMIT } from '@/constants/default';
 import { WRITE_SAVE } from '@/constants/localStorage';
-import { getLocalStorage, setLocalStorage } from '@/utils/localStorage';
+import { getLocalStorage } from '@/utils/localStorage';
+import { canSave, diffLocalStorage, required, saveSubmitData } from '@/utils/writeUtils';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
 import WriteCategory from '@/components/write_main/WriteCategory';
@@ -15,29 +16,24 @@ import WriteTitle from '@/components/write_main/WriteTitle';
 
 const WriteForm = () => {
   const [submitData, setSubmitData] = useState(DEFAULT_SUBMIT);
+  const [isSave, setIsSave] = useState(false);
 
   const handleSave = () => {
-    setLocalStorage({ key: WRITE_SAVE, value: submitData });
+    saveSubmitData(submitData);
+    setIsSave(true);
   };
   const handleRecall = () => {
-    const currentData = JSON.stringify(submitData);
-    const previousData = localStorage.getItem(WRITE_SAVE);
-    if (currentData === previousData) {
-      return;
-    }
-    if (previousData) {
-      setSubmitData(JSON.parse(previousData));
+    const prev = getLocalStorage(WRITE_SAVE);
+    if (prev) {
+      setSubmitData({ ...prev, hashtag: new Set(prev.hashtag) });
     }
   };
 
   const router = useRouter();
 
-  const required = !!submitData.title && !!submitData.category.length && !!submitData.description;
-  const canSave = !!submitData.image || !!submitData.title || !!submitData.category.length || !!submitData.hashtag.size || !!submitData.description;
-
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (!required) {
+    if (!required(submitData)) {
       return;
     }
     router.push('/');
@@ -46,12 +42,12 @@ const WriteForm = () => {
   return (
     <form onSubmit={handleSubmit} className="flex w-full flex-col [&>div:not(:first-child)]:mt-40">
       <WriteImage image={submitData.image} setImage={setSubmitData} />
-      <WriteTitle title={submitData.title} setTitle={setSubmitData} />
+      <WriteTitle setTitle={setSubmitData} />
       <WriteCategory category={submitData.category} setCategory={setSubmitData} />
       <WriteHashtag hashtag={submitData.hashtag} setHashtag={setSubmitData} />
-      <WriteDescription description={submitData.description} setDescription={setSubmitData} />
-      <WriteSave required={canSave} handleSave={handleSave} handleRecall={handleRecall} />
-      <WriteSubmit required={required} />
+      <WriteDescription setDescription={setSubmitData} />
+      <WriteSave canSave={canSave(submitData)} canRecall={diffLocalStorage(submitData)} handleSave={handleSave} handleRecall={handleRecall} />
+      <WriteSubmit required={required(submitData)} />
     </form>
   );
 };

@@ -1,6 +1,7 @@
 import { SetSubmitData } from '@/constants/default';
 import Image from 'next/image';
 import { KeyboardEvent, memo } from 'react';
+import WriteFormRow from '@/components/write_main/WriteFormRow';
 
 const REG = /#[a-z0-9_가-힣]+/;
 
@@ -30,18 +31,15 @@ const WriteHashtag = memo(function WriteHashtag({ hashtag, setHashtag }: Props) 
       return;
     }
     input.value = '';
-    setHashtag((prev) => ({ ...prev, hashtag: (prev.hashtag.add(newValue), prev.hashtag) }));
+    setHashtag((prev) => ({ ...prev, hashtag: (prev.hashtag.add(newValue), new Set(prev.hashtag)) }));
   };
 
   const deleteHashtag = (tag: string) => () => {
-    setHashtag((prev) => ({ ...prev, hashtag: (prev.hashtag.delete(tag), prev.hashtag) }));
+    setHashtag((prev) => ({ ...prev, hashtag: (prev.hashtag.delete(tag), new Set(prev.hashtag)) }));
   };
 
   return (
-    <div className="flex gap-40 text-18">
-      <div>
-        <h2 className="w-68 shrink-0 font-medium">해시태그</h2>
-      </div>
+    <WriteFormRow label="해시태그">
       <div className="flex grow flex-col gap-8">
         <input
           type="search"
@@ -49,7 +47,7 @@ const WriteHashtag = memo(function WriteHashtag({ hashtag, setHashtag }: Props) 
           placeholder="'#특징' 추가해 주세요."
           className="webkit w-full border-b border-black-60 bg-transparent font-bold focus:outline-none"
         />
-        <div className="flex flex-wrap gap-8">
+        <div className="flex min-h-max flex-wrap gap-8">
           {[...hashtag].map((tag) => (
             <button
               type="button"
@@ -63,7 +61,7 @@ const WriteHashtag = memo(function WriteHashtag({ hashtag, setHashtag }: Props) 
           ))}
         </div>
       </div>
-    </div>
+    </WriteFormRow>
   );
 });
 export default WriteHashtag;

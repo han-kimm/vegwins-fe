@@ -14,24 +14,6 @@ export const LABEL: { [key: string]: string } = {
 export const SP_KEYWORD = 'k';
 export const SP_CATEGORY = 'c';
 
-export class DefaultSubmit {
-  image = '';
-  title = '';
-  hashtag = new Set<string>();
-  category = Array<string>();
-  description = '';
-  diffLocalStorage() {
-    const currentData = JSON.stringify(this);
-    const previousData = localStorage.getItem(WRITE_SAVE);
-    return currentData === previousData;
-  }
-  required() {
-    return !!this.title && !!this.category.length && !!this.description;
-  }
-  canSave() {
-    return this.diffLocalStorage() || !!this.image || !!this.title || !!this.category.length || !!this.hashtag.size || !!this.description;
-  }
-}
 export const DEFAULT_SUBMIT = { image: '', title: '', hashtag: new Set<string>(), category: Array<string>(), description: '' };
-
-export type SetSubmitData = Dispatch<SetStateAction<typeof DEFAULT_SUBMIT>>;
+export type SubmitData = typeof DEFAULT_SUBMIT;
+export type SetSubmitData = Dispatch<SetStateAction<SubmitData>>;

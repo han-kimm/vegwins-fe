@@ -6,7 +6,7 @@ type UseDotButtonType = {
   onDotButtonClick: (index: number) => void;
 };
 
-export const useDotButton = (emblaApi: EmblaCarouselType | undefined, onButtonClick?: (emblaApi: EmblaCarouselType) => void): UseDotButtonType => {
+const useDotButton = (emblaApi: EmblaCarouselType | undefined, onButtonClick?: (emblaApi: EmblaCarouselType) => void): UseDotButtonType => {
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   const onDotButtonClick = useCallback(
@@ -35,3 +35,4 @@ export const useDotButton = (emblaApi: EmblaCarouselType | undefined, onButtonCl
     onDotButtonClick,
   };
 };
+export default useDotButton;

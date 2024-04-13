@@ -1,11 +1,11 @@
 'use client';
 
 import { MOCK } from '@/constants/mockCarousel';
+import useDotButton from '@/hooks/useDotButton';
 import Autoplay from 'embla-carousel-autoplay';
 import useEmblaCarousel from 'embla-carousel-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useDotButton } from '../../hooks/useDotButton';
 
 const Carousel = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 5000 })]);
