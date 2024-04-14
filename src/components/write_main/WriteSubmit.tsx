@@ -1,6 +1,8 @@
+import dynamic from 'next/dynamic';
 import { memo, useRef, useState } from 'react';
-import WriteSubmitModal from '@/components/write_main/WriteSubmitModal';
 import IconUpload from 'public/icon/upload.svg';
+
+const WriteSubmitModal = dynamic(() => import('@/components/write_main/WriteSubmitModal'), { ssr: false });
 
 interface Props {
   required: boolean;

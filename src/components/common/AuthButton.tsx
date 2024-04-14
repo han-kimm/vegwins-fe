@@ -1,8 +1,10 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { useState } from 'react';
-import AuthModal from '@/components/common/AuthModal';
+
+const AuthModal = dynamic(() => import('@/components/common/AuthModal'), { ssr: false });
 
 const AuthButton = () => {
   const [modalOpen, setModalOpen] = useState(false);
