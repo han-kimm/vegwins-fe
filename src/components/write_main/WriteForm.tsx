@@ -1,7 +1,6 @@
 'use client';
 
-import { DEFAULT_SUBMIT } from '@/constants/default';
-import { WRITE_SAVE } from '@/constants/localStorage';
+import { DEFAULT_SUBMIT, WRITE_SAVE } from '@/constants/default';
 import { getLocalStorage } from '@/utils/localStorage';
 import { canRecall, canSave, required, saveSubmitData } from '@/utils/writeUtils';
 import { useRouter } from 'next/navigation';

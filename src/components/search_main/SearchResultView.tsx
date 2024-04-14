@@ -1,7 +1,6 @@
 'use client';
 
 import { SP_KEYWORD } from '@/constants/default';
-import { PREVIOUS_PATH } from '@/constants/localStorage';
 import { MockSearch } from '@/constants/mockSearch';
 import useChangeQuery from '@/hooks/useChangeQuery';
 import { Fragment } from 'react';

@@ -1,6 +1,6 @@
 'use client';
 
-import { PREVIOUS_PATH } from '@/constants/localStorage';
+import { PREVIOUS_PATH } from '@/constants/default';
 import { getLocalStorage } from '@/utils/localStorage';
 import Image from 'next/image';
 import Link from 'next/link';

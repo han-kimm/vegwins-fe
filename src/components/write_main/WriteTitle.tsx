@@ -1,7 +1,7 @@
 import { SetSubmitData } from '@/constants/default';
 import useDebounce from '@/hooks/useDebounce';
 import useUncontrolInput from '@/hooks/useUncontrolInput';
-import { memo, useEffect, useRef } from 'react';
+import { memo } from 'react';
 import WriteFormRow from '@/components/write_main/WriteFormRow';
 
 interface Props {

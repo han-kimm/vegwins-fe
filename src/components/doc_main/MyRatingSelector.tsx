@@ -1,4 +1,4 @@
-import { ALTMSG } from '@/constants/ratingAlt';
+import { RATING_MSG } from '@/constants/default';
 import { setLocalStorage } from '@/utils/localStorage';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
@@ -24,7 +24,7 @@ const MyRatingSelector = ({ rating, setRating }: Props) => {
           className={`flex-center transform-active relative h-40 w-40 rounded-full ${rating === status ? 'bg-orange' : 'bg-black-20'}`}
         >
           {rating === status && <div className="absolute -top-12 left-1/2 mb-4 h-8 w-8 -translate-x-1/2 rounded-full bg-black-80" />}
-          <Image width={24} height={24} src={`/icon/rate-${status}.svg`} alt={ALTMSG[status]} />
+          <Image width={24} height={24} src={`/icon/rate-${status}.svg`} alt={RATING_MSG[status]} />
         </button>
       ))}
     </div>

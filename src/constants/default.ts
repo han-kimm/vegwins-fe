@@ -1,4 +1,3 @@
-import { WRITE_SAVE } from '@/constants/localStorage';
 import { Dispatch, SetStateAction } from 'react';
 
 export const DEFAULT_IMAGE = '/image/default.webp';
@@ -14,6 +13,16 @@ export const LABEL: { [key: string]: string } = {
 export const SP_KEYWORD = 'k';
 export const SP_CATEGORY = 'c';
 
+export const PREVIOUS_PATH = 'pp';
+export const WRITE_SAVE = 'wr';
+
 export const DEFAULT_SUBMIT = { image: '', title: '', hashtag: new Set<string>(), category: Array<string>(), description: '' };
 export type SubmitData = typeof DEFAULT_SUBMIT;
 export type SetSubmitData = Dispatch<SetStateAction<SubmitData>>;
+
+export const RATING_MSG: { [key: number]: string } = {
+  [-1]: '없음',
+  [0]: '안 좋음',
+  [1]: '보통',
+  [2]: '좋음',
+};

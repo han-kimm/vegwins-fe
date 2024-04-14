@@ -1,4 +1,4 @@
-import { PREVIOUS_PATH } from '@/constants/localStorage';
+import { PREVIOUS_PATH } from '@/constants/default';
 import { setLocalStorage } from '@/utils/localStorage';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useCallback } from 'react';

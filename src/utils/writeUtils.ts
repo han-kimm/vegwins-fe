@@ -1,17 +1,21 @@
-import { SubmitData } from '@/constants/default';
-import { WRITE_SAVE } from '@/constants/localStorage';
+import { SubmitData, WRITE_SAVE } from '@/constants/default';
 import { setLocalStorage } from '@/utils/localStorage';
 
 export const saveSubmitData = (submitData: SubmitData) => {
   setLocalStorage({ key: WRITE_SAVE, value: { ...submitData, hashtag: [...submitData.hashtag] } });
 };
 
-export const diffLocalStorage = (submitData: SubmitData) => {
+const getEntireData = (submitData: SubmitData) => {
   const previousData = typeof window !== 'undefined' && localStorage.getItem(WRITE_SAVE);
+  const currentData = JSON.stringify({ ...submitData, hashtag: [...submitData.hashtag] });
+  return { previousData, currentData };
+};
+
+export const diffLocalStorage = (submitData: SubmitData) => {
+  const { previousData, currentData } = getEntireData(submitData);
   if (!previousData) {
     return true;
   }
-  const currentData = JSON.stringify({ ...submitData, hashtag: [...submitData.hashtag] });
   return currentData !== previousData;
 };
 
@@ -25,7 +29,6 @@ export const canSave = (submitData: SubmitData) => {
 };
 
 export const canRecall = (submitData: SubmitData) => {
-  const previousData = typeof window !== 'undefined' && localStorage.getItem(WRITE_SAVE);
-  const currentData = JSON.stringify({ ...submitData, hashtag: [...submitData.hashtag] });
+  const { previousData, currentData } = getEntireData(submitData);
   return !!previousData && currentData !== previousData;
 };
