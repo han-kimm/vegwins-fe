@@ -2,7 +2,7 @@
 
 import { MockComment } from '@/constants/mockComment';
 import { ChangeEvent, useState } from 'react';
-import AuthButton from '@/components/home_header/AuthCheckerButton';
+import AuthButton from '@/components/common/AuthButton';
 
 interface Props {
   sessionName?: string;
