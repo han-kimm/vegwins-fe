@@ -17,20 +17,19 @@ const AuthButton = () => {
 
   const googleAuth = () => {
     const { google } = window;
-    if (google) {
+    if ('Identity') {
       google.accounts.id.initialize({
         client_id: process.env.NEXT_PUBLIC_ID_GOOGLE,
         callback: async (response: any) => {
           // Here we call our Provider with the token provided by google
           alert('구글 로그인 성공');
         },
-        use_fedcm_for_prompt: true,
         itp_support: true,
-        auto_select: true,
+      });
+      google.accounts.id.prompt((re) => {
+        alert(JSON.stringify(re));
       });
     }
-
-    google.accounts.id.prompt();
   };
   const googleOneTap = () => {
     const current = document.querySelector('#googleAuth');
