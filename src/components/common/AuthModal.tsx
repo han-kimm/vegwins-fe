@@ -28,11 +28,9 @@ const makeGoogleURL = () => {
   const endPoint = 'https://accounts.google.com/o/oauth2/v2/auth';
   const config = {
     client_id: process.env.NEXT_PUBLIC_ID_GOOGLE!,
-    redirect_uri: 'http://localhost:3000/auth/google',
-    response_type: 'token',
-    scope: 'https://www.googleapis.com/auth/userinfo.profile',
-    include_granted_scopes: 'true',
-    state: 'pass-through value',
+    redirect_uri: 'http://localhost:8000/auth/google',
+    response_type: 'code',
+    scope: 'profile',
   };
   const configKey = Object.keys(config) as (keyof typeof config)[];
 
