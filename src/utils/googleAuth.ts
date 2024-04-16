@@ -1,3 +1,4 @@
+import { customFetch } from '@/utils/fetching';
 import toast from 'react-hot-toast';
 
 declare global {
@@ -10,10 +11,7 @@ const googleAuthPath = 'http://localhost:8000/auth/google';
 
 const authCallback = async (response: any) => {
   try {
-    const res = await fetch(googleAuthPath, {
-      method: 'POST',
-      body: JSON.stringify(response),
-    });
+    const res = await customFetch.post({ path: googleAuthPath, body: response });
     console.log(res);
     toast.success('구글 계정으로 로그인 완료!');
   } catch (e) {
