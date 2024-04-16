@@ -7,7 +7,7 @@ declare global {
   }
 }
 
-const googleAuthPath = 'http://localhost:8000/auth/google';
+const googleAuthPath = '/auth/google';
 
 const authCallback = async (response: any) => {
   try {
