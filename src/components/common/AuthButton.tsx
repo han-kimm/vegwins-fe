@@ -18,13 +18,18 @@ const AuthButton = () => {
   const googleAuth = () => {
     const { google } = window;
     const userAgent = window.navigator.userAgent.toLowerCase();
-    if (userAgent.includes('samsung')) {
-      google.accounts.oauth2.initCodeClient({
-        client_id: process.env.NEXT_PUBLIC_ID_GOOGLE,
-        scope: 'https://www.googleapis.com/auth/userinfo.profile',
+    if (!userAgent.includes('samsung')) {
+      console.log(65);
+      const client = google.accounts.oauth2.initCodeClient({
+        client_id: '818484339128-sors7er5dtp2kko9g3765q2gjh21ahvs.apps.googleusercontent.com',
+        scope: 'profile',
         ux_mode: 'popup',
-        redirect_uri: 'http://localhost:8000/auth/google',
+        callback: (response: any) => {
+          console.log(response);
+        },
+        state: 'vegwins',
       });
+      client.requestCode();
       return;
     }
     google.accounts.id.initialize({
