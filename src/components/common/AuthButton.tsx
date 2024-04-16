@@ -26,7 +26,7 @@ const AuthButton = () => {
         },
         itp_support: true,
       });
-      google.accounts.id.prompt((re) => {
+      google.accounts.id.prompt((re: any) => {
         alert(JSON.stringify(re));
       });
     }
