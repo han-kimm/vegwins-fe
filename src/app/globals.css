@@ -19,7 +19,7 @@
     @apply bg-black-0 text-black-100;
   }
 
-  body > div {
+  body > div:first-child {
     @apply mx-auto flex max-w-[50rem] flex-col shadow-lg;
   }
 }

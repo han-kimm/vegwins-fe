@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
+import { Toaster } from 'react-hot-toast';
 import './globals.css';
 
 export default function RootLayout({
@@ -12,6 +13,7 @@ export default function RootLayout({
       <body className={NotoSansKR.className}>
         {children}
         <div id="modal" />
+        <Toaster />
       </body>
     </html>
   );
