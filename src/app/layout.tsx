@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
-import { Toaster } from 'react-hot-toast';
+import { DefaultToastOptions, Toaster } from 'react-hot-toast';
 import './globals.css';
 
 export default function RootLayout({
@@ -13,7 +13,7 @@ export default function RootLayout({
       <body className={NotoSansKR.className}>
         {children}
         <div id="modal" />
-        <Toaster />
+        <Toaster toastOptions={toasterOptions} />
       </body>
     </html>
   );
@@ -26,6 +26,10 @@ const NotoSansKR = localFont({
     { path: '../../public/font/NotoSans_bold_sub.woff2', weight: '700', style: 'normal' },
   ],
 });
+
+const toasterOptions = {
+  className: 'text-16 font-medium',
+};
 
 const APP_NAME = '비긴즈';
 const APP_DEFAULT_TITLE = '함께 나아가는 비긴즈, vegins';

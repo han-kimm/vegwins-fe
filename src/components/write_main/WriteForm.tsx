@@ -5,6 +5,7 @@ import { getLocalStorage } from '@/utils/localStorage';
 import { canRecall, canSave, required, saveSubmitData } from '@/utils/writeUtils';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
+import toast from 'react-hot-toast';
 import WriteCategory from '@/components/write_main/WriteCategory';
 import WriteDescription from '@/components/write_main/WriteDescription';
 import WriteHashtag from '@/components/write_main/WriteHashtag';
@@ -18,8 +19,15 @@ const WriteForm = () => {
   const [reload, setReload] = useState(0);
 
   const handleSave = () => {
-    saveSubmitData(submitData);
-    setReload(reload + 1);
+    try {
+      saveSubmitData(submitData);
+      setReload(reload + 1);
+      toast.success('저장 완료!', {
+        position: 'bottom-center',
+      });
+    } catch {
+      toast.error('다시 시도해 주세요.');
+    }
   };
   const handleRecall = () => {
     const prev = getLocalStorage(WRITE_SAVE);
