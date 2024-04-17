@@ -9,7 +9,7 @@ const LinkWrite = async () => {
     <section className="flex w-full gap-12 px-40" aria-label="게시판 또는 문서작성으로 이동">
       <Link
         href={session ? '/write' : '/'}
-        className="transform-active flex grow items-start justify-between rounded-sm bg-white px-20 py-28 shadow-md"
+        className={`${session ? '' : 'active:bg-orange'} transform-active flex grow items-start justify-between rounded-sm bg-white px-20 py-28 shadow-md`}
       >
         <div>
           <p className="mb-28 text-start text-18 font-bold">문서 작성</p>
