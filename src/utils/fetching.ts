@@ -18,6 +18,7 @@ class Fetching {
         'content-type': 'application/json',
       },
       body: JSON.stringify(body),
+      credentials: 'include',
     });
     if (!resp.ok) {
       throw Error('response is not OK');
@@ -26,5 +27,6 @@ class Fetching {
     return res;
   }
 }
+const ajax = new Fetching();
 
-export const customFetch = new Fetching();
+export default ajax;

@@ -3,8 +3,8 @@
 import { INPUT_PLACEHODER, SP_KEYWORD } from '@/constants/default';
 import useChangeQuery from '@/hooks/useChangeQuery';
 import Image from 'next/image';
-import { FormEvent, Suspense, useEffect, useRef } from 'react';
-import IconReset from 'public/icon/reset.svg';
+import { ChangeEvent, FormEvent, Suspense, useEffect, useState } from 'react';
+import IconBackspace from 'public/icon/backspace.svg';
 
 const SearchBar = () => {
   return (
@@ -16,28 +16,32 @@ const SearchBar = () => {
 export default SearchBar;
 
 const SearchInput = () => {
-  const inputRef = useRef<HTMLInputElement>(null);
   const { changeQuery, searchParams } = useChangeQuery();
+  const initial = searchParams.get(SP_KEYWORD) ?? '';
+  const [value, setValue] = useState(initial);
 
   useEffect(() => {
-    const initial = searchParams.get(SP_KEYWORD);
-    inputRef.current!.value = initial ?? '';
-  }, [searchParams]);
+    setValue(initial);
+  }, [initial]);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  };
 
   const resetKeyword = () => {
-    inputRef.current!.value = '';
-    changeQuery({ name: SP_KEYWORD });
+    setValue('');
   };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    changeQuery({ name: SP_KEYWORD, value: inputRef.current?.value });
+    changeQuery({ name: SP_KEYWORD, value });
   };
 
   return (
     <form onSubmit={handleSubmit} className="relative w-full" aria-label="검색어 입력">
       <input
-        ref={inputRef}
+        value={value}
+        onChange={handleChange}
         type="search"
         placeholder={INPUT_PLACEHODER}
         className="h-48 w-full rounded-full bg-white pl-48 text-16 font-bold shadow-sm"
@@ -50,17 +54,15 @@ const SearchInput = () => {
         className="absolute left-16 top-1/2 -translate-y-1/2"
         aria-hidden={true}
       />
-      {!!inputRef.current?.value && (
-        <button
-          type="button"
-          onClick={resetKeyword}
-          disabled={!inputRef.current?.value}
-          className={`absolute right-16 top-1/2 -translate-y-1/2 ${inputRef.current?.value ? 'text-black-80' : 'text-black-40'}`}
-          aria-label="검색어 초기화 버튼"
-        >
-          <IconReset />
-        </button>
-      )}
+      <button
+        type="button"
+        onClick={resetKeyword}
+        disabled={!value}
+        className={`absolute right-16 top-1/2 -translate-y-1/2 first:h-16 first:w-16 ${value ? 'first: text-black-80' : 'text-black-40'}`}
+        aria-label="검색어 지우기"
+      >
+        <IconBackspace />
+      </button>
     </form>
   );
 };

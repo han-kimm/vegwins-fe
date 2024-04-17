@@ -1,4 +1,5 @@
-import { customFetch } from '@/utils/fetching';
+import ajax from '@/utils/fetching';
+import { setLocalStorage } from '@/utils/localStorage';
 import toast from 'react-hot-toast';
 
 declare global {
@@ -11,8 +12,9 @@ const googleAuthPath = '/auth/google';
 
 const authCallback = async (response: any) => {
   try {
-    const res = await customFetch.post({ path: googleAuthPath, body: response });
-    console.log(res);
+    const res: { refreshToken: string; nickname: string } = await ajax.post({ path: googleAuthPath, body: response });
+    setLocalStorage({ key: 'v_rt', value: res.refreshToken });
+
     toast.success('구글 계정으로 로그인 완료!');
   } catch (e) {
     console.error(e);
