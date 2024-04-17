@@ -3,6 +3,7 @@
 import { MockComment } from '@/constants/mockComment';
 import { ChangeEvent, useState } from 'react';
 import AuthButton from '@/components/common/AuthButton';
+import AuthSign from '@/components/common/AuthSign';
 
 interface Props {
   sessionName?: string;
@@ -18,13 +19,8 @@ const UsersCommentInput = ({ sessionName, recomment }: Props) => {
   return (
     <div className="relative w-full animate-fadeIn">
       <div className="mb-8 flex items-baseline justify-between">
-        <h2 className="relative z-0 flex flex-wrap items-baseline gap-4 px-12 text-14 font-bold">
-          {sessionName ?? (
-            <>
-              <span>로그인이 필요합니다.</span>
-              <div className="absolute bottom-0 left-0 -z-10 h-[0.6rem] w-full bg-orange" />
-            </>
-          )}
+        <h2 className="flex flex-wrap items-baseline gap-4 text-14 font-bold">
+          {sessionName ?? <AuthSign />}
           {sessionName && recomment && <span className="rounded-full bg-black-20 px-12">{recomment?.nickname}님께 답글</span>}
         </h2>
         <button
