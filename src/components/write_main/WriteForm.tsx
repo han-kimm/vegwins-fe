@@ -14,6 +14,10 @@ import WriteSave from '@/components/write_main/WriteSave';
 import WriteSubmit from '@/components/write_main/WriteSubmit';
 import WriteTitle from '@/components/write_main/WriteTitle';
 
+const toastPosition = {
+  position: 'bottom-center',
+} as const;
+
 const WriteForm = () => {
   const [submitData, setSubmitData] = useState(DEFAULT_SUBMIT);
   const [reload, setReload] = useState(0);
@@ -22,27 +26,28 @@ const WriteForm = () => {
     try {
       saveSubmitData(submitData);
       setReload(reload + 1);
-      toast.success('저장 완료!', {
-        position: 'bottom-center',
-      });
+      toast.success('임시 저장 완료!', toastPosition);
     } catch {
-      toast.error('다시 시도해 주세요.');
+      toast.error('다시 시도해 주세요.', toastPosition);
     }
   };
   const handleRecall = () => {
     const prev = getLocalStorage(WRITE_SAVE);
     if (prev) {
       setSubmitData({ ...prev, hashtag: new Set(prev.hashtag) });
+      toast.success('불러 오기 성공!', toastPosition);
+      return;
     }
+    toast.error('다시 시도해 주세요.', toastPosition);
   };
 
   const router = useRouter();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (!required(submitData)) {
-      return;
-    }
+
+    try {
+    } catch (e) {}
     router.push('/');
   };
 

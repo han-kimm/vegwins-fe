@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useEffect, useState } from 'react';
 import IconRecall from 'public/icon/recall.svg';
 import IconSave from 'public/icon/save.svg';
 
@@ -10,6 +10,12 @@ interface Props {
 }
 
 const WriteSave = memo(function WriteSave({ canSave, canRecall, handleSave, handleRecall }: Props) {
+  const [recall, setRecall] = useState(false);
+
+  useEffect(() => {
+    setRecall(canRecall);
+  }, [canRecall]);
+
   return (
     <div className="flex gap-20 text-18">
       <button
@@ -24,8 +30,8 @@ const WriteSave = memo(function WriteSave({ canSave, canRecall, handleSave, hand
       <button
         type="button"
         onClick={handleRecall}
-        disabled={!canRecall}
-        className={`${canRecall ? 'transform-active border-black-80' : 'border-black-40 text-black-40'} flex-center grow gap-12 rounded-sm border py-12 font-bold`}
+        disabled={!recall}
+        className={`${recall ? 'transform-active border-black-80' : 'border-black-40 text-black-40'} flex-center grow gap-12 rounded-sm border py-12 font-bold`}
       >
         <IconRecall />
         불러오기
