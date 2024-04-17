@@ -1,5 +1,5 @@
 import useModalScroll from '@/hooks/useModalScroll';
-import Link from 'next/link';
+import { popup } from '@/utils/googleAuth';
 import ModalFrame from '@/components/common/ModalFrame';
 import IconGoogle from 'public/icon/google.svg';
 
@@ -12,32 +12,14 @@ const AuthModal = ({ closeModal }: Props) => {
   return (
     <ModalFrame closeModal={closeModal}>
       <h2 className="text-18 font-bold">로그인</h2>
-      <Link
-        href={makeGoogleURL()}
+      <button
+        onClick={popup}
         className="flex-center transform-active my-auto h-40 gap-12 rounded-full border border-black-20 bg-black-0 text-14 font-medium"
       >
         <IconGoogle />
         구글 계정으로 로그인
-      </Link>
+      </button>
     </ModalFrame>
   );
 };
 export default AuthModal;
-
-const makeGoogleURL = () => {
-  const endPoint = 'https://accounts.google.com/o/oauth2/v2/auth';
-  const config = {
-    client_id: process.env.NEXT_PUBLIC_ID_GOOGLE!,
-    redirect_uri: 'http://localhost:8000/auth/google',
-    response_type: 'code',
-    scope: 'profile',
-  };
-  const configKey = Object.keys(config) as (keyof typeof config)[];
-
-  const params = new URLSearchParams();
-  for (const key of configKey) {
-    params.set(key, config[key]);
-  }
-  const newParams = params.toString();
-  return endPoint + '?' + newParams;
-};

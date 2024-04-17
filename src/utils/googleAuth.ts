@@ -23,21 +23,7 @@ const authCallback = async (response: any) => {
   }
 };
 
-const oneTap = () => {
-  const { google } = window;
-  if (!google) {
-    return;
-  }
-  google.accounts.id.initialize({
-    client_id: process.env.NEXT_PUBLIC_ID_GOOGLE,
-    callback: authCallback,
-    itp_support: true,
-    use_fedcm_for_prompt: true,
-  });
-  google.accounts.id.prompt();
-};
-
-const popup = () => {
+export const popup = () => {
   const { google } = window;
   if (!google) {
     return;
@@ -52,26 +38,31 @@ const popup = () => {
   client.requestCode();
 };
 
-const oneTabOrPopup = async () => {
-  const userAgent = window.navigator.userAgent.toLowerCase();
-  if (userAgent.includes('samsung')) {
-    popup();
+const oneTap = () => {
+  const { google } = window;
+  if (!google) {
     return;
   }
-  oneTap();
+  google.accounts.id.initialize({
+    client_id: process.env.NEXT_PUBLIC_ID_GOOGLE,
+    callback: authCallback,
+    itp_support: true,
+    use_fedcm_for_prompt: true,
+  });
+  google.accounts.id.prompt();
 };
 
 export const googleAuth = () => {
   const current = document.querySelector('#googleAuth');
   if (current) {
-    oneTabOrPopup();
+    oneTap();
     return;
   }
   const script = document.createElement('script');
   script.id = 'googleAuth';
   script.src = 'https://accounts.google.com/gsi/client';
   script.async = true;
-  script.onload = oneTabOrPopup;
+  script.onload = oneTap;
 
   document.head.append(script);
 };

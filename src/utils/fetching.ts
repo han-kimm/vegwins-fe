@@ -19,10 +19,10 @@ class Fetching {
       body: JSON.stringify(body),
       credentials: 'include',
     });
-    if (!resp.ok) {
-      throw Error('response is not OK');
-    }
     const res = await resp.json();
+    if (!resp.ok) {
+      throw Error(res.error);
+    }
     return res;
   }
 }
