@@ -1,9 +1,8 @@
 type handlerParams = { path: string; body?: any };
 
 class Fetching {
-  #endpoint = 'https://localhost:8000';
   async get({ path }: handlerParams) {
-    const resp = await fetch(this.#endpoint + path);
+    const resp = await fetch(path);
     if (!resp.ok) {
       throw Error('response is not OK');
     }
@@ -11,7 +10,7 @@ class Fetching {
     return res;
   }
   async post({ path, body }: handlerParams) {
-    const resp = await fetch(this.#endpoint + path, {
+    const resp = await fetch(path, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',

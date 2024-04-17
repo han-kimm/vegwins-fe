@@ -1,16 +1,16 @@
 'use server';
 
+import { ResponseCookie } from 'next/dist/compiled/@edge-runtime/cookies';
 import { cookies } from 'next/headers';
 
-interface Args {
-  key: string;
+interface Args extends ResponseCookie {
   value: any;
-  maxAge?: number;
 }
 
-export const setCookie = ({ key, value, maxAge }: Args) => {
+export const setCookie = ({ ...args }: Args) => {
+  const { httpOnly, secure, sameSite } = args;
   const cookieStore = cookies();
-  cookieStore.set(key, JSON.stringify(value), { maxAge: maxAge ?? 1000 * 60 * 10 });
+  cookieStore.set(args.name, JSON.stringify(args.value), { maxAge: (args.maxAge ?? 60 * 60) * 1000, httpOnly, secure, sameSite });
 };
 
 export const getCookie = (key: string) => {

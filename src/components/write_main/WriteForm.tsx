@@ -1,6 +1,7 @@
 'use client';
 
 import { DEFAULT_SUBMIT, WRITE_SAVE } from '@/constants/default';
+import ajax from '@/utils/fetching';
 import { getLocalStorage } from '@/utils/localStorage';
 import { canRecall, canSave, required, saveSubmitData } from '@/utils/writeUtils';
 import { useRouter } from 'next/navigation';
@@ -43,12 +44,12 @@ const WriteForm = () => {
 
   const router = useRouter();
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     try {
+      const post = await ajax.post({ path: '/api/paper', body: { ...submitData, hashtag: [...submitData.hashtag] } });
     } catch (e) {}
-    router.push('/');
   };
 
   return (
