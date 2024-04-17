@@ -11,7 +11,6 @@ class Fetching {
     return res;
   }
   async post({ path, body }: handlerParams) {
-    alert(JSON.stringify(body));
     const resp = await fetch(this.#endpoint + path, {
       method: 'POST',
       headers: {

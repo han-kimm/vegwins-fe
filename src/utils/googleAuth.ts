@@ -1,3 +1,4 @@
+import { setCookie } from '@/utils/cookie';
 import ajax from '@/utils/fetching';
 import { setLocalStorage } from '@/utils/localStorage';
 import toast from 'react-hot-toast';
@@ -8,14 +9,14 @@ declare global {
   }
 }
 
-const googleAuthPath = '/auth/google';
+const googleAuthPath = '/api/auth/google';
 
 const authCallback = async (response: any) => {
   try {
     const res: { refreshToken: string; nickname: string } = await ajax.post({ path: googleAuthPath, body: response });
-    setLocalStorage({ key: 'v_rt', value: res.refreshToken });
-
-    toast.success('구글 계정으로 로그인 완료!');
+    setLocalStorage({ key: 'v_rt', value: res.refreshToken, maxAge: 60 * 60 * 24 });
+    setCookie({ key: 'v_s', value: { isAuth: true, nickname: res.nickname }, maxAge: 60 * 60 * 24 });
+    toast.success(`${res.nickname}님 안녕하세요!`);
   } catch (e) {
     console.error(e);
     toast.error('다시 시도해 주세요.');
