@@ -1,7 +1,7 @@
 type handlerParams = { path: string; body?: any };
 
 class Fetching {
-  #endpoint = 'http://localhost:8000';
+  #endpoint = 'https://localhost:8000';
   async get({ path }: handlerParams) {
     const resp = await fetch(this.#endpoint + path);
     if (!resp.ok) {
