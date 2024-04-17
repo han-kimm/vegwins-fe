@@ -1,16 +1,14 @@
 'use client';
 
 import { MockComment } from '@/constants/mockComment';
+import { Session } from '@/types/session';
 import { useState } from 'react';
 import UsersCommentInput from '@/components/doc_main/UsersCommentInput';
 import UsersCommentItem from '@/components/doc_main/UsersCommentItem';
 
 interface Props {
   data: MockComment;
-  session: {
-    id: string;
-    name: string;
-  } | null;
+  session: Session;
 }
 
 const UsersComment = ({ data, session }: Props) => {
@@ -21,7 +19,7 @@ const UsersComment = ({ data, session }: Props) => {
       {data.map((comment) => (
         <UsersCommentItem key={comment.id} comment={comment} session={session} recommentId={recomment?.id} setRecomment={setRecomment} />
       ))}
-      <UsersCommentInput sessionName={session?.name} recomment={data.find((v) => v.id === recomment?.id) ?? null} />
+      <UsersCommentInput sessionName={session?.nickname} recomment={data.find((v) => v.id === recomment?.id) ?? null} />
     </article>
   );
 };

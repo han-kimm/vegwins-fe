@@ -1,13 +1,11 @@
 import { MockComment } from '@/constants/mockComment';
+import { Session } from '@/types/session';
 import { timeDiff } from '@/utils/timeDiff';
 import { Dispatch, SetStateAction } from 'react';
 
 interface Props {
   comment: MockComment[number];
-  session: {
-    id: string;
-    name: string;
-  } | null;
+  session: Session;
   recommentId?: string;
   setRecomment?: Dispatch<SetStateAction<MockComment[number] | null>>;
   r?: boolean;
@@ -18,12 +16,13 @@ const UsersCommentItem = ({ comment, session, recommentId, setRecomment, r }: Pr
   const handleClick = () => setRecomment?.((prev) => (prev?.id === comment.id ? null : comment));
 
   return (
-    <div key={comment.id} className={`${r ? 'my-8 ml-12 border-l pl-12' : 'border-b pb-12'} flex flex-col`}>
-      <div className="flex items-baseline gap-8">
-        <h3 className="mb-4 text-center text-14 font-medium">{comment.nickname}</h3>
+    <div key={comment.id} className={`${r ? 'my-8 ml-12 border-l pl-12' : 'border-b border-black-20 pb-12'} flex flex-col`}>
+      <div className="flex items-center gap-8">
+        {/* <div className="h-4 w-4 rounded-full bg-black-100" /> */}
+        <h3 className="text-center text-14 font-bold">{comment.nickname}</h3>
         <span className="text-black-60">{timeDiff(comment.createdAt)}</span>
         {r || (
-          <button onClick={handleClick} disabled={!session} className={`${isSelected && 'font-medium text-sky'}`}>
+          <button onClick={handleClick} disabled={!session} className={`${isSelected && 'text-sky'} font-bold`}>
             {isSelected ? '답글 취소' : '답글 달기'}
           </button>
         )}

@@ -18,14 +18,18 @@ const UsersCommentInput = ({ sessionName, recomment }: Props) => {
   return (
     <div className="relative w-full animate-fadeIn">
       <div className="mb-8 flex items-baseline justify-between">
-        <h2 className="relative z-0 w-max px-12 text-center text-14 font-medium">
-          {sessionName ?? '로그인이 필요합니다.'}
-          {sessionName && recomment && <span>{'  → ' + recomment?.nickname}</span>}
-          <div className="absolute bottom-0 left-0 -z-10 h-[0.6rem] w-full bg-orange" />
+        <h2 className="relative z-0 flex flex-wrap items-baseline gap-4 px-12 text-14 font-bold">
+          {sessionName ?? (
+            <>
+              <span>로그인이 필요합니다.</span>
+              <div className="absolute bottom-0 left-0 -z-10 h-[0.6rem] w-full bg-orange" />
+            </>
+          )}
+          {sessionName && recomment && <span className="rounded-full bg-black-20 px-12">{recomment?.nickname}님께 답글</span>}
         </h2>
         <button
           disabled={!value}
-          className={`${value ? 'bg-black-80 text-white' : 'border-black-40 text-black-40'} rounded-[0.8rem] border px-8 py-4 text-12`}
+          className={`${value ? 'bg-black-80 text-white' : 'border-black-40 text-black-40'} shrink-0 rounded-[0.8rem] border px-8 py-4 text-12`}
         >
           작성 완료
         </button>
