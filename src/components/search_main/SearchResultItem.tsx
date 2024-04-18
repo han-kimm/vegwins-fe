@@ -4,10 +4,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import ItemRating from '@/components/common/ItemRating';
 
-const SearchResultItem = ({ _id, imageUrl, title, hashtag, rated, end }: SearchItem) => {
+const SearchResultItem = ({ id, imageUrl, title, hashtag, rated, end }: SearchItem) => {
   return (
     <Link
-      href={`/doc/${_id}`}
+      href={`/doc/${id}`}
       className={`${end && 'relative bg-black-0 [&>div]:opacity-30'} flex-center transform-active h-max w-full animate-fadeIn gap-28 p-12`}
     >
       <div className="relative h-100 w-100 shrink-0">

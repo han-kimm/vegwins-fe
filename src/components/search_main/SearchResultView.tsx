@@ -29,7 +29,7 @@ const SearchResultView = ({ data }: Props) => {
           role="group"
         >
           {data.map((data, i) => (
-            <Fragment key={data._id}>
+            <Fragment key={data.id}>
               {!i || <hr className="border-black-60" />}
               <SearchResultItem {...data} />
             </Fragment>
