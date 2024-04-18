@@ -1,21 +1,13 @@
 import { DEFAULT_IMAGE } from '@/constants/default';
+import { SearchItem } from '@/types/data';
 import Image from 'next/image';
 import Link from 'next/link';
 import ItemRating from '@/components/common/ItemRating';
 
-interface Props {
-  id: string;
-  imageUrl?: string;
-  title: string;
-  hashtag?: string[];
-  rating?: number | null;
-  end?: boolean;
-}
-
-const SearchResultItem = ({ id, imageUrl, title, hashtag, rating, end }: Props) => {
+const SearchResultItem = ({ _id, imageUrl, title, hashtag, rated, end }: SearchItem) => {
   return (
     <Link
-      href={`/doc/${id}`}
+      href={`/doc/${_id}`}
       className={`${end && 'relative bg-black-0 [&>div]:opacity-30'} flex-center transform-active h-max w-full animate-fadeIn gap-28 p-12`}
     >
       <div className="relative h-100 w-100 shrink-0">
@@ -23,7 +15,7 @@ const SearchResultItem = ({ id, imageUrl, title, hashtag, rating, end }: Props) 
       </div>
       <div className="flex h-100 flex-grow justify-between gap-12 py-12">
         <ItemTitle title={title.length > 12 ? title.slice(0, 12) + '...' : title} hashtag={hashtag} />
-        <RatingChecker rating={rating} />
+        <RatingChecker rated={rated} />
       </div>
       {end && <p className="absolute left-32 text-18 font-bold">판매종료</p>}
     </Link>
@@ -31,7 +23,7 @@ const SearchResultItem = ({ id, imageUrl, title, hashtag, rating, end }: Props) 
 };
 export default SearchResultItem;
 
-const ItemTitle = ({ title, hashtag }: Pick<Props, 'title' | 'hashtag'>) => {
+const ItemTitle = ({ title, hashtag }: Pick<SearchItem, 'title' | 'hashtag'>) => {
   return (
     <div className="flex h-full flex-col justify-between">
       <h2 className="text-18 font-bold">{title}</h2>
@@ -48,9 +40,9 @@ const ItemTitle = ({ title, hashtag }: Pick<Props, 'title' | 'hashtag'>) => {
   );
 };
 
-const RatingChecker = ({ rating }: Pick<Props, 'rating'>) => {
-  return rating ? (
-    <ItemRating rating={rating} />
+const RatingChecker = ({ rated }: Pick<SearchItem, 'rated'>) => {
+  return rated ? (
+    <ItemRating rating={rated} />
   ) : (
     <p className="text-10 text-center font-medium text-black-40">
       평가하기

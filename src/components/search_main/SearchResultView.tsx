@@ -1,15 +1,15 @@
 'use client';
 
 import { SP_KEYWORD } from '@/constants/default';
-import { MockSearch } from '@/constants/mockSearch';
 import useChangeQuery from '@/hooks/useChangeQuery';
+import { SearchItem } from '@/types/data';
 import { Fragment } from 'react';
 import SearchResultEmpty from '@/components/search_main/SearchResultEmpty';
 import SearchResultItem from '@/components/search_main/SearchResultItem';
 import SearchResultReset from '@/components/search_main/SearchResultReset';
 
 interface Props {
-  data: MockSearch;
+  data: SearchItem[];
 }
 
 const SearchResultView = ({ data }: Props) => {
@@ -29,7 +29,7 @@ const SearchResultView = ({ data }: Props) => {
           role="group"
         >
           {data.map((data, i) => (
-            <Fragment key={data.id}>
+            <Fragment key={data._id}>
               {!i || <hr className="border-black-60" />}
               <SearchResultItem {...data} />
             </Fragment>
