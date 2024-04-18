@@ -9,7 +9,7 @@ declare global {
   }
 }
 
-const googleAuthPath = '/api/auth/google';
+const googleAuthPath = '/auth/google';
 const maxAge = 60 * 60 * 24;
 
 const authCallback = async (response: any) => {

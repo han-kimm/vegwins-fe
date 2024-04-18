@@ -1,4 +1,4 @@
-import { setCookie } from '@/utils/cookie';
+import { getCookie, setCookie } from '@/utils/cookie';
 import { getLocalStorage } from '@/utils/localStorage';
 
 type Fetch = typeof fetch;
@@ -13,8 +13,16 @@ interface HandlerParams extends RequestInit {
 type ApiHandler = (params: HandlerParams) => Promise<any>;
 
 class Fetching {
+  #baseUrl = 'http://localhost:3000/api';
   fetchJSON = async (...params: Parameters<Fetch>) => {
-    return await fetch(...params)
+    let accessToken;
+    if (typeof window === 'undefined') {
+      accessToken = await getCookie('v_at');
+    }
+    return await fetch(this.#baseUrl + params[0], {
+      ...params[1],
+      ...(typeof window !== 'undefined' ? {} : { headers: { Cookie: `v_at=${accessToken}` } }),
+    })
       .then((resp) => resp.json())
       .catch((err) => console.error(err));
   };
@@ -23,7 +31,7 @@ class Fetching {
     if (!refreshToken) {
       throw Error('리프레시 토큰이 없습니다.');
     }
-    const { accessToken } = await this.post({ path: '/api/auth/refresh', body: { refreshToken } });
+    const { accessToken } = await this.post({ path: '/auth/refresh', body: { refreshToken } });
     setCookie({ name: 'v_at', value: accessToken, httpOnly: true, secure: true, sameSite: 'strict' });
   };
 

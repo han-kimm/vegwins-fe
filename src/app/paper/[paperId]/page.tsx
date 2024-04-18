@@ -8,11 +8,10 @@ import MyRating from '@/components/paper_main/MyRating';
 import Share from '@/components/paper_main/Share';
 import Users from '@/components/paper_main/Users';
 
-const Paper = async ({ params }: { params: { [key: string]: string } }) => {
+const Paper = async ({ params }: { params: { paperId: string } }) => {
   const { paperId } = params;
-  // Data fetching...
-  const resp = await ajax.get({ path: `/api/paper/${paperId}` });
-  console.log(resp);
+  const data = await ajax.get({ path: `/paper/${paperId}`, cache: 'no-store' });
+  console.log(data);
   return (
     <div className="max-h-max min-h-dvh px-16 pb-28 pt-16">
       <header className="mb-12 flex justify-between">
@@ -20,7 +19,7 @@ const Paper = async ({ params }: { params: { [key: string]: string } }) => {
         <HomeLink isPaper />
       </header>
       <main className="flex flex-grow animate-fadeIn flex-col gap-24">
-        <Information data={MOCK_DOC} />
+        <Information data={data} />
         <div className="flex gap-20">
           <MyRating data={MOCK_DOC} paperId={paperId} />
           <Share />

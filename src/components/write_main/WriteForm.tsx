@@ -48,22 +48,24 @@ const WriteForm = () => {
     e.preventDefault();
 
     try {
-      const post = await ajax.post({ path: '/api/paper', body: { ...submitData, hashtag: [...submitData.hashtag] } });
-      if (post) {
-        router.push(post.paperId);
+      const post = await ajax.post({ path: '/paper', body: { ...submitData, hashtag: [...submitData.hashtag] } });
+      if (!post.error) {
+        router.push(`/paper/${post.paperId}`);
       }
-    } catch (e) {}
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex w-full flex-col [&>div:not(:first-child)]:mt-40">
+    <form className="flex w-full flex-col [&>div:not(:first-child)]:mt-40">
       <WriteImage image={submitData.image} setImage={setSubmitData} />
       <WriteTitle title={submitData.title} setTitle={setSubmitData} />
       <WriteCategory category={submitData.category} setCategory={setSubmitData} />
       <WriteHashtag hashtag={submitData.hashtag} setHashtag={setSubmitData} />
       <WriteDescription description={submitData.description} setDescription={setSubmitData} />
       <WriteSave canSave={canSave(submitData)} canRecall={canRecall(submitData)} handleSave={handleSave} handleRecall={handleRecall} />
-      <WriteSubmit required={required(submitData)} />
+      <WriteSubmit required={required(submitData)} handleSubmit={handleSubmit} />
     </form>
   );
 };

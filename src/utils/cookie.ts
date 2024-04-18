@@ -8,12 +8,22 @@ interface Args extends ResponseCookie {
 }
 
 export const setCookie = ({ ...args }: Args) => {
-  const { httpOnly, secure, sameSite, path } = args;
+  const { httpOnly, secure, sameSite, path, value } = args;
   const cookieStore = cookies();
-  cookieStore.set(args.name, JSON.stringify(args.value), { maxAge: args.maxAge ?? 60 * 60, httpOnly, secure, sameSite, path });
+  cookieStore.set(args.name, typeof value === 'string' ? value : JSON.stringify(value), {
+    maxAge: args.maxAge ?? 60 * 60,
+    httpOnly,
+    secure,
+    sameSite,
+    path,
+  });
 };
 
 export const getCookie = (key: string) => {
   const cookieStore = cookies();
-  return JSON.parse(cookieStore.get(key)?.value ?? 'null');
+  const value = cookieStore.get(key)?.value;
+  if (!value) {
+    return null;
+  }
+  return value[0] === '{' ? JSON.parse(value) : value;
 };

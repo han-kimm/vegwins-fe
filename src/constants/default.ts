@@ -2,13 +2,15 @@ import { Dispatch, SetStateAction } from 'react';
 
 export const DEFAULT_IMAGE = '/image/default.webp';
 export const INPUT_PLACEHODER = "'검색어' 또는 '#특징'";
-export const LABEL: { [key: string]: string } = {
+export const LABEL = {
   imageUrl: '',
   title: '문서명',
   category: '카테고리',
   hashtag: '해시태그',
   description: '설명',
-};
+} as const;
+
+export const LABEL_KEY = Object.keys(LABEL) as (keyof typeof LABEL)[];
 
 export const SP_KEYWORD = 'k';
 export const SP_CATEGORY = 'c';

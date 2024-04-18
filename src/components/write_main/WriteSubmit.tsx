@@ -1,16 +1,16 @@
 import dynamic from 'next/dynamic';
-import { memo, useRef, useState } from 'react';
+import { FormEvent, memo, useRef, useState } from 'react';
 import IconUpload from 'public/icon/upload.svg';
 
 const WriteSubmitModal = dynamic(() => import('@/components/write_main/WriteSubmitModal'), { ssr: false });
 
 interface Props {
   required: boolean;
+  handleSubmit: (e: FormEvent) => void;
 }
 
-const WriteSubmit = memo(function WriteSubmit({ required }: Props) {
+const WriteSubmit = memo(function WriteSubmit({ required, handleSubmit }: Props) {
   const [modalOpen, setModalOpen] = useState(false);
-  const buttenRef = useRef<HTMLButtonElement>(null);
 
   return (
     <>
@@ -23,8 +23,7 @@ const WriteSubmit = memo(function WriteSubmit({ required }: Props) {
         <IconUpload />
         작성 완료
       </button>
-      <button ref={buttenRef} hidden />
-      {modalOpen && <WriteSubmitModal closeModal={() => setModalOpen(false)} buttonRef={buttenRef} />}
+      {modalOpen && <WriteSubmitModal closeModal={() => setModalOpen(false)} handleSubmit={handleSubmit} />}
     </>
   );
 });
