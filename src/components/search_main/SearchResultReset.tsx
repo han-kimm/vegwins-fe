@@ -1,12 +1,10 @@
-import { SP_KEYWORD } from '@/constants/default';
-import useChangeQuery from '@/hooks/useChangeQuery';
+import Link from 'next/link';
 
 const SearchResultReset = () => {
-  const { changeQuery } = useChangeQuery();
   return (
-    <button onClick={() => changeQuery({ name: SP_KEYWORD })} type="reset" className="ml-8 font-bold text-sky">
-      검색어 초기화
-    </button>
+    <Link href="/search" type="reset" className="ml-8 font-bold text-sky">
+      모든 검색 초기화
+    </Link>
   );
 };
 export default SearchResultReset;

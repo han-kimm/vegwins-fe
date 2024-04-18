@@ -8,15 +8,15 @@ import MyRatingSelector from '@/components/doc_main/MyRatingSelector';
 
 interface Props {
   data: MockDoc;
-  docId: string;
+  paperId: string;
 }
 
-const MyRating = ({ data, docId }: Props) => {
+const MyRating = ({ data, paperId }: Props) => {
   const [rating, setRating] = useState(-1);
   // Data Fetching...
 
   useEffect(() => {
-    setRating(getLocalStorage(`r${docId}`) ?? -1);
+    setRating(getLocalStorage(`r${paperId}`) ?? -1);
   }, []);
 
   return (

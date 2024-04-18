@@ -4,16 +4,16 @@ import { CATEGORY_KEY } from '@/constants/category';
 import { SP_CATEGORY } from '@/constants/default';
 import useChangeQuery from '@/hooks/useChangeQuery';
 import { useDraggable } from '@/hooks/useDragScroll';
-import { Suspense, useRef, useState } from 'react';
+import { Suspense, memo, useRef, useState } from 'react';
 import CategorySelectorItem from '@/components/search_header/CategorySelectorItem';
 
-const CategorySelector = () => {
+const CategorySelector = memo(function CategorySelector() {
   return (
     <Suspense>
       <CategorySelect />
     </Suspense>
   );
-};
+});
 export default CategorySelector;
 
 const CategorySelect = () => {

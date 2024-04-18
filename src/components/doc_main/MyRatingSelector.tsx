@@ -8,11 +8,11 @@ interface Props {
   setRating: (rating: number) => void;
 }
 const MyRatingSelector = ({ rating, setRating }: Props) => {
-  const { docId } = useParams();
+  const { paperId } = useParams();
 
   const setRatingLocalStorage = (status: number) => {
     setRating(rating === status ? -1 : status);
-    setLocalStorage({ key: `r${docId}`, value: rating === status ? -1 : status });
+    setLocalStorage({ key: `r${paperId}`, value: rating === status ? -1 : status });
   };
   return (
     <div className="flex w-full justify-evenly" role="group" aria-label="평가 고르기">

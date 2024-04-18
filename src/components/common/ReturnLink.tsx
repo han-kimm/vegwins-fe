@@ -1,9 +1,7 @@
 'use client';
 
-import { PREVIOUS_PATH } from '@/constants/default';
-import { getLocalStorage } from '@/utils/localStorage';
 import Image from 'next/image';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 interface Props {
   href: string;
@@ -12,15 +10,17 @@ interface Props {
   reverse?: boolean;
 }
 const ReturnLink = ({ href, text, icon, reverse }: Props) => {
-  const previousPath = getLocalStorage(PREVIOUS_PATH);
-
+  const router = useRouter();
+  const handleClick = () => {
+    document.referrer ? router.back() : router.push(href);
+  };
   return (
-    <Link href={previousPath ?? href} className={`${reverse && 'flex-row-reverse'} flex-center gap-12 text-16 font-medium`}>
+    <button onClick={handleClick} className={`${reverse && 'flex-row-reverse'} flex-center gap-12 text-16 font-medium`}>
       <div className="relative mt-4 h-24 w-12">
         <Image fill src={`/icon/${icon}.svg`} alt="" aria-hidden={true} />
       </div>
       {text}
-    </Link>
+    </button>
   );
 };
 export default ReturnLink;

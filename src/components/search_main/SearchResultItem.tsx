@@ -7,7 +7,7 @@ import ItemRating from '@/components/common/ItemRating';
 const SearchResultItem = ({ id, imageUrl, title, hashtag, rated, end }: SearchItem) => {
   return (
     <Link
-      href={`/doc/${id}`}
+      href={`/paper/${id}`}
       className={`${end && 'relative bg-black-0 [&>div]:opacity-30'} flex-center transform-active h-max w-full animate-fadeIn gap-28 p-12`}
     >
       <div className="relative h-100 w-100 shrink-0">

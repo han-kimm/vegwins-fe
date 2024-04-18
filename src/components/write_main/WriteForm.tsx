@@ -49,6 +49,9 @@ const WriteForm = () => {
 
     try {
       const post = await ajax.post({ path: '/api/paper', body: { ...submitData, hashtag: [...submitData.hashtag] } });
+      if (post) {
+        router.push(post.paperId);
+      }
     } catch (e) {}
   };
 

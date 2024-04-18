@@ -1,10 +1,10 @@
 'use client';
 
 import useDebounce from '@/hooks/useDebounce';
-import { useCallback, useEffect, useState } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 import IconArrowUp from 'public/icon/arrow-up.svg';
 
-const LiftingButton = () => {
+const LiftingButton = memo(function LiftingButton() {
   const [isScroll, setIsScroll] = useState(false);
 
   const handleScroll = useDebounce((e) => {
@@ -29,5 +29,5 @@ const LiftingButton = () => {
       <IconArrowUp />
     </button>
   ) : null;
-};
+});
 export default LiftingButton;

@@ -3,16 +3,16 @@
 import { INPUT_PLACEHODER, SP_KEYWORD } from '@/constants/default';
 import useChangeQuery from '@/hooks/useChangeQuery';
 import Image from 'next/image';
-import { ChangeEvent, FormEvent, Suspense, useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, Suspense, memo, useEffect, useState } from 'react';
 import IconBackspace from 'public/icon/backspace.svg';
 
-const SearchBar = () => {
+const SearchBar = memo(function SearchBar() {
   return (
     <Suspense>
       <SearchInput />
     </Suspense>
   );
-};
+});
 export default SearchBar;
 
 const SearchInput = () => {

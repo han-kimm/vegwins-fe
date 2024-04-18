@@ -6,6 +6,7 @@ type Fetch = typeof fetch;
 interface HandlerParams extends RequestInit {
   path: string;
   body?: any;
+  revalidate?: number;
   queryKey?: string[];
 }
 
@@ -26,8 +27,8 @@ class Fetching {
     setCookie({ name: 'v_at', value: accessToken, httpOnly: true, secure: true, sameSite: 'strict' });
   };
 
-  get: ApiHandler = async ({ path, queryKey, ...init }) => {
-    const resp = await this.fetchJSON(path, { ...init, next: { tags: queryKey } });
+  get: ApiHandler = async ({ path, queryKey, revalidate, ...init }) => {
+    const resp = await this.fetchJSON(path, { ...init, next: { revalidate, tags: queryKey } });
     return resp;
   };
 

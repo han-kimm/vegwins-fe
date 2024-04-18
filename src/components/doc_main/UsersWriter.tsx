@@ -4,17 +4,17 @@ import BaseLink from '@/components/common/BaseLink';
 interface Props {
   name: string;
   createdAt: string;
-  docId: string;
+  paperId: string;
   isWriter: boolean;
 }
 
-const UsersWriter = ({ name, createdAt, docId, isWriter }: Props) => {
+const UsersWriter = ({ name, createdAt, paperId, isWriter }: Props) => {
   return (
     <article className="w-full border-b border-black-20 pb-12">
       <div className="mb-8 flex justify-between">
         <h2 className="text-18 font-bold">작성자</h2>
         {isWriter && (
-          <BaseLink href={`/doc/${docId}/edit`} className="text-14 text-white">
+          <BaseLink href={`/paper/${paperId}/edit`} className="text-14 text-white">
             편집하기
           </BaseLink>
         )}
