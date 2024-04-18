@@ -19,7 +19,10 @@ export type Paper = {
   };
   createdAt: string;
   updatedAt: string;
-  isWriter?: boolean;
+  rating: {
+    [key in 0 | 1 | 2 | 'length']: number;
+  };
+  isWriter: boolean;
   imageUrl?: string;
   hashtag?: string[];
 };

@@ -10,8 +10,7 @@ interface Props {
 const SearchResult = async ({ c, k }: Props) => {
   const resp = await ajax.get({
     path: `/paper?${c ? `c=${c}` : ''}&${k ? `k=${k}` : ''}`,
-    // revalidate: 180,
-    cache: 'no-cache',
+    revalidate: 180,
     queryKey: [c ?? '', k ?? ''],
   });
   return (

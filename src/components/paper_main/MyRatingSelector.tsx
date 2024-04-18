@@ -4,19 +4,19 @@ import Image from 'next/image';
 import { useParams } from 'next/navigation';
 
 interface Props {
-  rating: number;
-  setRating: (rating: number) => void;
+  rating: -1 | 0 | 1 | 2;
+  setRating: (rating: -1 | 0 | 1 | 2) => void;
 }
 const MyRatingSelector = ({ rating, setRating }: Props) => {
   const { paperId } = useParams();
 
-  const setRatingLocalStorage = (status: number) => {
+  const setRatingLocalStorage = (status: -1 | 0 | 1 | 2) => {
     setRating(rating === status ? -1 : status);
     setLocalStorage({ key: `r${paperId}`, value: rating === status ? -1 : status });
   };
   return (
     <div className="flex w-full justify-evenly" role="group" aria-label="평가 고르기">
-      {[2, 1, 0].map((status) => (
+      {RATINGS.map((status) => (
         <button
           type="button"
           onClick={() => setRatingLocalStorage(status)}
@@ -31,3 +31,5 @@ const MyRatingSelector = ({ rating, setRating }: Props) => {
   );
 };
 export default MyRatingSelector;
+
+const RATINGS = [2, 1, 0] as const;

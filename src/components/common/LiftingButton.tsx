@@ -25,7 +25,10 @@ const LiftingButton = memo(function LiftingButton() {
   }, []);
 
   return isScroll ? (
-    <button onClick={liftScroll} className="fixed bottom-12 right-12 animate-fadeIn rounded-full bg-black-80 p-12 text-white shadow-lg">
+    <button
+      onClick={liftScroll}
+      className="transform-active fixed bottom-12 right-12 animate-fadeIn rounded-full bg-black-80 p-12 text-white shadow-lg"
+    >
       <IconArrowUp />
     </button>
   ) : null;

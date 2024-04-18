@@ -1,21 +1,21 @@
 import { MOCK_COMMENT } from '@/constants/mockComment';
-import { MockDoc } from '@/constants/mockDoc';
+import { Paper } from '@/types/data';
 import { getCookie } from '@/utils/cookie';
 import UsersComment from '@/components/paper_main/UsersComment';
 import UsersWriter from '@/components/paper_main/UsersWriter';
 
 interface Props {
-  data: MockDoc;
+  data: Paper;
   paperId: string;
 }
 
 const Users = async ({ data, paperId }: Props) => {
   const session = await getCookie('v_s');
 
-  // Comment Fetching...
+  // comment fetching
   return (
     <section className="flex-center relative grow flex-col gap-20 rounded-md bg-white p-20 shadow-lg" aria-label="유저 의견">
-      <UsersWriter name={data.writer.nickname} createdAt={data.createdAt} paperId={paperId} isWriter={data.writer.nickname === session?.nickname} />
+      <UsersWriter name={data.writer.nickname} createdAt={data.createdAt} paperId={paperId} isWriter={data.isWriter} />
       <UsersComment data={MOCK_COMMENT} session={session} />
     </section>
   );
