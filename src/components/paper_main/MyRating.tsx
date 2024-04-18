@@ -4,7 +4,7 @@ import { RATING_MSG } from '@/constants/default';
 import { MockDoc } from '@/constants/mockDoc';
 import { getLocalStorage } from '@/utils/localStorage';
 import { useEffect, useState } from 'react';
-import MyRatingSelector from '@/components/doc_main/MyRatingSelector';
+import MyRatingSelector from '@/components/paper_main/MyRatingSelector';
 
 interface Props {
   data: MockDoc;

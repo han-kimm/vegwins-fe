@@ -3,10 +3,10 @@ import ajax from '@/utils/fetching';
 import HomeLink from '@/components/common/HomeLink';
 import LiftingButton from '@/components/common/LiftingButton';
 import ReturnLink from '@/components/common/ReturnLink';
-import Information from '@/components/doc_main/Information';
-import MyRating from '@/components/doc_main/MyRating';
-import Share from '@/components/doc_main/Share';
-import Users from '@/components/doc_main/Users';
+import Information from '@/components/paper_main/Information';
+import MyRating from '@/components/paper_main/MyRating';
+import Share from '@/components/paper_main/Share';
+import Users from '@/components/paper_main/Users';
 
 const Paper = async ({ params }: { params: { [key: string]: string } }) => {
   const { paperId } = params;

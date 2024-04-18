@@ -3,8 +3,8 @@
 import { MockComment } from '@/constants/mockComment';
 import { Session } from '@/types/session';
 import { useState } from 'react';
-import UsersCommentInput from '@/components/doc_main/UsersCommentInput';
-import UsersCommentItem from '@/components/doc_main/UsersCommentItem';
+import UsersCommentInput from '@/components/paper_main/UsersCommentInput';
+import UsersCommentItem from '@/components/paper_main/UsersCommentItem';
 
 interface Props {
   data: MockComment;
