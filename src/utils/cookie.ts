@@ -10,7 +10,7 @@ interface Args extends ResponseCookie {
 export const setCookie = ({ ...args }: Args) => {
   const { httpOnly, secure, sameSite } = args;
   const cookieStore = cookies();
-  cookieStore.set(args.name, JSON.stringify(args.value), { maxAge: (args.maxAge ?? 60 * 60) * 1000, httpOnly, secure, sameSite });
+  cookieStore.set(args.name, JSON.stringify(args.value), { maxAge: args.maxAge ?? 60 * 60, httpOnly, secure, sameSite });
 };
 
 export const getCookie = (key: string) => {
