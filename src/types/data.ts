@@ -1,5 +1,5 @@
 export type SearchItem = {
-  id: string;
+  _id: string;
   title: string;
   end: string;
   imageUrl?: string;

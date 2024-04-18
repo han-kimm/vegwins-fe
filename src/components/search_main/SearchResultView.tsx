@@ -1,5 +1,5 @@
 import { SearchItem } from '@/types/data';
-import { Fragment, memo } from 'react';
+import { Fragment } from 'react';
 import SearchResultEmpty from '@/components/search_main/SearchResultEmpty';
 import SearchResultItem from '@/components/search_main/SearchResultItem';
 import SearchResultReset from '@/components/search_main/SearchResultReset';
@@ -9,7 +9,7 @@ interface Props {
   data: SearchItem[];
 }
 
-const SearchResultView = memo(function SerachResultView({ k, data }: Props) {
+const SearchResultView = ({ k, data }: Props) => {
   return (
     <section className="flex flex-grow flex-col">
       <div className="mb-4 ml-20">
@@ -19,7 +19,7 @@ const SearchResultView = memo(function SerachResultView({ k, data }: Props) {
       {data.length ? (
         <div className="flex w-full flex-col rounded-md bg-white px-16 shadow-lg" role="group">
           {data.map((data, i) => (
-            <Fragment key={data.id}>
+            <Fragment key={data._id}>
               {!i || <hr className="border-black-60" />}
               <SearchResultItem {...data} />
             </Fragment>
@@ -30,5 +30,5 @@ const SearchResultView = memo(function SerachResultView({ k, data }: Props) {
       )}
     </section>
   );
-});
+};
 export default SearchResultView;
