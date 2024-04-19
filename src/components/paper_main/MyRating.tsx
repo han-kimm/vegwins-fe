@@ -14,10 +14,6 @@ interface Props {
 
 const MyRating = ({ paperRating, userRating, paperId }: Props) => {
   const [rating, setRating] = useState<Rating>(userRating);
-  const [optimisticRating, addOptimisticRating] = useOptimistic<Rating, Rating>(userRating, (cur, optimisticValue) => {
-    const newValue = cur === optimisticValue ? -1 : optimisticValue;
-    return newValue;
-  });
 
   useEffect(() => {
     const unAuthUserRating = getLocalStorage(`r${paperId}`);
