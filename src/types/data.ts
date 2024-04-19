@@ -22,7 +22,13 @@ export type Paper = {
   rating: {
     [key in 0 | 1 | 2 | 'length']: number;
   };
-  isWriter: boolean;
   imageUrl?: string;
   hashtag?: string[];
+};
+
+export type Rating = -1 | 0 | 1 | 2;
+
+export type PaperUser = {
+  isWriter: boolean;
+  rating: Rating;
 };

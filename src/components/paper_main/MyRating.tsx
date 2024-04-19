@@ -1,20 +1,22 @@
 'use client';
 
 import { RATING_MSG } from '@/constants/default';
-import { Paper } from '@/types/data';
+import { Paper, PaperUser, Rating } from '@/types/data';
 import { getLocalStorage } from '@/utils/localStorage';
 import { useEffect, useState } from 'react';
 import MyRatingSelector from '@/components/paper_main/MyRatingSelector';
 
 interface Props {
   data: Paper;
+  rating: Rating;
+  paperId: string;
 }
 
-const MyRating = ({ data }: Props) => {
-  const [rating, setRating] = useState<-1 | 0 | 1 | 2>(-1);
+const MyRating = ({ data, rating: initial, paperId }: Props) => {
+  const [rating, setRating] = useState<Rating>(initial);
 
   useEffect(() => {
-    setRating(getLocalStorage(`r${data._id}`) ?? -1);
+    setRating(getLocalStorage(`r${paperId}`) ?? -1);
   }, []);
 
   return (

@@ -1,3 +1,5 @@
+import { PaperUser } from '@/types/data';
+import { getCookie } from '@/utils/cookie';
 import ajax from '@/utils/fetching';
 import HomeLink from '@/components/common/HomeLink';
 import LiftingButton from '@/components/common/LiftingButton';
@@ -13,7 +15,13 @@ interface Props {
 
 const Paper = async ({ params }: Props) => {
   const { paperId } = params;
-  const data = await ajax.get({ path: `/paper/${paperId}` });
+  const paperData = await ajax.get({ path: `/paper/${paperId}` });
+
+  const session = await getCookie('v_s');
+  let userData: PaperUser = { isWriter: false, rating: -1 };
+  if (session) {
+    userData = await ajax.get({ path: `/paper/${paperId}/user` });
+  }
   return (
     <div className="max-h-max min-h-dvh px-16 pb-28 pt-16">
       <header className="mb-12 flex justify-between">
@@ -21,12 +29,12 @@ const Paper = async ({ params }: Props) => {
         <HomeLink isPaper />
       </header>
       <main className="flex flex-grow animate-fadeIn flex-col gap-24">
-        <Information data={data} />
+        <Information data={paperData} />
         <div className="flex gap-20">
-          <MyRating data={data} />
+          <MyRating data={paperData} rating={userData.rating} paperId={paperId} />
           <Share />
         </div>
-        <Users data={data} />
+        <Users data={paperData} isWriter={userData.isWriter} />
       </main>
       <LiftingButton />
     </div>
