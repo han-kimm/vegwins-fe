@@ -10,14 +10,13 @@ declare global {
 }
 
 const googleAuthPath = '/auth/google';
-const maxAge = 60 * 60 * 24;
 
 const authCallback = async (response: any) => {
   try {
     const { accessToken, refreshToken, nickname } = await ajax.post({ path: googleAuthPath, body: response });
-    setLocalStorage({ key: 'v_rt', value: refreshToken, maxAge });
+    setCookie({ name: 'v_rt', value: refreshToken, httpOnly: true, secure: true, sameSite: 'strict' });
     setCookie({ name: 'v_at', value: accessToken, httpOnly: true, secure: true, sameSite: 'strict' });
-    setCookie({ name: 'v_s', value: { isAuth: true, nickname: nickname }, maxAge });
+    setCookie({ name: 'v_s', value: { isAuth: true, nickname: nickname } });
     toast.success(`${nickname}님 안녕하세요!`);
   } catch (e) {
     console.error(e);

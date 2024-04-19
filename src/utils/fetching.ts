@@ -15,20 +15,24 @@ type ApiHandler = (params: HandlerParams) => Promise<any>;
 class Fetching {
   #baseUrl = 'http://localhost:3000/api';
   fetchJSON = async (...params: Parameters<Fetch>) => {
-    let accessToken;
-    const isSSR = typeof window === 'undefined';
-    if (isSSR) {
-      accessToken = await getCookie('v_at');
+    try {
+      let accessToken;
+      const isSSR = typeof window === 'undefined';
+      if (isSSR) {
+        accessToken = await getCookie('v_at');
+      }
+      return await fetch(this.#baseUrl + params[0], {
+        ...params[1],
+        ...(isSSR ? { headers: { Cookie: `v_at=${accessToken}` } } : {}),
+      })
+        .then((resp) => resp.json())
+        .catch((err) => console.error(err));
+    } catch (e) {
+      console.error(e);
     }
-    return await fetch(this.#baseUrl + params[0], {
-      ...params[1],
-      ...(isSSR ? { headers: { Cookie: `v_at=${accessToken}` } } : {}),
-    })
-      .then((resp) => resp.json())
-      .catch((err) => console.error(err));
   };
   updateToken = async () => {
-    const refreshToken = getLocalStorage('v_rt');
+    const refreshToken = await getCookie('v_rt');
     if (!refreshToken) {
       throw Error('리프레시 토큰이 없습니다.');
     }
@@ -38,6 +42,10 @@ class Fetching {
 
   get: ApiHandler = async ({ path, queryKey, revalidate, ...init }) => {
     const resp = await this.fetchJSON(path, { ...init, next: { revalidate, tags: queryKey } });
+    if (resp.code === 419) {
+      await this.updateToken();
+      return await this.get({ path, queryKey, revalidate, ...init });
+    }
     return resp;
   };
 

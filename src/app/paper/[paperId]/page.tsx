@@ -1,4 +1,4 @@
-import { PaperUser } from '@/types/data';
+import { Paper, PaperUser } from '@/types/data';
 import { getCookie } from '@/utils/cookie';
 import ajax from '@/utils/fetching';
 import HomeLink from '@/components/common/HomeLink';
@@ -13,15 +13,17 @@ interface Props {
   params: { paperId: string };
 }
 
-const Paper = async ({ params }: Props) => {
+const PaperPage = async ({ params }: Props) => {
   const { paperId } = params;
-  const paperData = await ajax.get({ path: `/paper/${paperId}` });
+  const paperData: Paper = await ajax.get({ path: `/paper/${paperId}` });
 
   const session = await getCookie('v_s');
   let userData: PaperUser = { isWriter: false, rating: -1 };
   if (session) {
-    userData = await ajax.get({ path: `/paper/${paperId}/user` });
+    userData = await ajax.get({ path: `/paper/${paperId}/user`, cache: 'no-store' });
   }
+
+  console.log(userData);
   return (
     <div className="max-h-max min-h-dvh px-16 pb-28 pt-16">
       <header className="mb-12 flex justify-between">
@@ -31,7 +33,7 @@ const Paper = async ({ params }: Props) => {
       <main className="flex flex-grow animate-fadeIn flex-col gap-24">
         <Information data={paperData} />
         <div className="flex gap-20">
-          <MyRating data={paperData} rating={userData.rating} paperId={paperId} />
+          <MyRating paperRating={paperData.rating} userRating={userData.rating} paperId={paperId} />
           <Share />
         </div>
         <Users data={paperData} isWriter={userData.isWriter} />
@@ -40,4 +42,4 @@ const Paper = async ({ params }: Props) => {
     </div>
   );
 };
-export default Paper;
+export default PaperPage;

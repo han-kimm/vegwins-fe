@@ -1,22 +1,29 @@
 'use client';
 
 import { RATING_MSG } from '@/constants/default';
-import { Paper, PaperUser, Rating } from '@/types/data';
+import { Paper, Rating } from '@/types/data';
 import { getLocalStorage } from '@/utils/localStorage';
-import { useEffect, useState } from 'react';
+import { useEffect, useOptimistic, useState } from 'react';
 import MyRatingSelector from '@/components/paper_main/MyRatingSelector';
 
 interface Props {
-  data: Paper;
-  rating: Rating;
+  paperRating?: Paper['rating'];
+  userRating: Rating;
   paperId: string;
 }
 
-const MyRating = ({ data, rating: initial, paperId }: Props) => {
-  const [rating, setRating] = useState<Rating>(initial);
+const MyRating = ({ paperRating, userRating, paperId }: Props) => {
+  const [rating, setRating] = useState<Rating>(userRating);
+  const [optimisticRating, addOptimisticRating] = useOptimistic<Rating, Rating>(userRating, (cur, optimisticValue) => {
+    const newValue = cur === optimisticValue ? -1 : optimisticValue;
+    return newValue;
+  });
 
   useEffect(() => {
-    setRating(getLocalStorage(`r${paperId}`) ?? -1);
+    const unAuthUserRating = getLocalStorage(`r${paperId}`);
+    if (unAuthUserRating) {
+      setRating(unAuthUserRating);
+    }
   }, []);
 
   return (
@@ -26,10 +33,7 @@ const MyRating = ({ data, rating: initial, paperId }: Props) => {
         <div className="h-full w-1 border-l border-black-60 " />
         <p className="grow text-center text-18 font-bold">{RATING_MSG[rating]}</p>
       </div>
-      <MyRatingSelector rating={rating} setRating={setRating} />
-      {rating !== -1 && (
-        <span className="absolute bottom-4">{data.rating?.[rating] ? `${data.rating?.[rating]}명과 같은 의견이에요!` : '첫 평가 감사합니다!'}</span>
-      )}
+      <MyRatingSelector paperRating={paperRating} paperId={paperId} rating={rating} setRating={setRating} />
     </section>
   );
 };

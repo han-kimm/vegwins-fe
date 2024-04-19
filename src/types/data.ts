@@ -19,7 +19,7 @@ export type Paper = {
   };
   createdAt: string;
   updatedAt: string;
-  rating: {
+  rating?: {
     [key in 0 | 1 | 2 | 'length']: number;
   };
   imageUrl?: string;

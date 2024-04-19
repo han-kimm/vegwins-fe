@@ -18,7 +18,6 @@ const UsersCommentItem = ({ comment, session, recommentId, setRecomment, r }: Pr
   return (
     <div key={comment.id} className={`${r ? 'my-8 ml-12 border-l pl-12' : 'border-b border-black-20 pb-12'} flex flex-col`}>
       <div className="flex items-center gap-8">
-        {/* <div className="h-4 w-4 rounded-full bg-black-100" /> */}
         <h3 className="text-center text-14 font-bold">{comment.nickname}</h3>
         <span className="text-black-60">{timeDiff(comment.createdAt)}</span>
         {r || (
