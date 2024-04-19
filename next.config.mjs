@@ -28,7 +28,7 @@ const nextConfig = {
     return [
       {
         source: "/api/:path*",
-        destination: `http://${process.env.NEXT_PUBLIC_PROXY_URL}/:path*`,
+        destination: `${process.env.NEXT_PUBLIC_PROXY_URL}/:path*`,
       },
     ];
   },
