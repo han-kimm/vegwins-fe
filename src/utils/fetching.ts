@@ -16,12 +16,13 @@ class Fetching {
   #baseUrl = 'http://localhost:3000/api';
   fetchJSON = async (...params: Parameters<Fetch>) => {
     let accessToken;
-    if (typeof window === 'undefined') {
+    const isSSR = typeof window === 'undefined';
+    if (isSSR) {
       accessToken = await getCookie('v_at');
     }
     return await fetch(this.#baseUrl + params[0], {
       ...params[1],
-      ...(typeof window !== 'undefined' ? {} : { headers: { Cookie: `v_at=${accessToken}` } }),
+      ...(isSSR ? { headers: { Cookie: `v_at=${accessToken}` } } : {}),
     })
       .then((resp) => resp.json())
       .catch((err) => console.error(err));

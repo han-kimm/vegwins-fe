@@ -20,7 +20,7 @@ const WriteCategory = memo(function WriteCategory({ category, setCategory }: Pro
   return (
     <WriteFormRow label="카테고리" required={!category.length}>
       <div className="flex flex-wrap gap-8">
-        {CATEGORY_KEY.map((key, i) => {
+        {CATEGORY_KEY.slice(2).map((key, i) => {
           const isSelected = category?.includes(key);
           return (
             <button

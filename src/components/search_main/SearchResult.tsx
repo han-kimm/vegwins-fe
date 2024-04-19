@@ -9,9 +9,8 @@ interface Props {
 
 const SearchResult = async ({ c, k }: Props) => {
   const resp = await ajax.get({
-    path: `/paper?${c ? `c=${c}` : ''}&${k ? `k=${k}` : ''}`,
+    path: `/paper?${c ? `c=${c}` : ''}&${k ? `k=${encodeURIComponent(k)}` : ''}`,
     revalidate: 180,
-    queryKey: [c ?? '', k ?? ''],
   });
   return (
     <Suspense fallback={<h1 className="mb-4 ml-20 text-18 font-bold">검색 중...</h1>}>
