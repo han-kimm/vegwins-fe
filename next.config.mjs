@@ -25,11 +25,10 @@ const nextConfig = {
     return config
   },
   async rewrites() {
-    console.log(process.env.NEXT_PUBLIC_BASE_URL)
     return [
       {
         source: "/api/:path*",
-        destination: `http://${process.env.NEXT_PUBLIC_BASE_URL}/:path*`,
+        destination: `http://${process.env.NEXT_PUBLIC_PROXY_URL}/:path*`,
       },
     ];
   },

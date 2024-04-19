@@ -1,20 +1,16 @@
-import ajax from '@/utils/fetching';
+import { Paper } from '@/types/data';
 import { Suspense } from 'react';
 import SearchResultView from '@/components/search_main/SearchResultView';
 
 interface Props {
-  c?: string;
+  data: Paper[];
   k?: string;
 }
 
-const SearchResult = async ({ c, k }: Props) => {
-  const resp = await ajax.get({
-    path: `/paper?${c ? `c=${c}` : ''}&${k ? `k=${encodeURIComponent(k)}` : ''}`,
-    revalidate: 180,
-  });
+const SearchResult = async ({ data, k }: Props) => {
   return (
     <Suspense fallback={<h1 className="mb-4 ml-20 text-18 font-bold">검색 중...</h1>}>
-      <SearchResultView k={k} data={resp?.data ?? []} />
+      <SearchResultView k={k} data={data ?? []} />
     </Suspense>
   );
 };

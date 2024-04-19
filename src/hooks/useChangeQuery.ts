@@ -23,9 +23,8 @@ const useChangeQuery = () => {
     [searchParams],
   );
   const changeQuery = useCallback(
-    ({ name, value, save = false, routing = true }: { name?: string; value?: string; save?: boolean; routing?: boolean }) => {
+    ({ name, value, routing = true }: { name?: string; value?: string; save?: boolean; routing?: boolean }) => {
       const newPath = createNewPath(name, value);
-      save && setLocalStorage({ key: PREVIOUS_PATH, value: newPath });
       routing && router.push(newPath);
     },
     [createNewPath],

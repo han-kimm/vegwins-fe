@@ -13,7 +13,7 @@ interface HandlerParams extends RequestInit {
 type ApiHandler = (params: HandlerParams) => Promise<any>;
 
 class Fetching {
-  #baseUrl = 'http://localhost:3000/api';
+  #baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? '';
   fetchJSON = async (...params: Parameters<Fetch>) => {
     try {
       let accessToken;
@@ -41,28 +41,36 @@ class Fetching {
   };
 
   get: ApiHandler = async ({ path, queryKey, revalidate, ...init }) => {
-    const resp = await this.fetchJSON(path, { ...init, next: { revalidate, tags: queryKey } });
-    if (resp.code === 419) {
-      await this.updateToken();
-      return await this.get({ path, queryKey, revalidate, ...init });
+    try {
+      const resp = await this.fetchJSON(path, { ...init, next: { revalidate, tags: queryKey } });
+      if (resp?.code === 419) {
+        await this.updateToken();
+        return await this.get({ path, queryKey, revalidate, ...init });
+      }
+      return resp;
+    } catch (e) {
+      console.error(e);
     }
-    return resp;
   };
 
   post: ApiHandler = async ({ path, body, ...init }) => {
-    const resp = await this.fetchJSON(path, {
-      ...init,
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify(body),
-    });
-    if (resp.code === 419) {
-      await this.updateToken();
-      return await this.post({ path, body, ...init });
+    try {
+      const resp = await this.fetchJSON(path, {
+        ...init,
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      });
+      if (resp?.code === 419) {
+        await this.updateToken();
+        return await this.post({ path, body, ...init });
+      }
+      return resp;
+    } catch (e) {
+      console.error(e);
     }
-    return resp;
   };
 }
 const ajax = new Fetching();
