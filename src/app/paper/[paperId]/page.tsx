@@ -1,4 +1,3 @@
-import { MOCK_DOC } from '@/constants/mockDoc';
 import ajax from '@/utils/fetching';
 import HomeLink from '@/components/common/HomeLink';
 import LiftingButton from '@/components/common/LiftingButton';
@@ -8,7 +7,11 @@ import MyRating from '@/components/paper_main/MyRating';
 import Share from '@/components/paper_main/Share';
 import Users from '@/components/paper_main/Users';
 
-const Paper = async ({ params }: { params: { paperId: string } }) => {
+interface Props {
+  params: { paperId: string };
+}
+
+const Paper = async ({ params }: Props) => {
   const { paperId } = params;
   const data = await ajax.get({ path: `/paper/${paperId}` });
   return (
@@ -20,10 +23,10 @@ const Paper = async ({ params }: { params: { paperId: string } }) => {
       <main className="flex flex-grow animate-fadeIn flex-col gap-24">
         <Information data={data} />
         <div className="flex gap-20">
-          <MyRating data={data} paperId={paperId} />
+          <MyRating data={data} />
           <Share />
         </div>
-        <Users data={data} paperId={paperId} />
+        <Users data={data} />
       </main>
       <LiftingButton />
     </div>

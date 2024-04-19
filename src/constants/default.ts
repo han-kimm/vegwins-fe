@@ -8,7 +8,7 @@ export const LABEL = {
   category: '카테고리',
   hashtag: '해시태그',
   description: '설명',
-} as const;
+};
 
 export const LABEL_KEY = Object.keys(LABEL) as (keyof typeof LABEL)[];
 

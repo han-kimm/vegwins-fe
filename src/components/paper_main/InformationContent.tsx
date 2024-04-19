@@ -27,7 +27,7 @@ const InformationContent = ({ label, value }: { label: string; value: string | s
       if (typeof value === 'object') {
         SwitchedComponent = (
           <div className="flex flex-wrap gap-16 text-14 font-bold">
-            {value.slice(0, 2).map((tag) => (
+            {value.map((tag) => (
               <Link
                 href={`/search?${SP_KEYWORD}=${encodeURIComponent(tag)}`}
                 key={tag}

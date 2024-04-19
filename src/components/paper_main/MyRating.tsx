@@ -8,14 +8,13 @@ import MyRatingSelector from '@/components/paper_main/MyRatingSelector';
 
 interface Props {
   data: Paper;
-  paperId: string;
 }
 
-const MyRating = ({ data, paperId }: Props) => {
+const MyRating = ({ data }: Props) => {
   const [rating, setRating] = useState<-1 | 0 | 1 | 2>(-1);
 
   useEffect(() => {
-    setRating(getLocalStorage(`r${paperId}`) ?? -1);
+    setRating(getLocalStorage(`r${data._id}`) ?? -1);
   }, []);
 
   return (
