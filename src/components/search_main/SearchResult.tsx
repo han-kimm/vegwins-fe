@@ -7,7 +7,7 @@ interface Props {
   k?: string;
 }
 
-const SearchResult = async ({ data, k }: Props) => {
+const SearchResult = ({ data, k }: Props) => {
   return (
     <Suspense fallback={<h1 className="mb-4 ml-20 text-18 font-bold">검색 중...</h1>}>
       <SearchResultView k={k} data={data ?? []} />
