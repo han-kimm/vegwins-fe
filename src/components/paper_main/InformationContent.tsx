@@ -2,7 +2,7 @@ import { CATEGORY } from '@/constants/category';
 import { DEFAULT_IMAGE, LABEL, SP_CATEGORY, SP_KEYWORD } from '@/constants/default';
 import Image from 'next/image';
 import Link from 'next/link';
-import BaseIcon from '@/components/common/BaseIcon';
+import IconBase from '@/components/common/IconBase';
 
 const InformationContent = ({ label, value }: { label: string; value: string | string[] | undefined }) => {
   let SwitchedComponent;
@@ -16,7 +16,7 @@ const InformationContent = ({ label, value }: { label: string; value: string | s
           <div className="flex flex-wrap gap-16 text-black-80">
             {value.map((v) => (
               <Link href={`/search?${SP_CATEGORY}=${v}`} key={v} className="transform-active">
-                <BaseIcon key={v} name={v} render={CATEGORY[v]} fontSize={12} />
+                <IconBase key={v} name={v} render={CATEGORY[v]} fontSize={12} />
               </Link>
             ))}
           </div>

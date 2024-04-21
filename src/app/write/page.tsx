@@ -1,4 +1,4 @@
-import ReturnLink from '@/components/common/ReturnLink';
+import ReturnLink from '@/components/common/LinkReturn';
 import WriteForm from '@/components/write_main/WriteForm';
 
 const Write = () => {

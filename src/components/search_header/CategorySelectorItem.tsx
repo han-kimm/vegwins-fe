@@ -1,7 +1,7 @@
 import { CATEGORY } from '@/constants/category';
 import { SP_CATEGORY } from '@/constants/default';
 import useChangeQuery from '@/hooks/useChangeQuery';
-import BaseIcon from '@/components/common/BaseIcon';
+import IconBase from '@/components/common/IconBase';
 
 interface Props {
   name: string;
@@ -18,7 +18,7 @@ const CategorySelectorItem = ({ name, isSelected, setSelected }: Props) => {
   };
   return (
     <button onClick={handleClick} className={`flex-center w-60 shrink-0 flex-col ${isSelected ? 'text-black-100' : 'text-black-40'}`}>
-      <BaseIcon render={CATEGORY[name]} name={name} fontSize={12} />
+      <IconBase render={CATEGORY[name]} name={name} fontSize={12} />
       {isSelected && <span className="font-bold text-sky">초기화 하기</span>}
     </button>
   );

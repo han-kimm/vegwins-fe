@@ -9,7 +9,7 @@ interface Props {
   isPaper?: boolean;
 }
 
-const HomeLink = ({ isPaper }: Props) => {
+const LinkHome = ({ isPaper }: Props) => {
   return (
     <Link
       href="/"
@@ -21,4 +21,4 @@ const HomeLink = ({ isPaper }: Props) => {
     </Link>
   );
 };
-export default HomeLink;
+export default LinkHome;

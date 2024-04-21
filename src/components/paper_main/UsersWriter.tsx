@@ -1,5 +1,5 @@
 import { timeDiff } from '@/utils/timeDiff';
-import BaseLink from '@/components/common/BaseLink';
+import LinkBase from '@/components/common/LinkBase';
 
 interface Props {
   name: string;
@@ -14,9 +14,9 @@ const UsersWriter = ({ name, createdAt, paperId, isWriter }: Props) => {
       <div className="mb-8 flex justify-between">
         <h2 className="text-18 font-bold">작성자</h2>
         {isWriter && (
-          <BaseLink href={`/paper/${paperId}/edit`} className="transform-active text-14 text-white">
+          <LinkBase href={`/paper/${paperId}/edit`} className="transform-active text-14 text-white">
             편집하기
-          </BaseLink>
+          </LinkBase>
         )}
       </div>
       <div className="flex items-baseline gap-8">

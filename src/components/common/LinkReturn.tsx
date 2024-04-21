@@ -9,7 +9,7 @@ interface Props {
   icon?: string;
   reverse?: boolean;
 }
-const ReturnLink = ({ href, text, icon, reverse }: Props) => {
+const LinkReturn = ({ href, text, icon, reverse }: Props) => {
   const router = useRouter();
   const handleClick = () => {
     document.referrer.includes('localhost:3000/search') ? router.back() : router.push(href);
@@ -23,4 +23,4 @@ const ReturnLink = ({ href, text, icon, reverse }: Props) => {
     </button>
   );
 };
-export default ReturnLink;
+export default LinkReturn;

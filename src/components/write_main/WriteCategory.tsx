@@ -1,7 +1,7 @@
 import { CATEGORY, CATEGORY_KEY } from '@/constants/category';
 import { SetSubmitData } from '@/constants/default';
 import { memo } from 'react';
-import BaseIcon from '@/components/common/BaseIcon';
+import IconBase from '@/components/common/IconBase';
 import WriteFormRow from '@/components/write_main/WriteFormRow';
 
 interface Props {
@@ -29,7 +29,7 @@ const WriteCategory = memo(function WriteCategory({ category, setCategory }: Pro
               key={i}
               className={`flex-center transform-active w-60 shrink-0 flex-col transition duration-300 ${isSelected ? 'text-black-100' : 'text-black-40'}`}
             >
-              <BaseIcon render={CATEGORY[key]} name={key} fontSize={12} />
+              <IconBase render={CATEGORY[key]} name={key} fontSize={12} />
             </button>
           );
         })}

@@ -1,7 +1,7 @@
 import { Paper } from '@/types/data';
 import ajax from '@/utils/fetching';
-import HomeLink from '@/components/common/HomeLink';
 import LiftingButton from '@/components/common/LiftingButton';
+import LinkHome from '@/components/common/LinkHome';
 import CategorySelector from '@/components/search_header/CategorySelector';
 import SearchBar from '@/components/search_header/SearchBar';
 import SearchResult from '@/components/search_main/SearchResult';
@@ -19,7 +19,7 @@ const Search = async ({ searchParams }: Props) => {
       <header className="mb-20 flex flex-col gap-8">
         <div className="flex gap-8">
           <SearchBar />
-          <HomeLink />
+          <LinkHome />
         </div>
         <CategorySelector />
       </header>
