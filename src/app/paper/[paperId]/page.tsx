@@ -22,8 +22,6 @@ const PaperPage = async ({ params }: Props) => {
   if (session) {
     userData = await ajax.get({ path: `/paper/${paperId}/user`, cache: 'no-store' });
   }
-
-  console.log(userData);
   return (
     <div className="max-h-max min-h-dvh px-16 pb-28 pt-16">
       <header className="mb-12 flex justify-between">
