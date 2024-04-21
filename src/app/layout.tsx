@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
-import { DefaultToastOptions, Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import './globals.css';
 
 export default function RootLayout({

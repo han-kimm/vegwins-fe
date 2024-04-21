@@ -1,5 +1,3 @@
-'use client';
-
 import { CATEGORY } from '@/constants/category';
 import { SP_CATEGORY } from '@/constants/default';
 import useChangeQuery from '@/hooks/useChangeQuery';
