@@ -1,6 +1,5 @@
 import { RATING_MSG } from '@/constants/default';
 import { Paper, Rating } from '@/types/data';
-import { getCookie } from '@/utils/cookie';
 import ajax from '@/utils/fetching';
 import { setLocalStorage } from '@/utils/localStorage';
 import Image from 'next/image';
@@ -9,23 +8,23 @@ interface Props {
   paperRating?: Paper['rating'];
   paperId: string;
   rating: Rating;
-  setRating: (rating: Rating) => void;
+  setRating: ({ rating }: { rating: Rating }) => void;
 }
 const MyRatingSelector = ({ paperRating, paperId, rating, setRating }: Props) => {
   const changeRating = async (status: Rating) => {
-    const newValue = rating === status ? -1 : status;
+    const newValue = { rating: rating === status ? -1 : status };
     setRating(newValue);
 
-    const session = await getCookie('v_s');
-    if (!session) {
+    const isAuth = await ajax.checkAuth();
+    if (!isAuth) {
       setLocalStorage({ key: `r${paperId}`, value: newValue });
       return;
     }
 
     try {
-      await ajax.post({ path: `/paper/${paperId}/user`, body: { rating: newValue } });
+      await ajax.post({ path: `/paper/${paperId}/rating`, body: { ...newValue } });
     } catch {
-      setRating(rating);
+      setRating({ rating });
     }
   };
 

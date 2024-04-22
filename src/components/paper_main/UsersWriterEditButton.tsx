@@ -8,7 +8,9 @@ interface Props {
 }
 
 const UsersWriterEditButton = ({ paperId }: Props) => {
-  const [isWriter] = useFetchedState({ init: false, path: `/paper/${paperId}/writer` });
+  const {
+    state: { isWriter },
+  } = useFetchedState({ init: { isWriter: false }, path: `/paper/${paperId}/writer` });
 
   const router = useRouter();
   const handleClick = () => {
