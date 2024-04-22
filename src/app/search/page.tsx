@@ -1,4 +1,4 @@
-import { Paper } from '@/types/data';
+import { SearchItem } from '@/types/data';
 import ajax from '@/utils/fetching';
 import LiftingButton from '@/components/common/LiftingButton';
 import LinkHome from '@/components/common/LinkHome';
@@ -11,11 +11,10 @@ interface Props {
 }
 const Search = async ({ searchParams }: Props) => {
   const { c, k } = searchParams;
-  const data: Paper[] = await ajax.get({
+  const data: SearchItem[] = await ajax.get({
     path: `/paper?${c ? `c=${c}` : ''}&${k ? `k=${encodeURIComponent(k)}` : ''}`,
     cache: 'no-store',
   });
-  console.log(data);
   return (
     <div className="max-h-max min-h-dvh px-16 pb-28 pt-16">
       <header className="mb-20 flex flex-col gap-8">
@@ -26,7 +25,7 @@ const Search = async ({ searchParams }: Props) => {
         <CategorySelector />
       </header>
       <main className="flex flex-grow flex-col gap-24">
-        <SearchResult data={data} {...searchParams} />
+        <SearchResult data={data} k={k} />
       </main>
       <LiftingButton />
     </div>

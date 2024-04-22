@@ -1,7 +1,7 @@
 import { RATING_MSG } from '@/constants/default';
 import { Paper, Rating } from '@/types/data';
+import { setLocalStorage } from '@/utils/browserStorage';
 import ajax from '@/utils/fetching';
-import { setLocalStorage } from '@/utils/localStorage';
 import Image from 'next/image';
 
 interface Props {

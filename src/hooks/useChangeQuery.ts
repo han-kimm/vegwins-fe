@@ -1,5 +1,5 @@
 import { PREVIOUS_PATH } from '@/constants/default';
-import { setLocalStorage } from '@/utils/localStorage';
+import { setSessionStorage } from '@/utils/browserStorage';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useCallback } from 'react';
 
@@ -23,9 +23,10 @@ const useChangeQuery = () => {
     [searchParams],
   );
   const changeQuery = useCallback(
-    ({ name, value, routing = true }: { name?: string; value?: string; save?: boolean; routing?: boolean }) => {
+    ({ name, value, routing = true, save = true }: { name?: string; value?: string; save?: boolean; routing?: boolean }) => {
       const newPath = createNewPath(name, value);
       routing && router.push(newPath);
+      save && setSessionStorage({ key: PREVIOUS_PATH, value: newPath });
     },
     [createNewPath],
   );

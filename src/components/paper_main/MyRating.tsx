@@ -3,7 +3,7 @@
 import { RATING_MSG } from '@/constants/default';
 import useFetchedState from '@/hooks/useFetchedState';
 import { Paper, Rating } from '@/types/data';
-import { getLocalStorage } from '@/utils/localStorage';
+import { getLocalStorage } from '@/utils/browserStorage';
 import { useEffect } from 'react';
 import MyRatingSelector from '@/components/paper_main/MyRatingSelector';
 

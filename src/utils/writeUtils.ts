@@ -1,5 +1,5 @@
 import { SubmitData, WRITE_SAVE } from '@/constants/default';
-import { getLocalStorage, setLocalStorage } from '@/utils/localStorage';
+import { getLocalStorage, setLocalStorage } from '@/utils/browserStorage';
 
 export const saveSubmitData = (submitData: SubmitData) => {
   setLocalStorage({ key: WRITE_SAVE, value: { ...submitData, hashtag: [...submitData.hashtag] } });

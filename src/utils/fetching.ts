@@ -1,6 +1,3 @@
-import { getCookie, setCookie } from '@/utils/cookie';
-import { getLocalStorage } from '@/utils/localStorage';
-
 type Fetch = typeof fetch;
 
 interface HandlerParams extends RequestInit {
@@ -29,9 +26,12 @@ export class Fetching {
   };
 
   checkAuth = async () => {
-    const { isAuth } = await this.fetchJSON('/authCheck');
-    this.#isAuth = isAuth;
-    return isAuth;
+    const res = await this.fetchJSON('/authCheck');
+    if (res) {
+      this.#isAuth = res.isAuth;
+      return res.isAuth;
+    }
+    return false;
   };
 
   restoreToken = async () => {

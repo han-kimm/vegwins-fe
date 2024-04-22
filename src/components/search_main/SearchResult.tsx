@@ -1,9 +1,9 @@
-import { Paper } from '@/types/data';
+import { SearchItem } from '@/types/data';
 import { Suspense } from 'react';
 import SearchResultView from '@/components/search_main/SearchResultView';
 
 interface Props {
-  data: Paper[];
+  data: SearchItem[];
   k?: string;
 }
 

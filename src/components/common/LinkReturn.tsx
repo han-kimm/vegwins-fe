@@ -1,7 +1,10 @@
 'use client';
 
+import { PREVIOUS_PATH } from '@/constants/default';
+import { getSessionStorage } from '@/utils/browserStorage';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 interface Props {
   href: string;
@@ -10,20 +13,22 @@ interface Props {
   reverse?: boolean;
 }
 const LinkReturn = ({ href, text, icon, reverse }: Props) => {
-  const router = useRouter();
-  console.log(process.env.NEXT_PUBLIC_BASE_URL?.slice(0, -4));
-  console.log(document.referrer);
-  const handleClick = () => {
-    router.back();
-    // document.referrer.includes(`${process.env.NEXT_PUBLIC_BASE_URL?.slice(0, -4)}/search`) ? router.back() : router.push(href);
-  };
+  const [path, setPath] = useState(href);
+
+  useEffect(() => {
+    const previousPath = getSessionStorage(PREVIOUS_PATH);
+    if (previousPath) {
+      setPath(previousPath);
+    }
+  }, []);
+
   return (
-    <button onClick={handleClick} className={`${reverse && 'flex-row-reverse'} flex-center gap-12 text-16 font-medium`}>
+    <Link href={path} className={`${reverse && 'flex-row-reverse'} flex-center gap-12 text-16 font-medium`} aria-label="홈페이지로 이동">
       <div className="relative mt-4 h-24 w-12">
         <Image fill src={`/icon/${icon}.svg`} alt="" aria-hidden={true} />
       </div>
       {text}
-    </button>
+    </Link>
   );
 };
 export default LinkReturn;
