@@ -11,8 +11,11 @@ interface Props {
 }
 const LinkReturn = ({ href, text, icon, reverse }: Props) => {
   const router = useRouter();
+  console.log(process.env.NEXT_PUBLIC_BASE_URL?.slice(0, -4));
+  console.log(document.referrer);
   const handleClick = () => {
-    document.referrer.includes('localhost:3000/search') ? router.back() : router.push(href);
+    router.back();
+    // document.referrer.includes(`${process.env.NEXT_PUBLIC_BASE_URL?.slice(0, -4)}/search`) ? router.back() : router.push(href);
   };
   return (
     <button onClick={handleClick} className={`${reverse && 'flex-row-reverse'} flex-center gap-12 text-16 font-medium`}>

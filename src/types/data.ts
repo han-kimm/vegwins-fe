@@ -11,9 +11,10 @@ export type SearchItem = {
 export type Paper = {
   _id: string;
   title: string;
-  end: string;
+  end: boolean;
   category: string[];
   description: string;
+  view: number;
   writer: {
     _id: string;
     nickname: string;
