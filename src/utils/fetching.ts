@@ -32,7 +32,6 @@ export class Fetching {
 
   restoreToken = async () => {
     if (!this.#accessToken && this.#isAuth) {
-      console.log(1);
       await this.updateToken();
     }
   };
