@@ -14,14 +14,18 @@ const useFetchedState = <T>({ init, deps, path, queryKey }: Props<T>) => {
 
   useEffect(() => {
     (async () => {
-      try {
-        const res = await ajax.get({ path, queryKey });
-        setState(res);
-      } catch (e) {
-        console.error(e);
-      } finally {
-        setPending(false);
+      if (await ajax.checkAuth()) {
+        try {
+          setPending(true);
+          const res = await ajax.get({ path, queryKey });
+          setState(res);
+        } catch (e) {
+          console.error(e);
+        } finally {
+          setPending(false);
+        }
       }
+      setPending(false);
     })();
   }, deps ?? []);
 
