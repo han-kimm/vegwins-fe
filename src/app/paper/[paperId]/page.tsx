@@ -1,5 +1,4 @@
-import { Paper, PaperUser } from '@/types/data';
-import { getCookie } from '@/utils/cookie';
+import { Paper } from '@/types/data';
 import ajax from '@/utils/fetching';
 import LiftingButton from '@/components/common/LiftingButton';
 import LinkHome from '@/components/common/LinkHome';
@@ -17,11 +16,6 @@ const PaperPage = async ({ params }: Props) => {
   const { paperId } = params;
   const paperData: Paper = await ajax.get({ path: `/paper/${paperId}` });
 
-  const session = await getCookie('v_s');
-  let userData: PaperUser = { isWriter: false, rating: -1 };
-  if (session) {
-    userData = await ajax.get({ path: `/paper/${paperId}/user` });
-  }
   return (
     <div className="max-h-max min-h-dvh px-16 pb-28 pt-16">
       <header className="mb-12 flex justify-between">
@@ -31,10 +25,10 @@ const PaperPage = async ({ params }: Props) => {
       <main className="flex flex-grow animate-fadeIn flex-col gap-24">
         <Information data={paperData} />
         <div className="flex gap-20">
-          <MyRating paperRating={paperData.rating} userRating={userData.rating} paperId={paperId} />
+          <MyRating paperRating={paperData.rating} paperId={paperId} />
           <Share />
         </div>
-        <Users data={paperData} isWriter={userData.isWriter} />
+        <Users data={paperData} />
       </main>
       <LiftingButton />
     </div>

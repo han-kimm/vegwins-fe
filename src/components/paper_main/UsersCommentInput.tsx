@@ -25,7 +25,7 @@ const UsersCommentInput = ({ sessionName, recomment }: Props) => {
         </h2>
         <button
           disabled={!value}
-          className={`${value ? 'bg-black-80 text-white' : 'border-black-40 text-black-40'} shrink-0 rounded-[0.8rem] border px-8 py-4 text-12`}
+          className={`${value ? 'bg-black-80 text-white' : 'border-black-60 text-black-80'} shrink-0 rounded-[0.8rem] border px-8 py-4 text-12`}
         >
           작성 완료
         </button>

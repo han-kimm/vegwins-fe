@@ -24,10 +24,14 @@ export class Fetching {
   #baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? '';
   #isAuth = false;
 
+  getSession = async () => {
+    return await this.fetchJSON('/session');
+  };
+
   checkAuth = async () => {
     const { isAuth } = await this.fetchJSON('/authCheck');
-    console.log(isAuth);
     this.#isAuth = isAuth;
+    return isAuth;
   };
 
   restoreToken = async () => {

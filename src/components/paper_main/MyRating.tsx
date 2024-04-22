@@ -8,12 +8,11 @@ import MyRatingSelector from '@/components/paper_main/MyRatingSelector';
 
 interface Props {
   paperRating?: Paper['rating'];
-  userRating: Rating;
   paperId: string;
 }
 
-const MyRating = ({ paperRating, userRating, paperId }: Props) => {
-  const [rating, setRating] = useState<Rating>(userRating);
+const MyRating = ({ paperRating, paperId }: Props) => {
+  const [rating, setRating] = useState<Rating>(-1);
 
   useEffect(() => {
     const unAuthUserRating = getLocalStorage(`r${paperId}`);
