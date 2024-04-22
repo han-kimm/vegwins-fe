@@ -3,7 +3,7 @@
 import { RATING_MSG } from '@/constants/default';
 import { Paper, Rating } from '@/types/data';
 import { getLocalStorage } from '@/utils/localStorage';
-import { useEffect, useOptimistic, useState } from 'react';
+import { useEffect, useState } from 'react';
 import MyRatingSelector from '@/components/paper_main/MyRatingSelector';
 
 interface Props {

@@ -1,6 +1,5 @@
 import { setCookie } from '@/utils/cookie';
 import ajax from '@/utils/fetching';
-import { setLocalStorage } from '@/utils/localStorage';
 import toast from 'react-hot-toast';
 
 declare global {
@@ -13,11 +12,12 @@ const googleAuthPath = '/auth/google';
 
 const authCallback = async (response: any) => {
   try {
-    const { accessToken, refreshToken, nickname } = await ajax.post({ path: googleAuthPath, body: response });
-    setCookie({ name: 'v_rt', value: refreshToken, httpOnly: true, secure: true, sameSite: 'strict' });
-    setCookie({ name: 'v_at', value: accessToken, httpOnly: true, secure: true, sameSite: 'strict' });
-    setCookie({ name: 'v_s', value: { isAuth: true, nickname: nickname } });
-    toast.success(`${nickname}님 안녕하세요!`);
+    const { accessToken, nickname } = await ajax.post({ path: googleAuthPath, body: response });
+    if (nickname) {
+      toast.success(`${nickname}님 안녕하세요!`);
+      ajax.accessToken = accessToken;
+      setCookie({ name: 'v_s', value: { nickname: nickname }, path: '/' });
+    }
   } catch (e) {
     console.error(e);
     toast.error('다시 시도해 주세요.');

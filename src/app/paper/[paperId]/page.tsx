@@ -20,7 +20,7 @@ const PaperPage = async ({ params }: Props) => {
   const session = await getCookie('v_s');
   let userData: PaperUser = { isWriter: false, rating: -1 };
   if (session) {
-    userData = await ajax.get({ path: `/paper/${paperId}/user`, cache: 'no-store' });
+    userData = await ajax.get({ path: `/paper/${paperId}/user` });
   }
   return (
     <div className="max-h-max min-h-dvh px-16 pb-28 pt-16">
