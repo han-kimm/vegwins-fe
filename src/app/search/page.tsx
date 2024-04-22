@@ -13,7 +13,9 @@ const Search = async ({ searchParams }: Props) => {
   const { c, k } = searchParams;
   const data: Paper[] = await ajax.get({
     path: `/paper?${c ? `c=${c}` : ''}&${k ? `k=${encodeURIComponent(k)}` : ''}`,
+    cache: 'no-store',
   });
+  console.log(data);
   return (
     <div className="max-h-max min-h-dvh px-16 pb-28 pt-16">
       <header className="mb-20 flex flex-col gap-8">

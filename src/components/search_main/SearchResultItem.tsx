@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import ItemRating from '@/components/common/ItemRating';
 
-const SearchResultItem = ({ _id, imageUrl, title, hashtag, rated, end }: SearchItem) => {
+const SearchResultItem = ({ _id, imageUrl, title, hashtag, rated, end, view }: SearchItem) => {
   return (
     <Link
       href={`/paper/${_id}`}
@@ -15,7 +15,9 @@ const SearchResultItem = ({ _id, imageUrl, title, hashtag, rated, end }: SearchI
       </div>
       <div className="flex h-100 flex-grow justify-between gap-12 py-12">
         <ItemTitle title={title.length > 12 ? title.slice(0, 12) + '...' : title} hashtag={hashtag} />
-        <RatingChecker rated={rated} />
+        <div className="flex shrink-0 flex-col justify-between">
+          <RatingChecker rated={rated} />
+        </div>
       </div>
       {end && <p className="absolute left-32 text-18 font-bold">판매종료</p>}
     </Link>

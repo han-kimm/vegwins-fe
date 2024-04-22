@@ -2,9 +2,10 @@ export type SearchItem = {
   _id: string;
   title: string;
   end: string;
+  view: number;
   imageUrl?: string;
   hashtag?: string[];
-  rated?: number;
+  rated: number;
 };
 
 export type Paper = {

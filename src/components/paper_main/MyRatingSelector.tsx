@@ -12,7 +12,8 @@ interface Props {
 }
 const MyRatingSelector = ({ paperRating, paperId, rating, setRating }: Props) => {
   const changeRating = async (status: Rating) => {
-    const newValue = { rating: rating === status ? -1 : status };
+    const isSame = rating === status;
+    const newValue = { rating: isSame ? -1 : status };
     setRating(newValue);
 
     const isAuth = await ajax.checkAuth();
@@ -22,6 +23,10 @@ const MyRatingSelector = ({ paperRating, paperId, rating, setRating }: Props) =>
     }
 
     try {
+      if (isSame) {
+        await ajax.delete({ path: `/paper/${paperId}/rating`, body: { rating } });
+        return;
+      }
       await ajax.post({ path: `/paper/${paperId}/rating`, body: { ...newValue } });
     } catch {
       setRating({ rating });

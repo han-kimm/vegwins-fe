@@ -90,10 +90,22 @@ export class Fetching {
         return await this.fetchJSON(path, {
           ...init,
           method: 'POST',
-
           body: JSON.stringify(body),
         });
       }
+      return resp;
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  delete: ApiHandler = async ({ path, body }) => {
+    try {
+      const resp = await this.fetchJSON(path, {
+        method: 'DELETE',
+        body: JSON.stringify(body),
+      });
+
       return resp;
     } catch (e) {
       console.error(e);
