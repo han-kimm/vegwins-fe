@@ -13,7 +13,6 @@ const Search = async ({ searchParams }: Props) => {
   const { c, k } = searchParams;
   const data: SearchItem[] = await ajax.get({
     path: `/paper?${c ? `c=${c}` : ''}&${k ? `k=${encodeURIComponent(k)}` : ''}`,
-    cache: 'no-store',
   });
   return (
     <div className="max-h-max min-h-dvh px-16 pb-28 pt-16">
@@ -25,7 +24,7 @@ const Search = async ({ searchParams }: Props) => {
         <CategorySelector />
       </header>
       <main className="flex flex-grow flex-col gap-24">
-        <SearchResult data={data} k={k} />
+        <SearchResult data={data ?? []} {...searchParams} />
       </main>
       <LiftingButton />
     </div>

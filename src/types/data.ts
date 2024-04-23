@@ -5,6 +5,9 @@ export type SearchItem = {
   view: number;
   imageUrl?: string;
   hashtag?: string[];
+  rating?: {
+    length: number;
+  };
   rated: number;
 };
 

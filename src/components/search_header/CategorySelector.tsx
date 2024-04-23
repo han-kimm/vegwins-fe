@@ -43,7 +43,7 @@ const CategorySelect = () => {
 
 const NoSelected = () => {
   return (
-    <div className="flex-center h-full w-60 text-center text-12 text-black-40">
+    <div className="flex-center h-full w-60 text-center text-12 font-medium text-black-80">
       <p>
         설정된
         <br />

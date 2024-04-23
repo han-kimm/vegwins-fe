@@ -19,10 +19,6 @@ const UsersCommentItem = ({ comment, session, recommentId, setRecomment, r }: Pr
   const isSelected = comment._id === recommentId;
   const handleClick = () => setRecomment?.(isSelected ? null : comment);
 
-  if (r) {
-    console.log(comment);
-  }
-
   return (
     <div key={comment._id} className={`${r ? 'my-8 ml-12 border-l pl-12' : 'border-b border-black-20 pb-12'} flex flex-col`}>
       <div className="flex items-center gap-8">

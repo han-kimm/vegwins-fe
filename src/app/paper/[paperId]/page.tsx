@@ -15,7 +15,6 @@ interface Props {
 const PaperPage = async ({ params }: Props) => {
   const { paperId } = params;
   const paperData: Paper = await ajax.get({ path: `/paper/${paperId}` });
-
   return (
     <div className="max-h-max min-h-dvh px-16 pb-28 pt-16">
       <header className="mb-12 flex justify-between">

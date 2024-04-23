@@ -59,7 +59,7 @@ const SearchInput = () => {
         type="button"
         onClick={resetKeyword}
         disabled={!value}
-        className={`absolute right-16 top-1/2 -translate-y-1/2 first:h-16 first:w-16 ${value ? 'first: text-black-80' : 'text-black-40'}`}
+        className={`absolute right-16 top-1/2 -translate-y-1/2 first:h-16 first:w-16 ${value ? 'first: text-black-100' : 'text-black-80'}`}
         aria-label="검색어 지우기"
       >
         <IconBackspace />

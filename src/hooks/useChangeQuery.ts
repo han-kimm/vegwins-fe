@@ -9,16 +9,15 @@ const useChangeQuery = () => {
   const searchParams = useSearchParams();
   const createNewPath = useCallback(
     (name?: string, value?: string) => {
-      let newPath: string;
-      let newParams = searchParams.toString();
       if (name) {
+        let newParams = searchParams.toString();
         const params = new URLSearchParams(newParams);
         value ? params.set(name, value) : params.delete(name);
 
         newParams = params.toString();
+        return pathname + '?' + newParams;
       }
-      newPath = pathname + '?' + newParams;
-      return newPath;
+      return pathname;
     },
     [searchParams],
   );
