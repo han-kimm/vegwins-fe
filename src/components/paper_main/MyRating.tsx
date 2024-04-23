@@ -21,7 +21,6 @@ const MyRating = ({ paperRating, paperId }: Props) => {
 
   useEffect(() => {
     const unAuthUserRating = getLocalStorage(`r${paperId}`);
-    console.log(unAuthUserRating);
     if (unAuthUserRating) {
       setRating(unAuthUserRating);
     }

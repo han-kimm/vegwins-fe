@@ -49,7 +49,7 @@ const MyRatingSelector = ({ paperRating, paperId, rating, setRating }: Props) =>
         ))}
       </div>
       {rating !== -1 && rating > -1 && (
-        <span className="absolute bottom-4">{paperRating ? `${paperRating[rating]}명과 같은 의견이에요!` : '첫 평가 감사합니다!'}</span>
+        <span className="absolute bottom-4">{paperRating?.[rating] ? `${paperRating[rating]}명과 같은 의견이에요!` : '첫 평가 감사합니다!'}</span>
       )}
     </>
   );

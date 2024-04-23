@@ -78,7 +78,6 @@ export class Fetching {
     try {
       await this.restoreToken();
 
-      console.log('in post', this.#accessToken);
       const resp = await this.fetchJSON(path, {
         ...init,
         method: 'POST',
