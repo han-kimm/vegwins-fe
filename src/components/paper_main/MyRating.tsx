@@ -17,7 +17,7 @@ const MyRating = ({ paperRating, paperId }: Props) => {
     state: { rating },
     setState: setRating,
     pending,
-  } = useFetchedState({ init: { rating: -1 as Rating }, path: `/paper/${paperId}/rating` });
+  } = useFetchedState({ init: { rating: -1 as Rating }, path: `/paper/${paperId}/rating`, queryKey: ['rating'] });
 
   useEffect(() => {
     const unAuthUserRating = getLocalStorage(`r${paperId}`);

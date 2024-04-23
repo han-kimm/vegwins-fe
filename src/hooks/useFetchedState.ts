@@ -1,3 +1,4 @@
+import { getCookie } from '@/utils/cookie';
 import ajax from '@/utils/fetching';
 import { useEffect, useState } from 'react';
 
@@ -14,11 +15,14 @@ const useFetchedState = <T>({ init, deps, path, queryKey }: Props<T>) => {
 
   useEffect(() => {
     (async () => {
-      if (await ajax.checkAuth()) {
+      const session = await getCookie('v_s');
+      if (session) {
         try {
           setPending(true);
           const res = await ajax.get({ path, queryKey });
-          setState(res);
+          if (!res.error) {
+            setState(res);
+          }
         } catch (e) {
           console.error(e);
         } finally {
