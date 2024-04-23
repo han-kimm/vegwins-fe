@@ -19,10 +19,10 @@ const UsersCommentInput = ({ sessionName, recomment }: Props) => {
   return (
     <form className="relative w-full">
       <div className="mb-8 flex items-baseline justify-between">
-        <h2 className="flex flex-wrap items-baseline gap-4 text-14 font-bold">
+        <label htmlFor="comment" className="flex flex-wrap items-baseline gap-4 text-14 font-bold">
           {sessionName ?? <AuthSign />}
           {sessionName && recomment && <span className="rounded-full bg-black-20 px-12">{recomment?.nickname}님께 답글</span>}
-        </h2>
+        </label>
         <button
           disabled={!value}
           className={`${value ? 'bg-black-80 text-white' : 'border-black-60 text-black-80'} shrink-0 rounded-[0.8rem] border px-8 py-4 text-12`}
@@ -31,7 +31,13 @@ const UsersCommentInput = ({ sessionName, recomment }: Props) => {
           작성 완료
         </button>
       </div>
-      <textarea value={value} disabled={!sessionName} onChange={handleChange} className="h-80 w-full rounded-sm border border-black-80 p-8 text-14" />
+      <textarea
+        id="comment"
+        value={value}
+        disabled={!sessionName}
+        onChange={handleChange}
+        className="h-80 w-full rounded-sm border border-black-80 p-8 text-14"
+      />
       {!sessionName && (
         <div className="absolute left-1/2 top-2/3 -translate-x-1/2 -translate-y-1/2">
           <AuthButton />

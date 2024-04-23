@@ -1,25 +1,12 @@
-'use client';
+import { getCookie } from '@/utils/cookie';
+import UsersCommentView from '@/components/paper_main/UsersCommentView';
 
-import { MockComment } from '@/constants/mockComment';
-import { Session } from '@/types/session';
-import { useState } from 'react';
-import UsersCommentInput from '@/components/paper_main/UsersCommentInput';
-import UsersCommentItem from '@/components/paper_main/UsersCommentItem';
-
-interface Props {
-  data: MockComment;
-  session: Session;
-}
-
-const UsersComment = ({ data, session }: Props) => {
-  const [recomment, setRecomment] = useState<MockComment[number] | null>(null);
+const UsersComment = async () => {
+  const session = await getCookie('v_s');
   return (
     <article className="flex w-full flex-col gap-12 pb-12" role="group" aria-label="댓글 목록">
       <h2 className="text-18 font-bold">댓글</h2>
-      {data.map((comment) => (
-        <UsersCommentItem key={comment.id} comment={comment} session={session} recommentId={recomment?.id} setRecomment={setRecomment} />
-      ))}
-      <UsersCommentInput sessionName={session?.nickname} recomment={data.find((v) => v.id === recomment?.id) ?? null} />
+      <UsersCommentView data={[]} session={session} />
     </article>
   );
 };
