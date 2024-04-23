@@ -16,8 +16,8 @@ const AuthButton = () => {
   };
   return (
     <>
-      <button onClick={handleClick} className="flex-center gap-8 text-16 font-medium">
-        <Image src="/icon/join.svg" alt="로그인 이미지" width={24} height={24} />
+      <button type="button" onClick={handleClick} className="flex-center gap-8 text-16 font-medium" aria-label="구글 계정으로 로그인">
+        <Image src="/icon/join.svg" alt="로그인 이미지" width={24} height={24} aria-hidden />
         <span>로그인</span>
       </button>
       {open && <AuthModal closeModal={() => setOpen(false)} />}

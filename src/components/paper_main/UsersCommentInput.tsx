@@ -17,7 +17,7 @@ const UsersCommentInput = ({ sessionName, recomment }: Props) => {
   };
 
   return (
-    <div className="relative w-full animate-fadeIn">
+    <form className="relative w-full">
       <div className="mb-8 flex items-baseline justify-between">
         <h2 className="flex flex-wrap items-baseline gap-4 text-14 font-bold">
           {sessionName ?? <AuthSign />}
@@ -26,6 +26,7 @@ const UsersCommentInput = ({ sessionName, recomment }: Props) => {
         <button
           disabled={!value}
           className={`${value ? 'bg-black-80 text-white' : 'border-black-60 text-black-80'} shrink-0 rounded-[0.8rem] border px-8 py-4 text-12`}
+          aria-label="댓글 제출하기"
         >
           작성 완료
         </button>
@@ -36,7 +37,7 @@ const UsersCommentInput = ({ sessionName, recomment }: Props) => {
           <AuthButton />
         </div>
       )}
-    </div>
+    </form>
   );
 };
 export default UsersCommentInput;
