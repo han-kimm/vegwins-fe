@@ -85,7 +85,6 @@ export class Fetching {
       });
       if (resp.code === 419) {
         await this.updateToken();
-        console.log(this.#accessToken);
         return await this.fetchJSON(path, {
           ...init,
           method: 'POST',

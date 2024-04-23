@@ -34,3 +34,14 @@ export type PaperUser = {
   isWriter: boolean;
   rating: Rating;
 };
+
+export type Comment = {
+  _id: string;
+  commenter: {
+    _id: string;
+    nickname: string;
+  };
+  content: string;
+  recomment: Array<Omit<Comment, 'recomment'>>;
+  createdAt: string;
+};

@@ -6,13 +6,11 @@ interface Props {
   data: Paper;
 }
 
-const Users = async ({ data }: Props) => {
-  // comment fetching
-  // const commentData = await ajax.get({path: `/paper/${data._id}/comment`})
+const Users = ({ data }: Props) => {
   return (
     <section className="flex-center relative grow flex-col gap-20 rounded-md bg-white p-20 shadow-lg" aria-label="유저 의견">
       <UsersWriter name={data.writer.nickname} createdAt={data.createdAt} paperId={data._id} />
-      <UsersComment />
+      <UsersComment paperId={data._id} />
     </section>
   );
 };
