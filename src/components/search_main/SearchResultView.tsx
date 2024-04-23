@@ -1,5 +1,5 @@
 import { SearchItem } from '@/types/data';
-import Link from 'next/link';
+import ajax from '@/utils/fetching';
 import { Fragment } from 'react';
 import SearchResultEmpty from '@/components/search_main/SearchResultEmpty';
 import SearchResultItem from '@/components/search_main/SearchResultItem';
@@ -8,10 +8,14 @@ import SearchResultReset from '@/components/search_main/SearchResultReset';
 interface Props {
   c?: string;
   k?: string;
-  data: SearchItem[];
 }
 
-const SearchResultView = ({ c, k, data }: Props) => {
+const SearchResultView = async ({ c, k }: Props) => {
+  const data: SearchItem[] = await ajax.get({
+    path: `/paper?${c ? `c=${c}` : ''}&${k ? `k=${encodeURIComponent(k)}` : ''}`,
+    cache: 'no-cache',
+  });
+
   const setLabel = () => {
     if (c && k) {
       return `${c}: "${k}" 검색 결과(${data.length})`;

@@ -1,9 +1,7 @@
-import { SearchItem } from '@/types/data';
 import { Suspense } from 'react';
 import SearchResultView from '@/components/search_main/SearchResultView';
 
 interface Props {
-  data: SearchItem[];
   c?: string;
   k?: string;
 }

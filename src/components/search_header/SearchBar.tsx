@@ -40,7 +40,6 @@ const SearchInput = () => {
   return (
     <form onSubmit={handleSubmit} className="relative w-full" aria-label="검색어 입력">
       <input
-        autoFocus
         value={value}
         onChange={handleChange}
         type="search"
