@@ -3,7 +3,7 @@ import ajax from '@/utils/fetching';
 import { ErrorBoundary } from 'next/dist/client/components/error-boundary';
 import Link from 'next/link';
 import { Fragment } from 'react';
-import ApiErrorBoundary from '@/components/common/ApiErrorBoundary';
+import ApiErrorBoundary from '@/components/errorHandling/ApiErrorBoundary';
 import SearchResultEmpty from '@/components/search_main/SearchResultEmpty';
 import SearchResultItem from '@/components/search_main/SearchResultItem';
 import SearchResultReset from '@/components/search_main/SearchResultReset';

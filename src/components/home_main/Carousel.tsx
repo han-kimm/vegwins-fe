@@ -29,14 +29,14 @@ interface SlideProps {
   selectedIndex: number;
 }
 
-const CarouselSlide = ({ data, selectedIndex }: SlideProps) => {
+const CarouselSlide = ({ data }: SlideProps) => {
   return (
     <div className="flex h-200" role="marquee">
       {data.map((data, i, arr) => (
         <Link
           href={data.href}
           key={i}
-          className={`relative flex w-full flex-shrink-0 p-28 ${data.className}`}
+          className={`${data.className} relative flex w-full flex-shrink-0 p-28`}
           aria-label={`${arr.length}번째 중 ${i + 1}번째 슬라이드: ${data.title}로 이동`}
         >
           <Image fill priority sizes="(min-width: 500px) 500px, 250px" src={data.imageUrl} alt="" className="object-cover" aria-hidden />

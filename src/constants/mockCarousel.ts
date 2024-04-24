@@ -4,14 +4,14 @@ export const MOCK = [
     title: '봄 맞이 추천 제품',
     className: 'items-end',
     imageUrl: '/image/blossom.avif',
-    href: '/search?k=#봄',
+    href: `/search?k=%23봄`,
   },
   {
     id: 3,
     title: '젤리 추천 제품',
     className: 'items-end',
     imageUrl: '/image/haribo.jpg',
-    href: '/search?k=#젤리',
+    href: `/search?k=%23젤리`,
   },
 ];
 

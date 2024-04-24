@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import ApiErrorBoundary from '@/components/common/ApiErrorBoundary';
+import ApiErrorBoundary from '@/components/errorHandling/ApiErrorBoundary';
 import SearchResultView from '@/components/search_main/SearchResultView';
 
 interface Props {
