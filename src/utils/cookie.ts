@@ -27,3 +27,7 @@ export const getCookie = (key: string) => {
   }
   return value[0] === '{' ? JSON.parse(value) : value;
 };
+
+export const deleteCookie = (key: string) => {
+  cookies().delete(key);
+};
