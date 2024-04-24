@@ -13,7 +13,7 @@ const InformationContent = ({ label, value }: { label: string; value: string | s
     case LABEL.category:
       if (typeof value === 'object') {
         SwitchedComponent = (
-          <div className="flex flex-wrap gap-16 text-black-80">
+          <div className="flex flex-wrap gap-16">
             {value.map((v) => (
               <Link href={`/search?${SP_CATEGORY}=${v}`} key={v} className="transform-active">
                 <IconBase key={v} name={v} render={CATEGORY[v]} fontSize={12} />
@@ -31,7 +31,7 @@ const InformationContent = ({ label, value }: { label: string; value: string | s
               <Link
                 href={`/search?${SP_KEYWORD}=${encodeURIComponent(tag)}`}
                 key={tag}
-                className="transform-active shrink-0 rounded-full border border-black-40 px-8 active:bg-black-20"
+                className="transform-active shrink-0 rounded-full border border-black-100 px-8 active:bg-black-100 active:text-white"
               >
                 {tag}
               </Link>
@@ -50,7 +50,7 @@ const InformationContent = ({ label, value }: { label: string; value: string | s
             width={300}
             height={300}
             priority
-            sizes="300px"
+            sizes="600px"
             src={value ?? DEFAULT_IMAGE}
             alt=""
             className="mx-auto rounded-md object-cover"

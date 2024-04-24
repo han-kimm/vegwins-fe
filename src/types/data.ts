@@ -45,6 +45,6 @@ export type Comment = {
     nickname: string;
   };
   content: string;
-  recomment: Array<Omit<Comment, 'recomment'>>;
+  recomment: Comment[];
   createdAt: string;
 };
