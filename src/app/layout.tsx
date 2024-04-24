@@ -5,13 +5,16 @@ import './globals.css';
 
 export default function RootLayout({
   children,
+  dashboard,
 }: Readonly<{
   children: React.ReactNode;
+  dashboard: React.ReactNode;
 }>) {
   return (
     <html lang="ko">
       <body className={NotoSansKR.className}>
         {children}
+        {dashboard}
         <div id="modal" />
         <Toaster toastOptions={toasterOptions} />
       </body>

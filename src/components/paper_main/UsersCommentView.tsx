@@ -12,7 +12,7 @@ interface Props {
 }
 
 const UsersCommentView = ({ data, session }: Props) => {
-  const [recomment, setRecomment] = useState<Omit<Comment, 'recomment'> | null>(null);
+  const [recomment, setRecomment] = useState<Comment | null>(null);
 
   return (
     <>
