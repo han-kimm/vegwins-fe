@@ -43,17 +43,25 @@ const WriteForm = () => {
   };
 
   const router = useRouter();
+  const [pending, setPending] = useState(false);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    if (pending) {
+      return;
+    }
 
     try {
+      setPending(true);
       const post = await ajax.post({ path: '/paper', body: { ...submitData, hashtag: [...submitData.hashtag] } });
       if (!post.error) {
         router.push(`/paper/${post.paperId}`);
       }
     } catch (e) {
+      toast.error('다시 시도해주십시오.');
       console.error(e);
+    } finally {
+      setPending(false);
     }
   };
 
