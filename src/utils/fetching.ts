@@ -23,23 +23,19 @@ export class Fetching {
     this.#accessToken = token;
   }
   #baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? '';
-  #isAuth = false;
-
-  getSession = async () => {
-    return await this.fetchJSON('/session');
-  };
+  isAuth = false;
 
   checkAuth = async () => {
     const res = await this.fetchJSON('/authCheck');
     if (res) {
-      this.#isAuth = res.isAuth;
+      this.isAuth = res.isAuth;
       return res.isAuth;
     }
     return false;
   };
 
   restoreToken = async () => {
-    if (!this.#accessToken && this.#isAuth) {
+    if (!this.#accessToken && this.isAuth) {
       await this.updateToken();
     }
   };

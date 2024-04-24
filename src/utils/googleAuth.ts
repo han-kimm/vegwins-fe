@@ -17,6 +17,7 @@ const authCallback = async (response: any) => {
       toast.success(`${nickname}님 안녕하세요!`);
       ajax.accessToken = accessToken;
       setCookie({ name: 'v_s', value: { nickname: nickname }, path: '/' });
+      ajax.isAuth = true;
     }
   } catch (e) {
     console.error(e);
