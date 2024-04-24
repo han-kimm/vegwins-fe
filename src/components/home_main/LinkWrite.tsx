@@ -12,10 +12,10 @@ const LinkWrite = async () => {
         className={`${session ? '' : 'active:bg-orange'} transform-active flex grow items-start justify-between rounded-sm bg-white px-20 py-28 shadow-md`}
       >
         <div>
-          <p className="mb-28 text-start text-18 font-bold">문서 작성</p>
+          <p className="text-start text-18 font-bold">문서 작성</p>
           {session ? null : <AuthSign />}
         </div>
-        <Image width={32} height={55} src="/icon/pencil.svg" alt="작성 이미지" aria-hidden={true} />
+        <Image width={32} height={32} src="/icon/pencil.svg" alt="작성 이미지" aria-hidden={true} />
       </Link>
     </section>
   );

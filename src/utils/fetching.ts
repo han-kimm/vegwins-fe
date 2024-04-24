@@ -11,6 +11,10 @@ type ApiHandler = (params: HandlerParams) => Promise<any>;
 
 export class Fetching {
   constructor() {
+    const isSSR = typeof window === 'undefined';
+    if (isSSR) {
+      return;
+    }
     this.checkAuth();
   }
 
@@ -46,29 +50,33 @@ export class Fetching {
   };
 
   fetchJSON = async (...params: Parameters<Fetch>) => {
-    return await fetch(this.#baseUrl + params[0], {
-      ...params[1],
-      ...{
-        headers: {
-          'content-type': 'application/json',
-          authorization: 'bearer' + ' ' + `${this.#accessToken}`,
+    await this.restoreToken();
+
+    const wrappedFetch = () =>
+      fetch(this.#baseUrl + params[0], {
+        ...{
+          headers: {
+            'content-type': 'application/json',
+            authorization: 'bearer' + ' ' + `${this.#accessToken}`,
+          },
         },
-      },
-    })
-      .then((resp) => resp.json())
-      .catch((err) => console.error(err));
+        ...params[1],
+      }).then((resp) => resp.json());
+    const res = await wrappedFetch();
+    if (res.code === 419) {
+      await this.updateToken();
+      const refetchRes = await wrappedFetch();
+      return refetchRes;
+    }
+    if (res.error) {
+      throw Error(res.error);
+    }
+    return res;
   };
 
   get: ApiHandler = async ({ path, queryKey, revalidate, ...init }) => {
     try {
-      await this.restoreToken();
-
-      const resp = await this.fetchJSON(path, { ...init, next: { revalidate, tags: queryKey } });
-      if (resp.code === 419) {
-        await this.updateToken();
-        return await this.fetchJSON(path, { ...init, next: { revalidate, tags: queryKey } });
-      }
-      return resp;
+      return await this.fetchJSON(path, { ...init, next: { revalidate, tags: queryKey } });
     } catch (e) {
       console.error(e);
     }
@@ -76,22 +84,11 @@ export class Fetching {
 
   post: ApiHandler = async ({ path, body, ...init }) => {
     try {
-      await this.restoreToken();
-
-      const resp = await this.fetchJSON(path, {
+      return await this.fetchJSON(path, {
         ...init,
         method: 'POST',
         body: JSON.stringify(body),
       });
-      if (resp.code === 419) {
-        await this.updateToken();
-        return await this.fetchJSON(path, {
-          ...init,
-          method: 'POST',
-          body: JSON.stringify(body),
-        });
-      }
-      return resp;
     } catch (e) {
       console.error(e);
     }
@@ -99,12 +96,10 @@ export class Fetching {
 
   delete: ApiHandler = async ({ path, body }) => {
     try {
-      const resp = await this.fetchJSON(path, {
+      return await this.fetchJSON(path, {
         method: 'DELETE',
         body: JSON.stringify(body),
       });
-
-      return resp;
     } catch (e) {
       console.error(e);
     }

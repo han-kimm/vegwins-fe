@@ -6,5 +6,5 @@ export const GET = async (req: NextRequest) => {
     return Response.json(null);
   }
   const session = JSON.parse(value);
-  return Response.json({ ...session });
+  return Response.json(session);
 };
