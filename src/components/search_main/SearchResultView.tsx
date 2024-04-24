@@ -1,11 +1,7 @@
 import { SearchItem } from '@/types/data';
 import ajax from '@/utils/fetching';
-import { ErrorBoundary } from 'next/dist/client/components/error-boundary';
-import Link from 'next/link';
-import { Fragment } from 'react';
-import ApiErrorBoundary from '@/components/errorHandling/ApiErrorBoundary';
 import SearchResultEmpty from '@/components/search_main/SearchResultEmpty';
-import SearchResultItem from '@/components/search_main/SearchResultItem';
+import SearchResultItemList from '@/components/search_main/SearchResultItemList';
 import SearchResultReset from '@/components/search_main/SearchResultReset';
 
 interface Props {
@@ -16,27 +12,16 @@ interface Props {
 const SearchResultView = async ({ c, k }: Props) => {
   const data: SearchItem[] = await ajax.get({
     path: `/paper?${c ? `c=${c}` : ''}&${k ? `k=${encodeURIComponent(k)}` : ''}`,
-    revalidate: 300,
+    cache: 'no-cache',
   });
 
   return (
     <section className="flex flex-grow flex-col" aria-label="검색 목록">
-      <div className="mb-12 ml-20 flex items-center">
+      <div className="mb-12 ml-20 flex flex-wrap items-center justify-between">
         <h1 className="text-18 font-bold">{setLabel(data, c, k)}</h1>
         {data && (!!c || !!k) && <SearchResultReset />}
       </div>
-      {data.length ? (
-        <div className="flex w-full flex-col rounded-md bg-white px-16 shadow-lg" role="group">
-          {data.map((data, i) => (
-            <Fragment key={data._id}>
-              {!i || <hr className="border-black-60" />}
-              <SearchResultItem {...data} />
-            </Fragment>
-          ))}
-        </div>
-      ) : (
-        <SearchResultEmpty />
-      )}
+      {data.length ? <SearchResultItemList data={data} /> : <SearchResultEmpty />}
     </section>
   );
 };

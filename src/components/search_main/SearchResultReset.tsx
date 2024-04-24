@@ -8,8 +8,13 @@ const SearchResultReset = () => {
     sessionStorage.removeItem(PREVIOUS_PATH);
   };
   return (
-    <Link href="/search" onClick={handleClick} className="ml-8 text-12 font-bold text-sky" aria-label="검색 결과 초기화">
-      모든 검색 초기화
+    <Link
+      href="/search"
+      onClick={handleClick}
+      className="ml-8 rounded-full bg-black-100 px-8 py-4 text-12 font-bold text-white"
+      aria-label="검색 결과 초기화"
+    >
+      검색 초기화
     </Link>
   );
 };
