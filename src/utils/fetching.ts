@@ -50,8 +50,6 @@ export class Fetching {
   };
 
   fetchJSON = async (...params: Parameters<Fetch>) => {
-    await this.restoreToken();
-
     const wrappedFetch = () =>
       fetch(this.#baseUrl + params[0], {
         ...{
@@ -76,6 +74,8 @@ export class Fetching {
 
   get: ApiHandler = async ({ path, queryKey, revalidate, ...init }) => {
     try {
+      await this.restoreToken();
+
       return await this.fetchJSON(path, { ...init, next: { revalidate, tags: queryKey } });
     } catch (e) {
       console.error(e);
@@ -84,6 +84,8 @@ export class Fetching {
 
   post: ApiHandler = async ({ path, body, ...init }) => {
     try {
+      await this.restoreToken();
+
       return await this.fetchJSON(path, {
         ...init,
         method: 'POST',
@@ -96,6 +98,8 @@ export class Fetching {
 
   delete: ApiHandler = async ({ path, body }) => {
     try {
+      await this.restoreToken();
+
       return await this.fetchJSON(path, {
         method: 'DELETE',
         body: JSON.stringify(body),
