@@ -1,14 +1,11 @@
-import Link from 'next/link';
 import Notice from '@/components/home_header/Notice';
-import IconProfile from 'public/icon/profile.svg';
+import Profile from '@/components/home_header/Profile';
 
 const AuthAfter = () => {
   return (
     <>
       <Notice />
-      <Link href="/profile" className="ml-60">
-        <IconProfile />
-      </Link>
+      <Profile />
     </>
   );
 };

@@ -8,7 +8,7 @@ import LinkWrite from '@/components/home_main/LinkWrite';
 export default function Home() {
   return (
     <div className="max-h-max min-h-dvh">
-      <header className="flex h-60 w-full items-center justify-end px-40 py-20">
+      <header className="flex h-60 w-full items-center justify-end gap-60 px-40 py-20">
         <AuthChecker />
       </header>
       <main className="flex-center mb-100 flex-col gap-28">
