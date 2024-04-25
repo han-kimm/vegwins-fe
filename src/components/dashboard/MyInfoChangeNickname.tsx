@@ -23,6 +23,11 @@ const MyInfoChangeNickname = () => {
 
     try {
       setPending(true);
+      const { nickname: currentNickname } = await ajax.get({ path: '/session' });
+      if (currentNickname === value) {
+        setError({ message: '현재 닉네임과 다르게 입력해 주십시오.' });
+        return;
+      }
       const { nickname, error } = await ajax.put({ path: '/user/nickname', body: { newNickname: value } });
       if (error) {
         setError({ message: error });
