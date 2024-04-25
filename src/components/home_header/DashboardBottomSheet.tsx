@@ -10,6 +10,10 @@ const DashboardBottomSheet = ({ children }: Props) => {
   const [open, setOpen] = useState(false);
   const [focus, setFocus] = useState(false);
 
+  const closeByBlur = () => {
+    setOpen(false);
+  };
+
   const buttonClick = () => {
     if (focus) {
       setOpen(false);
@@ -19,10 +23,6 @@ const DashboardBottomSheet = ({ children }: Props) => {
     setOpen((prev) => !prev);
   };
 
-  const buttonBlur = () => {
-    setOpen(false);
-  };
-
   const sheetFocus = () => {
     setOpen(true);
     setFocus(true);
@@ -30,12 +30,14 @@ const DashboardBottomSheet = ({ children }: Props) => {
 
   return (
     <>
-      <button onClick={buttonClick} onBlur={buttonBlur} aria-label="내 정보 모아보기">
+      <button onClick={buttonClick} onBlur={closeByBlur} aria-label="내 정보 모아보기">
         <IconProfile />
       </button>
       <div
+        tabIndex={0}
         id="bottomsheet"
         onFocus={sheetFocus}
+        onBlur={closeByBlur}
         className={`${open ? 'bottom-0' : '-bottom-300'} fixed left-0 z-20 flex h-max w-full max-w-[50rem] animate-slideDown flex-col rounded-t-md bg-white shadow-bt transition-all duration-300 max:mx-[calc(50%-25rem)]`}
       >
         {children}
