@@ -8,7 +8,7 @@ const Dashboard = async () => {
     return null;
   }
   return (
-    <div className="flex flex-col gap-20 px-28">
+    <div className="mb-20 flex flex-col gap-20 px-16">
       <Nickname session={session} />
       <DashboardMyInfo />
     </div>

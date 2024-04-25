@@ -12,7 +12,7 @@ const Logout = () => {
   };
 
   return (
-    <button onClick={logout} className="flex-center start- col-start-2 gap-8 text-18 font-bold">
+    <button onClick={logout} className="flex-center start- col-start-2 gap-8">
       <IconLogout />
       로그아웃
     </button>
