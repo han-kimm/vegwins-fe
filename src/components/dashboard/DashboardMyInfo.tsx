@@ -11,7 +11,7 @@ const DashboardMyInfo = () => {
   return tab ? (
     <MyInfo tab={tab} setTab={setTab} />
   ) : (
-    <div className="grid grid-cols-2 place-items-center gap-y-28 text-16 font-bold">
+    <div className="mb-20 grid grid-cols-2 place-items-center gap-y-28 text-16 font-bold">
       <TabList setTab={setTab} />
       <Logout />
     </div>

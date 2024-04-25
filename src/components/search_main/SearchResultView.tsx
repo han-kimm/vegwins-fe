@@ -28,13 +28,14 @@ const SearchResultView = async ({ c, k }: Props) => {
 export default SearchResultView;
 
 const setLabel = (data: SearchItem[], c?: string, k?: string) => {
+  const length = data.length || 0;
   if (c && k) {
-    return `${c}: "${k}" 검색 결과(${data.length})`;
+    return `${c}: "${k}" 검색 결과(${length})`;
   } else if (c) {
-    return `${c}: 검색 결과(${data.length})`;
+    return `${c}: 검색 결과(${length})`;
   } else if (k) {
-    return `"${k}" 검색 결과(${data.length})`;
-  } else if (data.length) {
+    return `"${k}" 검색 결과(${length})`;
+  } else if (length) {
     return '최근 작성된 문서';
   }
 };

@@ -4,11 +4,12 @@ import SearchResultItem from '@/components/search_main/SearchResultItem';
 
 interface Props {
   data: SearchItem[];
+  my?: boolean;
 }
 
-const SearchResultItemList = ({ data }: Props) => {
+const SearchResultItemList = ({ data, my = false }: Props) => {
   return (
-    <div className="flex w-full flex-col rounded-md bg-white px-16 shadow-lg" role="group">
+    <div className={`${my ? '' : 'rounded-md px-16 shadow-lg'} flex w-full flex-col bg-white`} role="group">
       {data.map((data, i) => (
         <Fragment key={data._id}>
           {!i || <hr className="border-black-60" />}

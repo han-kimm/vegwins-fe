@@ -40,22 +40,19 @@ const MyInfoChangeNickname = () => {
     }
   };
   return (
-    <div className="relative mb-60 mt-40 flex flex-col gap-12 text-18">
-      <h3 className="text-20 font-bold">닉네임 변경하기</h3>
-      <div className="relative flex gap-12">
-        <input
-          value={value}
-          onChange={handleChange}
-          onKeyUp={(e: KeyboardEvent) => e.code === 'Enter' && nicknameChange()}
-          className={`${error.message ? 'border-red-600' : 'border-black-100'} w-full rounded-sm border px-12 font-bold`}
-        />
-        <button onClick={nicknameChange} className="shrink-0 rounded-sm bg-black-100 p-8 text-white">
-          변경하기
-        </button>
-        <span className={`${error.message ? 'text-red-600' : ''} absolute -bottom-28 ml-8 text-16 font-medium`}>
-          {error.message || '2-15자 이내, 특수문자 및 초성 금지'}
-        </span>
-      </div>
+    <div className="relative flex gap-12">
+      <input
+        value={value}
+        onChange={handleChange}
+        onKeyUp={(e: KeyboardEvent) => e.code === 'Enter' && nicknameChange()}
+        className={`${error.message ? 'border-red-600' : 'border-black-100'} w-full rounded-sm border px-12 text-18 font-bold`}
+      />
+      <button onClick={nicknameChange} className="shrink-0 rounded-sm bg-black-100 p-8 text-18 text-white">
+        변경하기
+      </button>
+      <span className={`${error.message ? 'text-red-600' : ''} absolute -bottom-28 ml-8 text-16 font-medium`}>
+        {error.message || '2-15자 이내, 특수문자 및 초성 금지'}
+      </span>
     </div>
   );
 };
