@@ -15,6 +15,9 @@ const config: Config = {
   content: ['./src/pages/**/*.{js,ts,jsx,tsx,mdx}', './src/components/**/*.{js,ts,jsx,tsx,mdx}', './src/app/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     extend: {
+      screens: {
+        max: '500px',
+      },
       spacing: PX_ENTRIES,
       borderRadius: {
         none: '0rem',
@@ -56,8 +59,8 @@ const config: Config = {
           '100%': { opacity: '1' },
         },
         slideDown: {
-          '0%': { transform: 'translateX(-50%) translateY(100%)', opacity: '0' },
-          '100%': { transform: 'translateX(-50%) translateY(0)', opacity: '1' },
+          '0%': { transform: 'translateY(100%)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
         },
       },
       animation: {
