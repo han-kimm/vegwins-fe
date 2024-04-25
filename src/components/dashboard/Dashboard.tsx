@@ -1,6 +1,6 @@
 import { getCookie } from '@/utils/cookie';
 import DashboardMyInfo from '@/components/dashboard/DashboardMyInfo';
-import Nickname from '@/components/dashboard/Nickname';
+import DashboardNickname from '@/components/dashboard/DashboardNickname';
 
 const Dashboard = async () => {
   const session = await getCookie('v_s');
@@ -9,7 +9,7 @@ const Dashboard = async () => {
   }
   return (
     <div className="flex flex-col gap-20 overflow-hidden px-16">
-      <Nickname session={session} />
+      <DashboardNickname session={session} />
       <DashboardMyInfo />
     </div>
   );

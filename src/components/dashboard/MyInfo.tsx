@@ -2,9 +2,15 @@ import Image from 'next/image';
 import { Suspense } from 'react';
 import Spinner from '@/components/common/Spinner';
 import MyInfoChangeNickname from '@/components/dashboard/MyInfoChangeNickname';
+import MyInfoComment from '@/components/dashboard/MyInfoComment';
 import MyInfoPaper from '@/components/dashboard/MyInfoPaper';
 
-const MyInfo = ({ tab, setTab }: { tab: string; setTab: (tab: string) => void }) => {
+interface Props {
+  tab: string;
+  setTab: (tab: string) => void;
+}
+
+const MyInfo = ({ tab, setTab }: Props) => {
   let SwitchedComponent;
   switch (tab) {
     case '닉네임 변경':
@@ -12,6 +18,9 @@ const MyInfo = ({ tab, setTab }: { tab: string; setTab: (tab: string) => void })
       break;
     case '나의 문서':
       SwitchedComponent = <MyInfoPaper />;
+      break;
+    case '나의 댓글':
+      SwitchedComponent = <MyInfoComment />;
       break;
   }
 
