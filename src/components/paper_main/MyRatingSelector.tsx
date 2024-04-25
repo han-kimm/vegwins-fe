@@ -3,6 +3,7 @@ import { Paper, Rating } from '@/types/data';
 import { setLocalStorage } from '@/utils/browserStorage';
 import ajax from '@/utils/fetching';
 import Image from 'next/image';
+import toast from 'react-hot-toast';
 
 interface Props {
   paperRating?: Paper['rating'];
@@ -25,9 +26,11 @@ const MyRatingSelector = ({ paperRating, paperId, rating, setRating }: Props) =>
     try {
       if (isSame) {
         await ajax.delete({ path: `/paper/${paperId}/rating`, body: { rating } });
+        toast.success('평가 반영 완료!');
         return;
       }
       await ajax.post({ path: `/paper/${paperId}/rating`, body: { ...newValue } });
+      toast.success('평가 반영 완료!');
     } catch {
       setRating({ rating });
     }

@@ -4,6 +4,7 @@ import Spinner from '@/components/common/Spinner';
 import MyInfoChangeNickname from '@/components/dashboard/MyInfoChangeNickname';
 import MyInfoComment from '@/components/dashboard/MyInfoComment';
 import MyInfoPaper from '@/components/dashboard/MyInfoPaper';
+import MyInfoRating from '@/components/dashboard/MyInfoRating';
 
 interface Props {
   tab: string;
@@ -21,6 +22,9 @@ const MyInfo = ({ tab, setTab }: Props) => {
       break;
     case '나의 댓글':
       SwitchedComponent = <MyInfoComment />;
+      break;
+    case '나의 평가':
+      SwitchedComponent = <MyInfoRating />;
       break;
   }
 
