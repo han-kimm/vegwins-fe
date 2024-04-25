@@ -46,26 +46,28 @@ export class Fetching {
   };
 
   fetchJSON = async (...params: Parameters<Fetch>) => {
-    const wrappedFetch = () =>
-      fetch(this.#baseUrl + params[0], {
-        ...{
-          headers: {
-            'content-type': 'application/json',
-            authorization: 'bearer' + ' ' + `${this.#accessToken}`,
+    try {
+      const wrappedFetch = () =>
+        fetch(this.#baseUrl + params[0], {
+          ...{
+            headers: {
+              'content-type': 'application/json',
+              authorization: 'bearer' + ' ' + `${this.#accessToken}`,
+            },
           },
-        },
-        ...params[1],
-      }).then((resp) => resp.json());
-    const res = await wrappedFetch();
-    if (res.code === 419) {
-      await this.updateToken();
-      const refetchRes = await wrappedFetch();
-      return refetchRes;
+          ...params[1],
+        }).then((resp) => resp.json());
+      const res = await wrappedFetch();
+      if (res.code === 419) {
+        await this.updateToken();
+        const refetchRes = await wrappedFetch();
+        return refetchRes;
+      }
+      return res;
+    } catch (e) {
+      console.error(e);
+      return {};
     }
-    if (res.error) {
-      throw Error(res.error);
-    }
-    return res;
   };
 
   get: ApiHandler = async ({ path, queryKey, revalidate, ...init }) => {
@@ -90,6 +92,16 @@ export class Fetching {
     } catch (e) {
       console.error(e);
     }
+  };
+
+  put: ApiHandler = async ({ path, body, ...init }) => {
+    await this.restoreToken();
+
+    return await this.fetchJSON(path, {
+      ...init,
+      method: 'PUT',
+      body: JSON.stringify(body),
+    });
   };
 
   delete: ApiHandler = async ({ path, body }) => {

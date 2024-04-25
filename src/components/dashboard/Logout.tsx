@@ -7,8 +7,8 @@ import IconLogout from 'public/icon/logout.svg';
 const Logout = () => {
   const logout = async () => {
     ajax.isAuth = false;
-    setCookie({ name: 'v_rt', value: '', maxAge: 1, path: '/api/refresh' });
-    deleteCookie('v_s');
+    await setCookie({ name: 'v_rt', value: '', maxAge: 1, path: '/api/refresh' });
+    await deleteCookie('v_s');
   };
 
   return (

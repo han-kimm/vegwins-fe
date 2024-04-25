@@ -1,8 +1,7 @@
 import dynamic from 'next/dynamic';
+import Dashboard from '@/components/dashboard/Dashboard';
 import DashboardBottomSheet from '@/components/home_header/DashboardBottomSheet';
 import Notice from '@/components/home_header/Notice';
-
-const Dashboard = dynamic(() => import('../dashboard/Dashboard'));
 
 const AuthAfter = () => {
   return (

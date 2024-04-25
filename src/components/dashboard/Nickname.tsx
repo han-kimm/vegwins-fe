@@ -6,9 +6,11 @@ interface Props {
 
 const Nickname = ({ session }: Props) => {
   return (
-    <div className="flex text-20">
-      <h2 className="font-bold">{session?.nickname}</h2>
-      <span>님 안녕하세요!</span>
+    <div className="flex-center text-20">
+      <p className="inline-block">
+        <strong>{session?.nickname}</strong>
+        님, 안녕하세요!
+      </p>
     </div>
   );
 };

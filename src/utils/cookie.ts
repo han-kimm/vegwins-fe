@@ -7,7 +7,7 @@ interface Args extends ResponseCookie {
   value: any;
 }
 
-export const setCookie = ({ ...args }: Args) => {
+export const setCookie = async ({ ...args }: Args) => {
   const { path, value, maxAge, httpOnly, secure, sameSite } = args;
   const cookieStore = cookies();
   cookieStore.set(args.name, typeof value === 'string' ? value : JSON.stringify(value), {
@@ -19,7 +19,7 @@ export const setCookie = ({ ...args }: Args) => {
   });
 };
 
-export const getCookie = (key: string) => {
+export const getCookie = async (key: string) => {
   const cookieStore = cookies();
   const value = cookieStore.get(key)?.value;
   if (!value) {
@@ -28,6 +28,6 @@ export const getCookie = (key: string) => {
   return value[0] === '{' ? JSON.parse(value) : value;
 };
 
-export const deleteCookie = (key: string) => {
+export const deleteCookie = async (key: string) => {
   cookies().delete(key);
 };

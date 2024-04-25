@@ -32,6 +32,7 @@ const config: Config = {
         sm: '0px 6px 12px 2px rgba(0, 0, 0, 0.10)',
         md: '0px 10px 20px 4px rgba(0, 0, 0, 0.10)',
         lg: '0px 8px 20px 0px rgba(0, 0, 0, 0.20)',
+        bt: '0px -4px 40px 4px rgba(0, 0, 0, 0.10)',
       },
       colors: {
         black: {
