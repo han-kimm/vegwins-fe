@@ -2,7 +2,7 @@
 
 import { ErrorBoundary, ErrorComponent } from 'next/dist/client/components/error-boundary';
 import { ReactNode, useEffect } from 'react';
-import Spinner from '@/components/common/Spinner';
+import Spinner from '@/components/errorHandling/Spinner';
 
 interface Props {
   children: ReactNode;

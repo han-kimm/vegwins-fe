@@ -1,21 +1,30 @@
 'use client';
 
-import { TABS, TABS_KEY } from '@/constants/dashboard';
-import Image from 'next/image';
+import { Session } from '@/types/session';
 import { useState } from 'react';
 import Logout from '@/components/dashboard/Logout';
 import MyInfo from '@/components/dashboard/MyInfo';
 import MyInfoTabList from '@/components/dashboard/MyInfoTabList';
+import MyInfoTitle from '@/components/dashboard/MyInfoTitle';
 
-const DashboardMyInfo = () => {
+interface Props {
+  session: Session;
+}
+
+const DashboardMyInfo = ({ session }: Props) => {
   const [tab, setTab] = useState('');
-  return tab ? (
-    <MyInfo tab={tab} setTab={setTab} />
-  ) : (
-    <div className="mb-20 grid grid-cols-2 place-items-center gap-y-28 text-16 font-bold">
-      <MyInfoTabList setTab={setTab} />
-      <Logout />
-    </div>
+  return (
+    <>
+      <MyInfoTitle session={session} tab={tab} />
+      {tab ? (
+        <MyInfo tab={tab} setTab={setTab} />
+      ) : (
+        <div className="mb-20 grid grid-cols-2 place-items-center gap-y-28 text-16 font-bold">
+          <MyInfoTabList setTab={setTab} />
+          <Logout />
+        </div>
+      )}
+    </>
   );
 };
 export default DashboardMyInfo;

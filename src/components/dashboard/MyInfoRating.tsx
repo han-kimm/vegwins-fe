@@ -1,15 +1,18 @@
 import useFetchedState from '@/hooks/useFetchedState';
 import { Rating, SearchItem } from '@/types/data';
 import { Fragment, useState } from 'react';
-import MyRating from '@/components/paper_main/MyRating';
+import DeferredSpinner from '@/components/errorHandling/DeferredSpinner';
 import MyRatingSelector from '@/components/paper_main/MyRatingSelector';
 import SearchResultItem from '@/components/search_main/SearchResultItem';
 
 const MyInfoRating = () => {
-  const { state: myRating } = useFetchedState<{ rating: Rating; _id: SearchItem }[]>({ init: [], path: '/user/rating', deps: [] });
-  console.log(myRating);
+  const { state: myRating, pending } = useFetchedState<{ rating: Rating; _id: SearchItem }[]>({ init: [], path: '/user/rating', deps: [] });
+
+  if (pending) {
+    return <DeferredSpinner />;
+  }
   return (
-    <div className="flex flex-col gap-20">
+    <div className="scrollbar flex h-400 flex-col gap-20 overflow-y-scroll pr-20">
       {myRating.map((data, i) => (
         <Fragment key={data._id._id}>
           {!!i && <hr className="border-black-100" />}
