@@ -3,8 +3,11 @@
 import { ReactNode, useState } from 'react';
 import IconProfile from 'public/icon/profile.svg';
 
-const Profile = ({ children }: { children: ReactNode }) => {
-  const [open, setOpen] = useState(false);
+interface Props {
+  children: ReactNode;
+}
+const DashboardBottomSheet = ({ children }: Props) => {
+  const [open, setOpen] = useState(true);
   const [focus, setFocus] = useState(false);
 
   const buttonClick = () => {
@@ -31,10 +34,11 @@ const Profile = ({ children }: { children: ReactNode }) => {
         <IconProfile />
       </button>
       <div
+        id="bottomsheet"
         onFocus={sheetFocus}
         className={`${open ? 'bottom-0' : '-bottom-300'} fixed left-0 flex h-300 w-full max-w-[50rem] animate-slideDown flex-col rounded-t-lg bg-white shadow-lg transition-all  max:mx-[calc(50%-25rem)]`}
       >
-        <button className="flex-center h-32 flex-col">
+        <button className="flex-center h-32 shrink-0 flex-col">
           <div className="h-4 w-100 rounded-full bg-black-100" />
         </button>
         {children}
@@ -42,4 +46,4 @@ const Profile = ({ children }: { children: ReactNode }) => {
     </>
   );
 };
-export default Profile;
+export default DashboardBottomSheet;

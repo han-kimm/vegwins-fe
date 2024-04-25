@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
+import DashboardBottomSheet from '@/components/home_header/DashboardBottomSheet';
 import Notice from '@/components/home_header/Notice';
-import Profile from '@/components/home_header/Profile';
 
 const Dashboard = dynamic(() => import('../dashboard/Dashboard'));
 
@@ -8,9 +8,9 @@ const AuthAfter = () => {
   return (
     <>
       <Notice />
-      <Profile>
+      <DashboardBottomSheet>
         <Dashboard />
-      </Profile>
+      </DashboardBottomSheet>
     </>
   );
 };

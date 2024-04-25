@@ -1,6 +1,5 @@
 import { getCookie } from '@/utils/cookie';
-import Board from '@/components/dashboard/Board';
-import Logout from '@/components/dashboard/Logout';
+import DashboardMyInfo from '@/components/dashboard/DashboardMyInfo';
 import Nickname from '@/components/dashboard/Nickname';
 
 const Dashboard = async () => {
@@ -9,9 +8,9 @@ const Dashboard = async () => {
     return null;
   }
   return (
-    <div className="flex flex-col">
-      <Nickname />
-      <Logout />
+    <div className="flex flex-col gap-20 px-28">
+      <Nickname session={session} />
+      <DashboardMyInfo />
     </div>
   );
 };

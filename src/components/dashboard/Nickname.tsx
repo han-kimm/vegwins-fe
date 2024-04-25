@@ -1,13 +1,15 @@
-'use client';
+import { Session } from '@/types/session';
 
-import IconManage from 'public/icon/manage.svg';
+interface Props {
+  session: Session;
+}
 
-const Nickname = () => {
+const Nickname = ({ session }: Props) => {
   return (
-    <button className="flex-center mx-20 gap-20 border-b border-black-100 py-40 text-18 font-bold">
-      <IconManage />
-      닉네임 변경
-    </button>
+    <div className="flex text-20">
+      <h2 className="font-bold">{session?.nickname}</h2>
+      <span>님 안녕하세요!</span>
+    </div>
   );
 };
 export default Nickname;
