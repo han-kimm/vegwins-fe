@@ -7,7 +7,7 @@ const Dashboard = async () => {
     return null;
   }
   return (
-    <div className="flex flex-col gap-20 overflow-hidden px-16 pt-16">
+    <div className="flex flex-col gap-20 overflow-hidden px-16">
       <DashboardMyInfo session={session} />
     </div>
   );

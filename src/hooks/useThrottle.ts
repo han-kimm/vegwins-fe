@@ -1,9 +1,9 @@
 import { useRef } from 'react';
 
-const useThrottle = <T>(callback: (...args: T[]) => void, time: number) => {
+const useThrottle = <T extends Function>(callback: T, time: number): T => {
   const timer = useRef<NodeJS.Timeout>();
 
-  return (...args: T[]) => {
+  return ((...args: Parameters<any>) => {
     if (timer.current) {
       return;
     }
@@ -14,6 +14,6 @@ const useThrottle = <T>(callback: (...args: T[]) => void, time: number) => {
       clearTimeout(timer.current);
       timer.current = undefined;
     }, time);
-  };
+  }) as unknown as T;
 };
 export default useThrottle;

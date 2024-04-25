@@ -8,7 +8,6 @@ interface Props {
 const MyInfoTitle = ({ session, tab }: Props) => {
   return (
     <div className="flex flex-col gap-12 text-20">
-      <div className="h-4 w-100 rounded-full bg-black-100" />
       {tab ? (
         <h3>
           <strong>{tab}</strong>
