@@ -1,5 +1,5 @@
 import useModalScroll from '@/hooks/useModalScroll';
-import { popup } from '@/utils/googleAuth';
+import { popup } from '@/lib/googleAuth';
 import ModalFrame from '@/components/common/ModalFrame';
 import IconGoogle from 'public/icon/google.svg';
 

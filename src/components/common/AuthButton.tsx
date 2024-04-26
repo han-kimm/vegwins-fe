@@ -1,6 +1,6 @@
 'use client';
 
-import { googleAuth } from '@/utils/googleAuth';
+import { googleAuth } from '@/lib/googleAuth';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { useState } from 'react';
