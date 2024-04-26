@@ -1,28 +1,28 @@
+import { Session } from '@/types/session';
 import Image from 'next/image';
-import { Suspense } from 'react';
 import MyInfoChangeNickname from '@/components/dashboard/MyInfoChangeNickname';
 import MyInfoComment from '@/components/dashboard/MyInfoComment';
 import MyInfoPaper from '@/components/dashboard/MyInfoPaper';
 import MyInfoRating from '@/components/dashboard/MyInfoRating';
 import ApiErrorBoundary from '@/components/errorHandling/ApiErrorBoundary';
-import Spinner from '@/components/errorHandling/Spinner';
 
 interface Props {
+  session: Session;
   tab: string;
   setTab: (tab: string) => void;
 }
 
-const MyInfo = ({ tab, setTab }: Props) => {
+const MyInfo = ({ session, tab, setTab }: Props) => {
   let SwitchedComponent;
   switch (tab) {
     case '닉네임 변경':
-      SwitchedComponent = <MyInfoChangeNickname />;
+      SwitchedComponent = <MyInfoChangeNickname session={session} />;
       break;
     case '나의 문서':
       SwitchedComponent = <MyInfoPaper />;
       break;
     case '나의 댓글':
-      SwitchedComponent = <MyInfoComment />;
+      SwitchedComponent = <MyInfoComment session={session} />;
       break;
     case '나의 평가':
       SwitchedComponent = <MyInfoRating />;

@@ -19,15 +19,15 @@ const Notice = () => {
   });
   const isEmpty = !notificationData.length;
 
-  const deleteByClick = (id?: string) => async () => {
+  const deleteByClick = (deleteId?: string) => async () => {
     try {
       if (isEmpty) {
         return;
       }
 
       let body;
-      if (id) {
-        body = { id };
+      if (deleteId) {
+        body = { deleteId };
       } else {
         body = { all: true };
       }

@@ -1,10 +1,15 @@
+import { Session } from '@/types/session';
 import { setCookie } from '@/utils/cookie';
 import ajax from '@/utils/fetching';
 import { ChangeEvent, KeyboardEvent, useState } from 'react';
 import toast from 'react-hot-toast';
 
 const REG_NICKNAME = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣\s]{2,16}$/;
-const MyInfoChangeNickname = () => {
+
+interface Props {
+  session: Session;
+}
+const MyInfoChangeNickname = ({ session }: Props) => {
   const [value, setValue] = useState('');
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
@@ -50,6 +55,7 @@ const MyInfoChangeNickname = () => {
         value={value}
         onChange={handleChange}
         onKeyUp={(e: KeyboardEvent) => e.code === 'Enter' && nicknameChange()}
+        placeholder={session?.nickname}
         className={`${error.message ? 'border-red-600' : 'border-black-100'} w-full rounded-sm border px-12 text-18 font-bold`}
       />
       <button onClick={nicknameChange} className="transform-active shrink-0 rounded-sm bg-black-100 p-8 text-18 text-white">

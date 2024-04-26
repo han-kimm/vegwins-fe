@@ -17,7 +17,7 @@ const DashboardMyInfo = ({ session }: Props) => {
     <>
       <MyInfoTitle session={session} tab={tab} />
       {tab ? (
-        <MyInfo tab={tab} setTab={setTab} />
+        <MyInfo session={session} tab={tab} setTab={setTab} />
       ) : (
         <div className="mb-20 grid grid-cols-2 place-items-center gap-y-28 text-16 font-bold">
           <MyInfoTabList setTab={setTab} />

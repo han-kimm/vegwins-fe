@@ -10,7 +10,10 @@ interface ModalFrameProps {
 const ModalFrame = ({ children, closeModal }: ModalFrameProps) => {
   return (
     <ModalPortal>
-      <div onClick={closeModal} className="fixed left-0 top-0 flex h-screen w-full items-center justify-center bg-gray-900 bg-opacity-70 text-center">
+      <div
+        onClick={closeModal}
+        className="fixed left-0 top-0 z-20 flex h-screen w-full items-center justify-center bg-gray-900 bg-opacity-70 text-center"
+      >
         <div
           className="relative mx-32 flex min-h-max min-w-300 flex-col gap-20 rounded-md bg-white p-20"
           onClick={(event) => event.stopPropagation()}
