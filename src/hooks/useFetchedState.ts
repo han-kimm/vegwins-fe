@@ -7,9 +7,10 @@ interface Props<T> {
   path: string;
   deps?: any[];
   queryKey?: string[];
+  cache?: RequestCache;
 }
 
-const useFetchedState = <T>({ init, deps, path, queryKey }: Props<T>) => {
+const useFetchedState = <T>({ init, deps, path, queryKey, cache }: Props<T>) => {
   const [state, setState] = useState<T>(init);
   const [pending, setPending] = useState(true);
 
@@ -20,7 +21,7 @@ const useFetchedState = <T>({ init, deps, path, queryKey }: Props<T>) => {
         if (session) {
           try {
             setPending(true);
-            const res = await ajax.get({ path, queryKey });
+            const res = await ajax.get({ path, queryKey, cache });
             if (!res.error) {
               setState(res);
             }

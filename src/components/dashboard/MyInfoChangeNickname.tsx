@@ -52,7 +52,7 @@ const MyInfoChangeNickname = () => {
         onKeyUp={(e: KeyboardEvent) => e.code === 'Enter' && nicknameChange()}
         className={`${error.message ? 'border-red-600' : 'border-black-100'} w-full rounded-sm border px-12 text-18 font-bold`}
       />
-      <button onClick={nicknameChange} className="shrink-0 rounded-sm bg-black-100 p-8 text-18 text-white">
+      <button onClick={nicknameChange} className="transform-active shrink-0 rounded-sm bg-black-100 p-8 text-18 text-white">
         변경하기
       </button>
       <span className={`${error.message ? 'text-red-600' : ''} absolute -bottom-28 ml-8 text-16 font-medium`}>

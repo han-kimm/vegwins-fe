@@ -48,3 +48,16 @@ export type Comment = {
   recomment: Comment[];
   createdAt: string;
 };
+
+export type Notification = {
+  _id: string;
+  paper: {
+    _id: string;
+    title: string;
+  };
+  comment: {
+    content: string;
+  };
+  createdAt: string;
+  type: 'comment' | 'recomment' | 'view' | 'rating';
+};
