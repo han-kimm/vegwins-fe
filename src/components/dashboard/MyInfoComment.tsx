@@ -10,7 +10,7 @@ const MyInfoComment = () => {
     return <DeferredSpinner />;
   }
   return (
-    <div className="scrollbar h-400 overflow-y-scroll pr-20">
+    <div className="scrollbar max-h-400 min-h-108 overflow-y-scroll pr-20">
       {myComment.map((comment) => (
         <UsersCommentItem key={comment._id} comment={comment} my />
       ))}

@@ -3,7 +3,7 @@ import Spinner from '@/components/errorHandling/Spinner';
 
 const DeferredSpinner = () => {
   return (
-    <div className="flex-center h-400 w-full">
+    <div className="flex-center h-108 w-full">
       <Deferring>
         <Spinner duration="infinity" />
       </Deferring>

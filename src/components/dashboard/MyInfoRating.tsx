@@ -12,14 +12,18 @@ const MyInfoRating = () => {
     return <DeferredSpinner />;
   }
   return (
-    <div className="scrollbar flex h-400 flex-col gap-20 overflow-y-scroll pr-20">
-      {myRating.map((data, i) => (
-        <Fragment key={data._id._id}>
-          {!!i && <hr className="border-black-100" />}
-          <SearchResultItem {...data._id} />
-          <MyInfoRatingSelector paperId={data._id._id} rating={data.rating} />
-        </Fragment>
-      ))}
+    <div className="scrollbar min-h-108 flex max-h-400 flex-col gap-20 overflow-y-scroll pr-20">
+      {myRating.length ? (
+        myRating.map((data, i) => (
+          <Fragment key={data._id._id}>
+            {!!i && <hr className="border-black-100" />}
+            <SearchResultItem {...data._id} />
+            <MyInfoRatingSelector paperId={data._id._id} rating={data.rating} />
+          </Fragment>
+        ))
+      ) : (
+        <p className="m-auto text-16">평가한 문서가 없습니다.</p>
+      )}
     </div>
   );
 };

@@ -10,8 +10,8 @@ const MyInfoPaper = () => {
     return <DeferredSpinner />;
   }
   return (
-    <div className="scrollbar h-400 overflow-y-scroll pr-20">
-      <SearchResultItemList data={myPaper} my />
+    <div className="scrollbar flex max-h-400 min-h-108 overflow-y-scroll pr-20">
+      {myPaper.length ? <SearchResultItemList data={myPaper} my /> : <p className="m-auto text-16">작성한 문서가 없습니다.</p>}
     </div>
   );
 };
