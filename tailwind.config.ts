@@ -1,5 +1,3 @@
-import type { Config } from 'tailwindcss';
-
 const createPxEntries = (size: number) => {
   return {
     0: '0',
@@ -11,8 +9,8 @@ const createPxEntries = (size: number) => {
 
 const PX_ENTRIES = createPxEntries(100);
 
-const config: Config = {
-  content: ['./src/pages/**/*.{js,ts,jsx,tsx,mdx}', './src/components/**/*.{js,ts,jsx,tsx,mdx}', './src/app/**/*.{js,ts,jsx,tsx,mdx}'],
+const config = {
+  content: ['./src/hooks/**/*.{ts,tsx}', './src/components/**/*.{ts,tsx}', './src/app/**/*.{ts,tsx}'],
   theme: {
     extend: {
       screens: {

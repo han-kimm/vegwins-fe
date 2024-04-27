@@ -1,6 +1,6 @@
 'use client';
 
-import { MouseEvent, ReactNode, useCallback, useEffect, useState } from 'react';
+import { FunctionComponent, MouseEvent, ReactNode, useCallback, useEffect, useState } from 'react';
 import IconDown from 'public/icon/arrow-down.svg';
 
 const useBottomSheet = () => {
@@ -26,7 +26,7 @@ const useBottomSheet = () => {
     };
   }, [open]);
 
-  const BottomSheet = useCallback(
+  const BottomSheet: FunctionComponent<{ children: ReactNode }> = useCallback(
     ({ children }: { children: ReactNode }) =>
       open && (
         <div
@@ -47,6 +47,6 @@ const useBottomSheet = () => {
     [open, toggleByClick],
   );
 
-  return { open, toggleByClick, BottomSheet };
+  return { toggleByClick, BottomSheet };
 };
 export default useBottomSheet;
