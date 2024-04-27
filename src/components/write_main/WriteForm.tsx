@@ -53,10 +53,16 @@ const WriteForm = () => {
 
     try {
       setPending(true);
-      const post = await ajax.post({ path: '/paper', body: { ...submitData, hashtag: [...submitData.hashtag] } });
-      if (!post.error) {
-        router.push(`/paper/${post.paperId}`);
-      }
+      console.log(submitData.image);
+      const noImageData = { ...submitData, image: '', hashtag: [...submitData.hashtag] };
+      const formData = new FormData();
+      formData.append('image', submitData.image);
+      formData.append('data', JSON.stringify(noImageData));
+
+      const post = await ajax.post({ path: '/paper', body: formData });
+      // if (!post.error) {
+      //   router.push(`/paper/${post.paperId}`);
+      // }
     } catch (e) {
       toast.error('다시 시도해주십시오.');
       console.error(e);

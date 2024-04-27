@@ -66,7 +66,6 @@ export class Fetching {
       return res;
     } catch (e) {
       console.error(e);
-      return {};
     }
   };
 
@@ -84,10 +83,20 @@ export class Fetching {
     try {
       await this.restoreToken();
 
+      const isFormData = body instanceof FormData;
+
       return await this.fetchJSON(path, {
         ...init,
         method: 'POST',
-        body: JSON.stringify(body),
+        headers: isFormData
+          ? {
+              authorization: 'bearer' + ' ' + `${this.#accessToken}`,
+            }
+          : {
+              'content-type': 'application/json',
+              authorization: 'bearer' + ' ' + `${this.#accessToken}`,
+            },
+        body: isFormData ? body : JSON.stringify(body),
       });
     } catch (e) {
       console.error(e);

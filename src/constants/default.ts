@@ -18,7 +18,7 @@ export const SP_CATEGORY = 'c';
 export const PREVIOUS_PATH = 'pp';
 export const WRITE_SAVE = 'wr';
 
-export const DEFAULT_SUBMIT = { image: '', title: '', hashtag: new Set<string>(), category: Array<string>(), description: '' };
+export const DEFAULT_SUBMIT = { image: new Blob(), title: '', hashtag: new Set<string>(), category: Array<string>(), description: '' };
 export type SubmitData = typeof DEFAULT_SUBMIT;
 export type SetSubmitData = Dispatch<SetStateAction<SubmitData>>;
 

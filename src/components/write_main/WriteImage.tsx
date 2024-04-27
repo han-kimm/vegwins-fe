@@ -1,33 +1,29 @@
 import { SetSubmitData } from '@/constants/default';
 import Image from 'next/image';
-import { ChangeEvent, memo } from 'react';
+import { ChangeEvent, memo, useState } from 'react';
 
 interface Props {
-  image: string;
+  image: Blob;
   setImage: SetSubmitData;
 }
 
 const WriteImage = memo(function WriteImage({ image, setImage }: Props) {
+  const [thumbnail, setThumbnail] = useState('');
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newFile = e.target.files?.[0];
     if (!newFile) {
       return;
     }
+    setImage((prev) => ({ ...prev, image: newFile }));
 
-    const reader = new FileReader();
-    reader.readAsDataURL(newFile);
-    reader.onload = () => {
-      const result = reader.result;
-      if (typeof result === 'string') {
-        setImage((prev) => ({ ...prev, image: result }));
-      }
-    };
-
+    const newthumbnail = URL.createObjectURL(newFile);
+    setThumbnail(newthumbnail);
     e.target.value = '';
   };
 
   const resetThumbnail = () => {
-    setImage((prev) => ({ ...prev, image: '' }));
+    setImage((prev) => ({ ...prev, image: new Blob() }));
+    setThumbnail('');
   };
 
   return (
@@ -35,7 +31,7 @@ const WriteImage = memo(function WriteImage({ image, setImage }: Props) {
       <div className="flex items-baseline gap-8">
         <h2 className="text-18 font-medium">이미지</h2>
         {image && (
-          <button onClick={resetThumbnail} className=" p-4 font-bold text-sky">
+          <button type="button" onClick={resetThumbnail} className=" p-4 font-bold text-sky">
             기본 이미지로 설정하기
           </button>
         )}
@@ -50,8 +46,8 @@ const WriteImage = memo(function WriteImage({ image, setImage }: Props) {
             fill
             priority
             sizes="300px"
-            src={image || '/image/default.webp'}
-            alt={image ? '추가한 이미지 썸네일' : '기본 이미지'}
+            src={thumbnail || '/image/default.webp'}
+            alt={thumbnail ? '추가한 이미지 썸네일' : '기본 이미지'}
             className="rounded-md object-cover"
           />
         }
