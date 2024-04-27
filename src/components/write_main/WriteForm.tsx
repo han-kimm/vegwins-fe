@@ -1,6 +1,6 @@
 'use client';
 
-import { DEFAULT_SUBMIT, WRITE_SAVE } from '@/constants/default';
+import { DEFAULT_SUBMIT, SubmitData, WRITE_SAVE } from '@/constants/default';
 import { getLocalStorage } from '@/utils/browserStorage';
 import ajax from '@/utils/fetching';
 import { canRecall, canSave, required, saveSubmitData } from '@/utils/writeUtils';
@@ -20,7 +20,7 @@ const toastPosition = {
 } as const;
 
 const WriteForm = () => {
-  const [submitData, setSubmitData] = useState(DEFAULT_SUBMIT);
+  const [submitData, setSubmitData] = useState<SubmitData>(DEFAULT_SUBMIT);
   const [reload, setReload] = useState(0);
 
   const handleSave = () => {
@@ -53,16 +53,15 @@ const WriteForm = () => {
 
     try {
       setPending(true);
-      console.log(submitData.image);
       const noImageData = { ...submitData, image: '', hashtag: [...submitData.hashtag] };
       const formData = new FormData();
-      formData.append('image', submitData.image);
+      formData.append('image', submitData.image ?? '');
       formData.append('data', JSON.stringify(noImageData));
 
       const post = await ajax.post({ path: '/paper', body: formData });
-      // if (!post.error) {
-      //   router.push(`/paper/${post.paperId}`);
-      // }
+      if (!post.error) {
+        router.push(`/paper/${post.paperId}`);
+      }
     } catch (e) {
       toast.error('다시 시도해주십시오.');
       console.error(e);

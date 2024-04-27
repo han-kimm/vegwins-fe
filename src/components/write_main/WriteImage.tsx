@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { ChangeEvent, memo, useState } from 'react';
 
 interface Props {
-  image: Blob;
+  image: Blob | null;
   setImage: SetSubmitData;
 }
 

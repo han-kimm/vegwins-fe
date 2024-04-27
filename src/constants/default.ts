@@ -18,8 +18,14 @@ export const SP_CATEGORY = 'c';
 export const PREVIOUS_PATH = 'pp';
 export const WRITE_SAVE = 'wr';
 
-export const DEFAULT_SUBMIT = { image: new Blob(), title: '', hashtag: new Set<string>(), category: Array<string>(), description: '' };
-export type SubmitData = typeof DEFAULT_SUBMIT;
+export const DEFAULT_SUBMIT = { image: null, title: '', hashtag: new Set<string>(), category: Array<string>(), description: '' };
+export type SubmitData = {
+  image: Blob | null;
+  title: string;
+  hashtag: Set<string>;
+  category: string[];
+  description: string;
+};
 export type SetSubmitData = Dispatch<SetStateAction<SubmitData>>;
 
 export const RATING_MSG: { [key: number]: string } = {
