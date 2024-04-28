@@ -2,9 +2,10 @@
 
 import { Comment } from '@/types/data';
 import { Session } from '@/types/session';
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import UsersCommentInput from '@/components/paper_main/UsersCommentInput';
 import UsersCommentItem from '@/components/paper_main/UsersCommentItem';
+import UsersRecomment from '@/components/paper_main/UsersRecomment';
 
 interface Props {
   data: Comment[];
@@ -12,14 +13,23 @@ interface Props {
 }
 
 const UsersCommentView = ({ data, session }: Props) => {
-  const [recomment, setRecomment] = useState<Comment | null>(null);
+  const [recommentId, setRecommentId] = useState('');
 
   return (
     <>
       {data?.map((comment) => (
-        <UsersCommentItem key={comment._id} comment={comment} session={session} recommentId={recomment?._id} setRecomment={setRecomment} />
+        <div key={comment._id}>
+          <UsersCommentItem session={session} comment={comment} />
+          <UsersRecomment
+            session={session}
+            originId={comment._id}
+            recommentData={comment.recomment}
+            recommentId={recommentId}
+            setRecomment={setRecommentId}
+          />
+        </div>
       ))}
-      <UsersCommentInput sessionName={session?.nickname} recomment={data?.find((v) => v._id === recomment?._id) ?? null} />
+      <UsersCommentInput sessionName={session?.nickname} recomment={data?.find((v) => v._id === recommentId) ?? null} />
     </>
   );
 };
