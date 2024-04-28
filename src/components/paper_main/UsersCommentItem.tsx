@@ -2,19 +2,20 @@ import useDeleteComment from '@/hooks/useDeleteComment';
 import { Comment } from '@/types/data';
 import { Session } from '@/types/session';
 import { timeDiff } from '@/utils/timeDiff';
-import { Dispatch, SetStateAction, useMemo } from 'react';
-import IconPencil from 'public/icon/pencil.svg';
+import { FunctionComponent, useMemo } from 'react';
 
 interface Props {
   comment: Comment;
   session: Session;
-  setMyComment?: Dispatch<SetStateAction<Comment[]>>;
+  onSuccess?: () => void;
+  isEdited: boolean;
+  ButtonEdit: FunctionComponent<{ comment: Comment; isEdited: boolean }>;
 }
 
-const UsersCommentItem = ({ comment, session, setMyComment }: Props) => {
+const UsersCommentItem = ({ comment, session, onSuccess, isEdited, ButtonEdit }: Props) => {
   const { ButtonDelete, ModalDelete } = useDeleteComment({
     body: { deleteId: comment._id },
-    onSuccess: () => setMyComment?.((prev) => prev.filter((c) => c._id !== comment._id)),
+    onSuccess,
   });
 
   const isCommenter = useMemo(() => session?.nickname === comment.commenter.nickname, []);
@@ -24,15 +25,13 @@ const UsersCommentItem = ({ comment, session, setMyComment }: Props) => {
   }
 
   return (
-    <div className="flex flex-col">
+    <div className={`${isEdited ? 'opacity-50' : ''} flex flex-col`}>
       <div className="flex items-center gap-8">
         <h3 className="text-center text-16 font-bold">{comment.commenter?.nickname}</h3>
         <span className="text-12 text-black-60">{timeDiff(comment.createdAt)}</span>
         {isCommenter && (
           <>
-            <button className="ml-auto text-black-60" aria-label="댓글 편집">
-              <IconPencil />
-            </button>
+            <ButtonEdit comment={comment} isEdited={isEdited} />
             <ButtonDelete />
           </>
         )}

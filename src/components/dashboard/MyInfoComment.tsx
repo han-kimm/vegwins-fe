@@ -19,7 +19,7 @@ const MyInfoComment = ({ session }: Props) => {
       {myComment.length ? (
         myComment.map((comment) => (
           <Fragment key={comment._id}>
-            <UsersCommentItem session={session} comment={comment} setMyComment={setState} />
+            <UsersCommentItem session={session} comment={comment} onSuccess={() => setState((prev) => prev.filter((c) => c._id !== comment._id))} />
             <hr className="border-black-60" />
           </Fragment>
         ))

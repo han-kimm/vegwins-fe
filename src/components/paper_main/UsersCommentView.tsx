@@ -1,5 +1,6 @@
 'use client';
 
+import useEditComment from '@/hooks/useEditComment';
 import { Comment } from '@/types/data';
 import { Session } from '@/types/session';
 import { Fragment, useState } from 'react';
@@ -13,23 +14,31 @@ interface Props {
 }
 
 const UsersCommentView = ({ data, session }: Props) => {
-  const [recommentId, setRecommentId] = useState('');
+  const { targetComment, setRecomment, ButtonEdit } = useEditComment();
 
+  console.log(targetComment);
   return (
     <>
-      {data?.map((comment) => (
-        <div key={comment._id}>
-          <UsersCommentItem session={session} comment={comment} />
-          <UsersRecomment
-            session={session}
-            originId={comment._id}
-            recommentData={comment.recomment}
-            recommentId={recommentId}
-            setRecomment={setRecommentId}
-          />
-        </div>
-      ))}
-      <UsersCommentInput sessionName={session?.nickname} recomment={data?.find((v) => v._id === recommentId) ?? null} />
+      {data?.map((comment) => {
+        const isEdited = targetComment?.status === 'edit' && targetComment.comment._id === comment._id;
+        const isSeleted = targetComment?.status === 'recomment' && targetComment.comment._id === comment._id;
+
+        return (
+          <div key={comment._id} className="animate-fadeIn">
+            <UsersCommentItem session={session} comment={comment} isEdited={isEdited} ButtonEdit={ButtonEdit} />
+            <UsersRecomment
+              session={session}
+              originId={comment._id}
+              commentData={comment}
+              isSelected={isSeleted}
+              setRecomment={setRecomment}
+              targetComment={targetComment}
+              ButtonEdit={ButtonEdit}
+            />
+          </div>
+        );
+      })}
+      <UsersCommentInput sessionName={session?.nickname} targetComment={targetComment} />
     </>
   );
 };

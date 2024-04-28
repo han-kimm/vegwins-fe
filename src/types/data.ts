@@ -49,6 +49,11 @@ export type Comment = {
   createdAt: string;
 };
 
+export type TargetComment = {
+  status: 'edit' | 'recomment';
+  comment: Comment;
+};
+
 export type Notification = {
   _id: string;
   paper: {

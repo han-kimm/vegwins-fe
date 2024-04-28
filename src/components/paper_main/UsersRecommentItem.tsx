@@ -2,7 +2,7 @@ import useDeleteComment from '@/hooks/useDeleteComment';
 import { Comment } from '@/types/data';
 import { Session } from '@/types/session';
 import { timeDiff } from '@/utils/timeDiff';
-import { useMemo } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 import IconPencil from 'public/icon/pencil.svg';
 import IconReply from 'public/icon/reply.svg';
 
@@ -10,13 +10,17 @@ interface Props {
   session: Session;
   comment: Comment;
   originId: string;
+  isEdited: boolean;
+  ButtonEdit: FunctionComponent<{ comment: Comment; isEdited: boolean }>;
 }
 
-const UsersRecommentItem = ({ session, comment, originId }: Props) => {
+const UsersRecommentItem = ({ session, comment, originId, isEdited, ButtonEdit }: Props) => {
   const { ButtonDelete, ModalDelete } = useDeleteComment({ body: { deleteId: comment._id, originId } });
   const isCommenter = useMemo(() => session?.nickname === comment.commenter.nickname, []);
+
+  console.log(isEdited);
   return (
-    <div className=" flex animate-fadeIn gap-4">
+    <div className={`${isEdited ? 'opacity-30' : ''} flex animate-fadeIn gap-4`}>
       <IconReply />
       <div className="flex w-full flex-col">
         <div className="flex items-center gap-8">
@@ -24,9 +28,7 @@ const UsersRecommentItem = ({ session, comment, originId }: Props) => {
           <span className="text-black-60">{timeDiff(comment.createdAt)}</span>
           {isCommenter && (
             <>
-              <button className="ml-auto text-black-60" aria-label="댓글 편집">
-                <IconPencil />
-              </button>
+              <ButtonEdit comment={comment} isEdited={isEdited} />
               <ButtonDelete />
             </>
           )}

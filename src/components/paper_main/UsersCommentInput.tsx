@@ -1,21 +1,25 @@
 'use client';
 
 import { MockComment } from '@/constants/mockComment';
-import { Comment } from '@/types/data';
+import { Comment, TargetComment } from '@/types/data';
 import ajax from '@/utils/fetching';
 import { useParams, useRouter } from 'next/navigation';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import AuthButton from '@/components/common/AuthButton';
 import AuthSign from '@/components/common/AuthSign';
 
 interface Props {
   sessionName?: string;
-  recomment: Comment | null;
+  targetComment?: TargetComment;
 }
-const UsersCommentInput = ({ sessionName, recomment }: Props) => {
+const UsersCommentInput = ({ sessionName, targetComment }: Props) => {
   const params = useParams();
-  const [content, setContent] = useState('');
   const router = useRouter();
+
+  const isRecomment = targetComment?.status === 'recomment';
+  const isEdit = targetComment?.status === 'edit';
+  const [content, setContent] = useState(isEdit ? targetComment?.comment.content : '');
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setContent(e.target.value);
@@ -26,12 +30,28 @@ const UsersCommentInput = ({ sessionName, recomment }: Props) => {
     if (!content) {
       return;
     }
-    const { paperId } = params;
-    const recommentId = recomment?._id;
-    const res = await ajax.post({ path: `/paper/${paperId}/comment`, body: { content, recommentId } });
-    if (!res.error) {
+    try {
+      const { paperId } = params;
+      let res;
+      if (isRecomment) {
+        const recommentId = targetComment?.comment._id;
+        res = await ajax.post({ path: `/paper/${paperId}/comment`, body: { content, recommentId } });
+      } else if (isEdit) {
+        const editId = targetComment?.comment._id;
+        res = await ajax.put({ path: `/paper/${paperId}/comment`, body: { content, editId } });
+      } else {
+        res = await ajax.post({ path: `/paper/${paperId}/comment`, body: { content } });
+      }
+
+      if (res.error) {
+        throw Error(res.error);
+      }
+
       setContent('');
       router.refresh();
+    } catch (e) {
+      console.error(e);
+      toast.error('다시 시도해 주십시오.');
     }
   };
 
@@ -40,7 +60,8 @@ const UsersCommentInput = ({ sessionName, recomment }: Props) => {
       <div className="mb-8 flex items-baseline justify-between">
         <label htmlFor="comment" className="flex flex-wrap items-baseline gap-4 text-14 font-bold">
           {sessionName ?? <AuthSign />}
-          {sessionName && recomment && <span className="rounded-full bg-black-20 px-12">{recomment.commenter.nickname}님께 답글</span>}
+          {sessionName && isRecomment && <span className="rounded-full bg-black-20 px-12">{targetComment.comment.commenter.nickname}님께 답글</span>}
+          {sessionName && isEdit && <span className="rounded-full bg-black-20 px-12">수정 중</span>}
         </label>
         <button
           disabled={!content}
