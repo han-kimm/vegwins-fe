@@ -28,11 +28,13 @@ const Notice = () => {
       let body;
       if (deleteId) {
         body = { deleteId };
+        await ajax.delete({ path: '/user/notification', body });
+        setState((prev) => prev.filter((n) => n._id !== deleteId));
       } else {
         body = { all: true };
+        await ajax.delete({ path: '/user/notification', body });
+        setState([]);
       }
-      await ajax.delete({ path: '/user/notification', body });
-      setState([]);
       toast.success('알림 삭제 완료');
     } catch (e) {
       console.error(e);
