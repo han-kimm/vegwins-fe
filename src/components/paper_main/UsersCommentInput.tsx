@@ -1,7 +1,6 @@
 'use client';
 
-import { MockComment } from '@/constants/mockComment';
-import { Comment, TargetComment } from '@/types/data';
+import { TargetComment } from '@/types/data';
 import ajax from '@/utils/fetching';
 import { useParams, useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
@@ -12,14 +11,21 @@ import AuthSign from '@/components/common/AuthSign';
 interface Props {
   sessionName?: string;
   targetComment?: TargetComment;
+  resetTarget: () => void;
 }
-const UsersCommentInput = ({ sessionName, targetComment }: Props) => {
+const UsersCommentInput = ({ sessionName, targetComment, resetTarget }: Props) => {
   const params = useParams();
   const router = useRouter();
 
   const isRecomment = targetComment?.status === 'recomment';
   const isEdit = targetComment?.status === 'edit';
-  const [content, setContent] = useState(isEdit ? targetComment?.comment.content : '');
+  const [content, setContent] = useState('');
+
+  useEffect(() => {
+    if (isEdit) {
+      setContent(targetComment.comment.content);
+    }
+  }, [isEdit, targetComment?.comment.content]);
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setContent(e.target.value);
@@ -48,6 +54,7 @@ const UsersCommentInput = ({ sessionName, targetComment }: Props) => {
       }
 
       setContent('');
+      resetTarget();
       router.refresh();
     } catch (e) {
       console.error(e);

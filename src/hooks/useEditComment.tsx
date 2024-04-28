@@ -26,6 +26,10 @@ const useTargetComment = () => {
     [],
   );
 
+  const resetTarget = useCallback(() => {
+    setTargetComment(undefined);
+  }, []);
+
   const ButtonEdit = useCallback(
     ({ comment, isEdited }: { comment: Comment; isEdited: boolean }) => (
       <button onClick={setEditComment(comment)} className={`${isEdited ? 'text-black-100' : 'text-black-60'} ml-auto`} aria-label="댓글 편집">
@@ -35,6 +39,6 @@ const useTargetComment = () => {
     [],
   );
 
-  return { targetComment, setRecomment, ButtonEdit };
+  return { targetComment, resetTarget, setRecomment, ButtonEdit };
 };
 export default useTargetComment;

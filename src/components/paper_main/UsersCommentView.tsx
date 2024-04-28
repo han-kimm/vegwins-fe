@@ -3,7 +3,6 @@
 import useEditComment from '@/hooks/useEditComment';
 import { Comment } from '@/types/data';
 import { Session } from '@/types/session';
-import { Fragment, useState } from 'react';
 import UsersCommentInput from '@/components/paper_main/UsersCommentInput';
 import UsersCommentItem from '@/components/paper_main/UsersCommentItem';
 import UsersRecomment from '@/components/paper_main/UsersRecomment';
@@ -14,9 +13,7 @@ interface Props {
 }
 
 const UsersCommentView = ({ data, session }: Props) => {
-  const { targetComment, setRecomment, ButtonEdit } = useEditComment();
-
-  console.log(targetComment);
+  const { targetComment,resetTarget, setRecomment, ButtonEdit } = useEditComment();
   return (
     <>
       {data?.map((comment) => {
@@ -38,7 +35,7 @@ const UsersCommentView = ({ data, session }: Props) => {
           </div>
         );
       })}
-      <UsersCommentInput sessionName={session?.nickname} targetComment={targetComment} />
+      <UsersCommentInput sessionName={session?.nickname} targetComment={targetComment} resetTarget={resetTarget} />
     </>
   );
 };

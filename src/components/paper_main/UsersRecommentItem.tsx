@@ -3,7 +3,6 @@ import { Comment } from '@/types/data';
 import { Session } from '@/types/session';
 import { timeDiff } from '@/utils/timeDiff';
 import { FunctionComponent, useMemo } from 'react';
-import IconPencil from 'public/icon/pencil.svg';
 import IconReply from 'public/icon/reply.svg';
 
 interface Props {
@@ -18,7 +17,6 @@ const UsersRecommentItem = ({ session, comment, originId, isEdited, ButtonEdit }
   const { ButtonDelete, ModalDelete } = useDeleteComment({ body: { deleteId: comment._id, originId } });
   const isCommenter = useMemo(() => session?.nickname === comment.commenter.nickname, []);
 
-  console.log(isEdited);
   return (
     <div className={`${isEdited ? 'opacity-30' : ''} flex animate-fadeIn gap-4`}>
       <IconReply />
