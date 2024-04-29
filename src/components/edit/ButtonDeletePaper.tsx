@@ -1,24 +1,36 @@
 'use client';
 
 import useUncontrolInput from '@/hooks/useUncontrolInput';
+import ajax from '@/utils/fetching';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import ModalFrame from '@/components/common/ModalFrame';
 import ModalPortal from '@/components/common/ModalPortal';
 
 interface Props {
   title: string;
+  paperId: string;
+  refreshPath: (path: string) => void;
 }
-const ButtonDeletePaper = ({ title }: Props) => {
+const ButtonDeletePaper = ({ title, paperId, refreshPath }: Props) => {
   const [open, setOpen] = useState(false);
   const inputRef = useUncontrolInput<HTMLInputElement>({ syncState: '' });
+  const router = useRouter();
 
-  const deleteByClick = () => {
+  const deleteByClick = async () => {
     if (inputRef.current?.value !== title) {
       return;
     }
-
-    console.log(1);
+    try {
+      await ajax.delete({ path: `/paper/${paperId}` });
+      toast.success('삭제 완료');
+      refreshPath('/search');
+      router.push('/');
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (

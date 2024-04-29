@@ -10,9 +10,10 @@ interface Props {
 }
 
 const SearchResultView = async ({ c, k }: Props) => {
+  const queryKey = [c, k, c || k ? undefined : 'search'].filter((v) => v) as string[];
   const data: SearchItem[] = await ajax.get({
     path: `/paper?${c ? `c=${c}` : ''}&${k ? `k=${encodeURIComponent(k)}` : ''}`,
-    revalidate: 180,
+    queryKey,
   });
 
   return (

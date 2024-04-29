@@ -106,10 +106,19 @@ export class Fetching {
   put: ApiHandler = async ({ path, body, ...init }) => {
     await this.restoreToken();
 
+    const isFormData = body instanceof FormData;
     return await this.fetchJSON(path, {
       ...init,
       method: 'PUT',
-      body: JSON.stringify(body),
+      headers: isFormData
+        ? {
+            authorization: 'bearer' + ' ' + `${this.#accessToken}`,
+          }
+        : {
+            'content-type': 'application/json',
+            authorization: 'bearer' + ' ' + `${this.#accessToken}`,
+          },
+      body: isFormData ? body : JSON.stringify(body),
     });
   };
 

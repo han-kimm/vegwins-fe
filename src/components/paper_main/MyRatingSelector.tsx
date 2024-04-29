@@ -2,6 +2,7 @@ import { RATING_MSG } from '@/constants/default';
 import { Paper, Rating } from '@/types/data';
 import { setLocalStorage } from '@/utils/browserStorage';
 import ajax from '@/utils/fetching';
+import { staleSearchQuery } from '@/utils/staleQuery';
 import Image from 'next/image';
 import toast from 'react-hot-toast';
 
@@ -26,11 +27,11 @@ const MyRatingSelector = ({ paperRating, paperId, rating, setRating }: Props) =>
     try {
       if (isSame) {
         await ajax.delete({ path: `/paper/${paperId}/rating`, body: { rating } });
-        toast.success('평가 반영 완료!');
-        return;
+      } else {
+        await ajax.post({ path: `/paper/${paperId}/rating`, body: { ...newValue } });
       }
-      await ajax.post({ path: `/paper/${paperId}/rating`, body: { ...newValue } });
       toast.success('평가 반영 완료!');
+      staleSearchQuery();
     } catch {
       setRating({ rating });
     }

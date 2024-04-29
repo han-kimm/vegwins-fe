@@ -4,6 +4,7 @@ import { DEFAULT_SUBMIT, SubmitData, WRITE_SAVE } from '@/constants/default';
 import { getLocalStorage } from '@/utils/browserStorage';
 import ajax from '@/utils/fetching';
 import { canRecall, canSave, required, saveSubmitData } from '@/utils/writeUtils';
+import { revalidatePath } from 'next/cache';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
 import toast from 'react-hot-toast';
@@ -21,9 +22,11 @@ const toastPosition = {
 
 interface Props {
   initial?: SubmitData;
+  paperId?: string;
+  refreshPath: (path: string) => void;
 }
 
-const WriteForm = ({ initial }: Props) => {
+const WriteForm = ({ initial, paperId, refreshPath }: Props) => {
   const [submitData, setSubmitData] = useState<SubmitData>(() => (initial ? { ...initial, hashtag: new Set(initial.hashtag) } : DEFAULT_SUBMIT));
   const [reload, setReload] = useState(0);
   const handleSave = () => {
@@ -58,12 +61,20 @@ const WriteForm = ({ initial }: Props) => {
       setPending(true);
       const noImageData = { ...submitData, image: '', hashtag: [...submitData.hashtag] };
       const formData = new FormData();
-      formData.append('image', submitData.image ?? '');
+      formData.append('image', typeof submitData.image ?? '');
       formData.append('data', JSON.stringify(noImageData));
 
-      const post = await ajax.post({ path: '/paper', body: formData });
-      if (!post.error) {
-        router.push(`/paper/${post.paperId}`);
+      if (!initial) {
+        const post = await ajax.post({ path: '/paper', body: formData });
+        if (!post.error) {
+          refreshPath('/search');
+          router.push(`/paper/${post.paperId}`);
+        }
+        return;
+      }
+      const editedPost = await ajax.put({ path: `/paper/${paperId}`, body: formData });
+      if (!editedPost.error) {
+        router.push(`/paper/${paperId}`);
       }
     } catch (e) {
       toast.error('다시 시도해주십시오.');
