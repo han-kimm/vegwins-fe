@@ -28,7 +28,7 @@ const WriteImage = memo(function WriteImage({ image, setImage }: Props) {
 
   return (
     <div className="mb-12 flex w-full flex-col gap-8">
-      <div className="flex items-baseline gap-8">
+      <div className="flex h-40 items-baseline gap-8">
         <h2 className="text-18 font-medium">이미지</h2>
         {image && (
           <button type="button" onClick={resetThumbnail} className=" p-4 font-bold text-sky">

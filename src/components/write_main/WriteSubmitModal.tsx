@@ -1,4 +1,3 @@
-import useModalScroll from '@/hooks/useModalScroll';
 import { ChangeEvent, FormEvent, RefObject, useState } from 'react';
 import ModalFrame from '@/components/common/ModalFrame';
 import IconUpload from 'public/icon/upload.svg';
@@ -9,7 +8,6 @@ interface Props {
 }
 
 const WriteSubmitModal = ({ closeModal, handleSubmit }: Props) => {
-  useModalScroll();
   const [signed, setSigned] = useState({ sensored: false, edited: false });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => setSigned((prev) => ({ ...prev, [e.target.name]: e.target.checked }));
