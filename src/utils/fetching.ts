@@ -47,20 +47,20 @@ export class Fetching {
 
   fetchJSON = async (...params: Parameters<Fetch>) => {
     try {
-      const wrappedFetch = () =>
+      const wrappedFetch = (token: string) =>
         fetch(this.#baseUrl + params[0], {
           ...{
             headers: {
               'content-type': 'application/json',
-              authorization: 'bearer' + ' ' + `${this.#accessToken}`,
+              authorization: 'bearer' + ' ' + token,
             },
           },
           ...params[1],
         }).then((resp) => resp.json());
-      const res = await wrappedFetch();
+      const res = await wrappedFetch(this.#accessToken);
       if (res.code === 419) {
         await this.updateToken();
-        const refetchRes = await wrappedFetch();
+        const refetchRes = await wrappedFetch(this.#accessToken);
         return refetchRes;
       }
       return res;

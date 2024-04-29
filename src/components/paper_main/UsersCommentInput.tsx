@@ -2,7 +2,8 @@
 
 import { TargetComment } from '@/types/data';
 import ajax from '@/utils/fetching';
-import { useParams, useRouter } from 'next/navigation';
+import { refreshTag } from '@/utils/revalidate';
+import { useParams } from 'next/navigation';
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import AuthButton from '@/components/common/AuthButton';
@@ -15,7 +16,6 @@ interface Props {
 }
 const UsersCommentInput = ({ sessionName, targetComment, resetTarget }: Props) => {
   const params = useParams();
-  const router = useRouter();
 
   const isRecomment = targetComment?.status === 'recomment';
   const isEdit = targetComment?.status === 'edit';
@@ -55,7 +55,7 @@ const UsersCommentInput = ({ sessionName, targetComment, resetTarget }: Props) =
 
       setContent('');
       resetTarget();
-      router.refresh();
+      refreshTag(`${paperId}/comment`);
     } catch (e) {
       console.error(e);
       toast.error('다시 시도해 주십시오.');

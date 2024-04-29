@@ -13,7 +13,7 @@ interface Props {
 }
 
 const UsersCommentView = ({ data, session }: Props) => {
-  const { targetComment,resetTarget, setRecomment, ButtonEdit } = useEditComment();
+  const { targetComment, resetTarget, setRecomment, ButtonEdit } = useEditComment();
   return (
     <>
       {data?.map((comment) => {
