@@ -2,7 +2,8 @@ import { RATING_MSG } from '@/constants/default';
 import { Paper, Rating } from '@/types/data';
 import { setLocalStorage } from '@/utils/browserStorage';
 import ajax from '@/utils/fetching';
-import { staleSearchQuery } from '@/utils/staleQuery';
+import { refreshTag } from '@/utils/revalidate';
+import { revalidateTag } from 'next/cache';
 import Image from 'next/image';
 import toast from 'react-hot-toast';
 
@@ -31,7 +32,7 @@ const MyRatingSelector = ({ paperRating, paperId, rating, setRating }: Props) =>
         await ajax.post({ path: `/paper/${paperId}/rating`, body: { ...newValue } });
       }
       toast.success('평가 반영 완료!');
-      staleSearchQuery();
+      refreshTag('search');
     } catch {
       setRating({ rating });
     }

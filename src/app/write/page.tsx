@@ -1,4 +1,3 @@
-import { refreshPath } from '@/utils/revalidate';
 import ButtonReturn from '@/components/common/ButtonReturn';
 import WriteForm from '@/components/write_main/WriteForm';
 
@@ -9,7 +8,7 @@ const Write = () => {
         <ButtonReturn text="취소하기" icon="cancel" reverse />
       </header>
       <main className="h-full w-full">
-        <WriteForm refreshPath={refreshPath} />
+        <WriteForm />
       </main>
     </div>
   );

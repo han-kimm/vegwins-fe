@@ -11,7 +11,7 @@ interface Props {
 }
 const EditPage = async ({ params }: Props) => {
   const { paperId } = params;
-  const data: Paper = await ajax.get({ path: `/paper/${paperId}` });
+  const data: Paper = await ajax.get({ path: `/paper/${paperId}`, cache: 'no-store' });
   const initial: SubmitData = {
     title: data.title,
     category: data.category,
@@ -22,7 +22,7 @@ const EditPage = async ({ params }: Props) => {
   return (
     <div className="max-h-max min-h-dvh px-28 pb-28 pt-16">
       <header className="mb-12 flex justify-between">
-        <ButtonDeletePaper title={data.title} paperId={paperId} refreshPath={refreshPath} />
+        <ButtonDeletePaper title={data.title} paperId={paperId} />
         <ButtonReturn text="취소하기" icon="cancel" reverse />
       </header>
       <main className="h-full w-full">

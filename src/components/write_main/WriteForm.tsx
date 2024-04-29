@@ -3,6 +3,7 @@
 import { DEFAULT_SUBMIT, SubmitData, WRITE_SAVE } from '@/constants/default';
 import { getLocalStorage } from '@/utils/browserStorage';
 import ajax from '@/utils/fetching';
+import { refreshTag } from '@/utils/revalidate';
 import { canRecall, canSave, required, saveSubmitData } from '@/utils/writeUtils';
 import { revalidatePath } from 'next/cache';
 import { useRouter } from 'next/navigation';
@@ -67,14 +68,16 @@ const WriteForm = ({ initial, paperId, refreshPath }: Props) => {
       if (!initial) {
         const post = await ajax.post({ path: '/paper', body: formData });
         if (!post.error) {
-          refreshPath('/search');
+          refreshTag('search');
           router.push(`/paper/${post.paperId}`);
         }
         return;
       }
       const editedPost = await ajax.put({ path: `/paper/${paperId}`, body: formData });
       if (!editedPost.error) {
+        refreshTag('search');
         router.push(`/paper/${paperId}`);
+        router.refresh();
       }
     } catch (e) {
       toast.error('다시 시도해주십시오.');

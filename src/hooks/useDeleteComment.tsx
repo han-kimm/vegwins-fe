@@ -1,5 +1,6 @@
 import ajax from '@/utils/fetching';
-import { useRouter } from 'next/navigation';
+import { refreshTag } from '@/utils/revalidate';
+import { useParams, useRouter } from 'next/navigation';
 import { useCallback, useState } from 'react';
 import toast from 'react-hot-toast';
 import ModalFrame from '@/components/common/ModalFrame';
@@ -13,7 +14,7 @@ interface Props {
 
 const useDeleteComment = ({ body, onSuccess }: Props) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const router = useRouter();
+  const { paperId } = useParams();
 
   const toggleModal = () => {
     setModalOpen((prev) => !prev);
@@ -25,7 +26,7 @@ const useDeleteComment = ({ body, onSuccess }: Props) => {
         setModalOpen(false);
         onSuccess?.();
         toast.success('댓글 삭제 완료');
-        router.refresh();
+        refreshTag(`${paperId}/comment`);
       }
     } catch (e) {
       console.error(e);

@@ -2,6 +2,7 @@
 
 import useUncontrolInput from '@/hooks/useUncontrolInput';
 import ajax from '@/utils/fetching';
+import { refreshTag } from '@/utils/revalidate';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -12,9 +13,8 @@ import ModalPortal from '@/components/common/ModalPortal';
 interface Props {
   title: string;
   paperId: string;
-  refreshPath: (path: string) => void;
 }
-const ButtonDeletePaper = ({ title, paperId, refreshPath }: Props) => {
+const ButtonDeletePaper = ({ title, paperId }: Props) => {
   const [open, setOpen] = useState(false);
   const inputRef = useUncontrolInput<HTMLInputElement>({ syncState: '' });
   const router = useRouter();
@@ -26,7 +26,7 @@ const ButtonDeletePaper = ({ title, paperId, refreshPath }: Props) => {
     try {
       await ajax.delete({ path: `/paper/${paperId}` });
       toast.success('삭제 완료');
-      refreshPath('/search');
+      refreshTag('search');
       router.push('/');
     } catch (e) {
       console.error(e);
