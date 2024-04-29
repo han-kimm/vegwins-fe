@@ -65,11 +65,17 @@ const config = {
           '0%': { transform: 'translateX(-100%)', opacity: '0' },
           '100%': { transform: 'translateX(0)', opacity: '1' },
         },
+        bell: {
+          '25%': { transform: 'rotate(5deg)' },
+          '75%': { transform: 'rotate(-5deg)' },
+          '100%': { transform: 'rotate(0deg)' },
+        },
       },
       animation: {
         fadeIn: 'fadeIn 0.5s ease-in-out',
         slideDown: 'slideDown 0.5s ease-in-out',
         slideRight: 'slideRight 0.5s ease-in-out',
+        bell: 'bell 0.15s ease-in-out 10',
       },
     },
   },

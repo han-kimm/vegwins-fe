@@ -14,7 +14,6 @@ const Notice = () => {
   const { state: notificationData, setState } = useFetchedState<Notification[]>({
     init: [],
     path: '/user/notification',
-    cache: 'no-cache',
     deps: [],
   });
   const isEmpty = !notificationData.length;
@@ -44,9 +43,11 @@ const Notice = () => {
   return (
     <>
       <button onClick={toggleByClick} className="relative">
-        <IconBell />
+        <div className={`${isEmpty || 'animate-bell'}`}>
+          <IconBell />
+        </div>
         {isEmpty || (
-          <div className="flex-center absolute -right-24 top-0 h-24 w-24 rounded-full bg-orange text-14 font-bold text-black-100">
+          <div className="flex-center absolute -right-24 top-0 h-24 w-24 animate-fadeIn rounded-full bg-orange text-14 font-bold text-black-100">
             {notificationData.length}
           </div>
         )}
