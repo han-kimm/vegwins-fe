@@ -3,12 +3,12 @@ import Image from 'next/image';
 import { ChangeEvent, memo, useState } from 'react';
 
 interface Props {
-  image: Blob | null;
+  image: Blob | string | undefined;
   setImage: SetSubmitData;
 }
 
 const WriteImage = memo(function WriteImage({ image, setImage }: Props) {
-  const [thumbnail, setThumbnail] = useState('');
+  const [thumbnail, setThumbnail] = useState(() => (typeof image === 'string' ? image : ''));
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newFile = e.target.files?.[0];
     if (!newFile) {
@@ -17,13 +17,13 @@ const WriteImage = memo(function WriteImage({ image, setImage }: Props) {
     setImage((prev) => ({ ...prev, image: newFile }));
 
     const newthumbnail = URL.createObjectURL(newFile);
-    setThumbnail(newthumbnail);
+    setThumbnail((prev) => (URL.revokeObjectURL(prev), newthumbnail));
     e.target.value = '';
   };
 
   const resetThumbnail = () => {
-    setImage((prev) => ({ ...prev, image: new Blob() }));
-    setThumbnail('');
+    setImage((prev) => ({ ...prev, image: undefined }));
+    setThumbnail((prev) => (URL.revokeObjectURL(prev), ''));
   };
 
   return (

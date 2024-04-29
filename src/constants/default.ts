@@ -18,9 +18,9 @@ export const SP_CATEGORY = 'c';
 export const PREVIOUS_PATH = 'pp';
 export const WRITE_SAVE = 'wr';
 
-export const DEFAULT_SUBMIT = { image: null, title: '', hashtag: new Set<string>(), category: Array<string>(), description: '' };
+export const DEFAULT_SUBMIT = { image: undefined, title: '', hashtag: new Set<string>(), category: Array<string>(), description: '' };
 export type SubmitData = {
-  image: Blob | null;
+  image: Blob | string | undefined;
   title: string;
   hashtag: Set<string>;
   category: string[];

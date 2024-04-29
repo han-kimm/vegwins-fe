@@ -19,10 +19,13 @@ const toastPosition = {
   position: 'bottom-center',
 } as const;
 
-const WriteForm = () => {
-  const [submitData, setSubmitData] = useState<SubmitData>(DEFAULT_SUBMIT);
-  const [reload, setReload] = useState(0);
+interface Props {
+  initial?: SubmitData;
+}
 
+const WriteForm = ({ initial }: Props) => {
+  const [submitData, setSubmitData] = useState<SubmitData>(() => (initial ? { ...initial, hashtag: new Set(initial.hashtag) } : DEFAULT_SUBMIT));
+  const [reload, setReload] = useState(0);
   const handleSave = () => {
     try {
       saveSubmitData(submitData);
