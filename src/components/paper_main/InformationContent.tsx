@@ -51,7 +51,7 @@ const InformationContent = ({ label, value }: { label: string; value: string | s
             height={300}
             priority
             sizes="600px"
-            src={value ?? DEFAULT_IMAGE}
+            src={value || DEFAULT_IMAGE}
             alt=""
             className="mx-auto rounded-md object-cover"
             aria-hidden={true}

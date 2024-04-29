@@ -1,10 +1,9 @@
-import { SubmitData } from '@/constants/default';
-import { Paper } from '@/types/data';
-import ajax from '@/utils/fetching';
-import { refreshPath } from '@/utils/revalidate';
 import ButtonReturn from '@/components/common/ButtonReturn';
 import ButtonDeletePaper from '@/components/edit/ButtonDeletePaper';
 import WriteForm from '@/components/write_main/WriteForm';
+import { SubmitData } from '@/constants/default';
+import { Paper } from '@/types/data';
+import ajax from '@/utils/fetching';
 
 interface Props {
   params: { paperId: string };
@@ -26,7 +25,7 @@ const EditPage = async ({ params }: Props) => {
         <ButtonReturn text="취소하기" icon="cancel" reverse />
       </header>
       <main className="h-full w-full">
-        <WriteForm initial={initial} paperId={paperId} refreshPath={refreshPath} />
+        <WriteForm initial={initial} paperId={paperId} />
       </main>
     </div>
   );
