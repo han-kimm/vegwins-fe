@@ -3,7 +3,7 @@
 import { DEFAULT_SUBMIT, SubmitData, WRITE_SAVE } from '@/constants/default';
 import { getLocalStorage } from '@/utils/browserStorage';
 import ajax from '@/utils/fetching';
-import { refreshTag } from '@/utils/revalidate';
+import { refreshPath, refreshTag } from '@/utils/revalidate';
 import { canRecall, canSave, required, saveSubmitData } from '@/utils/writeUtils';
 import { revalidatePath } from 'next/cache';
 import { useRouter } from 'next/navigation';
@@ -73,7 +73,7 @@ const WriteForm = ({ initial, paperId }: Props) => {
       }
       if (!res.error) {
         refreshTag('search');
-        refreshTag('edit');
+        refreshPath(`/paper/${paperId}`);
         router.push(`/paper/${res.paperId}`);
       }
     } catch (e) {

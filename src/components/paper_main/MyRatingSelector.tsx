@@ -1,9 +1,9 @@
 import { RATING_MSG } from '@/constants/default';
 import { Paper, Rating } from '@/types/data';
 import { setLocalStorage } from '@/utils/browserStorage';
+import { getCookie } from '@/utils/cookie';
 import ajax from '@/utils/fetching';
 import { refreshTag } from '@/utils/revalidate';
-import { revalidateTag } from 'next/cache';
 import Image from 'next/image';
 import toast from 'react-hot-toast';
 
@@ -11,15 +11,15 @@ interface Props {
   paperRating?: Paper['rating'];
   paperId: string;
   rating: Rating;
-  setRating: ({ rating }: { rating: Rating }) => void;
+  setRating: (rating: Rating) => void;
 }
 const MyRatingSelector = ({ paperRating, paperId, rating, setRating }: Props) => {
   const changeRating = async (status: Rating) => {
     const isSame = rating === status;
-    const newValue = { rating: isSame ? -1 : status };
+    const newValue = isSame ? -1 : status;
     setRating(newValue);
 
-    const isAuth = await ajax.checkAuth();
+    const isAuth = await getCookie('v_s');
     if (!isAuth) {
       setLocalStorage({ key: `r${paperId}`, value: newValue });
       return;
@@ -29,12 +29,11 @@ const MyRatingSelector = ({ paperRating, paperId, rating, setRating }: Props) =>
       if (isSame) {
         await ajax.delete({ path: `/paper/${paperId}/rating`, body: { rating } });
       } else {
-        await ajax.post({ path: `/paper/${paperId}/rating`, body: { ...newValue } });
+        await ajax.post({ path: `/paper/${paperId}/rating`, body: { rating: newValue } });
       }
       toast.success('평가 반영 완료!');
-      refreshTag('search');
     } catch {
-      setRating({ rating });
+      setRating(rating);
     }
   };
 

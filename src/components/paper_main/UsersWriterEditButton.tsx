@@ -1,27 +1,19 @@
-'use client';
-
-import useFetchedState from '@/hooks/useFetchedState';
-import { useRouter } from 'next/navigation';
+import ajax from '@/utils/fetching';
+import Link from 'next/link';
 
 interface Props {
   paperId: string;
 }
 
-const UsersWriterEditButton = ({ paperId }: Props) => {
-  const { state: isWriter } = useFetchedState({ init: false, path: `/paper/${paperId}/writer` });
-
-  const router = useRouter();
-  const handleClick = () => {
-    router.push(`/paper/${paperId}/edit`);
-  };
+const UsersWriterEditButton = async ({ paperId }: Props) => {
+  const isWriter = await ajax.get({ path: `/paper/${paperId}/writer` });
   return (
-    <button
-      onClick={handleClick}
-      disabled={!isWriter}
+    <Link
+      href={isWriter ? `/paper/${paperId}/edit` : '#'}
       className={`${isWriter ? 'transform-active bg-black-80 text-white transition-all' : 'border-black-60 bg-white text-black-80'} flex-center gap-8 rounded-xs border px-12 py-4 text-14`}
     >
       편집하기
-    </button>
+    </Link>
   );
 };
 export default UsersWriterEditButton;

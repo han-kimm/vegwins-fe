@@ -10,7 +10,7 @@ interface Props {
 }
 
 const WriteDescription = memo(function WriteDescription({ description, setDescription }: Props) {
-  const ref = useUncontrolInput<HTMLTextAreaElement>({ syncState: description });
+  const { ref, refCallback } = useUncontrolInput<HTMLTextAreaElement>({ syncState: description });
   const handleChange = useDebounce(() => {
     setDescription((prev) => ({ ...prev, description: ref.current?.value! }));
   }, 500);
@@ -18,7 +18,7 @@ const WriteDescription = memo(function WriteDescription({ description, setDescri
   return (
     <WriteFormRow label="설명" required={!description}>
       <textarea
-        ref={ref}
+        ref={refCallback}
         defaultValue={description}
         onChange={handleChange}
         placeholder="비건, 비거니즘에 해당하는 이유, 근거를 작성해 주세요."

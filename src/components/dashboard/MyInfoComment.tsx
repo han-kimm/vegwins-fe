@@ -1,18 +1,19 @@
 import useEditComment from '@/hooks/useEditComment';
 import useFetchedState from '@/hooks/useFetchedState';
+import useUncontrolInput from '@/hooks/useUncontrolInput';
 import { Comment } from '@/types/data';
 import { Session } from '@/types/session';
 import { Fragment } from 'react';
 import DeferredSpinner from '@/components/errorHandling/DeferredSpinner';
+import UsersCommentInput from '@/components/paper_main/UsersCommentInput';
 import UsersCommentItem from '@/components/paper_main/UsersCommentItem';
 
 interface Props {
   session: Session;
 }
 const MyInfoComment = ({ session }: Props) => {
-  const { state: myComment, setState, pending } = useFetchedState<Comment[]>({ init: [], path: '/user/comment', deps: [] });
-  const { targetComment, resetTarget, setRecomment, ButtonEdit } = useEditComment();
-
+  const { state: myComment, setState, pending } = useFetchedState<Comment[]>({ init: [], path: '/user/comment', deps: [], queryKey: ['comment'] });
+  const { targetComment, resetTarget, ButtonEdit } = useEditComment();
   if (pending) {
     return <DeferredSpinner />;
   }
@@ -32,6 +33,7 @@ const MyInfoComment = ({ session }: Props) => {
                 ButtonEdit={ButtonEdit}
               />
               <hr className="border-black-60" />
+              {isEdited && <UsersCommentInput sessionName={session?.nickname} resetTarget={resetTarget} targetComment={targetComment} />}
             </Fragment>
           );
         })

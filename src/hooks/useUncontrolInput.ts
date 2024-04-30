@@ -5,15 +5,20 @@ interface Props {
 }
 
 const useUncontrolInput = <T extends HTMLInputElement | HTMLTextAreaElement>({ syncState }: Props) => {
-  const ref = useRef<T>(null);
-  const input = ref.current;
+  const ref = useRef<T>();
+
+  const refCallback = (el: T) => {
+    if (el) {
+      ref.current = el;
+    }
+  };
 
   useEffect(() => {
-    if (input) {
-      input.value = syncState;
+    if (ref.current) {
+      ref.current.value = syncState;
     }
-  }, [syncState]);
+  }, [syncState, ref]);
 
-  return ref;
+  return { ref, refCallback };
 };
 export default useUncontrolInput;

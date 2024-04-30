@@ -12,7 +12,7 @@ interface Props {
 const SearchResultView = async ({ c, k }: Props) => {
   const data: SearchItem[] = await ajax.get({
     path: `/paper?${c ? `c=${c}` : ''}&${k ? `k=${encodeURIComponent(k)}` : ''}`,
-    queryKey: ['search'],
+    // queryKey: ['search'],
   });
 
   return (
@@ -21,14 +21,14 @@ const SearchResultView = async ({ c, k }: Props) => {
         <h1 className="text-18 font-bold">{setLabel(data, c, k)}</h1>
         {data && (!!c || !!k) && <SearchResultReset />}
       </div>
-      {data.length ? <SearchResultItemList data={data} /> : <SearchResultEmpty />}
+      {data?.length ? <SearchResultItemList data={data} /> : <SearchResultEmpty />}
     </section>
   );
 };
 export default SearchResultView;
 
 const setLabel = (data: SearchItem[], c?: string, k?: string) => {
-  const length = data.length || 0;
+  const length = data?.length || 0;
   if (c && k) {
     return `${c}: "${k}" 검색 결과(${length})`;
   } else if (c) {

@@ -9,7 +9,7 @@ interface Props {
   setTitle: SetSubmitData;
 }
 const WriteTitle = memo(function WriteTitle({ title, setTitle }: Props) {
-  const ref = useUncontrolInput<HTMLInputElement>({ syncState: title });
+  const { ref, refCallback } = useUncontrolInput<HTMLInputElement>({ syncState: title });
   const handleChange = useDebounce(() => {
     setTitle((prev) => ({ ...prev, title: ref.current?.value! }));
   }, 500);
@@ -17,7 +17,7 @@ const WriteTitle = memo(function WriteTitle({ title, setTitle }: Props) {
   return (
     <WriteFormRow label="문서명" required={!title}>
       <input
-        ref={ref}
+        ref={refCallback}
         defaultValue={title}
         onChange={handleChange}
         placeholder="입력해 주세요."

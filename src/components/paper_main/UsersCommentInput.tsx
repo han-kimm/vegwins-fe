@@ -3,7 +3,7 @@
 import { TargetComment } from '@/types/data';
 import ajax from '@/utils/fetching';
 import { refreshTag } from '@/utils/revalidate';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import AuthButton from '@/components/common/AuthButton';
@@ -65,14 +65,14 @@ const UsersCommentInput = ({ sessionName, targetComment, resetTarget }: Props) =
   return (
     <form onSubmit={handleSubmit} className="relative w-full">
       <div className="mb-8 flex items-baseline justify-between">
-        <label htmlFor="comment" className="flex flex-wrap items-baseline gap-4 text-14 font-bold">
+        <label htmlFor="comment" className="flex flex-wrap items-baseline gap-4 text-16 font-bold">
           {sessionName ?? <AuthSign />}
           {sessionName && isRecomment && <span className="rounded-full bg-black-20 px-12">{targetComment.comment.commenter.nickname}님께 답글</span>}
           {sessionName && isEdit && <span className="rounded-full bg-black-20 px-12">수정 중</span>}
         </label>
         <button
           disabled={!content}
-          className={`${content ? 'bg-black-80 text-white' : 'border-black-60 text-black-80'} shrink-0 rounded-[0.8rem] border px-8 py-4 text-12`}
+          className={`${content ? 'bg-black-80 text-white' : 'border-black-60 text-black-80'} shrink-0 rounded-[0.8rem] border px-8 py-4 text-14`}
           aria-label="댓글 제출하기"
         >
           작성 완료
@@ -83,7 +83,7 @@ const UsersCommentInput = ({ sessionName, targetComment, resetTarget }: Props) =
         value={content}
         disabled={!sessionName}
         onChange={handleChange}
-        className="h-80 w-full rounded-sm border border-black-80 p-8 text-14"
+        className="h-80 w-full rounded-sm border border-black-80 p-8 text-16"
       />
       {!sessionName && (
         <div className="absolute left-1/2 top-2/3 -translate-x-1/2 -translate-y-1/2">

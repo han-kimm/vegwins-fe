@@ -16,7 +16,7 @@ interface Props {
 }
 const ButtonDeletePaper = ({ title, paperId }: Props) => {
   const [open, setOpen] = useState(false);
-  const inputRef = useUncontrolInput<HTMLInputElement>({ syncState: '' });
+  const { ref: inputRef, refCallback } = useUncontrolInput<HTMLInputElement>({ syncState: '' });
   const router = useRouter();
 
   const deleteByClick = async () => {
@@ -53,7 +53,7 @@ const ButtonDeletePaper = ({ title, paperId }: Props) => {
               <strong>{`"${title}"`}</strong>
               <span>입력해주십시오.</span>
             </div>
-            <input ref={inputRef} placeholder={title} className="w-full rounded-sm border border-black-100 px-12 py-4 text-18 font-bold" />
+            <input ref={refCallback} placeholder={title} className="w-full rounded-sm border border-black-100 px-12 py-4 text-18 font-bold" />
             <div className="mx-auto flex gap-40">
               <button onClick={deleteByClick} className="transform-active w-100 rounded-sm border border-black-100 p-8 text-16 font-bold">
                 삭제하기
