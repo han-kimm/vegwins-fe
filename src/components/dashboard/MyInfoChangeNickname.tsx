@@ -1,3 +1,5 @@
+'use client';
+
 import { Session } from '@/types/session';
 import { setCookie } from '@/utils/cookie';
 import ajax from '@/utils/fetching';

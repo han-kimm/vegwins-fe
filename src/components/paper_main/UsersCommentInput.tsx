@@ -3,7 +3,7 @@
 import { TargetComment } from '@/types/data';
 import ajax from '@/utils/fetching';
 import { refreshTag } from '@/utils/revalidate';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import AuthButton from '@/components/common/AuthButton';

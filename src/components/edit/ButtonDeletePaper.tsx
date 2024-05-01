@@ -26,7 +26,7 @@ const ButtonDeletePaper = ({ title, paperId }: Props) => {
     try {
       await ajax.delete({ path: `/paper/${paperId}` });
       toast.success('삭제 완료');
-      refreshTag('search');
+      refreshTag(['search', 'myPaper', 'myRating']);
       router.push('/');
     } catch (e) {
       console.error(e);

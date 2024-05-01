@@ -32,6 +32,7 @@ const MyRatingSelector = ({ paperRating, paperId, rating, setRating }: Props) =>
         await ajax.post({ path: `/paper/${paperId}/rating`, body: { rating: newValue } });
       }
       toast.success('평가 반영 완료!');
+      refreshTag([`${paperId}/rating`, 'myRating']);
     } catch {
       setRating(rating);
     }

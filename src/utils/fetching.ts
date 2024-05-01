@@ -13,7 +13,6 @@ type ApiHandler = (params: HandlerParams) => Promise<any>;
 
 export class Fetching {
   #baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? '';
-  noNeedTokenPath = ['/paper', '/paper'];
 
   makeHeader = async (body?: any) => {
     const isFormData = body instanceof FormData;
@@ -31,8 +30,6 @@ export class Fetching {
 
   fetchJSON = async (...params: Parameters<Fetch>) => {
     try {
-      params[0];
-
       const wrappedFetch = async () =>
         fetch(this.#baseUrl + params[0], { ...params[1], ...((await this.makeHeader(params[1]?.body)) as any) }).then((resp) => resp.json());
       const res = await wrappedFetch();

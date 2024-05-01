@@ -1,3 +1,5 @@
+'use client';
+
 import useEditComment from '@/hooks/useEditComment';
 import useFetchedState from '@/hooks/useFetchedState';
 import useUncontrolInput from '@/hooks/useUncontrolInput';

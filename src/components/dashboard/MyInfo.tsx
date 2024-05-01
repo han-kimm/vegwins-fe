@@ -1,34 +1,13 @@
-import { Session } from '@/types/session';
 import Image from 'next/image';
-import MyInfoChangeNickname from '@/components/dashboard/MyInfoChangeNickname';
-import MyInfoComment from '@/components/dashboard/MyInfoComment';
-import MyInfoPaper from '@/components/dashboard/MyInfoPaper';
-import MyInfoRating from '@/components/dashboard/MyInfoRating';
+import { ReactNode } from 'react';
 import ApiErrorBoundary from '@/components/errorHandling/ApiErrorBoundary';
 
 interface Props {
-  session: Session;
-  tab: string;
   setTab: (tab: string) => void;
+  children: ReactNode;
 }
 
-const MyInfo = ({ session, tab, setTab }: Props) => {
-  let SwitchedComponent;
-  switch (tab) {
-    case '닉네임 변경':
-      SwitchedComponent = <MyInfoChangeNickname session={session} />;
-      break;
-    case '나의 문서':
-      SwitchedComponent = <MyInfoPaper />;
-      break;
-    case '나의 댓글':
-      SwitchedComponent = <MyInfoComment session={session} />;
-      break;
-    case '나의 평가':
-      SwitchedComponent = <MyInfoRating />;
-      break;
-  }
-
+const MyInfo = ({ setTab, children }: Props) => {
   return (
     <div className="animate-fadeIn">
       <button
@@ -39,7 +18,7 @@ const MyInfo = ({ session, tab, setTab }: Props) => {
         뒤로 가기
       </button>
       <div className="mb-60 mt-20 flex flex-col gap-12">
-        <ApiErrorBoundary>{SwitchedComponent}</ApiErrorBoundary>
+        <ApiErrorBoundary>{children}</ApiErrorBoundary>
       </div>
     </div>
   );

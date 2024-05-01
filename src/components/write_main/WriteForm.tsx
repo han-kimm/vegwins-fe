@@ -72,7 +72,7 @@ const WriteForm = ({ initial, paperId }: Props) => {
         res = await ajax.put({ path: `/paper/${paperId}`, body: formData });
       }
       if (!res.error) {
-        refreshTag('search');
+        refreshTag(['search', 'myPaper']);
         refreshPath(`/paper/${paperId}`);
         router.push(`/paper/${res.paperId}`);
       }

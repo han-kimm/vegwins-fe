@@ -1,6 +1,6 @@
 import ajax from '@/utils/fetching';
 import { refreshTag } from '@/utils/revalidate';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { useCallback, useState } from 'react';
 import toast from 'react-hot-toast';
 import ModalFrame from '@/components/common/ModalFrame';
@@ -21,7 +21,7 @@ const useDeleteComment = ({ body, onSuccess }: Props) => {
   };
   const deleteByClick = useCallback(async () => {
     try {
-      const res = await ajax.delete({ path: '/user/comment', body });
+      const res = await ajax.delete({ path: `/paper/${paperId}/comment`, body });
       if (res.success) {
         setModalOpen(false);
         onSuccess?.();
