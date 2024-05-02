@@ -1,4 +1,4 @@
-import { getCookie, setTokenCookie } from '@/utils/cookie';
+import { getCookie } from '@/utils/cookie';
 
 type Fetch = typeof fetch;
 
@@ -34,8 +34,7 @@ export class Fetching {
         fetch(this.#baseUrl + params[0], { ...params[1], ...((await this.makeHeader(params[1]?.body)) as any) }).then((resp) => resp.json());
       const res = await wrappedFetch();
       if (res.code === 419) {
-        const { accessToken, refreshToken } = await this.fetchJSON('/auth/refresh');
-        setTokenCookie(accessToken, refreshToken);
+        await this.fetchJSON('/auth/refresh');
         const refetchRes = await wrappedFetch();
         return refetchRes;
       }
