@@ -31,3 +31,8 @@ export const getCookie = async (key: string) => {
 export const deleteCookie = async (key: string) => {
   cookies().delete(key);
 };
+
+export const setTokenCookie = (accessToken: string, refreshToken: string) => {
+  setCookie({ name: 'v_at', value: accessToken, path: '/', secure: true, httpOnly: true, sameSite: 'strict' });
+  setCookie({ name: 'v_rt', value: refreshToken, path: '/api/auth/refresh', secure: true, httpOnly: true, sameSite: 'strict' });
+};
