@@ -85,7 +85,7 @@ const WriteForm = ({ initial, paperId }: Props) => {
   };
 
   return (
-    <form className="flex w-full flex-col [&>div:not(:first-child)]:mt-40">
+    <div className="flex w-full flex-col [&>div:not(:first-child)]:mt-40" aria-label="문서 작성">
       <WriteImage image={submitData.image} setImage={setSubmitData} />
       <WriteTitle title={submitData.title} setTitle={setSubmitData} />
       <WriteCategory category={submitData.category} setCategory={setSubmitData} />
@@ -93,7 +93,7 @@ const WriteForm = ({ initial, paperId }: Props) => {
       <WriteDescription description={submitData.description} setDescription={setSubmitData} />
       <WriteSave canSave={canSave(submitData)} canRecall={canRecall(submitData)} handleSave={handleSave} handleRecall={handleRecall} />
       <WriteSubmit required={required(submitData)} handleSubmit={handleSubmit} />
-    </form>
+    </div>
   );
 };
 export default WriteForm;
