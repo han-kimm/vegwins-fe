@@ -1,14 +1,16 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import ModalFrame from '@/components/common/ModalFrame';
 import ModalPortal from '@/components/common/ModalPortal';
+import LoadingDot from '@/components/write_main/LoadingDot';
 import IconUpload from 'public/icon/upload.svg';
 
 interface Props {
   closeModal: () => void;
   handleSubmit: (e: FormEvent) => void;
+  pending: boolean;
 }
 
-const WriteSubmitModal = ({ closeModal, handleSubmit }: Props) => {
+const WriteSubmitModal = ({ closeModal, handleSubmit, pending }: Props) => {
   const [signed, setSigned] = useState({ sensored: false, edited: false });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => setSigned((prev) => ({ ...prev, [e.target.name]: e.target.checked }));
@@ -50,8 +52,14 @@ const WriteSubmitModal = ({ closeModal, handleSubmit }: Props) => {
           disabled={!signed.sensored || !signed.edited}
           className={`${signed.sensored && signed.edited ? 'transform-active border-black-80 bg-black-100 text-white' : 'border-black-40 text-black-40'} flex-center mt-auto gap-12 rounded-sm border py-12 text-18 font-medium`}
         >
-          <IconUpload />
-          작성 완료
+          {pending ? (
+            <LoadingDot />
+          ) : (
+            <>
+              <IconUpload />
+              작성 완료
+            </>
+          )}
         </button>
       </ModalFrame>
     </ModalPortal>

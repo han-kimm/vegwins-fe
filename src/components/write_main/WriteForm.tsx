@@ -92,7 +92,7 @@ const WriteForm = ({ initial, paperId }: Props) => {
       <WriteHashtag hashtag={submitData.hashtag} setHashtag={setSubmitData} />
       <WriteDescription description={submitData.description} setDescription={setSubmitData} />
       <WriteSave canSave={canSave(submitData)} canRecall={canRecall(submitData)} handleSave={handleSave} handleRecall={handleRecall} />
-      <WriteSubmit required={required(submitData)} handleSubmit={handleSubmit} />
+      <WriteSubmit required={required(submitData)} handleSubmit={handleSubmit} pending={pending} />
     </form>
   );
 };

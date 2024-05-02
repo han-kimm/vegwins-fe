@@ -7,9 +7,10 @@ const WriteSubmitModal = dynamic(() => import('@/components/write_main/WriteSubm
 interface Props {
   required: boolean;
   handleSubmit: (e: FormEvent) => void;
+  pending: boolean;
 }
 
-const WriteSubmit = memo(function WriteSubmit({ required, handleSubmit }: Props) {
+const WriteSubmit = memo(function WriteSubmit({ required, handleSubmit, pending }: Props) {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
@@ -23,7 +24,7 @@ const WriteSubmit = memo(function WriteSubmit({ required, handleSubmit }: Props)
         <IconUpload />
         작성 완료
       </button>
-      {modalOpen && <WriteSubmitModal closeModal={() => setModalOpen(false)} handleSubmit={handleSubmit} />}
+      {modalOpen && <WriteSubmitModal closeModal={() => setModalOpen(false)} handleSubmit={handleSubmit} pending={pending} />}
     </>
   );
 });
