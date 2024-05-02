@@ -12,9 +12,11 @@ const googleAuthPath = '/auth/google';
 
 const authCallback = async (response: any) => {
   try {
-    const { nickname } = await ajax.post({ path: googleAuthPath, body: response });
+    const { accessToken, refreshToken, nickname } = await ajax.post({ path: googleAuthPath, body: response });
     if (nickname) {
       toast.success(`${nickname}님 안녕하세요!`);
+      await setCookie({ name: 'v_at', value: accessToken, path: '/', secure: true, httpOnly: true, sameSite: 'strict' });
+      await setCookie({ name: 'v_rt', value: refreshToken, path: '/api/auth/refresh', secure: true, httpOnly: true, sameSite: 'strict' });
       await setCookie({ name: 'v_s', value: { nickname }, path: '/' });
     }
   } catch (e) {
