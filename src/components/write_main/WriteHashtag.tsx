@@ -42,7 +42,7 @@ const WriteHashtag = memo(function WriteHashtag({ hashtag, setHashtag }: Props) 
     <WriteFormRow label="해시태그">
       <div className="flex grow flex-col gap-8">
         <input
-          type="text"
+          type="search"
           onKeyUp={makeHashtag}
           placeholder="'#특징' 추가해 주세요."
           className="webkit w-full border-b border-black-60 bg-transparent font-bold focus:outline-none"
