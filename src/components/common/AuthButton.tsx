@@ -9,9 +9,10 @@ const AuthModal = dynamic(() => import('./AuthModal'), { ssr: false });
 
 const AuthButton = () => {
   const [open, setOpen] = useState(false);
+  const [pending, setPending] = useState(true);
 
   const handleClick = () => {
-    googleAuth();
+    googleAuth(() => setPending(false));
     setOpen(true);
   };
   return (
@@ -20,7 +21,7 @@ const AuthButton = () => {
         <Image src="/icon/join.svg" alt="로그인 이미지" width={24} height={24} aria-hidden />
         <span>로그인</span>
       </button>
-      {open && <AuthModal closeModal={() => setOpen(false)} />}
+      {open && <AuthModal closeModal={() => setOpen(false)} pending={pending} />}
     </>
   );
 };

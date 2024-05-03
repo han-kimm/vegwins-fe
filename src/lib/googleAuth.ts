@@ -16,7 +16,7 @@ const authCallback = async (response: any) => {
     if (nickname) {
       toast.success(`${nickname}님 안녕하세요!`);
       setTokenCookie(accessToken, refreshToken);
-      await setCookie({ name: 'v_s', value: { nickname }, path: '/' });
+      setCookie({ name: 'v_s', value: { nickname }, path: '/' });
     }
   } catch (e) {
     console.error(e);
@@ -39,7 +39,7 @@ export const popup = () => {
   client.requestCode();
 };
 
-const oneTap = () => {
+const oneTap = (callback: () => void) => {
   const { google } = window;
   if (!google) {
     return;
@@ -51,19 +51,22 @@ const oneTap = () => {
     use_fedcm_for_prompt: true,
   });
   google.accounts.id.prompt();
+  callback();
 };
 
-export const googleAuth = () => {
+export const googleAuth = (callback: () => void) => {
   const current = document.querySelector('#googleAuth');
   if (current) {
-    oneTap();
+    oneTap(callback);
     return;
   }
   const script = document.createElement('script');
   script.id = 'googleAuth';
   script.src = 'https://accounts.google.com/gsi/client';
   script.async = true;
-  script.onload = oneTap;
+  script.onload = () => {
+    oneTap(callback);
+  };
 
   document.head.append(script);
 };

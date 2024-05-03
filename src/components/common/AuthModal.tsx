@@ -1,26 +1,55 @@
 import { popup } from '@/lib/googleAuth';
+import Link from 'next/link';
 import ModalFrame from '@/components/common/ModalFrame';
 import ModalPortal from '@/components/common/ModalPortal';
+import LoadingDot from '@/components/write_main/LoadingDot';
 import IconGoogle from 'public/icon/google.svg';
 
 interface Props {
   closeModal: () => void;
+  pending: boolean;
 }
 
-const AuthModal = ({ closeModal }: Props) => {
+const AuthModal = ({ closeModal, pending }: Props) => {
   return (
     <ModalPortal>
       <ModalFrame closeModal={closeModal}>
-        <h2 className="text-18 font-bold">로그인</h2>
-        <button
-          onClick={popup}
-          className="flex-center transform-active my-auto h-40 gap-12 rounded-full border border-black-20 bg-black-0 text-14 font-medium"
+        <h2 className="mb-20 text-18 font-bold">로그인</h2>
+        <Link
+          href={makeGoogleURL()}
+          className="flex-center transform-active my-auto gap-12 rounded-full border border-black-20 bg-black-0 py-8 text-16 font-medium"
         >
-          <IconGoogle />
-          구글 계정으로 로그인
-        </button>
+          {pending ? (
+            <LoadingDot />
+          ) : (
+            <>
+              <IconGoogle />
+              구글 계정으로 로그인
+            </>
+          )}
+        </Link>
       </ModalFrame>
     </ModalPortal>
   );
 };
 export default AuthModal;
+
+const makeGoogleURL = () => {
+  const endPoint = 'https://accounts.google.com/o/oauth2/v2/auth';
+  const config = {
+    client_id: process.env.NEXT_PUBLIC_ID_GOOGLE ?? '',
+    redirect_uri: process.env.NEXT_PUBLIC_URI_GOOGLE ?? '',
+    response_type: 'code',
+    scope: 'https://www.googleapis.com/auth/userinfo.profile',
+    include_granted_scopes: 'true',
+    state: 'pass-through value',
+  };
+  const configKey = Object.keys(config) as (keyof typeof config)[];
+
+  const params = new URLSearchParams();
+  for (const key of configKey) {
+    params.set(key, config[key]);
+  }
+  const newParams = params.toString();
+  return endPoint + '?' + newParams;
+};
