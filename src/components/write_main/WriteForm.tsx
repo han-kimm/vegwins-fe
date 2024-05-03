@@ -2,6 +2,7 @@
 
 import { DEFAULT_SUBMIT, SubmitData, WRITE_SAVE } from '@/constants/default';
 import { getLocalStorage } from '@/utils/browserStorage';
+import { getCookie } from '@/utils/cookie';
 import ajax from '@/utils/fetching';
 import { refreshPath, refreshTag } from '@/utils/revalidate';
 import { canRecall, canSave, required, saveSubmitData } from '@/utils/writeUtils';
@@ -27,7 +28,6 @@ interface Props {
 
 const WriteForm = ({ initial, paperId }: Props) => {
   const [submitData, setSubmitData] = useState<SubmitData>(() => (initial ? initial : DEFAULT_SUBMIT));
-  console.log(submitData);
   const [reload, setReload] = useState(0);
   const handleSave = () => {
     try {
@@ -67,7 +67,14 @@ const WriteForm = ({ initial, paperId }: Props) => {
 
       let res;
       if (!initial) {
-        res = await ajax.post({ path: '/paper', body: formData });
+        const accessToken = await getCookie('v_at');
+        res = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/paper', {
+          method: 'POST',
+          headers: {
+            Cookie: 'v_at=' + accessToken,
+          },
+          body: formData,
+        });
         alert(res);
       } else {
         res = await ajax.put({ path: `/paper/${paperId}`, body: formData });
