@@ -55,7 +55,7 @@ const WriteImage = memo(function WriteImage({ image, setImage }: Props) {
           />
         }
       </label>
-      <input onChange={handleChange} id="image" type="file" accept="image/*" hidden />
+      <input onChange={handleChange} id="image" type="file" accept="image/.png,.jpg,.jpeg" capture="environment" hidden />
     </div>
   );
 });

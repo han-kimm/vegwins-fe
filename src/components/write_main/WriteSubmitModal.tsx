@@ -1,5 +1,4 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
-import FadingDot from '@/components/common/FadingDot';
 import ModalFrame from '@/components/common/ModalFrame';
 import ModalPortal from '@/components/common/ModalPortal';
 import IconUpload from 'public/icon/upload.svg';
@@ -53,7 +52,7 @@ const WriteSubmitModal = ({ closeModal, handleSubmit, pending }: Props) => {
           className={`${signed.sensored && signed.edited ? 'transform-active border-black-80 bg-black-100 text-white' : 'border-black-40 text-black-40'} flex-center mt-auto gap-12 rounded-sm border py-12 text-18 font-medium`}
         >
           {pending ? (
-            <FadingDot />
+            '전송 중입니다...'
           ) : (
             <>
               <IconUpload />

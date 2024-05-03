@@ -60,6 +60,7 @@ const WriteForm = ({ initial, paperId }: Props) => {
       setPending(true);
       const noImageData = { ...submitData, image: '', hashtag: [...submitData.hashtag] };
       const formData = new FormData();
+      alert(submitData.image.toString());
       formData.append('image', typeof submitData.image === 'string' ? '' : submitData.image);
       formData.append('data', JSON.stringify(noImageData));
       formData.append('deleteImage', JSON.stringify(initial && (!submitData.image || typeof submitData.image !== 'string')));
