@@ -2,7 +2,7 @@
 
 import { setCookie, setTokenCookie } from '@/utils/cookie';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import toast from 'react-hot-toast';
 import FadingDot from '@/components/common/FadingDot';
 import IconGoogle from 'public/icon/google.svg';
@@ -44,4 +44,13 @@ const GoogleAuthPage = () => {
     </div>
   );
 };
-export default GoogleAuthPage;
+
+const SuspendedPage = () => {
+  return (
+    <Suspense>
+      <GoogleAuthPage />
+    </Suspense>
+  );
+};
+
+export default SuspendedPage;
