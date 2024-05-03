@@ -6,7 +6,7 @@ import WriteFormRow from '@/components/write_main/WriteFormRow';
 const REG = /#[a-z0-9_가-힣]+/;
 
 interface Props {
-  hashtag: Set<string>;
+  hashtag: string[];
   setHashtag: SetSubmitData;
 }
 
@@ -25,17 +25,17 @@ const WriteHashtag = memo(function WriteHashtag({ hashtag, setHashtag }: Props) 
 
       return;
     }
-    if (hashtag.has(newValue)) {
+    if (hashtag.includes(newValue)) {
       input.value = '';
       input.placeholder = '이미 추가된 태그입니다.';
       return;
     }
     input.value = '';
-    setHashtag((prev) => ({ ...prev, hashtag: (prev.hashtag.add(newValue), new Set(prev.hashtag)) }));
+    setHashtag((prev) => ({ ...prev, hashtag: [...prev.hashtag, newValue] }));
   };
 
   const deleteHashtag = (tag: string) => () => {
-    setHashtag((prev) => ({ ...prev, hashtag: (prev.hashtag.delete(tag), new Set(prev.hashtag)) }));
+    setHashtag((prev) => ({ ...prev, hashtag: prev.hashtag.filter((v) => v !== tag) }));
   };
 
   return (

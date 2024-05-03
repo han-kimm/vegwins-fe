@@ -18,11 +18,11 @@ export const SP_CATEGORY = 'c';
 export const PREVIOUS_PATH = 'pp';
 export const WRITE_SAVE = 'wr';
 
-export const DEFAULT_SUBMIT = { image: '', title: '', hashtag: new Set<string>(), category: Array<string>(), description: '' };
+export const DEFAULT_SUBMIT = { image: '', title: '', hashtag: Array<string>(), category: Array<string>(), description: '' };
 export type SubmitData = {
   image: Blob | string;
   title: string;
-  hashtag: Set<string>;
+  hashtag: string[];
   category: string[];
   description: string;
 };

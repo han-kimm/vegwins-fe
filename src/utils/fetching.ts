@@ -85,6 +85,8 @@ export class Fetching {
   };
 }
 
-const ajax = new Fetching();
+const map = new Map();
+map.set('ajax', new Fetching());
+const ajax = map.get('ajax');
 
 export default ajax;

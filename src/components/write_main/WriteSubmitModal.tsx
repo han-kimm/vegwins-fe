@@ -48,8 +48,8 @@ const WriteSubmitModal = ({ closeModal, handleSubmit, pending }: Props) => {
         </button>
         <button
           onClick={handleSubmit}
-          disabled={!signed.sensored || !signed.edited}
-          className={`${signed.sensored && signed.edited ? 'transform-active border-black-80 bg-black-100 text-white' : 'border-black-40 text-black-40'} flex-center mt-auto gap-12 rounded-sm border py-12 text-18 font-medium`}
+          disabled={!signed.sensored || !signed.edited || pending}
+          className={`${pending || (signed.sensored && signed.edited) ? 'transform-active border-black-80 bg-black-100 text-white' : 'border-black-40 text-black-40'} flex-center mt-auto gap-12 rounded-sm border py-12 text-18 font-medium`}
         >
           {pending ? (
             '전송 중입니다...'

@@ -26,7 +26,8 @@ interface Props {
 }
 
 const WriteForm = ({ initial, paperId }: Props) => {
-  const [submitData, setSubmitData] = useState<SubmitData>(() => (initial ? { ...initial, hashtag: new Set(initial.hashtag) } : DEFAULT_SUBMIT));
+  const [submitData, setSubmitData] = useState<SubmitData>(() => (initial ? initial : DEFAULT_SUBMIT));
+  console.log(submitData);
   const [reload, setReload] = useState(0);
   const handleSave = () => {
     try {
@@ -58,7 +59,7 @@ const WriteForm = ({ initial, paperId }: Props) => {
 
     try {
       setPending(true);
-      const noImageData = { ...submitData, image: '', hashtag: [...submitData.hashtag] };
+      const noImageData = { ...submitData, image: '' };
       const formData = new FormData();
       formData.append('image', typeof submitData.image === 'string' ? '' : submitData.image);
       formData.append('data', JSON.stringify(noImageData));
@@ -74,10 +75,9 @@ const WriteForm = ({ initial, paperId }: Props) => {
       if (!res?.error) {
         refreshTag(['search', 'myPaper']);
         refreshPath(`/paper/${paperId}`);
-        router.push(`/paper/${res.paperId}`);
+        router.push(`/paper/${res?.paperId}`);
       }
     } catch (e: any) {
-      alert(e);
       toast.error('다시 시도해주십시오.');
       console.error(e);
     } finally {
