@@ -74,7 +74,7 @@ const WriteForm = ({ initial, paperId }: Props) => {
             Cookie: 'v_at=' + accessToken,
           },
           body: formData,
-        });
+        }).then((resp) => resp.json());
         alert(res);
       } else {
         res = await ajax.put({ path: `/paper/${paperId}`, body: formData });
