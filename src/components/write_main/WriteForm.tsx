@@ -66,19 +66,18 @@ const WriteForm = ({ initial, paperId }: Props) => {
 
       let res;
       if (!initial) {
-        alert(1);
         res = await ajax.post({ path: '/paper', body: formData });
+        alert(res);
       } else {
         res = await ajax.put({ path: `/paper/${paperId}`, body: formData });
       }
-      if (!res.error) {
+      if (!res?.error) {
         refreshTag(['search', 'myPaper']);
         refreshPath(`/paper/${paperId}`);
         router.push(`/paper/${res.paperId}`);
       }
     } catch (e: any) {
       alert(e);
-      alert(e.message);
       toast.error('다시 시도해주십시오.');
       console.error(e);
     } finally {
