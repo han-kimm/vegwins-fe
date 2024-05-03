@@ -60,13 +60,13 @@ const WriteForm = ({ initial, paperId }: Props) => {
       setPending(true);
       const noImageData = { ...submitData, image: '', hashtag: [...submitData.hashtag] };
       const formData = new FormData();
-      alert(submitData.image.toString());
       formData.append('image', typeof submitData.image === 'string' ? '' : submitData.image);
       formData.append('data', JSON.stringify(noImageData));
       formData.append('deleteImage', JSON.stringify(initial && (!submitData.image || typeof submitData.image !== 'string')));
 
       let res;
       if (!initial) {
+        alert(1);
         res = await ajax.post({ path: '/paper', body: formData });
       } else {
         res = await ajax.put({ path: `/paper/${paperId}`, body: formData });
@@ -76,7 +76,9 @@ const WriteForm = ({ initial, paperId }: Props) => {
         refreshPath(`/paper/${paperId}`);
         router.push(`/paper/${res.paperId}`);
       }
-    } catch (e) {
+    } catch (e: any) {
+      alert(e);
+      alert(e.message);
       toast.error('다시 시도해주십시오.');
       console.error(e);
     } finally {
