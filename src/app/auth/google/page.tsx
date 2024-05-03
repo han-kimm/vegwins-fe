@@ -1,26 +1,20 @@
 'use client';
 
 import { setCookie, setTokenCookie } from '@/utils/cookie';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 import FadingDot from '@/components/common/FadingDot';
 import IconGoogle from 'public/icon/google.svg';
 import IconLogo from 'public/icon/logo.svg';
 
-interface Props {
-  searchParams: {
-    code: string;
-  };
-}
-
-const GoogleAuthPage = ({ searchParams }: Props) => {
+const GoogleAuthPage = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
   useEffect(() => {
     (async () => {
       try {
-        const { code } = searchParams;
-        console.log(code);
+        const code = searchParams.get('code');
         const { accessToken, refreshToken, nickname } = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/auth/google', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
