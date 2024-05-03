@@ -67,15 +67,7 @@ const WriteForm = ({ initial, paperId }: Props) => {
 
       let res;
       if (!initial) {
-        const accessToken = await getCookie('v_at');
-        res = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/paper', {
-          method: 'POST',
-          headers: {
-            Cookie: 'v_at=' + accessToken,
-          },
-          body: formData,
-        }).then((resp) => resp.json());
-        alert(res);
+        res = await ajax.post({ path: '/paper', body: formData });
       } else {
         res = await ajax.put({ path: `/paper/${paperId}`, body: formData });
       }

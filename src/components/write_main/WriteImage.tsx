@@ -1,4 +1,5 @@
 import { SetSubmitData } from '@/constants/default';
+import imageCompression from 'browser-image-compression';
 import Image from 'next/image';
 import { ChangeEvent, memo, useState } from 'react';
 
@@ -9,12 +10,24 @@ interface Props {
 
 const WriteImage = memo(function WriteImage({ image, setImage }: Props) {
   const [thumbnail, setThumbnail] = useState(() => (typeof image === 'string' ? image : ''));
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const newFile = e.target.files?.[0];
     if (!newFile) {
       return;
     }
-    setImage((prev) => ({ ...prev, image: newFile }));
+
+    // const reader = new FileReader();
+    const options = {
+      maxSizeMB: 0.2,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    };
+    const compressedFile = await imageCompression(newFile, options);
+    // reader.readAsDataURL(compressedFile);
+    // reader.onloadend = () => {
+    //   const base64data = reader.result;
+    // }
+    setImage((prev) => ({ ...prev, image: compressedFile }));
 
     const newthumbnail = URL.createObjectURL(newFile);
     setThumbnail((prev) => (URL.revokeObjectURL(prev), newthumbnail));
