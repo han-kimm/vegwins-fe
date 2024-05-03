@@ -20,6 +20,7 @@ const GoogleAuthPage = ({ searchParams }: Props) => {
     (async () => {
       try {
         const { code } = searchParams;
+        console.log(searchParams);
         const { accessToken, refreshToken, nickname } = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/auth/google', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
