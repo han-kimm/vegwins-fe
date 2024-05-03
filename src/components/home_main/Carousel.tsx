@@ -36,11 +36,11 @@ const CarouselSlide = ({ data }: SlideProps) => {
         <Link
           href={data.href}
           key={i}
-          className={`${data.className} relative flex w-full flex-shrink-0 p-28`}
+          className="relative flex w-full flex-shrink-0 p-28"
           aria-label={`${arr.length}번째 중 ${i + 1}번째 슬라이드: ${data.title}로 이동`}
         >
           <Image fill priority sizes="(min-width: 500px) 500px, 250px" src={data.imageUrl} alt="" className="object-cover" aria-hidden />
-          <h2 className="z-10 text-24 font-bold">{data.title}</h2>
+          <h2 className={`${data.className} z-10 text-24 font-bold`}>{data.title}</h2>
         </Link>
       ))}
     </div>
