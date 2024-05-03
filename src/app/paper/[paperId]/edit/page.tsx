@@ -15,7 +15,7 @@ const EditPage = async ({ params }: Props) => {
     title: data.title,
     category: data.category,
     description: data.description,
-    hashtag: new Set(data.hashtag),
+    hashtag: data.hashtag ?? [],
     image: data.imageUrl ?? '',
   };
   return (
