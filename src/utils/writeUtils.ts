@@ -2,12 +2,12 @@ import { SubmitData, WRITE_SAVE } from '@/constants/default';
 import { getLocalStorage, setLocalStorage } from '@/utils/browserStorage';
 
 export const saveSubmitData = (submitData: SubmitData) => {
-  setLocalStorage({ key: WRITE_SAVE, value: { ...submitData, hashtag: [...submitData.hashtag] } });
+  setLocalStorage({ key: WRITE_SAVE, value: submitData });
 };
 
 const getEntireData = (submitData: SubmitData) => {
   const previousData = typeof window !== 'undefined' ? JSON.stringify(getLocalStorage(WRITE_SAVE)) : 'null';
-  const currentData = JSON.stringify({ ...submitData, hashtag: [...submitData.hashtag] });
+  const currentData = JSON.stringify(submitData);
   return { previousData, currentData };
 };
 
@@ -24,7 +24,7 @@ export const required = (submitData: SubmitData) => {
 };
 
 export const canSave = (submitData: SubmitData) => {
-  const isDirty = !!submitData.image || !!submitData.title || !!submitData.category.length || !!submitData.hashtag.size || !!submitData.description;
+  const isDirty = !!submitData.image || !!submitData.title || !!submitData.category.length || !!submitData.hashtag.length || !!submitData.description;
   return isDirty && diffLocalStorage(submitData);
 };
 

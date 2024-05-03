@@ -41,7 +41,7 @@ const WriteForm = ({ initial, paperId }: Props) => {
   const handleRecall = () => {
     const prev = getLocalStorage(WRITE_SAVE);
     if (prev) {
-      setSubmitData({ ...prev, hashtag: new Set(prev.hashtag) });
+      setSubmitData(prev);
       toast.success('불러 오기 성공!', toastPosition);
       return;
     }
