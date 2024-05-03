@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import { FormEvent, memo, useRef, useState } from 'react';
+import { FormEvent, memo, useState } from 'react';
 import IconUpload from 'public/icon/upload.svg';
 
 const WriteSubmitModal = dynamic(() => import('@/components/write_main/WriteSubmitModal'), { ssr: false });
