@@ -39,7 +39,7 @@ export const popup = () => {
   client.requestCode();
 };
 
-const oneTap = (callback: () => void) => {
+const oneTap = () => {
   const { google } = window;
   if (!google) {
     return;
@@ -51,22 +51,19 @@ const oneTap = (callback: () => void) => {
     use_fedcm_for_prompt: true,
   });
   google.accounts.id.prompt();
-  callback();
 };
 
-export const googleAuth = (callback: () => void) => {
+export const googleAuth = () => {
   const current = document.querySelector('#googleAuth');
   if (current) {
-    oneTap(callback);
+    oneTap();
     return;
   }
   const script = document.createElement('script');
   script.id = 'googleAuth';
   script.src = 'https://accounts.google.com/gsi/client';
   script.async = true;
-  script.onload = () => {
-    oneTap(callback);
-  };
+  script.onload = oneTap;
 
   document.head.append(script);
 };

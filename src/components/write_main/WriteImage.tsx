@@ -22,7 +22,7 @@ const WriteImage = memo(function WriteImage({ image, setImage }: Props) {
   };
 
   const resetThumbnail = () => {
-    setImage((prev) => ({ ...prev, image: undefined }));
+    setImage((prev) => ({ ...prev, image: '' }));
     setThumbnail((prev) => (URL.revokeObjectURL(prev), ''));
   };
 

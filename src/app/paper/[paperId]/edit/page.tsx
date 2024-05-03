@@ -16,7 +16,7 @@ const EditPage = async ({ params }: Props) => {
     category: data.category,
     description: data.description,
     hashtag: new Set(data.hashtag),
-    image: data.imageUrl,
+    image: data.imageUrl ?? '',
   };
   return (
     <div className="max-h-max min-h-dvh px-28 pb-28 pt-16">

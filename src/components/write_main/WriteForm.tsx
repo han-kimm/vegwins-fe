@@ -5,7 +5,6 @@ import { getLocalStorage } from '@/utils/browserStorage';
 import ajax from '@/utils/fetching';
 import { refreshPath, refreshTag } from '@/utils/revalidate';
 import { canRecall, canSave, required, saveSubmitData } from '@/utils/writeUtils';
-import { revalidatePath } from 'next/cache';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
 import toast from 'react-hot-toast';
@@ -61,9 +60,9 @@ const WriteForm = ({ initial, paperId }: Props) => {
       setPending(true);
       const noImageData = { ...submitData, image: '', hashtag: [...submitData.hashtag] };
       const formData = new FormData();
-      formData.append('image', typeof submitData.image ?? '');
+      formData.append('image', typeof submitData.image === 'string' ? '' : submitData.image);
       formData.append('data', JSON.stringify(noImageData));
-      formData.append('deleteImage', JSON.stringify(initial && !submitData.image));
+      formData.append('deleteImage', JSON.stringify(initial && (!submitData.image || typeof submitData.image !== 'string')));
 
       let res;
       if (!initial) {

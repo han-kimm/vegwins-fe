@@ -1,16 +1,13 @@
-import { popup } from '@/lib/googleAuth';
 import Link from 'next/link';
 import ModalFrame from '@/components/common/ModalFrame';
 import ModalPortal from '@/components/common/ModalPortal';
-import LoadingDot from '@/components/write_main/LoadingDot';
 import IconGoogle from 'public/icon/google.svg';
 
 interface Props {
   closeModal: () => void;
-  pending: boolean;
 }
 
-const AuthModal = ({ closeModal, pending }: Props) => {
+const AuthModal = ({ closeModal }: Props) => {
   return (
     <ModalPortal>
       <ModalFrame closeModal={closeModal}>
@@ -19,14 +16,8 @@ const AuthModal = ({ closeModal, pending }: Props) => {
           href={makeGoogleURL()}
           className="flex-center transform-active my-auto gap-12 rounded-full border border-black-20 bg-black-0 py-8 text-16 font-medium"
         >
-          {pending ? (
-            <LoadingDot />
-          ) : (
-            <>
-              <IconGoogle />
-              구글 계정으로 로그인
-            </>
-          )}
+          <IconGoogle />
+          구글 계정으로 로그인
         </Link>
       </ModalFrame>
     </ModalPortal>

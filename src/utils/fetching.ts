@@ -35,7 +35,7 @@ export class Fetching {
       const res = await wrappedFetch();
       if (res.code === 419) {
         const { accessToken, refreshToken } = await this.fetchJSON('/auth/refresh');
-        setTokenCookie(accessToken, refreshToken);
+        await setTokenCookie(accessToken, refreshToken);
         const refetchRes = await wrappedFetch();
         return refetchRes;
       }
