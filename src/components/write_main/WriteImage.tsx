@@ -11,6 +11,9 @@ const WriteImage = memo(function WriteImage({ image, setImage }: Props) {
   const [thumbnail, setThumbnail] = useState(() => (typeof image === 'string' ? image : ''));
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newFile = e.target.files?.[0];
+    alert(newFile);
+    alert(typeof newFile);
+    alert(console.dir(newFile));
     if (!newFile) {
       return;
     }
