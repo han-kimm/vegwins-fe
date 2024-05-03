@@ -1,6 +1,6 @@
 'use client';
 
-import { FunctionComponent, MouseEvent, ReactNode, useCallback, useEffect, useState } from 'react';
+import { FunctionComponent, MouseEvent, ReactNode, useCallback, useState } from 'react';
 import IconDown from 'public/icon/arrow-down.svg';
 
 const useBottomSheet = () => {
@@ -10,27 +10,13 @@ const useBottomSheet = () => {
     setOpen((prev) => !prev);
   }, []);
 
-  const closeByScroll = useCallback(() => {
-    const { scrollY } = window;
-    if (scrollY) {
-      setOpen(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (open) {
-      window.addEventListener('scroll', closeByScroll);
-    }
-    return () => {
-      window.removeEventListener('scroll', closeByScroll);
-    };
-  }, [open]);
-
   const BottomSheet: FunctionComponent<{ children: ReactNode }> = useCallback(
     ({ children }: { children: ReactNode }) =>
       open && (
         <div
           onClick={toggleByClick}
+          onTouchEnd={toggleByClick}
+          onScroll={() => console.log(1)}
           className={`${open ? 'bottom-0' : '-bottom-300'} fixed left-0 z-20 flex h-dvh w-full max-w-[50rem] animate-slideDown flex-col justify-end max:mx-[calc(50%-25rem)]`}
         >
           <div onClick={(e: MouseEvent) => e.stopPropagation()} className="rounded-t-md bg-white shadow-bt">

@@ -16,17 +16,12 @@ const WriteImage = memo(function WriteImage({ image, setImage }: Props) {
       return;
     }
 
-    // const reader = new FileReader();
     const options = {
       maxSizeMB: 0.2,
       maxWidthOrHeight: 1920,
       useWebWorker: true,
     };
     const compressedFile = await imageCompression(newFile, options);
-    // reader.readAsDataURL(compressedFile);
-    // reader.onloadend = () => {
-    //   const base64data = reader.result;
-    // }
     setImage((prev) => ({ ...prev, image: compressedFile }));
 
     const newthumbnail = URL.createObjectURL(newFile);
