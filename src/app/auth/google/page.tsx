@@ -1,5 +1,7 @@
 'use client';
 
+import { PREVIOUS_PATH } from '@/constants/default';
+import { getLocalStorage } from '@/utils/browserStorage';
 import { setCookie, setTokenCookie } from '@/utils/cookie';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Suspense, useEffect } from 'react';
@@ -29,10 +31,12 @@ const GoogleAuthPage = () => {
         console.error(e);
         toast.error('다시 시도해 주십시오.');
       } finally {
-        router.push('/');
+        const previousPath = getLocalStorage(PREVIOUS_PATH);
+        router.push(previousPath || '/');
+        localStorage.clear();
       }
     })();
-  });
+  }, []);
 
   return (
     <div className="flex-center h-dvh w-full">

@@ -33,7 +33,7 @@ const WriteForm = ({ initial, paperId }: Props) => {
     try {
       saveSubmitData(submitData);
       setReload(reload + 1);
-      toast.success('임시 저장 완료!', toastPosition);
+      toast.success('10분 간 저장됩니다.', toastPosition);
     } catch {
       toast.error('다시 시도해 주세요.', toastPosition);
     }
@@ -79,7 +79,6 @@ const WriteForm = ({ initial, paperId }: Props) => {
     } catch (e: any) {
       toast.error('다시 시도해주십시오.');
       console.error(e);
-    } finally {
       setPending(false);
     }
   };
