@@ -33,7 +33,14 @@ const WriteForm = ({ initial, paperId }: Props) => {
     try {
       saveSubmitData(submitData);
       setReload(reload + 1);
-      toast.success('10분 간 저장됩니다.', toastPosition);
+      toast.success(
+        <p>
+          <strong>이미지를 제외</strong>한 정보가
+          <br />
+          <strong>10분</strong> 간 저장됩니다.
+        </p>,
+        toastPosition,
+      );
     } catch {
       toast.error('다시 시도해 주세요.', toastPosition);
     }
