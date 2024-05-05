@@ -66,3 +66,9 @@ export type Notification = {
   createdAt: string;
   type: 'comment' | 'recomment' | 'view' | 'rating';
 };
+
+export type CarouselData = {
+  title: string;
+  imageUrl: string;
+  href: string;
+};
