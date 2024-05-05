@@ -1,11 +1,13 @@
 'use client';
 
 import { deleteCookie, setCookie } from '@/utils/cookie';
-import ajax from '@/utils/fetching';
+import { useRouter } from 'next/navigation';
 import IconLogout from 'public/icon/logout.svg';
 
 const Logout = () => {
+  const router = useRouter();
   const logout = async () => {
+    router.push('/');
     await setCookie({ name: 'v_at', value: '', maxAge: 1, path: '/' });
     await setCookie({ name: 'v_rt', value: '', maxAge: 1, path: '/api/refresh' });
     await deleteCookie('v_s');
