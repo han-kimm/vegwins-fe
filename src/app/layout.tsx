@@ -32,9 +32,9 @@ const toasterOptions = {
 };
 
 const APP_NAME = '비긴즈';
-const APP_DEFAULT_TITLE = '함께 나아가는 비긴즈, vegins';
+const APP_DEFAULT_TITLE = '함께 나아가는 비긴즈, vegwins';
 const APP_TITLE_TEMPLATE = '%s - 비긴즈';
-const APP_DESCRIPTION = '함께 나아가는 비긴즈, vegins';
+const APP_DESCRIPTION = '함께 나아가는 비긴즈, vegwins';
 
 const AppleIconSizes = [57, 60, 72, 76];
 const IconSizes = [16, 32, 96, 128, 196];
