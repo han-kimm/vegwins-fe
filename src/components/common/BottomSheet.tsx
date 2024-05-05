@@ -11,7 +11,7 @@ const BottomSheet = ({ toggleByClick, children }: Props) => {
   return (
     <div
       onClick={toggleByClick}
-      className={`absolute left-0 top-0 z-20 flex h-dvh w-full max-w-[50rem] animate-slideDown flex-col justify-end max:mx-[calc(50%-25rem)]`}
+      className="fixed left-0 top-0 z-20 flex h-dvh w-full max-w-[50rem] animate-slideDown flex-col justify-end max:mx-[calc(50%-25rem)]"
     >
       <div
         onClick={(e: MouseEvent) => e.stopPropagation()}

@@ -6,7 +6,7 @@ const AuthAfter = () => {
   return (
     <>
       <Notice />
-      <Link href="/dashboard" aria-label="내 정보 모아보기">
+      <Link href="/dashboard" scroll={false} aria-label="내 정보 모아보기">
         <IconProfile />
       </Link>
     </>
