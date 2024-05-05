@@ -71,4 +71,5 @@ export type CarouselData = {
   title: string;
   imageUrl: string;
   href: string;
+  color: 'white';
 };
