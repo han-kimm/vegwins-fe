@@ -1,16 +1,14 @@
-import dynamic from 'next/dynamic';
-import DashboardBottomSheet from '@/components/home_header/DashboardBottomSheet';
+import Link from 'next/link';
 import Notice from '@/components/home_header/Notice';
-
-const Dashboard = dynamic(() => import('@/components/dashboard/Dashboard'));
+import IconProfile from 'public/icon/profile.svg';
 
 const AuthAfter = () => {
   return (
     <>
       <Notice />
-      <DashboardBottomSheet>
-        <Dashboard />
-      </DashboardBottomSheet>
+      <Link href="/dashboard" aria-label="내 정보 모아보기">
+        <IconProfile />
+      </Link>
     </>
   );
 };
