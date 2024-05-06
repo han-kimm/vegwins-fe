@@ -39,7 +39,7 @@ const CarouselSlide = ({ data }: SlideProps) => {
   };
   return (
     <div className="flex h-200" role="marquee">
-      {data.map((data, i, arr) => (
+      {data?.map((data, i, arr) => (
         <Link
           href={data.href}
           key={i}
@@ -59,7 +59,7 @@ interface IndicatorProps extends SlideProps {
 }
 
 const CarouselIndicator = ({ data, selectedIndex, onDotButtonClick }: IndicatorProps) => {
-  return data.map((_, index) => (
+  return data?.map((_, index) => (
     <button
       key={index}
       onClick={() => onDotButtonClick(index)}
