@@ -1,14 +1,14 @@
-import Link from 'next/link';
+import Dashboard from '@/components/dashboard/Dashboard';
+import Board from '@/components/home_header/Board';
 import Notice from '@/components/home_header/Notice';
-import IconProfile from 'public/icon/profile.svg';
 
 const AuthAfter = () => {
   return (
     <>
       <Notice />
-      <Link href="/dashboard" scroll={false} aria-label="내 정보 모아보기">
-        <IconProfile />
-      </Link>
+      <Board>
+        <Dashboard />
+      </Board>
     </>
   );
 };

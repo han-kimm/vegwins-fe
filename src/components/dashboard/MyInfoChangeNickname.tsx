@@ -1,7 +1,7 @@
 'use client';
 
 import { Session } from '@/types/session';
-import { setCookie } from '@/utils/cookie';
+import { getCookie, setCookie } from '@/utils/cookie';
 import ajax from '@/utils/fetching';
 import { ChangeEvent, KeyboardEvent, useState } from 'react';
 import toast from 'react-hot-toast';
@@ -30,7 +30,7 @@ const MyInfoChangeNickname = ({ session }: Props) => {
 
     try {
       setPending(true);
-      const { nickname: currentNickname } = await ajax.get({ path: '/session' });
+      const { nickname: currentNickname } = await getCookie('v_s');
       if (currentNickname === value) {
         setError({ message: '현재 닉네임과 다르게 입력해 주십시오.' });
         return;

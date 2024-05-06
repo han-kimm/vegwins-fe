@@ -8,7 +8,7 @@ const MyInfoRating = async () => {
   const myRating: Array<{ rating: Rating; _id: SearchItem }> = await ajax.get({ path: '/user/rating', queryKey: ['myRating'] });
   return (
     <div className="scrollbar flex max-h-400 min-h-108 flex-col gap-20 overflow-y-scroll pr-20">
-      {myRating.length ? (
+      {myRating?.length ? (
         myRating.map((data, i) => (
           <Fragment key={data._id?._id}>
             {!!i && <hr className="border-black-100" />}
