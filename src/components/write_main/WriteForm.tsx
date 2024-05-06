@@ -79,9 +79,9 @@ const WriteForm = ({ initial, paperId }: Props) => {
         res = await ajax.put({ path: `/paper/${paperId}`, body: formData });
       }
       if (!res?.error) {
-        refreshTag(['search', 'myPaper']);
-        refreshPath(`/paper/${paperId}`);
-        router.push(`/paper/${res?.paperId}`);
+        paperId && refreshTag(['search', 'myPaper']);
+        paperId && refreshPath(`/paper/${paperId}`);
+        router.replace(`/paper/${res?.paperId}#top`);
       }
     } catch (e: any) {
       toast.error('다시 시도해주십시오.');

@@ -12,7 +12,7 @@ interface Props {
 const SearchResultView = async ({ c, k }: Props) => {
   const data: SearchItem[] = await ajax.get({
     path: `/paper?${c ? `c=${c}` : ''}&${k ? `k=${encodeURIComponent(k)}` : ''}`,
-    // queryKey: ['search'],
+    queryKey: ['search'],
   });
 
   return (
