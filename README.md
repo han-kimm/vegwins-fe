@@ -1,36 +1,17 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# vegwins, 우리가 사는 세상을 지키는 작은 실천
+우리에게는 지구를 구할 기회가 있다. 오늘의 선택이 미래의 변화로 이어지도록, 환경과 동물에 도움이 되도록, 지구에 흔적을 적게 남기며 살아갑시다.
 
-## Getting Started
+## 웹 사이트가 도움을 받은 기술들
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## .gif로 보는 웹 사이트
+### 홈화면
+![home](https://github.com/han-kimm/vegwins-fe/assets/78120157/6d9f90fe-cb02-42eb-88e6-d07e34a4000c)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 소셜 로그인
+|리다이렉트 방식(카카오인앱브라우저 지원)|구글 원탭 로그인 (애플)|구글 원탭 로그인 (안드로이드)|
+|---|---|---|
+|![redirect](https://github.com/han-kimm/vegwins-fe/assets/78120157/8a21c465-e0ef-473b-aecd-73c6e82088aa)|![onetap-apple](https://github.com/han-kimm/vegwins-fe/assets/78120157/4410bb1a-8472-4f98-961e-a53ecf004ec8)|![onetab-android](https://github.com/han-kimm/vegwins-fe/assets/78120157/248f037f-431e-4765-9d94-70767619a024)|
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### 
