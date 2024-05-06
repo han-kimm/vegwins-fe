@@ -15,6 +15,9 @@ const WriteImage = memo(function WriteImage({ image, setImage }: Props) {
     if (!newFile) {
       return;
     }
+    if (!['image/png', 'image/jpg', 'image/jpeg'].includes(newFile.type)) {
+      return;
+    }
 
     const options = {
       maxSizeMB: 0.2,
@@ -60,7 +63,7 @@ const WriteImage = memo(function WriteImage({ image, setImage }: Props) {
           />
         }
       </label>
-      <input onChange={handleChange} id="image" type="file" accept="image/.png,.jpg,.jpeg" capture="environment" hidden />
+      <input onChange={handleChange} id="image" type="file" accept="image/png,.jpg,.jpeg" capture="environment" hidden />
     </div>
   );
 });
