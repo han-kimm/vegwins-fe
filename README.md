@@ -2,9 +2,8 @@
 ![Group 320](https://github.com/han-kimm/vegwins-fe/assets/78120157/9d02ad81-87ab-40a2-aeb9-1cf487d98777)
 
 편의점과 마트 등 일상의 공간에 있는 비건, 제로웨이스트, 저탄소, 친환경 제품들을 소개합니다.
-<a href="https://vegwins.com">
-사이트 바로가기
-</a>
+<br/>
+https://vegwins.com
 
 ## 웹 사이트가 도움을 받은 기술들
 
