@@ -23,12 +23,16 @@
 
 ### 디자인
 <img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white">
+<a href="https://www.figma.com/file/tRwNUZHi1PsrJIqqO6YscX/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8vgwk?type=design&node-id=0%3A1&mode=design&t=fdRLb8WYrXTeGiEE-1">
+피그마 시안
+</a>
 
 ## 개발 중 생겼던 문제
 ### 서드파티쿠키 차단
 - 24년 하반기까지 모든 서드 파티 쿠키 지원이 차단될 예정
 - 도메인이 다른 API 서버에서 `res.cookie()` 불가
 - [x] Next.js의 `Cookie()` 함수를 이용하여 클라이언트에서 쿠키를 지정
+- [x] Next.js의 `rewrites` 함수를 이용하여 프록시 설정, 퍼스트파티 쿠키로 API 서버에 보냄 
 - 구글 로그인 지원 방식 변경
 - [x] GIS 패키지를 <script> 태그에서 필요할 때 다운로드
 - [x] FedCM을 지원하는 One Tap 방식 로그인 구현 
