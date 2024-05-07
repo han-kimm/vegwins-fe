@@ -2,6 +2,7 @@ import { SetSubmitData } from '@/constants/default';
 import imageCompression from 'browser-image-compression';
 import Image from 'next/image';
 import { ChangeEvent, memo, useState } from 'react';
+import toast from 'react-hot-toast';
 
 interface Props {
   image: Blob | string | undefined;
@@ -16,6 +17,7 @@ const WriteImage = memo(function WriteImage({ image, setImage }: Props) {
       return;
     }
     if (!['image/png', 'image/jpg', 'image/jpeg'].includes(newFile.type)) {
+      toast.error('png, jpg, jpeg 확장자만 업로드 가능합니다.');
       return;
     }
 
