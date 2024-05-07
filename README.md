@@ -1,8 +1,9 @@
 # vegwins, 우리가 사는 세상을 지키는 작은 실천
+![Group 320](https://github.com/han-kimm/vegwins-fe/assets/78120157/9d02ad81-87ab-40a2-aeb9-1cf487d98777)
+
 편의점과 마트 등 일상의 공간에 있는 비건, 제로웨이스트, 저탄소, 친환경 제품들을 소개합니다.
-<a href="https://vegwins.com">
-사이트 바로가기
-</a>
+<br/>
+https://vegwins.com
 
 ## 웹 사이트가 도움을 받은 기술들
 
@@ -72,4 +73,12 @@
 |---|---|---|
 |![redirect](https://github.com/han-kimm/vegwins-fe/assets/78120157/8a21c465-e0ef-473b-aecd-73c6e82088aa)|![onetap-apple](https://github.com/han-kimm/vegwins-fe/assets/78120157/4410bb1a-8472-4f98-961e-a53ecf004ec8)|![onetab-android](https://github.com/han-kimm/vegwins-fe/assets/78120157/248f037f-431e-4765-9d94-70767619a024)|
 
-### 
+### CRUD
+|작성|수정|삭제|
+|---|---|---|
+|![write](https://github.com/han-kimm/vegwins-fe/assets/78120157/0345bd20-c0c3-4a70-aea7-4fc29802d633)|![edit](https://github.com/han-kimm/vegwins-fe/assets/78120157/f29bc030-4814-4d45-a07d-9a5aeda1d949)|![delete](https://github.com/han-kimm/vegwins-fe/assets/78120157/013c2a60-57b4-4942-a5cd-68b43564255b)|
+
+### 유저 간의 상호작용
+|평가|댓글|
+|---|---|
+|![rating](https://github.com/han-kimm/vegwins-fe/assets/78120157/d53a3a72-7c2f-4aa0-a937-08d276aac137)|![comment](https://github.com/han-kimm/vegwins-fe/assets/78120157/5b183a82-b6e8-4d11-ae1b-2e1427af0e9c)|
