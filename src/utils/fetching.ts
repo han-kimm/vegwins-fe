@@ -12,6 +12,9 @@ interface HandlerParams extends RequestInit {
 type ApiHandler = (params: HandlerParams) => Promise<any>;
 
 export class Fetching {
+  constructor() {
+    console.log('its new');
+  }
   #baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? '';
 
   makeHeader = async (body?: any) => {
@@ -85,8 +88,6 @@ export class Fetching {
   };
 }
 
-const map = new Map();
-map.set('ajax', new Fetching());
-const ajax = map.get('ajax');
+const ajax = new Fetching();
 
 export default ajax;
