@@ -27,7 +27,7 @@ const BottomSheetNotice = ({ toggleByClick, data, isEmpty, deleteByClick }: Prop
                   </h4>
                   {data.comment && <p className="text-14">{data.comment.content}</p>}
                 </Link>
-                <span className="text-14">{timeDiff(data.createdAt)}</span>
+                <span className="shrink-0 text-14">{timeDiff(data.createdAt)}</span>
               </div>
             ))
           )}
