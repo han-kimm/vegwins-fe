@@ -36,8 +36,7 @@ const APP_DEFAULT_TITLE = '함께 나아가는 비긴즈, vegwins';
 const APP_TITLE_TEMPLATE = '%s - 비긴즈';
 const APP_DESCRIPTION = '함께 나아가는 비긴즈, vegwins';
 
-const AppleIconSizes = [57, 60, 72, 76];
-const IconSizes = [16, 32, 96, 128, 196];
+const IconSizes = [128, 196];
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
@@ -46,11 +45,8 @@ export const metadata: Metadata = {
     template: APP_TITLE_TEMPLATE,
   },
   description: APP_DESCRIPTION,
-  icons: [
-    ...IconSizes.map((size) => ({ rel: 'icon', url: `/favicon/favicon-${size}x${size}.png`, sizes: `${size}x${size}` })),
-    ...AppleIconSizes.map((size) => ({ rel: 'apple-touch-icon', url: `/favicon/apple-touch-icon-${size}x${size}.png`, sizes: `${size}x${size}` })),
-  ],
-  manifest: '/manifest.webmanifest',
+  icons: [...IconSizes.map((size) => ({ rel: 'icon', url: `/favicon/favicon-${size}x${size}.png`, sizes: `${size}x${size}` }))],
+  // manifest: '/manifest.webmanifest',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
