@@ -1,7 +1,7 @@
 'use client';
 
 import useUncontrolInput from '@/hooks/useUncontrolInput';
-import ajax from '@/utils/fetching';
+import { deleteData } from '@/utils/fetching';
 import { refreshTag } from '@/utils/revalidate';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -24,7 +24,7 @@ const ButtonDeletePaper = ({ title, paperId }: Props) => {
       return;
     }
     try {
-      await ajax.delete({ path: `/paper/${paperId}` });
+      await deleteData({ path: `/paper/${paperId}` });
       toast.success('삭제 완료');
       refreshTag(['search', 'myPaper', 'myRating']);
       router.push('/');

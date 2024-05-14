@@ -1,5 +1,5 @@
 import { getCookie } from '@/utils/cookie';
-import ajax from '@/utils/fetching';
+import { getData } from '@/utils/fetching';
 import { useEffect, useState } from 'react';
 
 interface Props<T> {
@@ -20,7 +20,7 @@ const useFetchedState = <T>({ init, deps, path, queryKey, cache }: Props<T>) => 
       if (session) {
         try {
           setPending(true);
-          const res = await ajax.get({ path, queryKey, cache });
+          const res = await getData({ path, queryKey, cache });
           if (!res.error) {
             setState(res);
           }

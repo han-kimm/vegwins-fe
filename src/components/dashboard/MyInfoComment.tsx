@@ -2,10 +2,9 @@
 
 import useEditComment from '@/hooks/useEditComment';
 import useFetchedState from '@/hooks/useFetchedState';
-import useUncontrolInput from '@/hooks/useUncontrolInput';
 import { Comment } from '@/types/data';
 import { Session } from '@/types/session';
-import { Fragment } from 'react';
+import Link from 'next/link';
 import DeferredSpinner from '@/components/errorHandling/DeferredSpinner';
 import UsersCommentInput from '@/components/paper_main/UsersCommentInput';
 import UsersCommentItem from '@/components/paper_main/UsersCommentItem';
@@ -25,8 +24,11 @@ const MyInfoComment = ({ session }: Props) => {
         myComment.map((comment) => {
           const isEdited = targetComment?.status === 'edit' && targetComment.comment._id === comment._id;
 
+          console.log(comment);
+
           return (
-            <Fragment key={comment._id}>
+            <div key={comment._id}>
+              {/* <Link href={''}>{comment.paper.title}</Link> */}
               <UsersCommentItem
                 session={session}
                 comment={comment}
@@ -36,7 +38,7 @@ const MyInfoComment = ({ session }: Props) => {
               />
               <hr className="border-black-60" />
               {isEdited && <UsersCommentInput sessionName={session?.nickname} resetTarget={resetTarget} targetComment={targetComment} />}
-            </Fragment>
+            </div>
           );
         })
       ) : (

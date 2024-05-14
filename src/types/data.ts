@@ -44,6 +44,10 @@ export type Comment = {
     _id: string;
     nickname: string;
   };
+  paper: {
+    _id: string;
+    title: string;
+  };
   content: string;
   recomment: Comment[];
   createdAt: string;

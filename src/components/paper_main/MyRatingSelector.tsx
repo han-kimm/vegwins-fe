@@ -2,7 +2,7 @@ import { RATING_MSG } from '@/constants/default';
 import { Paper, Rating } from '@/types/data';
 import { setLocalStorage } from '@/utils/browserStorage';
 import { getCookie } from '@/utils/cookie';
-import ajax from '@/utils/fetching';
+import { deleteData, postData } from '@/utils/fetching';
 import { refreshTag } from '@/utils/revalidate';
 import Image from 'next/image';
 import toast from 'react-hot-toast';
@@ -27,9 +27,9 @@ const MyRatingSelector = ({ paperRating, paperId, rating, setRating }: Props) =>
 
     try {
       if (isSame) {
-        await ajax.delete({ path: `/paper/${paperId}/rating`, body: { rating } });
+        await deleteData({ path: `/paper/${paperId}/rating`, body: { rating } });
       } else {
-        await ajax.post({ path: `/paper/${paperId}/rating`, body: { rating: newValue } });
+        await postData({ path: `/paper/${paperId}/rating`, body: { rating: newValue } });
       }
       toast.success('평가 반영 완료!');
       refreshTag([`${paperId}/rating`, 'myRating']);

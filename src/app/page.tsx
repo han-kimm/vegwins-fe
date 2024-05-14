@@ -1,4 +1,4 @@
-import ajax from '@/utils/fetching';
+import { getData } from '@/utils/fetching';
 import Footer from '@/components/home_footer/Footer';
 import AuthChecker from '@/components/home_header/AuthChecker';
 import Carousel from '@/components/home_main/Carousel';
@@ -7,7 +7,7 @@ import LinkSearch from '@/components/home_main/LinkSearch';
 import LinkWrite from '@/components/home_main/LinkWrite';
 
 const Home = async () => {
-  const carousels = await ajax.get({ path: '/carousel' });
+  const carousels = await getData({ path: '/carousel' });
   return (
     <>
       <meta property="og:image" content="og-thumbnail.webp" />

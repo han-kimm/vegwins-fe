@@ -1,5 +1,5 @@
 import { SearchItem } from '@/types/data';
-import ajax from '@/utils/fetching';
+import { getData } from '@/utils/fetching';
 import SearchResultEmpty from '@/components/search_main/SearchResultEmpty';
 import SearchResultItemList from '@/components/search_main/SearchResultItemList';
 import SearchResultReset from '@/components/search_main/SearchResultReset';
@@ -10,7 +10,7 @@ interface Props {
 }
 
 const SearchResultView = async ({ c, k }: Props) => {
-  const data: SearchItem[] = await ajax.get({
+  const data: SearchItem[] = await getData({
     path: `/paper?${c ? `c=${c}` : ''}&${k ? `k=${encodeURIComponent(k)}` : ''}`,
     queryKey: ['search'],
   });

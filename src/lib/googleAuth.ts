@@ -1,5 +1,5 @@
 import { setCookie, setTokenCookie } from '@/utils/cookie';
-import ajax from '@/utils/fetching';
+import { postData } from '@/utils/fetching';
 import toast from 'react-hot-toast';
 
 declare global {
@@ -12,7 +12,7 @@ const googleAuthPath = '/auth/google';
 
 const authCallback = async (response: any) => {
   try {
-    const { accessToken, refreshToken, nickname } = await ajax.post({ path: googleAuthPath, body: response });
+    const { accessToken, refreshToken, nickname } = await postData({ path: googleAuthPath, body: response });
     if (nickname) {
       toast.success(`${nickname}님 안녕하세요!`);
       setTokenCookie(accessToken, refreshToken);

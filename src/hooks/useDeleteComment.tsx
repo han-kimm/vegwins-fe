@@ -1,4 +1,4 @@
-import ajax from '@/utils/fetching';
+import { deleteData } from '@/utils/fetching';
 import { refreshTag } from '@/utils/revalidate';
 import { useParams } from 'next/navigation';
 import { useCallback, useState } from 'react';
@@ -21,7 +21,7 @@ const useDeleteComment = ({ body, onSuccess }: Props) => {
   };
   const deleteByClick = useCallback(async () => {
     try {
-      const res = await ajax.delete({ path: `/paper/${paperId}/comment`, body });
+      const res = await deleteData({ path: `/paper/${paperId}/comment`, body });
       if (res.success) {
         setModalOpen(false);
         onSuccess?.();
@@ -56,7 +56,7 @@ const useDeleteComment = ({ body, onSuccess }: Props) => {
 
   const ButtonDelete = useCallback(
     () => (
-      <button onClick={toggleModal} className="text-black-60" aria-label="댓글 삭제">
+      <button onClick={toggleModal} className="ml-12 text-black-60" aria-label="댓글 삭제">
         <IconDelete />
       </button>
     ),

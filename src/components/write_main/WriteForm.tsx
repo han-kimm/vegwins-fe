@@ -2,9 +2,8 @@
 
 import { DEFAULT_SUBMIT, SubmitData, WRITE_SAVE } from '@/constants/default';
 import { getLocalStorage } from '@/utils/browserStorage';
-import { getCookie } from '@/utils/cookie';
-import ajax from '@/utils/fetching';
-import { refreshPath, refreshTag } from '@/utils/revalidate';
+import { postData, putData } from '@/utils/fetching';
+import { refreshTag } from '@/utils/revalidate';
 import { canRecall, canSave, required, saveSubmitData } from '@/utils/writeUtils';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
@@ -74,13 +73,12 @@ const WriteForm = ({ initial, paperId }: Props) => {
 
       let res;
       if (!initial) {
-        res = await ajax.post({ path: '/paper', body: formData });
+        res = await postData({ path: '/paper', body: formData });
       } else {
-        res = await ajax.put({ path: `/paper/${paperId}`, body: formData });
+        res = await putData({ path: `/paper/${paperId}`, body: formData });
       }
       if (!res?.error) {
-        paperId && refreshTag(['search', 'myPaper']);
-        paperId && refreshPath(`/paper/${paperId}`);
+        paperId && refreshTag(['search', 'myPaper', paperId]);
         router.replace(`/paper/${res?.paperId}#top`);
       }
     } catch (e: any) {

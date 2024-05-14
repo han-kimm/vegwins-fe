@@ -1,6 +1,6 @@
 import { SubmitData } from '@/constants/default';
 import { Paper } from '@/types/data';
-import ajax from '@/utils/fetching';
+import { getData } from '@/utils/fetching';
 import ButtonReturn from '@/components/common/ButtonReturn';
 import ButtonDeletePaper from '@/components/edit/ButtonDeletePaper';
 import WriteForm from '@/components/write_main/WriteForm';
@@ -10,7 +10,7 @@ interface Props {
 }
 const EditPage = async ({ params }: Props) => {
   const { paperId } = params;
-  const data: Paper = await ajax.get({ path: `/paper/${paperId}`, queryKey: [paperId] });
+  const data: Paper = await getData({ path: `/paper/${paperId}`, queryKey: [paperId] });
   const initial: SubmitData = {
     title: data.title,
     category: data.category,

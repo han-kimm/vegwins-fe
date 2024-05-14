@@ -1,5 +1,5 @@
 import { getCookie } from '@/utils/cookie';
-import ajax from '@/utils/fetching';
+import { getData } from '@/utils/fetching';
 import Link from 'next/link';
 
 interface Props {
@@ -10,7 +10,7 @@ const UsersWriterEditButton = async ({ paperId }: Props) => {
   const session = await getCookie('v_s');
   let isWriter = false;
   if (session) {
-    isWriter = await ajax.get({ path: `/paper/${paperId}/writer` });
+    isWriter = await getData({ path: `/paper/${paperId}/writer` });
   }
   return (
     <Link

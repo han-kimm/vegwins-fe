@@ -2,7 +2,7 @@
 
 import useFetchedState from '@/hooks/useFetchedState';
 import { Notification } from '@/types/data';
-import ajax from '@/utils/fetching';
+import { deleteData } from '@/utils/fetching';
 import dynamic from 'next/dynamic';
 import { useCallback, useState } from 'react';
 import toast from 'react-hot-toast';
@@ -33,11 +33,11 @@ const Notice = () => {
       let body;
       if (deleteId) {
         body = { deleteId };
-        await ajax.delete({ path: '/user/notification', body });
+        await deleteData({ path: '/user/notification', body });
         setState((prev) => prev.filter((n) => n._id !== deleteId));
       } else {
         body = { all: true };
-        await ajax.delete({ path: '/user/notification', body });
+        await deleteData({ path: '/user/notification', body });
         setState([]);
       }
       toast.success('알림 삭제 완료');

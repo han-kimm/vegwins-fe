@@ -2,7 +2,7 @@
 
 import { Session } from '@/types/session';
 import { getCookie, setCookie } from '@/utils/cookie';
-import ajax from '@/utils/fetching';
+import { putData } from '@/utils/fetching';
 import { ChangeEvent, KeyboardEvent, useState } from 'react';
 import toast from 'react-hot-toast';
 
@@ -35,7 +35,7 @@ const MyInfoChangeNickname = ({ session }: Props) => {
         setError({ message: '현재 닉네임과 다르게 입력해 주십시오.' });
         return;
       }
-      const { nickname, error } = await ajax.put({ path: '/user/nickname', body: { newNickname: value } });
+      const { nickname, error } = await putData({ path: '/user/nickname', body: { newNickname: value } });
       if (error) {
         setError({ message: error });
         return;

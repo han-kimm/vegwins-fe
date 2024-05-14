@@ -1,7 +1,7 @@
 'use client';
 
 import { TargetComment } from '@/types/data';
-import ajax from '@/utils/fetching';
+import { postData, putData } from '@/utils/fetching';
 import { refreshTag } from '@/utils/revalidate';
 import { useParams } from 'next/navigation';
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
@@ -41,12 +41,12 @@ const UsersCommentInput = ({ sessionName, targetComment, resetTarget }: Props) =
       let res;
       if (isRecomment) {
         const recommentId = targetComment?.comment._id;
-        res = await ajax.post({ path: `/paper/${paperId}/comment`, body: { content, recommentId } });
+        res = await postData({ path: `/paper/${paperId}/comment`, body: { content, recommentId } });
       } else if (isEdit) {
         const editId = targetComment?.comment._id;
-        res = await ajax.put({ path: `/paper/${paperId}/comment`, body: { content, editId } });
+        res = await putData({ path: `/paper/${paperId}/comment`, body: { content, editId } });
       } else {
-        res = await ajax.post({ path: `/paper/${paperId}/comment`, body: { content } });
+        res = await postData({ path: `/paper/${paperId}/comment`, body: { content } });
       }
 
       if (res.error) {

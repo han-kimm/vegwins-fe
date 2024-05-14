@@ -1,6 +1,6 @@
 import { Paper } from '@/types/data';
 import { getCookie } from '@/utils/cookie';
-import ajax from '@/utils/fetching';
+import { getData } from '@/utils/fetching';
 import ButtonReturn from '@/components/common/ButtonReturn';
 import LiftingButton from '@/components/common/LiftingButton';
 import LinkHome from '@/components/common/LinkHome';
@@ -14,12 +14,12 @@ interface Props {
 
 const PaperPage = async ({ params }: Props) => {
   const { paperId } = params;
-  const paperData: Paper = await ajax.get({ path: `/paper/${paperId}`, queryKey: [paperId] });
+  const paperData: Paper = await getData({ path: `/paper/${paperId}`, queryKey: [paperId] });
 
   const session = await getCookie('v_s');
   let initialRating;
   if (session) {
-    initialRating = await ajax.get({ path: `/paper/${paperId}/rating`, queryKey: [`${paperId}/rating`] });
+    initialRating = await getData({ path: `/paper/${paperId}/rating`, queryKey: [`${paperId}/rating`] });
   }
   return (
     <div className="max-h-max min-h-dvh px-16 pb-28 pt-16">
