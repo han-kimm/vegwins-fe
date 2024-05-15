@@ -39,6 +39,3 @@ next-env.d.ts
 # storybook
 *storybook.log
 /.storybook
-
-# PWA
-/public/manifest.webmanifest

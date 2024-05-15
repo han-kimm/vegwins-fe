@@ -45,8 +45,11 @@ export const metadata: Metadata = {
     template: APP_TITLE_TEMPLATE,
   },
   description: APP_DESCRIPTION,
-  icons: [...IconSizes.map((size) => ({ rel: 'icon', url: `/favicon/favicon-${size}x${size}.png`, sizes: `${size}x${size}` }))],
-  // manifest: '/manifest.webmanifest',
+  icons: [
+    ...IconSizes.map((size) => ({ rel: 'icon', url: `/favicon/favicon-${size}x${size}.png`, sizes: `${size}x${size}` })),
+    ...IconSizes.map((size) => ({ rel: 'apple-touch-icon', url: `/favicon/favicon-${size}x${size}.png`, sizes: `${size}x${size}` })),
+  ],
+  manifest: '/manifest.webmanifest',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
