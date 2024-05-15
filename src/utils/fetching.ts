@@ -1,7 +1,4 @@
-'use server';
-
-import { deleteCookie, getCookie, logoutCookie, setTokenCookie } from '@/utils/cookie';
-import { redirect } from 'next/navigation';
+import { getCookie, setTokenCookie } from '@/utils/cookie';
 
 type Fetch = typeof fetch;
 
@@ -16,40 +13,57 @@ type ApiHandler = (params: HandlerParams) => Promise<any>;
 
 const _baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? '';
 
-const makeHeader = async (body?: any) => {
-  const accessToken = await getCookie('v_at');
-  if (!body) {
-    return { headers: { Cookie: 'v_at=' + accessToken } };
-  }
-
+const makeHeader = (body: any) => {
   const isFormData = body instanceof FormData;
   if (isFormData) {
-    return { headers: { Cookie: 'v_at=' + accessToken }, body };
+    return { body };
   }
-  return { headers: { 'Content-Type': 'application/json', Cookie: 'v_at=' + accessToken }, body: JSON.stringify(body) };
+  return { headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) };
 };
 
 const fetchJSON = async (...params: Parameters<Fetch>) => {
-  const wrappedFetch = async () =>
-    fetch(_baseUrl + params[0], { ...params[1], ...((await makeHeader(params[1]?.body)) as any) }).then((resp) => resp.json());
-  const res = await wrappedFetch();
-  if (res.code === 419) {
-    const prevToken = await getCookie('v_rt');
-    const tokenRes = await fetch(_baseUrl + '/auth/refresh', { headers: { Cookie: 'v_rt=' + prevToken } }).then((resp) => resp.json());
-    if (tokenRes.error) {
-      return;
+  try {
+    const wrappedFetch = async () =>
+      fetch(_baseUrl + params[0], { ...params[1], ...(params[1]?.body ? makeHeader(params[1].body) : {}) }).then((resp) => resp.json());
+    const res = await wrappedFetch();
+    if (res.code === 419) {
+      const { accessToken, refreshToken } = await fetchJSON('/auth/refresh');
+      await setTokenCookie(accessToken, refreshToken);
+      const refetchRes = await wrappedFetch();
+      return refetchRes;
     }
-    const { accessToken, refreshToken } = tokenRes;
-    await setTokenCookie(accessToken, refreshToken);
-    const refetchRes = await wrappedFetch();
-    return refetchRes;
+    return res;
+  } catch (e) {
+    console.error(e);
   }
-  return res;
 };
 
 export const getData: ApiHandler = async ({ path, queryKey, revalidate, ...init }) => {
   try {
     return await fetchJSON(path, { ...init, next: { revalidate, tags: queryKey } });
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export const getSSR: ApiHandler = async ({ path, queryKey, revalidate, ...init }) => {
+  try {
+    const accessToken = await getCookie('v_at');
+    const wrappedFetch = async (accessToken: string) =>
+      fetch(_baseUrl + path, { ...init, headers: { Cookie: 'v_at=' + accessToken }, next: { revalidate, tags: queryKey } }).then((resp) =>
+        resp.json(),
+      );
+
+    const res = await wrappedFetch(accessToken);
+    if (res.code === 419) {
+      const refreshToken = await getCookie('v_rt');
+      const { accessToken: newAt, refreshToken: newRt } = await fetch(_baseUrl + '/auth/refresh', {
+        headers: { Cookie: 'v_rt=' + refreshToken },
+      }).then((resp) => resp.json());
+      await setTokenCookie(newAt, newRt);
+      const refetchRes = await wrappedFetch(newAt);
+      return refetchRes;
+    }
   } catch (e) {
     console.error(e);
   }
