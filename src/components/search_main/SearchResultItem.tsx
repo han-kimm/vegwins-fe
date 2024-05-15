@@ -33,17 +33,14 @@ const SearchResultItem = ({ _id, imageUrl, title, hashtag, rated, end, view, rat
 };
 export default SearchResultItem;
 
-const ItemTitle = ({ title, hashtag }: Pick<SearchItem, 'title' | 'hashtag'>) => {
+const ItemTitle = ({ title, hashtag = [] }: Pick<SearchItem, 'title' | 'hashtag'>) => {
+  const tags = hashtag.reduce((acc, cur) => acc + ' ' + cur);
   return (
     <div className="flex h-full flex-col justify-between">
       <h2 className="text-18 font-bold">{title}</h2>
       {!!hashtag && (
         <div className="text-12" role="group" aria-label="해시태그">
-          {hashtag.map((tag) => (
-            <span key={tag} className="mr-4">
-              {tag}
-            </span>
-          ))}
+          {tags.length > 25 ? tags.slice(0, 25) + '...' : tags}
         </div>
       )}
     </div>
