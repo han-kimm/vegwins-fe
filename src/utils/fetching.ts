@@ -1,3 +1,5 @@
+'use server';
+
 import { getCookie, setTokenCookie } from '@/utils/cookie';
 
 type Fetch = typeof fetch;
@@ -13,21 +15,29 @@ type ApiHandler = (params: HandlerParams) => Promise<any>;
 
 const _baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? '';
 
-const makeHeader = (body: any) => {
+const makeHeader = async (body?: any) => {
+  const accessToken = await getCookie('v_at');
+  if (!body) {
+    return { headers: { Cookie: 'v_at=' + accessToken } };
+  }
+  if (body === 'refresh') {
+    const refreshToken = await getCookie('v_rt');
+    return { headers: { Cookie: 'v_rt=' + refreshToken } };
+  }
   const isFormData = body instanceof FormData;
   if (isFormData) {
-    return { body };
+    return { headers: { Cookie: 'v_at=' + accessToken }, body };
   }
-  return { headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) };
+  return { headers: { 'Content-Type': 'application/json', Cookie: 'v_at=' + accessToken }, body: JSON.stringify(body) };
 };
 
 const fetchJSON = async (...params: Parameters<Fetch>) => {
   try {
     const wrappedFetch = async () =>
-      fetch(_baseUrl + params[0], { ...params[1], ...(params[1]?.body ? makeHeader(params[1].body) : {}) }).then((resp) => resp.json());
+      fetch(_baseUrl + params[0], { ...params[1], ...((await makeHeader(params[1]?.body)) as any) }).then((resp) => resp.json());
     const res = await wrappedFetch();
     if (res.code === 419) {
-      const { accessToken, refreshToken } = await fetchJSON('/auth/refresh');
+      const { accessToken, refreshToken } = await fetchJSON('/auth/refresh', { body: 'refresh' });
       await setTokenCookie(accessToken, refreshToken);
       const refetchRes = await wrappedFetch();
       return refetchRes;
@@ -41,15 +51,6 @@ const fetchJSON = async (...params: Parameters<Fetch>) => {
 export const getData: ApiHandler = async ({ path, queryKey, revalidate, ...init }) => {
   try {
     return await fetchJSON(path, { ...init, next: { revalidate, tags: queryKey } });
-  } catch (e) {
-    console.error(e);
-  }
-};
-
-export const getSSR: ApiHandler = async ({ path, queryKey, revalidate, ...init }) => {
-  try {
-    const accessToken = await getCookie('v_at');
-    return await fetchJSON(path, { ...init, headers: { Cookie: 'v_at=' + accessToken }, next: { revalidate, tags: queryKey } });
   } catch (e) {
     console.error(e);
   }

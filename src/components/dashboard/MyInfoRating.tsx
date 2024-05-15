@@ -1,11 +1,11 @@
+import { Rating, SearchItem } from '@/types/data';
+import { getData } from '@/utils/fetching';
+import { Fragment } from 'react';
 import MyInfoRatingSelector from '@/components/dashboard/MyInfoRatingSelector';
 import SearchResultItem from '@/components/search_main/SearchResultItem';
-import { Rating, SearchItem } from '@/types/data';
-import { getSSR } from '@/utils/fetching';
-import { Fragment } from 'react';
 
 const MyInfoRating = async () => {
-  const myRating: Array<{ rating: Rating; _id: SearchItem }> = await getSSR({ path: '/user/rating', queryKey: ['myRating'] });
+  const myRating: Array<{ rating: Rating; _id: SearchItem }> = await getData({ path: '/user/rating', queryKey: ['myRating'] });
   return (
     <div className="scrollbar flex max-h-400 min-h-108 flex-col gap-20 overflow-y-scroll pr-20">
       {myRating?.length ? (
