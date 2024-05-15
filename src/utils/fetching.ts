@@ -1,6 +1,7 @@
 'use server';
 
-import { getCookie, setTokenCookie } from '@/utils/cookie';
+import { deleteCookie, getCookie, logoutCookie, setTokenCookie } from '@/utils/cookie';
+import { redirect } from 'next/navigation';
 
 type Fetch = typeof fetch;
 
@@ -29,23 +30,21 @@ const makeHeader = async (body?: any) => {
 };
 
 const fetchJSON = async (...params: Parameters<Fetch>) => {
-  try {
-    const wrappedFetch = async () =>
-      fetch(_baseUrl + params[0], { ...params[1], ...((await makeHeader(params[1]?.body)) as any) }).then((resp) => resp.json());
-    const res = await wrappedFetch();
-    if (res.code === 419) {
-      const prevToken = await getCookie('v_rt');
-      const { accessToken, refreshToken } = await fetch(_baseUrl + '/auth/refresh', { headers: { Cookie: 'v_rt=' + prevToken } }).then((resp) =>
-        resp.json(),
-      );
-      await setTokenCookie(accessToken, refreshToken);
-      const refetchRes = await wrappedFetch();
-      return refetchRes;
+  const wrappedFetch = async () =>
+    fetch(_baseUrl + params[0], { ...params[1], ...((await makeHeader(params[1]?.body)) as any) }).then((resp) => resp.json());
+  const res = await wrappedFetch();
+  if (res.code === 419) {
+    const prevToken = await getCookie('v_rt');
+    const tokenRes = await fetch(_baseUrl + '/auth/refresh', { headers: { Cookie: 'v_rt=' + prevToken } }).then((resp) => resp.json());
+    if (tokenRes.error) {
+      return;
     }
-    return res;
-  } catch (e) {
-    console.error(e);
+    const { accessToken, refreshToken } = tokenRes;
+    await setTokenCookie(accessToken, refreshToken);
+    const refetchRes = await wrappedFetch();
+    return refetchRes;
   }
+  return res;
 };
 
 export const getData: ApiHandler = async ({ path, queryKey, revalidate, ...init }) => {

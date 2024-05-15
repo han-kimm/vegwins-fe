@@ -36,3 +36,9 @@ export const setTokenCookie = async (accessToken: string, refreshToken: string) 
   await setCookie({ name: 'v_at', value: accessToken, path: '/', secure: true, httpOnly: true, sameSite: 'strict' });
   await setCookie({ name: 'v_rt', value: refreshToken, path: '/', secure: true, httpOnly: true, sameSite: 'strict' });
 };
+
+export const logoutCookie = async () => {
+  await deleteCookie('v_at');
+  await deleteCookie('v_rt');
+  await deleteCookie('v_s');
+};
