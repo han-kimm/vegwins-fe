@@ -20,10 +20,7 @@ const makeHeader = async (body?: any) => {
   if (!body) {
     return { headers: { Cookie: 'v_at=' + accessToken } };
   }
-  if (body === 'refresh') {
-    const refreshToken = await getCookie('v_rt');
-    return { headers: { Cookie: 'v_rt=' + refreshToken } };
-  }
+
   const isFormData = body instanceof FormData;
   if (isFormData) {
     return { headers: { Cookie: 'v_at=' + accessToken }, body };
@@ -37,7 +34,10 @@ const fetchJSON = async (...params: Parameters<Fetch>) => {
       fetch(_baseUrl + params[0], { ...params[1], ...((await makeHeader(params[1]?.body)) as any) }).then((resp) => resp.json());
     const res = await wrappedFetch();
     if (res.code === 419) {
-      const { accessToken, refreshToken } = await fetchJSON('/auth/refresh', { body: 'refresh' });
+      const prevToken = await getCookie('v_rt');
+      const { accessToken, refreshToken } = await fetch(_baseUrl + '/auth/refresh', { headers: { Cookie: 'v_rt=' + prevToken } }).then((resp) =>
+        resp.json(),
+      );
       await setTokenCookie(accessToken, refreshToken);
       const refetchRes = await wrappedFetch();
       return refetchRes;
