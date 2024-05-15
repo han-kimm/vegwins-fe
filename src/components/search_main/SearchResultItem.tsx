@@ -34,7 +34,7 @@ const SearchResultItem = ({ _id, imageUrl, title, hashtag, rated, end, view, rat
 export default SearchResultItem;
 
 const ItemTitle = ({ title, hashtag = [] }: Pick<SearchItem, 'title' | 'hashtag'>) => {
-  const tags = hashtag.reduce((acc, cur) => acc + ' ' + cur);
+  const tags = hashtag.reduce((acc, cur) => acc + ' ' + cur, '');
   return (
     <div className="flex h-full flex-col justify-between">
       <h2 className="text-18 font-bold">{title}</h2>

@@ -78,7 +78,7 @@ const WriteForm = ({ initial, paperId }: Props) => {
         res = await putData({ path: `/paper/${paperId}`, body: formData });
       }
       if (!res?.error) {
-        paperId && refreshTag(['search', 'myPaper', paperId]);
+        refreshTag(['search', 'myPaper', paperId || '']);
         router.replace(`/paper/${res?.paperId}#top`);
       }
     } catch (e: any) {

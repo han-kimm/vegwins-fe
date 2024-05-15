@@ -5,6 +5,7 @@ import ButtonReturn from '@/components/common/ButtonReturn';
 import ButtonDeletePaper from '@/components/edit/ButtonDeletePaper';
 import WriteForm from '@/components/write_main/WriteForm';
 
+export const dynamic = 'force-static';
 interface Props {
   params: { paperId: string };
 }

@@ -38,7 +38,7 @@ const MyRatingSelector = ({ paperRating, paperId, rating, setRating }: Props) =>
         setRating(rating);
         toast.error('다시 시도해 주십시오.');
       }
-      await refreshTag(['myRating', 'search']);
+      refreshTag(['myRating', 'search']);
     } catch {
       setRating(rating);
     }

@@ -15,7 +15,6 @@ interface Props {
 const PaperPage = async ({ params }: Props) => {
   const { paperId } = params;
   const paperData: Paper = await getData({ path: `/paper/${paperId}`, queryKey: [paperId] });
-  console.log('rerendering');
   const session = await getCookie('v_s');
   let initialRating;
   if (session) {

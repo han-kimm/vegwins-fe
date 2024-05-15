@@ -24,10 +24,12 @@ const ButtonDeletePaper = ({ title, paperId }: Props) => {
       return;
     }
     try {
-      await deleteData({ path: `/paper/${paperId}` });
-      toast.success('삭제 완료');
-      refreshTag(['search', 'myPaper', 'myRating']);
-      router.push('/');
+      const res = await deleteData({ path: `/paper/${paperId}` });
+      if (res?.success) {
+        toast.success('삭제 완료');
+        await refreshTag(['search', 'myPaper', 'myRating']);
+        router.push('/');
+      }
     } catch (e) {
       console.error(e);
     }
