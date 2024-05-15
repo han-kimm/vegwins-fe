@@ -64,6 +64,7 @@ export const getSSR: ApiHandler = async ({ path, queryKey, revalidate, ...init }
       const refetchRes = await wrappedFetch(newAt);
       return refetchRes;
     }
+    return res;
   } catch (e) {
     console.error(e);
   }

@@ -1,6 +1,6 @@
 import LiftingButton from '@/components/common/LiftingButton';
 import LinkHome from '@/components/common/LinkHome';
-import CategorySelector from '@/components/search_header/CategorySelector';
+import CategorySelect from '@/components/search_header/CategorySelect';
 import SearchBar from '@/components/search_header/SearchBar';
 import SearchResult from '@/components/search_main/SearchResult';
 
@@ -15,7 +15,7 @@ const Search = ({ searchParams }: Props) => {
           <SearchBar />
           <LinkHome />
         </div>
-        <CategorySelector />
+        <CategorySelect {...searchParams} />
       </header>
       <main className="flex flex-grow flex-col gap-24">
         <SearchResult {...searchParams} />

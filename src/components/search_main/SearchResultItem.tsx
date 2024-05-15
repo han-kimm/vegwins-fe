@@ -3,14 +3,12 @@ import { SearchItem } from '@/types/data';
 import Image from 'next/image';
 import Link from 'next/link';
 import ItemRating from '@/components/common/ItemRating';
+import SearchResultItemLink from '@/components/search_main/SearchResultItemLink';
 import IconPageview from 'public/icon/pageview.svg';
 
 const SearchResultItem = ({ _id, imageUrl, title, hashtag, rated, end, view, rating }: SearchItem) => {
   return (
-    <Link
-      href={`/paper/${_id}`}
-      className={`${end && 'relative bg-black-0 [&>div]:opacity-30'} flex-center transform-active h-max w-full animate-fadeIn gap-28 py-12`}
-    >
+    <SearchResultItemLink _id={_id} end={end}>
       <div className="relative h-100 w-100 shrink-0">
         <Image fill sizes="100px" src={imageUrl || DEFAULT_IMAGE} alt="" className="rounded-sm object-cover" aria-hidden={true} />
       </div>
@@ -28,7 +26,7 @@ const SearchResultItem = ({ _id, imageUrl, title, hashtag, rated, end, view, rat
         </div>
       </div>
       {end && <p className="absolute left-32 text-18 font-bold">판매종료</p>}
-    </Link>
+    </SearchResultItemLink>
   );
 };
 export default SearchResultItem;

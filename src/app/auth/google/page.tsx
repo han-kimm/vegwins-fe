@@ -32,8 +32,11 @@ const GoogleAuthPage = () => {
         toast.error('다시 시도해 주십시오.');
       } finally {
         const previousPath = getLocalStorage(PREVIOUS_PATH);
-        router.push(previousPath || '/');
-        localStorage.clear();
+        if (previousPath) {
+          router.push(previousPath);
+          localStorage.clear();
+        }
+        router.push('/');
       }
     })();
   }, []);

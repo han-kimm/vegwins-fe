@@ -1,7 +1,7 @@
 export type SearchItem = {
   _id: string;
   title: string;
-  end: string;
+  end: boolean;
   view: number;
   imageUrl?: string;
   hashtag?: string[];
