@@ -4,6 +4,7 @@ import CategorySelect from '@/components/search_header/CategorySelect';
 import SearchBar from '@/components/search_header/SearchBar';
 import SearchResult from '@/components/search_main/SearchResult';
 
+export const dynamic = 'force-dynamic';
 interface Props {
   searchParams: { [key in 'c' | 'k']: string };
 }
