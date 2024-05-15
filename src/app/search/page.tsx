@@ -3,6 +3,7 @@ import LinkHome from '@/components/common/LinkHome';
 import CategorySelector from '@/components/search_header/CategorySelector';
 import SearchBar from '@/components/search_header/SearchBar';
 import SearchResult from '@/components/search_main/SearchResult';
+import SearchResultView from '@/components/search_main/SearchResultView';
 
 export const dynamic = 'force-dynamic';
 interface Props {
@@ -19,7 +20,9 @@ const Search = ({ searchParams }: Props) => {
         <CategorySelector />
       </header>
       <main className="flex flex-grow flex-col gap-24">
-        <SearchResult {...searchParams} />
+        <SearchResult>
+          <SearchResultView {...searchParams} />
+        </SearchResult>
       </main>
       <LiftingButton />
     </div>

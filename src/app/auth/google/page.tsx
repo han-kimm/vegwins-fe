@@ -35,6 +35,7 @@ const GoogleAuthPage = () => {
         if (previousPath) {
           router.push(previousPath);
           localStorage.clear();
+          return;
         }
         router.push('/');
       }

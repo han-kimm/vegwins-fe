@@ -10,7 +10,7 @@ interface Props {
 
 const LinkHome = ({ isPaper }: Props) => {
   const handleClick = () => {
-    sessionStorage.removeItem(PREVIOUS_PATH);
+    [PREVIOUS_PATH, 'scroll'].forEach((v) => sessionStorage.removeItem(v));
   };
   return (
     <Link

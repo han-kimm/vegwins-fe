@@ -21,7 +21,7 @@ const ButtonReturn = ({ recallPath = false, text, icon, reverse }: Props) => {
 
     const previousPath = getSessionStorage(PREVIOUS_PATH);
     if (previousPath) {
-      router.back();
+      router.push(previousPath);
       return;
     }
 

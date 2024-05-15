@@ -1,7 +1,6 @@
 import { DEFAULT_IMAGE } from '@/constants/default';
 import { SearchItem } from '@/types/data';
 import Image from 'next/image';
-import Link from 'next/link';
 import ItemRating from '@/components/common/ItemRating';
 import SearchResultItemLink from '@/components/search_main/SearchResultItemLink';
 import IconPageview from 'public/icon/pageview.svg';

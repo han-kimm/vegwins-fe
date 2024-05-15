@@ -1,20 +1,21 @@
-import { Suspense } from 'react';
+'use client';
+
+import { getSessionStorage } from '@/utils/browserStorage';
+import { ReactNode, useEffect } from 'react';
 import ApiErrorBoundary from '@/components/errorHandling/ApiErrorBoundary';
-import SearchFallback from '@/components/search_main/SearchFallback';
-import SearchResultView from '@/components/search_main/SearchResultView';
 
 interface Props {
-  c?: string;
-  k?: string;
+  children: ReactNode;
 }
 
-const SearchResult = (props: Props) => {
-  return (
-    <ApiErrorBoundary>
-      <Suspense fallback={<SearchFallback />}>
-        <SearchResultView {...props} />
-      </Suspense>
-    </ApiErrorBoundary>
-  );
+const SearchResult = ({ children }: Props) => {
+  useEffect(() => {
+    const scroll = getSessionStorage('scroll');
+    if (scroll) {
+      window.scrollTo({ top: scroll });
+    }
+  }, []);
+
+  return <ApiErrorBoundary>{children}</ApiErrorBoundary>;
 };
 export default SearchResult;

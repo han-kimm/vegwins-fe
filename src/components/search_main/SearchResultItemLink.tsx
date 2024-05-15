@@ -1,9 +1,10 @@
 'use client';
 
 import { PREVIOUS_PATH } from '@/constants/default';
+import useChangeQuery from '@/hooks/useChangeQuery';
 import { setSessionStorage } from '@/utils/browserStorage';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { ReactNode } from 'react';
 
 interface Props {
@@ -14,8 +15,11 @@ interface Props {
 
 const SearchResultItemLink = ({ _id, end, children }: Props) => {
   const path = usePathname();
+  const searchParams = useSearchParams();
+  const query = searchParams.toString();
   const savePath = () => {
-    setSessionStorage({ key: PREVIOUS_PATH, value: path });
+    setSessionStorage({ key: PREVIOUS_PATH, value: path + (query ? '?' + query : '') });
+    setSessionStorage({ key: 'scroll', value: window.scrollY });
   };
   return (
     <Link

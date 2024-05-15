@@ -13,7 +13,7 @@ const useChangeQuery = () => {
         value ? params.set(name, value) : params.delete(name);
 
         newParams = params.toString();
-        return pathname + '?' + newParams;
+        return pathname + (newParams ? '?' + newParams : '');
       }
       return pathname;
     },

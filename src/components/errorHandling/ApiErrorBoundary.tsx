@@ -1,7 +1,7 @@
 'use client';
 
 import { ErrorBoundary, ErrorComponent } from 'next/dist/client/components/error-boundary';
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, Suspense, useEffect } from 'react';
 import Spinner from '@/components/errorHandling/Spinner';
 
 interface Props {
