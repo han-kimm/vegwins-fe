@@ -26,13 +26,19 @@ const MyRatingSelector = ({ paperRating, paperId, rating, setRating }: Props) =>
     }
 
     try {
+      let res;
       if (isSame) {
-        await deleteData({ path: `/paper/${paperId}/rating`, body: { rating } });
+        res = await deleteData({ path: `/paper/${paperId}/rating`, body: { rating } });
       } else {
-        await postData({ path: `/paper/${paperId}/rating`, body: { rating: newValue } });
+        res = await postData({ path: `/paper/${paperId}/rating`, body: { rating: newValue } });
       }
-      toast.success('평가 반영 완료!');
-      refreshTag([`${paperId}/rating`, 'myRating']);
+      if (!res.error) {
+        toast.success('평가 반영 완료!');
+      } else {
+        setRating(rating);
+        toast.error('다시 시도해 주십시오.');
+      }
+      await refreshTag(['myRating', 'search']);
     } catch {
       setRating(rating);
     }

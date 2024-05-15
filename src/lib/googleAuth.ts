@@ -17,6 +17,7 @@ const authCallback = async (response: any) => {
       toast.success(`${nickname}님 안녕하세요!`);
       setTokenCookie(accessToken, refreshToken);
       setCookie({ name: 'v_s', value: { nickname }, path: '/' });
+      localStorage.clear();
     }
   } catch (e) {
     console.error(e);

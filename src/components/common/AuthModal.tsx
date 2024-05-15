@@ -20,7 +20,8 @@ const AuthModal = ({ closeModal }: Props) => {
           구글 계정으로 로그인
         </Link>
         <span className="text-12">
-          구글 계정의 고유식별번호 외 <strong>개인 정보는 저장되지 않습니다.</strong>
+          구글 계정의 고유식별번호 외<br />
+          <strong>개인 정보는 저장되지 않습니다.</strong>
         </span>
       </ModalFrame>
     </ModalPortal>

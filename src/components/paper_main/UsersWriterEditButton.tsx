@@ -1,5 +1,5 @@
 import { getCookie } from '@/utils/cookie';
-import { getData } from '@/utils/fetching';
+import { getSSR } from '@/utils/fetching';
 import Link from 'next/link';
 
 interface Props {
@@ -10,11 +10,14 @@ const UsersWriterEditButton = async ({ paperId }: Props) => {
   const session = await getCookie('v_s');
   let isWriter = false;
   if (session) {
-    isWriter = await getData({ path: `/paper/${paperId}/writer` });
+    const res = await getSSR({ path: `/paper/${paperId}/writer` });
+    if (!res.error) {
+      isWriter = res;
+    }
   }
   return (
     <Link
-      href={isWriter ? `/paper/${paperId}/edit` : '#'}
+      href={isWriter ? `/paper/${paperId}/edit` : ''}
       className={`${isWriter ? 'transform-active bg-black-80 text-white transition-all' : 'border-black-60 bg-white text-black-80'} flex-center gap-8 rounded-xs border px-12 py-4 text-14`}
     >
       편집하기
