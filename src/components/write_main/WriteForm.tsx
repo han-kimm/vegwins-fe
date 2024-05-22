@@ -1,6 +1,6 @@
 'use client';
 
-import { DEFAULT_SUBMIT, SubmitData, WRITE_SAVE } from '@/constants/default';
+import { DEFAULT_SUBMIT, SubmitData, SubmitInitial, WRITE_SAVE } from '@/constants/default';
 import { getLocalStorage } from '@/utils/browserStorage';
 import { postData, putData } from '@/utils/fetching';
 import { refreshTag } from '@/utils/revalidate';
@@ -67,7 +67,6 @@ const WriteForm = ({ initial, paperId }: Props) => {
       setPending(true);
       const noImageData = { ...submitData, image: '' };
       const formData = new FormData();
-      formData.append('image', typeof submitData.image === 'string' ? '' : submitData.image);
       formData.append('data', JSON.stringify(noImageData));
       formData.append('deleteImage', JSON.stringify(initial && (!submitData.image || typeof submitData.image !== 'string')));
 

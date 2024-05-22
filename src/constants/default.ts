@@ -18,15 +18,19 @@ export const SP_CATEGORY = 'c';
 export const PREVIOUS_PATH = 'pp';
 export const WRITE_SAVE = 'wr';
 
-export const DEFAULT_SUBMIT = { image: '', title: '', hashtag: Array<string>(), category: Array<string>(), description: '' };
+export const DEFAULT_SUBMIT = { image: [], title: '', hashtag: Array<string>(), category: Array<string>(), description: '' };
 export type SubmitData = {
-  image: Blob | string;
+  image: (Blob | string)[];
   title: string;
   hashtag: string[];
   category: string[];
   description: string;
 };
 export type SetSubmitData = Dispatch<SetStateAction<SubmitData>>;
+
+export interface SubmitInitial extends Omit<SubmitData, 'image'> {
+  image: string[];
+}
 
 export const RATING_MSG: { [key: number]: string } = {
   [-1]: '없음',
