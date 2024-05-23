@@ -65,23 +65,35 @@ const WriteForm = ({ initial, paperId }: Props) => {
 
     try {
       setPending(true);
-      const noImageData = { ...submitData, image: '' };
+      const noImageData = { ...submitData, image: [] as boolean[] };
+
       const formData = new FormData();
+      for (let index = 0; index < 2; index++) {
+        const image = submitData.image[index];
+        if (image === initial?.image[index]) {
+          noImageData.image[index] = false;
+          continue;
+        }
+        noImageData.image[index] = true;
+
+        if (image) {
+          formData.append('image', image);
+        }
+      }
       formData.append('data', JSON.stringify(noImageData));
 
       let res;
       if (!initial) {
-        for (const image of submitData.image) {
-          formData.append('image', image);
-        }
         res = await postData({ path: '/paper', body: formData });
       } else {
         res = await putData({ path: `/paper/${paperId}`, body: formData });
       }
-      if (!res?.error) {
-        refreshTag(['search', 'myPaper', paperId || '']);
-        router.replace(`/paper/${res?.paperId}#top`);
+      if (!res || res.error) {
+        throw new Error(res.error || '응답이 없습니다.');
       }
+
+      refreshTag(['search', 'myPaper', paperId || '']);
+      router.replace(`/paper/${res?.paperId}#top`);
     } catch (e: any) {
       toast.error('다시 시도해주십시오.');
       console.error(e);
