@@ -1,6 +1,6 @@
 'use client';
 
-import { DEFAULT_SUBMIT, SubmitData, SubmitInitial, WRITE_SAVE } from '@/constants/default';
+import { DEFAULT_SUBMIT, MAX_LEGNTH_IMAGE, SubmitData, SubmitInitial, WRITE_SAVE } from '@/constants/default';
 import { getLocalStorage } from '@/utils/browserStorage';
 import { postData, putData } from '@/utils/fetching';
 import { refreshTag } from '@/utils/revalidate';
@@ -68,7 +68,7 @@ const WriteForm = ({ initial, paperId }: Props) => {
       const noImageData = { ...submitData, image: [] as boolean[] };
 
       const formData = new FormData();
-      for (let index = 0; index < 2; index++) {
+      for (let index = 0; index < MAX_LEGNTH_IMAGE; index++) {
         const image = submitData.image[index];
         if (image === initial?.image[index]) {
           noImageData.image[index] = false;

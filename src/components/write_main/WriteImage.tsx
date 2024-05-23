@@ -1,4 +1,4 @@
-import { SetSubmitData, SubmitData } from '@/constants/default';
+import { MAX_LEGNTH_IMAGE, SetSubmitData, SubmitData } from '@/constants/default';
 import { useDraggable } from '@/hooks/useDragScroll';
 import imageCompression from 'browser-image-compression';
 import Image from 'next/image';
@@ -24,13 +24,13 @@ const WriteImage = memo(function WriteImage({ image, setImage }: Props) {
     let count = thumbnail.length;
 
     if (mutateIndex > -1) {
-      count = 1;
+      count = MAX_LEGNTH_IMAGE - 1;
     }
 
     for (const newFile of files) {
       count++;
-      if (count > 2) {
-        toast.error('2장까지만 추가됩니다.');
+      if (count > MAX_LEGNTH_IMAGE) {
+        toast.error(`${MAX_LEGNTH_IMAGE}장까지만 추가됩니다.`);
         break;
       }
       if (!['image/png', 'image/jpg', 'image/jpeg'].includes(newFile.type)) {

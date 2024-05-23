@@ -1,6 +1,8 @@
 import { Dispatch, SetStateAction } from 'react';
 
 export const DEFAULT_IMAGE = '/image/default.webp';
+export const MAX_LEGNTH_IMAGE = 2;
+
 export const INPUT_PLACEHODER = "'검색어' 또는 '#특징'";
 export const LABEL = {
   imageUrl: '',
