@@ -1,10 +1,10 @@
 import { CATEGORY } from '@/constants/category';
-import { DEFAULT_IMAGE, LABEL, SP_CATEGORY, SP_KEYWORD } from '@/constants/default';
-import Image from 'next/image';
+import { LABEL, SP_CATEGORY, SP_KEYWORD } from '@/constants/default';
 import Link from 'next/link';
 import IconBase from '@/components/common/IconBase';
+import InformationImage from '@/components/paper_main/InformationImage';
 
-const InformationContent = ({ label, value }: { label: string; value: string | string[] | undefined }) => {
+const InformationContent = ({ label, value }: { label: string; value: string | string[] }) => {
   let SwitchedComponent;
   switch (label) {
     case LABEL.title:
@@ -44,20 +44,7 @@ const InformationContent = ({ label, value }: { label: string; value: string | s
       SwitchedComponent = <p className="whitespace-pre-wrap text-14 font-medium">{value}</p>;
       break;
     case LABEL.imageUrl:
-      if (typeof value !== 'object') {
-        SwitchedComponent = (
-          <Image
-            width={300}
-            height={300}
-            priority
-            sizes="600px"
-            src={value || DEFAULT_IMAGE}
-            alt=""
-            className="mx-auto rounded-md object-cover"
-            aria-hidden={true}
-          />
-        );
-      }
+      SwitchedComponent = <InformationImage value={value} />;
   }
 
   return SwitchedComponent;
