@@ -9,7 +9,14 @@ const SearchResultItem = ({ _id, imageUrl, title, hashtag, rated, end, view, rat
   return (
     <SearchResultItemLink _id={_id} end={end}>
       <div className="relative h-100 w-100 shrink-0">
-        <Image fill sizes="100px" src={imageUrl || DEFAULT_IMAGE} alt="" className="rounded-sm object-cover" aria-hidden={true} />
+        <Image
+          fill
+          sizes="100px"
+          src={typeof imageUrl === 'string' ? imageUrl : imageUrl[0] ?? DEFAULT_IMAGE}
+          alt=""
+          className="rounded-sm object-cover"
+          aria-hidden={true}
+        />
       </div>
       <div className="flex h-100 flex-grow justify-between gap-12 py-12">
         <ItemTitle title={title.length > 12 ? title.slice(0, 12) + '...' : title} hashtag={hashtag} />

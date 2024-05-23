@@ -3,7 +3,7 @@ export type SearchItem = {
   title: string;
   end: boolean;
   view: number;
-  imageUrl?: string[];
+  imageUrl: string[];
   hashtag?: string[];
   rating?: {
     length: number;
@@ -13,22 +13,22 @@ export type SearchItem = {
 
 export type Paper = {
   _id: string;
+  imageUrl: string[];
   title: string;
-  end: boolean;
   category: string[];
+  hashtag: string[];
   description: string;
-  view: number;
   writer: {
     _id: string;
     nickname: string;
   };
-  imageUrl: string[];
   createdAt: string;
   updatedAt: string;
+  view: number;
+  end: boolean;
   rating?: {
     [key in 0 | 1 | 2 | 'length']: number;
   };
-  hashtag?: string[];
 };
 
 export type Rating = -1 | 0 | 1 | 2;
