@@ -10,7 +10,7 @@ interface Props {
 }
 
 const WriteDescription = memo(function WriteDescription({ description, setDescription }: Props) {
-  const { ref, refCallback } = useUncontrolInput<HTMLTextAreaElement>({ syncState: description });
+  const { ref, refCallback } = useUncontrolInput<HTMLTextAreaElement>(description);
   const handleChange = useDebounce(() => {
     setDescription((prev) => ({ ...prev, description: ref.current?.value! }));
   }, 500);

@@ -9,7 +9,7 @@ interface Props {
   setTitle: SetSubmitData;
 }
 const WriteTitle = memo(function WriteTitle({ title, setTitle }: Props) {
-  const { ref, refCallback } = useUncontrolInput<HTMLInputElement>({ syncState: title });
+  const { ref, refCallback } = useUncontrolInput<HTMLInputElement>(title);
   const handleChange = useDebounce(() => {
     setTitle((prev) => ({ ...prev, title: ref.current?.value! }));
   }, 500);

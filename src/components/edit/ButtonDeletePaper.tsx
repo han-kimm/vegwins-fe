@@ -16,7 +16,7 @@ interface Props {
 }
 const ButtonDeletePaper = ({ title, paperId }: Props) => {
   const [open, setOpen] = useState(false);
-  const { ref: inputRef, refCallback } = useUncontrolInput<HTMLInputElement>({ syncState: '' });
+  const { ref: inputRef, refCallback } = useUncontrolInput<HTMLInputElement>();
   const router = useRouter();
 
   const deleteByClick = async () => {

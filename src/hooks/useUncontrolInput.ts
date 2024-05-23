@@ -1,10 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-interface Props {
-  syncState: any;
-}
-
-const useUncontrolInput = <T extends HTMLInputElement | HTMLTextAreaElement>({ syncState }: Props) => {
+const useUncontrolInput = <T extends HTMLInputElement | HTMLTextAreaElement>(syncState?: any) => {
   const ref = useRef<T>();
 
   const refCallback = (el: T) => {
@@ -14,7 +10,7 @@ const useUncontrolInput = <T extends HTMLInputElement | HTMLTextAreaElement>({ s
   };
 
   useEffect(() => {
-    if (ref.current) {
+    if (ref.current && syncState) {
       ref.current.value = syncState;
     }
   }, [syncState, ref]);

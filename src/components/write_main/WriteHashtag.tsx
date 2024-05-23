@@ -2,7 +2,7 @@ import { SetSubmitData } from '@/constants/default';
 import useDebounce from '@/hooks/useDebounce';
 import useUncontrolInput from '@/hooks/useUncontrolInput';
 import Image from 'next/image';
-import { memo } from 'react';
+import { memo, useEffect, useMemo } from 'react';
 import WriteFormRow from '@/components/write_main/WriteFormRow';
 
 const REG = /#[a-z0-9가-힣\s]{1,8}$/;
@@ -13,7 +13,9 @@ interface Props {
 }
 
 const WriteHashtag = memo(function WriteHashtag({ hashtag, setHashtag }: Props) {
-  const { ref, refCallback } = useUncontrolInput<HTMLInputElement>({ syncState: '' });
+  const initial = hashtag.reduce((acc, cur) => acc + cur, '');
+  const { ref, refCallback } = useUncontrolInput<HTMLInputElement>(initial);
+
   const handleChange = useDebounce(() => {
     makeHashtag();
   }, 500);
@@ -63,17 +65,18 @@ const WriteHashtag = memo(function WriteHashtag({ hashtag, setHashtag }: Props) 
       <div className="flex grow flex-col gap-8">
         <input
           type="search"
+          defaultValue={initial}
           ref={refCallback}
           onChange={handleChange}
           placeholder="'#특징', '#검색어', '#브랜드'"
           className="webkit w-full border-b border-black-60 bg-transparent font-bold focus:outline-none"
         />
-        <div className="flex min-h-max flex-wrap gap-8">
+        <div className="flex min-h-32 flex-wrap gap-8">
           {[...hashtag].map((tag) => (
             <button
               type="button"
               onClick={deleteHashtag(tag)}
-              className="flex-center animate-fadeIn gap-8 rounded-full border border-black-80 px-8 active:bg-black-80"
+              className="flex-center h-32 animate-fadeIn gap-8 rounded-full border border-black-80 px-8 active:bg-black-80"
               key={tag}
             >
               {tag}
