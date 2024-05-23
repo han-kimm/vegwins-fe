@@ -45,11 +45,6 @@ const WriteImage = memo(function WriteImage({ image, setImage }: Props) {
     e.target.value = '';
   };
 
-  const resetThumbnail = () => {
-    setImage((prev) => ({ ...prev, image: [] }));
-    setThumbnail((prev) => prev.filter((v) => URL.revokeObjectURL(v)));
-  };
-
   const scrollRef = useRef<HTMLDivElement>(null);
   const scrollHandler = useDraggable(scrollRef);
 
@@ -62,16 +57,6 @@ const WriteImage = memo(function WriteImage({ image, setImage }: Props) {
         <p className="text-12">이미지를 눌러 삭제할 수 있습니다.</p>
       </div>
       <div ref={scrollRef} {...scrollHandler} className="flex gap-8 overflow-x-scroll">
-        {
-          <label
-            htmlFor="image"
-            className="transform-active flex-center text-balck-80 mx-auto h-200 w-full max-w-200 shrink-0 flex-col gap-8 rounded-sm border border-black-60 text-16"
-            tabIndex={0}
-          >
-            <IconPlus />
-            <span>이미지 추가하기</span>
-          </label>
-        }
         {thumbnail.map(
           (v, i) =>
             v && (
@@ -89,6 +74,14 @@ const WriteImage = memo(function WriteImage({ image, setImage }: Props) {
               </button>
             ),
         )}
+        <label
+          htmlFor="image"
+          className="transform-active flex-center text-balck-80 mx-auto h-200 w-full max-w-200 shrink-0 flex-col gap-8 rounded-sm border border-black-60 text-16"
+          tabIndex={0}
+        >
+          <IconPlus />
+          <span>이미지 추가하기</span>
+        </label>
       </div>
       <input onChange={handleChange} ref={inputRef} id="image" type="file" multiple accept="image/png,.jpg,.jpeg" hidden />
     </div>
