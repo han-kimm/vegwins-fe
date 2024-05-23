@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { memo } from 'react';
 import WriteFormRow from '@/components/write_main/WriteFormRow';
 
-const REG = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣\s]{1,8}$/;
+const REG = /#[a-z0-9가-힣\s]{1,8}$/;
 
 interface Props {
   hashtag: string[];
@@ -26,6 +26,7 @@ const WriteHashtag = memo(function WriteHashtag({ hashtag, setHashtag }: Props) 
     const tags: string[] = [];
     const value = ref.current.value;
     const length = value.length;
+    let newValue = '';
 
     for (let i = 0; i < length; i++) {
       const cur = value[i];
@@ -34,16 +35,17 @@ const WriteHashtag = memo(function WriteHashtag({ hashtag, setHashtag }: Props) 
       }
       if (cur === '#') {
         index++;
-        continue;
       }
-
       if (index > -1) {
         const tag = tags[index];
         tags[index] = (tag ?? '') + cur;
       }
+
+      newValue += cur;
     }
     const newTags = tags.filter((v) => REG.test(v));
     setHashtag((prev) => ({ ...prev, hashtag: newTags }));
+    ref.current.value = newValue;
   };
 
   const deleteHashtag = (tag: string) => () => {
@@ -52,9 +54,8 @@ const WriteHashtag = memo(function WriteHashtag({ hashtag, setHashtag }: Props) 
     if (!ref.current) {
       return;
     }
-    const deleteValue = '#' + tag;
     const currentValue = ref.current.value;
-    ref.current.value = currentValue.replace(deleteValue, '');
+    ref.current.value = currentValue.replace(tag, '');
   };
 
   return (
