@@ -54,7 +54,7 @@ const WriteImage = memo(function WriteImage({ image, setImage }: Props) {
     <div className="mb-12 flex w-full flex-col gap-8">
       <div className="flex h-40 items-baseline gap-8">
         <h2 className="text-18 font-medium">이미지</h2>
-        <p className="text-12">이미지를 눌러 삭제할 수 있습니다.</p>
+        <p className="text-12">추가한 이미지를 눌러 삭제할 수 있습니다.</p>
       </div>
       <div ref={scrollRef} {...scrollHandler} className="flex gap-8 overflow-x-scroll">
         {thumbnail.map(

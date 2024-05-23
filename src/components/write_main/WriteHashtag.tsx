@@ -1,9 +1,11 @@
 import { SetSubmitData } from '@/constants/default';
+import useDebounce from '@/hooks/useDebounce';
+import useUncontrolInput from '@/hooks/useUncontrolInput';
 import Image from 'next/image';
-import { KeyboardEvent, memo } from 'react';
+import { memo } from 'react';
 import WriteFormRow from '@/components/write_main/WriteFormRow';
 
-const REG = /#[a-z0-9_가-힣]+/;
+const REG = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣\s]{1,8}$/;
 
 interface Props {
   hashtag: string[];
@@ -11,31 +13,49 @@ interface Props {
 }
 
 const WriteHashtag = memo(function WriteHashtag({ hashtag, setHashtag }: Props) {
-  const makeHashtag = (e: KeyboardEvent) => {
-    const input = e.target as HTMLInputElement;
-    const newValue = input.value;
+  const { ref, refCallback } = useUncontrolInput<HTMLInputElement>({ syncState: '' });
+  const handleChange = useDebounce(() => {
+    makeHashtag();
+  }, 500);
 
-    if (e.key !== 'Enter' || !newValue) {
+  const makeHashtag = () => {
+    if (!ref.current) {
       return;
     }
+    let index = -1;
+    const tags: string[] = [];
+    const value = ref.current.value;
+    const length = value.length;
 
-    if (!REG.test(newValue)) {
-      input.value = '';
-      input.placeholder = '"#태그명"으로 입력해 주세요.';
+    for (let i = 0; i < length; i++) {
+      const cur = value[i];
+      if (cur === ' ') {
+        continue;
+      }
+      if (cur === '#') {
+        index++;
+        continue;
+      }
 
-      return;
+      if (index > -1) {
+        const tag = tags[index];
+        tags[index] = (tag ?? '') + cur;
+      }
     }
-    if (hashtag.includes(newValue)) {
-      input.value = '';
-      input.placeholder = '이미 추가된 태그입니다.';
-      return;
-    }
-    input.value = '';
-    setHashtag((prev) => ({ ...prev, hashtag: [...prev.hashtag, newValue] }));
+    const newTags = tags.filter((v) => REG.test(v));
+    console.log(newTags);
+    setHashtag((prev) => ({ ...prev, hashtag: newTags }));
   };
 
   const deleteHashtag = (tag: string) => () => {
     setHashtag((prev) => ({ ...prev, hashtag: prev.hashtag.filter((v) => v !== tag) }));
+
+    if (!ref.current) {
+      return;
+    }
+    const deleteValue = '#' + tag;
+    const currentValue = ref.current.value;
+    ref.current.value = currentValue.replace(deleteValue, '');
   };
 
   return (
@@ -43,7 +63,8 @@ const WriteHashtag = memo(function WriteHashtag({ hashtag, setHashtag }: Props) 
       <div className="flex grow flex-col gap-8">
         <input
           type="search"
-          onKeyUp={makeHashtag}
+          ref={refCallback}
+          onChange={handleChange}
           placeholder="'#특징' 추가해 주세요."
           className="webkit w-full border-b border-black-60 bg-transparent font-bold focus:outline-none"
         />
