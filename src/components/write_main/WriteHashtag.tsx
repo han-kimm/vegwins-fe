@@ -43,7 +43,6 @@ const WriteHashtag = memo(function WriteHashtag({ hashtag, setHashtag }: Props) 
       }
     }
     const newTags = tags.filter((v) => REG.test(v));
-    console.log(newTags);
     setHashtag((prev) => ({ ...prev, hashtag: newTags }));
   };
 
@@ -65,7 +64,7 @@ const WriteHashtag = memo(function WriteHashtag({ hashtag, setHashtag }: Props) 
           type="search"
           ref={refCallback}
           onChange={handleChange}
-          placeholder="'#특징' 추가해 주세요."
+          placeholder="'#특징', '#검색어', '#브랜드'"
           className="webkit w-full border-b border-black-60 bg-transparent font-bold focus:outline-none"
         />
         <div className="flex min-h-max flex-wrap gap-8">

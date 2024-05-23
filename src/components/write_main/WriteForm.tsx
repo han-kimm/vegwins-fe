@@ -68,10 +68,12 @@ const WriteForm = ({ initial, paperId }: Props) => {
       const noImageData = { ...submitData, image: '' };
       const formData = new FormData();
       formData.append('data', JSON.stringify(noImageData));
-      formData.append('deleteImage', JSON.stringify(initial && (!submitData.image || typeof submitData.image !== 'string')));
 
       let res;
       if (!initial) {
+        for (const image of submitData.image) {
+          formData.append('image', image);
+        }
         res = await postData({ path: '/paper', body: formData });
       } else {
         res = await putData({ path: `/paper/${paperId}`, body: formData });

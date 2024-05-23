@@ -12,7 +12,7 @@ interface Props {
 }
 
 const WriteImage = memo(function WriteImage({ image, setImage }: Props) {
-  const [thumbnail, setThumbnail] = useState<string[]>(image as string[]);
+  const [thumbnail, setThumbnail] = useState<string[]>(() => (typeof image === 'string' ? [image] : (image as string[])));
 
   const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
