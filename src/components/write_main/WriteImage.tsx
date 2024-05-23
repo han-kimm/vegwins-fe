@@ -4,6 +4,7 @@ import imageCompression from 'browser-image-compression';
 import Image from 'next/image';
 import { ChangeEvent, memo, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
+import IconDelete from 'public/icon/delete.svg';
 import IconPlus from 'public/icon/plus.svg';
 
 interface Props {
@@ -13,6 +14,7 @@ interface Props {
 
 const WriteImage = memo(function WriteImage({ image, setImage }: Props) {
   const [thumbnail, setThumbnail] = useState<string[]>(() => (typeof image === 'string' ? [image] : (image as string[])));
+  const [mutateIndex, setMutateIndex] = useState(-1);
 
   const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -20,6 +22,11 @@ const WriteImage = memo(function WriteImage({ image, setImage }: Props) {
       return;
     }
     let count = thumbnail.length;
+
+    if (mutateIndex > -1) {
+      count = 1;
+    }
+
     for (const newFile of files) {
       count++;
       if (count > 2) {
@@ -37,10 +44,14 @@ const WriteImage = memo(function WriteImage({ image, setImage }: Props) {
         useWebWorker: true,
       };
       const compressedFile = await imageCompression(newFile, options);
-      setImage((prev) => ({ ...prev, image: [...prev.image, compressedFile] }));
-
-      const newthumbnail = URL.createObjectURL(newFile);
-      setThumbnail((prev) => [...prev, newthumbnail]);
+      const newThumbnail = URL.createObjectURL(newFile);
+      if (mutateIndex > -1) {
+        setImage((prev) => ({ ...prev, image: prev.image.map((v, i) => (i === mutateIndex ? compressedFile : v)) }));
+        setThumbnail((prev) => prev.map((v, i) => (i === mutateIndex ? newThumbnail : v)));
+      } else {
+        setImage((prev) => ({ ...prev, image: [...prev.image, compressedFile] }));
+        setThumbnail((prev) => [...prev, newThumbnail]);
+      }
     }
     e.target.value = '';
   };
@@ -60,22 +71,33 @@ const WriteImage = memo(function WriteImage({ image, setImage }: Props) {
         {thumbnail.map(
           (v, i) =>
             v && (
-              <button
-                key={v}
-                onClick={() => {
-                  setImage((prev) => ({ ...prev, image: prev.image.filter((_, idx) => idx !== i) }));
-                  setThumbnail((prev) => prev.filter((_, idx) => idx !== i));
-                }}
-                type="button"
-                className="relative h-200 w-200 shrink-0"
-              >
-                <Image fill sizes="200px" src={v} alt={thumbnail ? '추가한 이미지 썸네일' : '기본 이미지'} className="rounded-md object-cover" />
+              <div key={v} className="relative h-200 w-200 shrink-0">
+                <Image
+                  onClick={() => (setMutateIndex(i), inputRef.current?.click())}
+                  fill
+                  sizes="200px"
+                  src={v}
+                  tabIndex={0}
+                  alt={thumbnail ? '추가한 이미지 썸네일' : '기본 이미지'}
+                  className="rounded-md object-cover"
+                />
                 {!i && <div className="absolute left-8 top-8 rounded-sm bg-black-100 px-8 py-4 text-white">대표 이미지</div>}
-              </button>
+                <button
+                  onClick={() => {
+                    setImage((prev) => ({ ...prev, image: prev.image.filter((_, idx) => idx !== i) }));
+                    setThumbnail((prev) => prev.filter((_, idx) => idx !== i));
+                  }}
+                  type="button"
+                  className="absolute right-8 top-8 rounded-md bg-black-100 p-8 text-white"
+                >
+                  <IconDelete />
+                </button>
+              </div>
             ),
         )}
         <label
           htmlFor="image"
+          onKeyDown={(e) => e.key === 'Enter' && inputRef.current?.click()}
           className="transform-active flex-center text-balck-80 mx-auto h-200 w-full max-w-200 shrink-0 flex-col gap-8 rounded-sm border border-black-60 text-16"
           tabIndex={0}
         >
