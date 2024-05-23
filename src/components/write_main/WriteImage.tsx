@@ -48,6 +48,7 @@ const WriteImage = memo(function WriteImage({ image, setImage }: Props) {
       if (mutateIndex > -1) {
         setImage((prev) => ({ ...prev, image: prev.image.map((v, i) => (i === mutateIndex ? compressedFile : v)) }));
         setThumbnail((prev) => prev.map((v, i) => (i === mutateIndex ? newThumbnail : v)));
+        setMutateIndex(-1);
       } else {
         setImage((prev) => ({ ...prev, image: [...prev.image, compressedFile] }));
         setThumbnail((prev) => [...prev, newThumbnail]);
