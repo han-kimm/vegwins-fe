@@ -24,8 +24,17 @@ const InformationImage = ({ value }: Props) => {
       />
     );
   }
+
+  let start = 0;
+
   return (
-    <div className="flex-center w-full flex-col gap-12">
+    <div
+      onDragStart={(e) => (start = e.movementX)}
+      onDragEnd={(e) => setSelected((prev) => (e.movementX < start ? (prev + 1) % 2 : Math.abs(prev - 1) % 2))}
+      onTouchStart={(e) => (start = e.touches[0].pageX)}
+      onTouchEnd={(e) => setSelected((prev) => (e.changedTouches[0].pageX < start ? (prev + 1) % 2 : Math.abs(prev - 1) % 2))}
+      className="flex-center w-full flex-col gap-12"
+    >
       <Image
         width={300}
         height={300}
@@ -33,7 +42,7 @@ const InformationImage = ({ value }: Props) => {
         sizes="600px"
         src={value[selected] || DEFAULT_IMAGE}
         alt={`${selected + 1}번째 본문 이미지`}
-        className="rounded-md object-cover"
+        className="h-300 rounded-md object-cover"
         aria-hidden={true}
       />
       <div className="flex-center w-full gap-20">
