@@ -18,7 +18,10 @@ const UsersWriterEditButton = async ({ paperId }: Props) => {
   return (
     <Link
       href={isWriter ? `/paper/${paperId}/edit` : ''}
-      className={`${isWriter ? 'transform-active bg-black-80 text-white transition-all' : 'border-black-60 bg-white text-black-80'} flex-center gap-8 rounded-xs border px-12 py-4 text-14`}
+      scroll={isWriter || false}
+      className={
+        isWriter ? 'transform-active flex-center gap-8 rounded-xs border bg-black-80 px-12 py-4 text-14 text-white transition-all' : 'hidden'
+      }
     >
       편집하기
     </Link>
