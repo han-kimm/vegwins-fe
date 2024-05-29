@@ -6,6 +6,7 @@ import LiftingButton from '@/components/common/LiftingButton';
 import LinkHome from '@/components/common/LinkHome';
 import Information from '@/components/paper_main/Information';
 import MyRating from '@/components/paper_main/MyRating';
+import Share from '@/components/paper_main/Share';
 import Users from '@/components/paper_main/Users';
 
 interface Props {
@@ -30,7 +31,7 @@ const PaperPage = async ({ params }: Props) => {
         <Information data={paperData} />
         <div className="flex gap-20">
           <MyRating initialRating={initialRating?.rating} paperRating={paperData.rating} paperId={paperId} />
-          {/* <Share /> */}
+          <Share />
         </div>
         <Users data={paperData} />
       </main>
