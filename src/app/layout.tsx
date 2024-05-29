@@ -32,11 +32,11 @@ const toasterOptions = {
 };
 
 const APP_NAME = '비긴즈';
-const APP_DEFAULT_TITLE = '함께 나아가는 비긴즈, vegwins';
-const APP_TITLE_TEMPLATE = '%s - 비긴즈';
+const APP_DEFAULT_TITLE = '비긴즈 | vegwins';
+const APP_TITLE_TEMPLATE = '%s | 비긴즈';
 const APP_DESCRIPTION = '함께 나아가는 비긴즈, vegwins';
 
-const IconSizes = [128, 196];
+const IconSizes = [512];
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
@@ -46,8 +46,8 @@ export const metadata: Metadata = {
   },
   description: APP_DESCRIPTION,
   icons: [
-    ...IconSizes.map((size) => ({ rel: 'icon', url: `/favicon/favicon-${size}x${size}.png`, sizes: `${size}x${size}` })),
-    ...IconSizes.map((size) => ({ rel: 'apple-touch-icon', url: `/favicon/favicon-${size}x${size}.png`, sizes: `${size}x${size}` })),
+    ...IconSizes.map((size) => ({ rel: 'icon', url: `icon-${size}x${size}.png`, sizes: `${size}x${size}` })),
+    ...IconSizes.map((size) => ({ rel: 'apple-touch-icon', url: `icon-${size}x${size}.png`, sizes: `${size}x${size}` })),
   ],
   manifest: '/manifest.webmanifest',
   appleWebApp: {

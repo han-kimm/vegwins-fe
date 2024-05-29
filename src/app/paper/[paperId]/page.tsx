@@ -26,7 +26,7 @@ const PaperPage = async ({ params }: Props) => {
     <>
       <MetaTag
         title={paperData.title}
-        description={`${paperData.category.reduce((acc, cur) => (acc ? acc + ', ' + cur : acc + cur), '')}에서 발견할 수 있는 ${paperData.title}`}
+        description={`${paperData.category?.reduce((acc, cur) => (acc ? acc + ', ' + cur : acc + cur), '') ?? '비긴즈'}에서 발견할 수 있는 ${paperData.title}`}
         imageUrl={paperData.imageUrl[0]}
       />
       <div className="max-h-max min-h-dvh px-16 pb-28 pt-16">
