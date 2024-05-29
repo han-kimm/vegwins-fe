@@ -1,4 +1,5 @@
 import { RATING_MSG } from '@/constants/default';
+import useDebounce from '@/hooks/useDebounce';
 import { Paper, Rating } from '@/types/data';
 import { setLocalStorage } from '@/utils/browserStorage';
 import { getCookie } from '@/utils/cookie';
@@ -14,7 +15,7 @@ interface Props {
   setRating: (rating: Rating) => void;
 }
 const MyRatingSelector = ({ paperRating, paperId, rating, setRating }: Props) => {
-  const changeRating = async (status: Rating) => {
+  const changeRating = useDebounce(async (status: Rating) => {
     const isSame = rating === status;
     const newValue = isSame ? -1 : status;
     setRating(newValue);
@@ -42,7 +43,7 @@ const MyRatingSelector = ({ paperRating, paperId, rating, setRating }: Props) =>
     } catch {
       setRating(rating);
     }
-  };
+  }, 500);
 
   return (
     <>

@@ -12,7 +12,7 @@ const useDebounce = <T>(callback: (...args: T[]) => void, time: number) => {
         callback(...args);
       }, time);
     },
-    [timer],
+    [timer, callback, time],
   );
 };
 export default useDebounce;
