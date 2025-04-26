@@ -35,7 +35,7 @@ const WriteHashtag = memo(function WriteHashtag({ hashtag, setHashtag }: Props) 
     <WriteFormRow label="해시태그">
       <div className="flex grow flex-col gap-8">
         <input
-          type="text"
+          type="search"
           defaultValue=""
           ref={refCallback}
           onKeyDown={handleChange}
