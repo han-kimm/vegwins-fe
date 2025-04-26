@@ -1,5 +1,4 @@
 import { SetSubmitData } from '@/constants/default';
-import useDebounce from '@/hooks/useDebounce';
 import useUncontrolInput from '@/hooks/useUncontrolInput';
 import Image from 'next/image';
 import { KeyboardEvent, memo } from 'react';
@@ -13,11 +12,10 @@ interface Props {
 }
 
 const WriteHashtag = memo(function WriteHashtag({ hashtag, setHashtag }: Props) {
-  const initial = hashtag.reduce((acc, cur) => acc + cur, '');
   const { ref, refCallback } = useUncontrolInput<HTMLInputElement>();
 
   const handleChange = (e: KeyboardEvent) => {
-    if (!ref.current || e.code !== 'Enter') {
+    if (!ref.current || e.code !== 'Enter' || e.key !== 'Enter') {
       return;
     }
 
@@ -37,7 +35,7 @@ const WriteHashtag = memo(function WriteHashtag({ hashtag, setHashtag }: Props) 
     <WriteFormRow label="해시태그">
       <div className="flex grow flex-col gap-8">
         <input
-          type="search"
+          type="text"
           defaultValue=""
           ref={refCallback}
           onKeyDown={handleChange}
