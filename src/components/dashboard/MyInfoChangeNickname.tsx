@@ -49,6 +49,7 @@ const MyInfoChangeNickname = ({ session }: Props) => {
       toast.error('다시 시도해 주십시오.');
     } finally {
       setPending(false);
+      setValue('');
     }
   };
   return (
@@ -57,7 +58,7 @@ const MyInfoChangeNickname = ({ session }: Props) => {
         value={value}
         onChange={handleChange}
         onKeyUp={(e: KeyboardEvent) => e.code === 'Enter' && nicknameChange()}
-        placeholder={session?.nickname}
+        placeholder={'현재 닉네임은, ' + session?.nickname}
         className={`${error.message ? 'border-red-600' : 'border-black-100'} w-full rounded-sm border px-12 text-18 font-bold`}
       />
       <button onClick={nicknameChange} className="transform-active shrink-0 rounded-sm bg-black-100 p-8 text-18 text-white">

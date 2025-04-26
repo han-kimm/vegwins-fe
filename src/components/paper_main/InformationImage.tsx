@@ -24,7 +24,7 @@ const InformationImage = ({ value }: Props) => {
       />
     );
   }
-  const length = value.length;
+  const length = value?.length;
   let start = 0;
 
   return (
@@ -40,13 +40,13 @@ const InformationImage = ({ value }: Props) => {
         height={300}
         priority
         sizes="600px"
-        src={value[selected] || DEFAULT_IMAGE}
+        src={value?.[selected] || DEFAULT_IMAGE}
         alt={`${selected + 1}번째 본문 이미지`}
         className="h-300 rounded-md object-cover"
         aria-hidden={true}
       />
       <div className="flex-center w-full gap-20">
-        {value.map((_, index) => (
+        {value?.map((_, index) => (
           <button
             key={index}
             onClick={() => setSelected(index)}

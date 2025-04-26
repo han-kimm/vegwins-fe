@@ -2,7 +2,7 @@ import { SetSubmitData } from '@/constants/default';
 import useDebounce from '@/hooks/useDebounce';
 import useUncontrolInput from '@/hooks/useUncontrolInput';
 import Image from 'next/image';
-import { memo, useEffect, useMemo } from 'react';
+import { KeyboardEvent, memo } from 'react';
 import WriteFormRow from '@/components/write_main/WriteFormRow';
 
 const REG = /#[a-z0-9가-힣\s]{1,8}$/;
@@ -14,50 +14,23 @@ interface Props {
 
 const WriteHashtag = memo(function WriteHashtag({ hashtag, setHashtag }: Props) {
   const initial = hashtag.reduce((acc, cur) => acc + cur, '');
-  const { ref, refCallback } = useUncontrolInput<HTMLInputElement>(initial);
+  const { ref, refCallback } = useUncontrolInput<HTMLInputElement>();
 
-  const handleChange = useDebounce(() => {
-    makeHashtag();
-  }, 500);
-
-  const makeHashtag = () => {
-    if (!ref.current) {
+  const handleChange = (e: KeyboardEvent) => {
+    if (!ref.current || e.code !== 'Enter') {
       return;
     }
-    let index = -1;
-    const tags: string[] = [];
+
     const value = ref.current.value;
-    const length = value.length;
-    let newValue = '';
+    ref.current.value = '';
 
-    for (let i = 0; i < length; i++) {
-      const cur = value[i];
-      if (cur === ' ') {
-        continue;
-      }
-      if (cur === '#') {
-        index++;
-      }
-      if (index > -1) {
-        const tag = tags[index];
-        tags[index] = (tag ?? '') + cur;
-      }
-
-      newValue += cur;
+    if (REG.test(value)) {
+      setHashtag((prev) => ({ ...prev, hashtag: [...prev.hashtag, value] }));
     }
-    const newTags = tags.filter((v) => REG.test(v));
-    setHashtag((prev) => ({ ...prev, hashtag: newTags }));
-    ref.current.value = newValue;
   };
 
   const deleteHashtag = (tag: string) => () => {
     setHashtag((prev) => ({ ...prev, hashtag: prev.hashtag.filter((v) => v !== tag) }));
-
-    if (!ref.current) {
-      return;
-    }
-    const currentValue = ref.current.value;
-    ref.current.value = currentValue.replace(tag, '');
   };
 
   return (
@@ -65,10 +38,10 @@ const WriteHashtag = memo(function WriteHashtag({ hashtag, setHashtag }: Props) 
       <div className="flex grow flex-col gap-8">
         <input
           type="search"
-          defaultValue={initial}
+          defaultValue=""
           ref={refCallback}
-          onChange={handleChange}
-          placeholder="'#특징', '#검색어', '#브랜드'"
+          onKeyDown={handleChange}
+          placeholder="#특징 #검색어 #브랜드"
           className="webkit w-full border-b border-black-60 bg-transparent font-bold focus:outline-none"
         />
         <div className="flex min-h-32 flex-wrap gap-8">
